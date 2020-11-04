@@ -1,4 +1,4 @@
-package org.PedidosComandas;
+package es.uclm.esi.isoft2.PedidosComandas;
 
 import static org.junit.Assert.assertTrue;
 
