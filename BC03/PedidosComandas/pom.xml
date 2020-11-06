@@ -10,6 +10,7 @@
   <groupId>es.uclm.esi.isoft2</groupId>
   <artifactId>PedidosComandas</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+   <packaging>pom</packaging>
 
   <name>PedidosComandas</name>
   <!-- FIXME change it to the project's website -->
