@@ -10,7 +10,7 @@ public class Almacen {
 	private ArrayList platosAgotados;
 	private ArrayList bebidasAgotadas;
 	private ArrayList platosListos;
-	private Menu menu;
+	private Menu menu; //Falta la clase Menu
 
 	/**
 	 * 
