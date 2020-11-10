@@ -1,8 +1,8 @@
 package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
-public class Bebida {
+public class Comensal {
 
-	private int idBebida;
 	private String nombre;
+	private Menu idMenu;
 
 }
