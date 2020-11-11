@@ -20,7 +20,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
 
-public class UI_CamareroBarra {
+public class UI_CamareroMesa {
 
 	private JFrame frmInterfazCamareroBarra;
 	private JPanel panel;
@@ -65,7 +65,7 @@ public class UI_CamareroBarra {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UI_CamareroBarra window = new UI_CamareroBarra();
+					UI_CamareroMesa window = new UI_CamareroMesa();
 					window.frmInterfazCamareroBarra.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -77,7 +77,7 @@ public class UI_CamareroBarra {
 	/**
 	 * Create the application.
 	 */
-	public UI_CamareroBarra() {
+	public UI_CamareroMesa() {
 		initialize();
 	}
 
