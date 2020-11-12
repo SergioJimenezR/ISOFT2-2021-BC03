@@ -19,24 +19,26 @@ import javax.swing.JList;
 
 public class UI_CamareroMesa_Comanda extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
 	private JPanel panel;
 	private JPanel panelDatosMesa;
 	private JPanel panelComanda;
 	private JLabel lblNumMesa;
 	private JLabel lblNumComensales;
-	private JComboBox comboBox;
+	private JComboBox<Integer> cbNComensales;
 	private JPanel panelCarta;
-	private JList listEntrantes;
-	private JList listPrimeros;
-	private JList listSegundos;
-	private JList listPostres;
+	private JList<String> listEntrantes;
+	private JList<String> listPrimeros;
+	private JList<String> listSegundos;
+	private JList<String> listPostres;
 	private JButton btnCerrarComanda;
 	private JButton btnCancelar;
-	private JComboBox cbEntrantes;
-	private JComboBox cbPrimeros;
-	private JComboBox cbSegundos;
-	private JComboBox cbPostres;
+	private JComboBox<String> cbEntrantes;
+	private JComboBox<String> cbPrimeros;
+	private JComboBox<String> cbSegundos;
+	private JComboBox<String> cbPostres;
 	private JButton btnAñadirEntrante;
 	private JButton btnQuitarEntrante;
 	private JButton btnAñadirPrimero;
@@ -92,7 +94,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				gbl_panelDatosMesa.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 				panelDatosMesa.setLayout(gbl_panelDatosMesa);
 				{
-					lblNumMesa = new JLabel("Mesa Numero 6");
+					lblNumMesa = new JLabel("Mesa Número 6");
 					lblNumMesa.setFont(new Font("Tahoma", Font.BOLD, 15));
 					GridBagConstraints gbc_lblNumMesa = new GridBagConstraints();
 					gbc_lblNumMesa.insets = new Insets(0, 0, 0, 5);
@@ -111,14 +113,14 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					panelDatosMesa.add(lblNumComensales, gbc_lblNumComensales);
 				}
 				{
-					comboBox = new JComboBox();
-					comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5"}));
-					GridBagConstraints gbc_comboBox = new GridBagConstraints();
-					gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-					gbc_comboBox.insets = new Insets(0, 0, 0, 5);
-					gbc_comboBox.gridx = 3;
-					gbc_comboBox.gridy = 0;
-					panelDatosMesa.add(comboBox, gbc_comboBox);
+					cbNComensales = new JComboBox<Integer>();
+					cbNComensales.setModel(new DefaultComboBoxModel<Integer>(new Integer[] {1,2,3,4,5}));
+					GridBagConstraints gbc_cbNComensales = new GridBagConstraints();
+					gbc_cbNComensales.fill = GridBagConstraints.HORIZONTAL;
+					gbc_cbNComensales.insets = new Insets(0, 0, 0, 5);
+					gbc_cbNComensales.gridx = 3;
+					gbc_cbNComensales.gridy = 0;
+					panelDatosMesa.add(cbNComensales, gbc_cbNComensales);
 				}
 			}
 			{
@@ -157,7 +159,8 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					gbl_panelCarta.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 					panelCarta.setLayout(gbl_panelCarta);
 					{
-						cbEntrantes = new JComboBox();
+						cbEntrantes = new JComboBox<String>();
+						cbEntrantes.setModel(new DefaultComboBoxModel<String>(NombresPlatos.entrantes));
 						GridBagConstraints gbc_cbEntrantes = new GridBagConstraints();
 						gbc_cbEntrantes.insets = new Insets(0, 0, 5, 5);
 						gbc_cbEntrantes.anchor = GridBagConstraints.NORTH;
@@ -183,7 +186,8 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 						panelCarta.add(btnQuitarEntrante, gbc_btnQuitarEntrante);
 					}
 					{
-						cbPrimeros = new JComboBox();
+						cbPrimeros = new JComboBox<String>();
+						cbPrimeros.setModel(new DefaultComboBoxModel<String>(NombresPlatos.primeros));
 						GridBagConstraints gbc_cbPrimeros = new GridBagConstraints();
 						gbc_cbPrimeros.insets = new Insets(0, 0, 5, 5);
 						gbc_cbPrimeros.fill = GridBagConstraints.HORIZONTAL;
@@ -208,7 +212,8 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 						panelCarta.add(btnQuitarPrimero, gbc_btnQuitarPrimero);
 					}
 					{
-						cbSegundos = new JComboBox();
+						cbSegundos = new JComboBox<String>();
+						cbSegundos.setModel(new DefaultComboBoxModel<String>(NombresPlatos.segundos));
 						GridBagConstraints gbc_cbSegundos = new GridBagConstraints();
 						gbc_cbSegundos.insets = new Insets(0, 0, 5, 5);
 						gbc_cbSegundos.fill = GridBagConstraints.HORIZONTAL;
@@ -233,7 +238,8 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 						panelCarta.add(btnQuitarSegundo, gbc_btnQuitarSegundo);
 					}
 					{
-						cbPostres = new JComboBox();
+						cbPostres = new JComboBox<String>();
+						cbPostres.setModel(new DefaultComboBoxModel<String>(NombresPlatos.postres));
 						GridBagConstraints gbc_cbPostres = new GridBagConstraints();
 						gbc_cbPostres.insets = new Insets(0, 0, 5, 5);
 						gbc_cbPostres.fill = GridBagConstraints.HORIZONTAL;
@@ -259,7 +265,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 				}
 				{
-					listEntrantes = new JList();
+					listEntrantes = new JList<String>();
 					GridBagConstraints gbc_listEntrantes = new GridBagConstraints();
 					gbc_listEntrantes.gridwidth = 2;
 					gbc_listEntrantes.gridheight = 2;
@@ -279,7 +285,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					panelComanda.add(lblPrimero, gbc_lblPrimero);
 				}
 				{
-					listPrimeros = new JList();
+					listPrimeros = new JList<String>();
 					GridBagConstraints gbc_listPrimeros = new GridBagConstraints();
 					gbc_listPrimeros.gridwidth = 2;
 					gbc_listPrimeros.gridheight = 2;
@@ -299,7 +305,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					panelComanda.add(lblSegundo, gbc_lblSegundo);
 				}
 				{
-					listSegundos = new JList();
+					listSegundos = new JList<String>();
 					GridBagConstraints gbc_listSegundos = new GridBagConstraints();
 					gbc_listSegundos.gridwidth = 2;
 					gbc_listSegundos.gridheight = 2;
@@ -319,7 +325,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					panelComanda.add(lblPostre, gbc_lblPostre);
 				}
 				{
-					listPostres = new JList();
+					listPostres = new JList<String>();
 					GridBagConstraints gbc_listPostres = new GridBagConstraints();
 					gbc_listPostres.gridwidth = 2;
 					gbc_listPostres.gridheight = 2;
