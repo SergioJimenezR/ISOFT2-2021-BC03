@@ -2,29 +2,32 @@ package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
 public class Plato {
 
-	private int idPlato;
+	private int id;
 	private String nombre;
-	private boolean disponible;
 	
-	public Plato (int idPlato, String nombre, boolean disponible) {
-		this.idPlato = idPlato;
-		this.nombre = nombre;
-		this.disponible = disponible;
+	public Plato(int id, String nombre) {
+		setId(id);
+		setNombre(nombre);
 	}
 
-	public int getIdPlato() {
-		return idPlato;
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	public boolean isDisponible() {
-		return disponible;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public void setDisponible(boolean disponible) {
-		this.disponible = disponible;
+	public String toString() {
+		return nombre;
 	}
+	
 }
