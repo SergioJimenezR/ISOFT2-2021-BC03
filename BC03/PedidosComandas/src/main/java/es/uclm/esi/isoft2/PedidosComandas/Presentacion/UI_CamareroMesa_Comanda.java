@@ -724,6 +724,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 			CardLayout panel = (CardLayout) (contentPane.getLayout());
 			panel.show(contentPane, e.getActionCommand());			
 			vaciarListas(listBebidas,listEntrantes,listPrimeros,listSegundos,listPostres);		
+			lblNumMesa.setText("Mesa Número: "+cbMesa.getSelectedItem());
 		}
 	}
 	
