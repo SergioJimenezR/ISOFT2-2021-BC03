@@ -722,12 +722,11 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 	private class BtnPanelActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			CardLayout panel = (CardLayout) (contentPane.getLayout());
-			panel.show(contentPane, e.getActionCommand());
-			
-			
-			
+			panel.show(contentPane, e.getActionCommand());			
+			vaciarListas(listBebidas,listEntrantes,listPrimeros,listSegundos,listPostres);		
 		}
 	}
+	
 	private class ThisWindowListener extends WindowAdapter {
 		@Override
 		public void windowClosing(WindowEvent e) {
@@ -756,6 +755,24 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					+ Auxiliar.imprimirVector(stockVirtualPlatos) + "). (Stock necesario: "
 					+ Auxiliar.imprimirVector(aux.getIngredientes()) + ").");
 		}
+	}
+
+	public void vaciarListas(JList<Bebida> listBebidas, JList<Plato> listEntrantes, JList<Plato> listPrimeros,
+			JList<Plato> listSegundos, JList<Plato> listPostres) {
+		
+		((DefaultListModel<Bebida>) listBebidas.getModel()).removeAllElements();
+		((DefaultListModel<Plato>) listEntrantes.getModel()).removeAllElements();
+		((DefaultListModel<Plato>) listPrimeros.getModel()).removeAllElements();
+		((DefaultListModel<Plato>) listSegundos.getModel()).removeAllElements();
+		((DefaultListModel<Plato>) listPostres.getModel()).removeAllElements();
+		
+		textEstado.setText("");
+
+		for (int i = 0; i < stockVirtualPlatos.length; i++)
+			stockVirtualPlatos[i] = 1000;
+		for (int i = 0; i < stockVirtualBebidas.length; i++)
+			stockVirtualBebidas[i] = 10;		
+		index = 0;
 	}
 
 	private void eventoAñadir(JComboBox<String> comboBox, JButton btnAñadir, JList<Plato> lista) {
