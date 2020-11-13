@@ -84,12 +84,15 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 	private JTextArea textEstado;
 	private JPanel Avisos;
 	private JPanel panelNuevaComanda;
-	private JPanel panel_2;
-	private JComboBox<String> comboBox_1;
-	private JPanel panel_3;
+	private JPanel panelAvisos;
+	private JComboBox<String> cbAvisos;
+	private JPanel panelDatosAviso;
 	private JLabel lblInfo;
 	private JComboBox<String> cbMesa;
 	private JButton btnInicarComanda;
+	private JTextArea textTituloAviso;
+	private JTextArea textNMesaAviso;
+	private JTextArea textEstadoMesa;
 
 	/**
 	 * Launch the application.
@@ -139,7 +142,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 			contentPane.add(panelCamareria, "Cancelar");
 			GridBagLayout gbl_panelCamareria = new GridBagLayout();
 			gbl_panelCamareria.columnWidths = new int[]{0, 0, 0, 0};
-			gbl_panelCamareria.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+			gbl_panelCamareria.rowHeights = new int[]{0, 315, 0, 0, 0, 0};
 			gbl_panelCamareria.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 			gbl_panelCamareria.rowWeights = new double[]{0.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 			panelCamareria.setLayout(gbl_panelCamareria);
@@ -154,17 +157,57 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				panelCamareria.add(Avisos, gbc_Avisos);
 				Avisos.setLayout(new BorderLayout(0, 0));
 				{
-					panel_2 = new JPanel();
-					Avisos.add(panel_2, BorderLayout.NORTH);
+					panelAvisos = new JPanel();
+					Avisos.add(panelAvisos, BorderLayout.NORTH);
 					{
-						comboBox_1 = new JComboBox();
-						panel_2.add(comboBox_1);
+						cbAvisos = new JComboBox();
+						panelAvisos.add(cbAvisos);
 					}
 				}
 				{
-					panel_3 = new JPanel();
-					panel_3.setBorder(new TitledBorder(null, "Datos Aviso", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-					Avisos.add(panel_3, BorderLayout.CENTER);
+					panelDatosAviso = new JPanel();
+					panelDatosAviso.setBorder(new TitledBorder(null, "Datos Aviso", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+					Avisos.add(panelDatosAviso, BorderLayout.CENTER);
+					GridBagLayout gbl_panelDatosAviso = new GridBagLayout();
+					gbl_panelDatosAviso.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
+					gbl_panelDatosAviso.rowHeights = new int[]{0, 53, 0, 85, 0, 0};
+					gbl_panelDatosAviso.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+					gbl_panelDatosAviso.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+					panelDatosAviso.setLayout(gbl_panelDatosAviso);
+					{
+						textTituloAviso = new JTextArea();
+						textTituloAviso.setText("** No hay avisos **");
+						textTituloAviso.setEditable(false);
+						GridBagConstraints gbc_textTituloAviso = new GridBagConstraints();
+						gbc_textTituloAviso.gridwidth = 3;
+						gbc_textTituloAviso.insets = new Insets(0, 0, 5, 5);
+						gbc_textTituloAviso.fill = GridBagConstraints.BOTH;
+						gbc_textTituloAviso.gridx = 1;
+						gbc_textTituloAviso.gridy = 1;
+						panelDatosAviso.add(textTituloAviso, gbc_textTituloAviso);
+					}
+					{
+						textNMesaAviso = new JTextArea();
+						textNMesaAviso.setText("Mesa Número: ***");
+						textNMesaAviso.setEditable(false);
+						GridBagConstraints gbc_textNMesaAviso = new GridBagConstraints();
+						gbc_textNMesaAviso.insets = new Insets(0, 0, 5, 5);
+						gbc_textNMesaAviso.fill = GridBagConstraints.BOTH;
+						gbc_textNMesaAviso.gridx = 1;
+						gbc_textNMesaAviso.gridy = 3;
+						panelDatosAviso.add(textNMesaAviso, gbc_textNMesaAviso);
+					}
+					{
+						textEstadoMesa = new JTextArea();
+						textEstadoMesa.setText("Estado Mesa: ***");
+						textEstadoMesa.setEditable(false);
+						GridBagConstraints gbc_textEstadoMesa = new GridBagConstraints();
+						gbc_textEstadoMesa.insets = new Insets(0, 0, 5, 5);
+						gbc_textEstadoMesa.fill = GridBagConstraints.BOTH;
+						gbc_textEstadoMesa.gridx = 3;
+						gbc_textEstadoMesa.gridy = 3;
+						panelDatosAviso.add(textEstadoMesa, gbc_textEstadoMesa);
+					}
 				}
 			}
 			{
@@ -172,6 +215,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				panelNuevaComanda.setBorder(new TitledBorder(null, "Nueva Comanda", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				panelNuevaComanda.setLayout(null);
 				GridBagConstraints gbc_panelNuevaComanda = new GridBagConstraints();
+				gbc_panelNuevaComanda.gridheight = 2;
 				gbc_panelNuevaComanda.insets = new Insets(0, 0, 5, 5);
 				gbc_panelNuevaComanda.fill = GridBagConstraints.BOTH;
 				gbc_panelNuevaComanda.gridx = 1;
