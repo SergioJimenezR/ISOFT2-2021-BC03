@@ -28,7 +28,7 @@ public class Mesa {
 
 	@Override
 	public String toString() {
-		return "Mesa [id=" + id + ", estadoMesa=" + estadoMesa + "]";
+		return Integer.toString(this.id) + " - " + estadoMesa.name();
 	}
 	
 }

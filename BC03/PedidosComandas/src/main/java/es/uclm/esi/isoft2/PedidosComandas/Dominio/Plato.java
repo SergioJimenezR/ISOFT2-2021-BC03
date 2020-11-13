@@ -1,7 +1,6 @@
 package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
-import es.uclm.esi.isoft2.PedidosComandas.Presentacion.Carta;
-import es.uclm.esi.isoft2.PedidosComandas.Presentacion.Ingredientes;
+import es.uclm.esi.isoft2.PedidosComandas.Presentacion.Constantes;
 
 public class Plato {
 
@@ -52,20 +51,20 @@ public class Plato {
 			int[][] auxingredientes = null;
 			switch (i) {
 			case 0:
-				auxplatos = Carta.ENTRANTES;
-				auxingredientes = Ingredientes.ENTRANTES;
+				auxplatos = Constantes.NOMBRES_ENTRANTES;
+				auxingredientes = Constantes.INGR_ENTRANTES;
 				break;
 			case 1:
-				auxplatos = Carta.PRIMEROS;
-				auxingredientes = Ingredientes.PRIMEROS;
+				auxplatos = Constantes.NOMBRES_PRIMEROS;
+				auxingredientes = Constantes.INGR_PRIMEROS;
 				break;
 			case 2:
-				auxplatos = Carta.SEGUNDOS;
-				auxingredientes = Ingredientes.SEGUNDOS;
+				auxplatos = Constantes.NOMBRES_SEGUNDOS;
+				auxingredientes = Constantes.INGR_SEGUNDOS;
 				break;
 			case 3:
-				auxplatos = Carta.POSTRES;
-				auxingredientes = Ingredientes.POSTRES;
+				auxplatos = Constantes.NOMBRES_POSTRES;
+				auxingredientes = Constantes.INGR_POSTRES;
 			}
 			for (int j = 0; j < auxplatos.length && !encontrado; j++) {
 				if (auxplatos[j].equals(nombre)) {
