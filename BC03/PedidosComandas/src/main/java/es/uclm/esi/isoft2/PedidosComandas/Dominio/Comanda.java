@@ -20,14 +20,6 @@ public class Comanda extends Aviso {
 		setSegundos(segundos);
 		setPostres(postres);
 	}
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public ArrayList<ArrayList<Plato>> getComida() {
 		ArrayList<ArrayList<Plato>> comidas = new ArrayList<ArrayList<Plato>>();

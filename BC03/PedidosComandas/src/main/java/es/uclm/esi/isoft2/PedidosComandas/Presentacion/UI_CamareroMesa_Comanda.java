@@ -13,26 +13,35 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Plato;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Auxiliar;
+import java.awt.CardLayout;
 
 public class UI_CamareroMesa_Comanda extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private JPanel contentPane;
-	private JPanel panel;
+	private JPanel panelAnotacionComanda;
 	private JPanel panelDatosMesa;
 	private JPanel panelComanda;
 	private JLabel lblNumMesa;
 	private JLabel lblNumComensales;
 	private JComboBox<Integer> cbNComensales;
 	private JPanel panelCarta;
-	private JList<String> listEntrantes;
-	private JList<String> listPrimeros;
-	private JList<String> listSegundos;
-	private JList<String> listPostres;
+	private JList<Plato> listEntrantes;
+	private JList<Plato> listPrimeros;
+	private JList<Plato> listSegundos;
+	private JList<Plato> listPostres;
 	private JButton btnCerrarComanda;
 	private JButton btnCancelar;
 	private JComboBox<String> cbEntrantes;
@@ -51,6 +60,10 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 	private JLabel lblPrimero;
 	private JLabel lblSegundo;
 	private JLabel lblPostre;
+
+	static int[] stockVirtualPlatos;
+	static int[] stockVirtualBebidas;
+	static int index;;
 
 	/**
 	 * Launch the application.
@@ -72,26 +85,36 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 	 * Create the frame.
 	 */
 	public UI_CamareroMesa_Comanda() {
-		setTitle("Comanda");
+
+		index = 1;
+		
+		// Ésto es de prueba. Luego va con la BBDD.
+		stockVirtualPlatos = new int[3];
+		for(int i = 0; i < stockVirtualPlatos.length; i++)
+			stockVirtualPlatos[i] = 1000;
+		stockVirtualBebidas = new int[Carta.bebidas.length];
+
+		setTitle("Camarero");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 672);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(new CardLayout(0, 0));
 		{
-			panel = new JPanel();
-			contentPane.add(panel, BorderLayout.CENTER);
-			panel.setLayout(new BorderLayout(0, 0));
+			panelAnotacionComanda = new JPanel();
+			contentPane.add(panelAnotacionComanda, "name_868160916949900");
+			panelAnotacionComanda.setLayout(new BorderLayout(0, 0));
 			{
 				panelDatosMesa = new JPanel();
-				panelDatosMesa.setBorder(new TitledBorder(null, "Datos Mesa", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				panel.add(panelDatosMesa, BorderLayout.NORTH);
+				panelDatosMesa.setBorder(
+						new TitledBorder(null, "Datos Mesa", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				panelAnotacionComanda.add(panelDatosMesa, BorderLayout.NORTH);
 				GridBagLayout gbl_panelDatosMesa = new GridBagLayout();
-				gbl_panelDatosMesa.columnWidths = new int[]{290, 193, 171, 47, 0, 0};
-				gbl_panelDatosMesa.rowHeights = new int[]{28, 0};
-				gbl_panelDatosMesa.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-				gbl_panelDatosMesa.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+				gbl_panelDatosMesa.columnWidths = new int[] { 290, 193, 171, 47, 0, 0 };
+				gbl_panelDatosMesa.rowHeights = new int[] { 28, 0 };
+				gbl_panelDatosMesa.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+				gbl_panelDatosMesa.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 				panelDatosMesa.setLayout(gbl_panelDatosMesa);
 				{
 					lblNumMesa = new JLabel("Mesa Número 6");
@@ -114,7 +137,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				}
 				{
 					cbNComensales = new JComboBox<Integer>();
-					cbNComensales.setModel(new DefaultComboBoxModel<Integer>(new Integer[] {1,2,3,4,5}));
+					cbNComensales.setModel(new DefaultComboBoxModel<Integer>(new Integer[] { 1, 2, 3, 4, 5 }));
 					GridBagConstraints gbc_cbNComensales = new GridBagConstraints();
 					gbc_cbNComensales.fill = GridBagConstraints.HORIZONTAL;
 					gbc_cbNComensales.insets = new Insets(0, 0, 0, 5);
@@ -125,13 +148,15 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 			}
 			{
 				panelComanda = new JPanel();
-				panelComanda.setBorder(new TitledBorder(null, "Comanda", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				panel.add(panelComanda, BorderLayout.CENTER);
+				panelComanda.setBorder(
+						new TitledBorder(null, "Comanda", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				panelAnotacionComanda.add(panelComanda, BorderLayout.CENTER);
 				GridBagLayout gbl_panelComanda = new GridBagLayout();
-				gbl_panelComanda.columnWidths = new int[]{0, 0, 0, 0, 15, 0, 0};
-				gbl_panelComanda.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-				gbl_panelComanda.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
-				gbl_panelComanda.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+				gbl_panelComanda.columnWidths = new int[] { 0, 0, 0, 0, 15, 0, 0 };
+				gbl_panelComanda.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+				gbl_panelComanda.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE };
+				gbl_panelComanda.rowWeights = new double[] { 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
+						1.0, 1.0, 0.0, Double.MIN_VALUE };
 				panelComanda.setLayout(gbl_panelComanda);
 				{
 					lblEntrantes = new JLabel("Entrantes:");
@@ -144,7 +169,8 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				}
 				{
 					panelCarta = new JPanel();
-					panelCarta.setBorder(new TitledBorder(null, "Carta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+					panelCarta.setBorder(
+							new TitledBorder(null, "Carta", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 					GridBagConstraints gbc_panelCarta = new GridBagConstraints();
 					gbc_panelCarta.gridheight = 11;
 					gbc_panelCarta.insets = new Insets(0, 0, 5, 5);
@@ -153,14 +179,15 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					gbc_panelCarta.gridy = 1;
 					panelComanda.add(panelCarta, gbc_panelCarta);
 					GridBagLayout gbl_panelCarta = new GridBagLayout();
-					gbl_panelCarta.columnWidths = new int[]{8, 222, 0, 10, 0, 0};
-					gbl_panelCarta.rowHeights = new int[]{21, 0, 51, 0, 0, 62, 0, 0, 64, 0, 0, 0, 0};
-					gbl_panelCarta.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-					gbl_panelCarta.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+					gbl_panelCarta.columnWidths = new int[] { 8, 222, 0, 10, 0, 0 };
+					gbl_panelCarta.rowHeights = new int[] { 21, 0, 51, 0, 0, 62, 0, 0, 64, 0, 0, 0, 0 };
+					gbl_panelCarta.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
+					gbl_panelCarta.rowWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+							0.0, Double.MIN_VALUE };
 					panelCarta.setLayout(gbl_panelCarta);
 					{
 						cbEntrantes = new JComboBox<String>();
-						cbEntrantes.setModel(new DefaultComboBoxModel<String>(NombresPlatos.entrantes));
+						cbEntrantes.setModel(new DefaultComboBoxModel<String>(Carta.entrantes));
 						GridBagConstraints gbc_cbEntrantes = new GridBagConstraints();
 						gbc_cbEntrantes.insets = new Insets(0, 0, 5, 5);
 						gbc_cbEntrantes.anchor = GridBagConstraints.NORTH;
@@ -171,6 +198,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						btnAñadirEntrante = new JButton("Añadir");
+						btnAñadirEntrante.addActionListener(new BtnAñadirEntranteActionListener());
 						GridBagConstraints gbc_btnAñadirEntrante = new GridBagConstraints();
 						gbc_btnAñadirEntrante.insets = new Insets(0, 0, 5, 5);
 						gbc_btnAñadirEntrante.gridx = 3;
@@ -179,6 +207,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						btnQuitarEntrante = new JButton("Quitar");
+						btnQuitarEntrante.addActionListener(new BtnQuitarEntranteActionListener());
 						GridBagConstraints gbc_btnQuitarEntrante = new GridBagConstraints();
 						gbc_btnQuitarEntrante.insets = new Insets(0, 0, 5, 5);
 						gbc_btnQuitarEntrante.gridx = 3;
@@ -187,7 +216,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						cbPrimeros = new JComboBox<String>();
-						cbPrimeros.setModel(new DefaultComboBoxModel<String>(NombresPlatos.primeros));
+						cbPrimeros.setModel(new DefaultComboBoxModel<String>(Carta.primeros));
 						GridBagConstraints gbc_cbPrimeros = new GridBagConstraints();
 						gbc_cbPrimeros.insets = new Insets(0, 0, 5, 5);
 						gbc_cbPrimeros.fill = GridBagConstraints.HORIZONTAL;
@@ -197,6 +226,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						btnAñadirPrimero = new JButton("Añadir");
+						btnAñadirPrimero.addActionListener(new BtnAñadirPrimeroActionListener());
 						GridBagConstraints gbc_btnAñadirPrimero = new GridBagConstraints();
 						gbc_btnAñadirPrimero.insets = new Insets(0, 0, 5, 5);
 						gbc_btnAñadirPrimero.gridx = 3;
@@ -205,6 +235,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						btnQuitarPrimero = new JButton("Quitar");
+						btnQuitarPrimero.addActionListener(new BtnQuitarPrimeroActionListener());
 						GridBagConstraints gbc_btnQuitarPrimero = new GridBagConstraints();
 						gbc_btnQuitarPrimero.insets = new Insets(0, 0, 5, 5);
 						gbc_btnQuitarPrimero.gridx = 3;
@@ -213,7 +244,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						cbSegundos = new JComboBox<String>();
-						cbSegundos.setModel(new DefaultComboBoxModel<String>(NombresPlatos.segundos));
+						cbSegundos.setModel(new DefaultComboBoxModel<String>(Carta.segundos));
 						GridBagConstraints gbc_cbSegundos = new GridBagConstraints();
 						gbc_cbSegundos.insets = new Insets(0, 0, 5, 5);
 						gbc_cbSegundos.fill = GridBagConstraints.HORIZONTAL;
@@ -223,6 +254,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						btnAñadirSegundo = new JButton("Añadir");
+						btnAñadirSegundo.addActionListener(new BtnAñadirSegundoActionListener());
 						GridBagConstraints gbc_btnAñadirSegundo = new GridBagConstraints();
 						gbc_btnAñadirSegundo.insets = new Insets(0, 0, 5, 5);
 						gbc_btnAñadirSegundo.gridx = 3;
@@ -231,6 +263,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						btnQuitarSegundo = new JButton("Quitar");
+						btnQuitarSegundo.addActionListener(new BtnQuitarSegundoActionListener());
 						GridBagConstraints gbc_btnQuitarSegundo = new GridBagConstraints();
 						gbc_btnQuitarSegundo.insets = new Insets(0, 0, 5, 5);
 						gbc_btnQuitarSegundo.gridx = 3;
@@ -239,7 +272,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						cbPostres = new JComboBox<String>();
-						cbPostres.setModel(new DefaultComboBoxModel<String>(NombresPlatos.postres));
+						cbPostres.setModel(new DefaultComboBoxModel<String>(Carta.postres));
 						GridBagConstraints gbc_cbPostres = new GridBagConstraints();
 						gbc_cbPostres.insets = new Insets(0, 0, 5, 5);
 						gbc_cbPostres.fill = GridBagConstraints.HORIZONTAL;
@@ -249,6 +282,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						btnAñadirPostre = new JButton("Añadir");
+						btnAñadirPostre.addActionListener(new BtnAñadirPostreActionListener());
 						GridBagConstraints gbc_btnAñadirPostre = new GridBagConstraints();
 						gbc_btnAñadirPostre.insets = new Insets(0, 0, 5, 5);
 						gbc_btnAñadirPostre.gridx = 3;
@@ -257,6 +291,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						btnQuitarPostre = new JButton("Quitar");
+						btnQuitarPostre.addActionListener(new BtnQuitarPostreActionListener());
 						GridBagConstraints gbc_btnQuitarPostre = new GridBagConstraints();
 						gbc_btnQuitarPostre.insets = new Insets(0, 0, 5, 5);
 						gbc_btnQuitarPostre.gridx = 3;
@@ -265,7 +300,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 				}
 				{
-					listEntrantes = new JList<String>();
+					listEntrantes = new JList<Plato>(new DefaultListModel<Plato>());
 					GridBagConstraints gbc_listEntrantes = new GridBagConstraints();
 					gbc_listEntrantes.gridwidth = 2;
 					gbc_listEntrantes.gridheight = 2;
@@ -285,7 +320,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					panelComanda.add(lblPrimero, gbc_lblPrimero);
 				}
 				{
-					listPrimeros = new JList<String>();
+					listPrimeros = new JList<Plato>(new DefaultListModel<Plato>());
 					GridBagConstraints gbc_listPrimeros = new GridBagConstraints();
 					gbc_listPrimeros.gridwidth = 2;
 					gbc_listPrimeros.gridheight = 2;
@@ -305,7 +340,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					panelComanda.add(lblSegundo, gbc_lblSegundo);
 				}
 				{
-					listSegundos = new JList<String>();
+					listSegundos = new JList<Plato>(new DefaultListModel<Plato>());
 					GridBagConstraints gbc_listSegundos = new GridBagConstraints();
 					gbc_listSegundos.gridwidth = 2;
 					gbc_listSegundos.gridheight = 2;
@@ -325,7 +360,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					panelComanda.add(lblPostre, gbc_lblPostre);
 				}
 				{
-					listPostres = new JList<String>();
+					listPostres = new JList<Plato>(new DefaultListModel<Plato>());
 					GridBagConstraints gbc_listPostres = new GridBagConstraints();
 					gbc_listPostres.gridwidth = 2;
 					gbc_listPostres.gridheight = 2;
@@ -359,4 +394,73 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 			}
 		}
 	}
+
+	private class BtnAñadirEntranteActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+
+			Plato p = new Plato(index++, (String) cbEntrantes.getSelectedItem());
+			if (Almacen.comprobarStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes())) {
+				((DefaultListModel<Plato>) listEntrantes.getModel()).addElement(p);
+				stockVirtualPlatos = Almacen.reducirStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes());
+				Auxiliar.imprimirVectorStockVirtual(stockVirtualPlatos);
+				// Estado.setText("Plato añadido");
+			} else {
+				index--;
+				Auxiliar.imprimirVectorStockVirtual(stockVirtualPlatos);
+				// Estado.setText("no hay stock")
+			}
+		}
+	}
+
+	private class BtnAñadirPrimeroActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			
+		}
+	}
+
+	private class BtnAñadirSegundoActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			
+		}
+	}
+
+	private class BtnAñadirPostreActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			
+		}
+	}
+
+	private class BtnQuitarEntranteActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			if (listEntrantes.getSelectedIndex() >= 0) {
+				Plato p = ((DefaultListModel<Plato>) listEntrantes.getModel()).get(listEntrantes.getSelectedIndex());
+				stockVirtualPlatos = Almacen.aumentarStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes());
+				((DefaultListModel<Plato>) listEntrantes.getModel()).remove(listEntrantes.getSelectedIndex());
+				Auxiliar.imprimirVectorStockVirtual(stockVirtualPlatos);
+				// Estado.setText("Plato eliminado correctamente");
+			} else {
+				Auxiliar.imprimirVectorStockVirtual(stockVirtualPlatos);
+				// Estado.setText("Debe existir y seleccionar un plato");
+			}
+		}
+	}
+
+	private class BtnQuitarPrimeroActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			
+		}
+	}
+
+	private class BtnQuitarSegundoActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			
+		}
+	}
+
+	private class BtnQuitarPostreActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			
+		}
+	}
+
 }
