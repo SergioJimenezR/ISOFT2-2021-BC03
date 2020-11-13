@@ -30,6 +30,9 @@ import java.awt.CardLayout;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JTextArea;
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
+import javax.swing.JSpinner;
 
 public class UI_CamareroMesa_Comanda extends JFrame {
 
@@ -75,6 +78,14 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 	private JList<Bebida> listBebidas;
 	private JList<Plato> listPostres;
 	private JTextArea textEstado;
+	private JPanel Avisos;
+	private JPanel panelNuevaComanda;
+	private JPanel panel_2;
+	private JComboBox<String> comboBox_1;
+	private JPanel panel_3;
+	private JLabel lblInfo;
+	private JComboBox<String> cbMesa;
+	private JButton btnInicarComanda;
 
 	/**
 	 * Launch the application.
@@ -473,6 +484,65 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 		{
 			panelCamareria = new JPanel();
 			contentPane.add(panelCamareria, "name_880407293944900");
+			GridBagLayout gbl_panelCamareria = new GridBagLayout();
+			gbl_panelCamareria.columnWidths = new int[]{0, 0, 0, 0};
+			gbl_panelCamareria.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+			gbl_panelCamareria.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+			gbl_panelCamareria.rowWeights = new double[]{0.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+			panelCamareria.setLayout(gbl_panelCamareria);
+			{
+				Avisos = new JPanel();
+				Avisos.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Avisos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				GridBagConstraints gbc_Avisos = new GridBagConstraints();
+				gbc_Avisos.insets = new Insets(0, 0, 5, 5);
+				gbc_Avisos.fill = GridBagConstraints.BOTH;
+				gbc_Avisos.gridx = 1;
+				gbc_Avisos.gridy = 1;
+				panelCamareria.add(Avisos, gbc_Avisos);
+				Avisos.setLayout(new BorderLayout(0, 0));
+				{
+					panel_2 = new JPanel();
+					Avisos.add(panel_2, BorderLayout.NORTH);
+					{
+						comboBox_1 = new JComboBox();
+						panel_2.add(comboBox_1);
+					}
+				}
+				{
+					panel_3 = new JPanel();
+					panel_3.setBorder(new TitledBorder(null, "Datos Aviso", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+					Avisos.add(panel_3, BorderLayout.CENTER);
+				}
+			}
+			{
+				panelNuevaComanda = new JPanel();
+				panelNuevaComanda.setBorder(new TitledBorder(null, "Nueva Comanda", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				panelNuevaComanda.setLayout(null);
+				GridBagConstraints gbc_panelNuevaComanda = new GridBagConstraints();
+				gbc_panelNuevaComanda.insets = new Insets(0, 0, 5, 5);
+				gbc_panelNuevaComanda.fill = GridBagConstraints.BOTH;
+				gbc_panelNuevaComanda.gridx = 1;
+				gbc_panelNuevaComanda.gridy = 2;
+				panelCamareria.add(panelNuevaComanda, gbc_panelNuevaComanda);
+				{
+					lblInfo = new JLabel("Mesa número");
+					lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+					lblInfo.setBounds(64, 89, 109, 24);
+					panelNuevaComanda.add(lblInfo);
+				}
+				{
+					cbMesa = new JComboBox();
+					cbMesa.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6"}));
+					cbMesa.setBounds(183, 88, 48, 31);
+					panelNuevaComanda.add(cbMesa);
+				}
+				{
+					btnInicarComanda = new JButton("Iniciar Comanda");
+					btnInicarComanda.setFont(new Font("Tahoma", Font.BOLD, 16));
+					btnInicarComanda.setBounds(397, 65, 202, 72);
+					panelNuevaComanda.add(btnInicarComanda);
+				}
+			}
 		}
 	}
 
