@@ -40,7 +40,7 @@ public class Plato {
 	}
 
 	public String toString() {
-		return nombre + " (" + id + ")";
+		return nombre + " (id: " + id + ")";
 	}
 
 	public static int[] calcularIngredientes(String nombre) {
@@ -76,7 +76,7 @@ public class Plato {
 		}
 		return ingredientes;
 	}
-	
+
 	public void reducirId() {
 		this.id--;
 	}

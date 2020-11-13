@@ -1,5 +1,9 @@
 package es.uclm.esi.isoft2.PedidosComandas.Presentacion;
 
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Plato;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Auxiliar;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -21,10 +25,9 @@ import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Plato;
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Auxiliar;
 import java.awt.CardLayout;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class UI_CamareroMesa_Comanda extends JFrame {
 
@@ -64,6 +67,10 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 	static int[] stockVirtualPlatos;
 	static int[] stockVirtualBebidas;
 	static int index;
+
+	static String cadenaEstado; // Acoplar el contenido de cadenaEstado al argumento de
+	private JPanel panelCamareria;
+								// textPaneEstado.setText(AQUÍ) y eliminar esta variable global innecesaria.
 
 	/**
 	 * Launch the application.
@@ -199,6 +206,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						btnAñadirEntrante = new JButton("Añadir");
+						btnAñadirEntrante.setEnabled(false);
 						btnAñadirEntrante.addActionListener(new BtnAñadirEntranteActionListener());
 						GridBagConstraints gbc_btnAñadirEntrante = new GridBagConstraints();
 						gbc_btnAñadirEntrante.insets = new Insets(0, 0, 5, 5);
@@ -208,6 +216,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						btnQuitarEntrante = new JButton("Quitar");
+						btnQuitarEntrante.setEnabled(false);
 						btnQuitarEntrante.addActionListener(new BtnQuitarEntranteActionListener());
 						GridBagConstraints gbc_btnQuitarEntrante = new GridBagConstraints();
 						gbc_btnQuitarEntrante.insets = new Insets(0, 0, 5, 5);
@@ -217,6 +226,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						cbPrimeros = new JComboBox<String>();
+						cbPrimeros.addActionListener(new CbPrimerosActionListener());
 						cbPrimeros.setModel(new DefaultComboBoxModel<String>(Carta.primeros));
 						GridBagConstraints gbc_cbPrimeros = new GridBagConstraints();
 						gbc_cbPrimeros.insets = new Insets(0, 0, 5, 5);
@@ -228,6 +238,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					{
 						btnAñadirPrimero = new JButton("Añadir");
 						btnAñadirPrimero.addActionListener(new BtnAñadirPrimeroActionListener());
+						btnAñadirPrimero.setEnabled(false);
 						GridBagConstraints gbc_btnAñadirPrimero = new GridBagConstraints();
 						gbc_btnAñadirPrimero.insets = new Insets(0, 0, 5, 5);
 						gbc_btnAñadirPrimero.gridx = 3;
@@ -237,6 +248,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					{
 						btnQuitarPrimero = new JButton("Quitar");
 						btnQuitarPrimero.addActionListener(new BtnQuitarPrimeroActionListener());
+						btnQuitarPrimero.setEnabled(false);
 						GridBagConstraints gbc_btnQuitarPrimero = new GridBagConstraints();
 						gbc_btnQuitarPrimero.insets = new Insets(0, 0, 5, 5);
 						gbc_btnQuitarPrimero.gridx = 3;
@@ -245,6 +257,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						cbSegundos = new JComboBox<String>();
+						cbSegundos.addActionListener(new CbSegundosActionListener());
 						cbSegundos.setModel(new DefaultComboBoxModel<String>(Carta.segundos));
 						GridBagConstraints gbc_cbSegundos = new GridBagConstraints();
 						gbc_cbSegundos.insets = new Insets(0, 0, 5, 5);
@@ -256,6 +269,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					{
 						btnAñadirSegundo = new JButton("Añadir");
 						btnAñadirSegundo.addActionListener(new BtnAñadirSegundoActionListener());
+						btnAñadirSegundo.setEnabled(false);
 						GridBagConstraints gbc_btnAñadirSegundo = new GridBagConstraints();
 						gbc_btnAñadirSegundo.insets = new Insets(0, 0, 5, 5);
 						gbc_btnAñadirSegundo.gridx = 3;
@@ -265,6 +279,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					{
 						btnQuitarSegundo = new JButton("Quitar");
 						btnQuitarSegundo.addActionListener(new BtnQuitarSegundoActionListener());
+						btnQuitarSegundo.setEnabled(false);
 						GridBagConstraints gbc_btnQuitarSegundo = new GridBagConstraints();
 						gbc_btnQuitarSegundo.insets = new Insets(0, 0, 5, 5);
 						gbc_btnQuitarSegundo.gridx = 3;
@@ -273,6 +288,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					}
 					{
 						cbPostres = new JComboBox<String>();
+						cbPostres.addActionListener(new CbPostresActionListener());
 						cbPostres.setModel(new DefaultComboBoxModel<String>(Carta.postres));
 						GridBagConstraints gbc_cbPostres = new GridBagConstraints();
 						gbc_cbPostres.insets = new Insets(0, 0, 5, 5);
@@ -284,6 +300,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					{
 						btnAñadirPostre = new JButton("Añadir");
 						btnAñadirPostre.addActionListener(new BtnAñadirPostreActionListener());
+						btnAñadirPostre.setEnabled(false);
 						GridBagConstraints gbc_btnAñadirPostre = new GridBagConstraints();
 						gbc_btnAñadirPostre.insets = new Insets(0, 0, 5, 5);
 						gbc_btnAñadirPostre.gridx = 3;
@@ -293,6 +310,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					{
 						btnQuitarPostre = new JButton("Quitar");
 						btnQuitarPostre.addActionListener(new BtnQuitarPostreActionListener());
+						btnQuitarPostre.setEnabled(false);
 						GridBagConstraints gbc_btnQuitarPostre = new GridBagConstraints();
 						gbc_btnQuitarPostre.insets = new Insets(0, 0, 5, 5);
 						gbc_btnQuitarPostre.gridx = 3;
@@ -302,6 +320,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				}
 				{
 					listEntrantes = new JList<Plato>(new DefaultListModel<Plato>());
+					listEntrantes.addListSelectionListener(new ListEntrantesListSelectionListener());
 					GridBagConstraints gbc_listEntrantes = new GridBagConstraints();
 					gbc_listEntrantes.gridwidth = 2;
 					gbc_listEntrantes.gridheight = 2;
@@ -312,7 +331,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					panelComanda.add(listEntrantes, gbc_listEntrantes);
 				}
 				{
-					lblPrimero = new JLabel("Primero:");
+					lblPrimero = new JLabel("Primeros:");
 					lblPrimero.setFont(new Font("Tahoma", Font.BOLD, 14));
 					GridBagConstraints gbc_lblPrimero = new GridBagConstraints();
 					gbc_lblPrimero.insets = new Insets(0, 0, 5, 5);
@@ -322,6 +341,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				}
 				{
 					listPrimeros = new JList<Plato>(new DefaultListModel<Plato>());
+					listPrimeros.addListSelectionListener(new ListPrimerosListSelectionListener());
 					GridBagConstraints gbc_listPrimeros = new GridBagConstraints();
 					gbc_listPrimeros.gridwidth = 2;
 					gbc_listPrimeros.gridheight = 2;
@@ -332,7 +352,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					panelComanda.add(listPrimeros, gbc_listPrimeros);
 				}
 				{
-					lblSegundo = new JLabel("Segundo:");
+					lblSegundo = new JLabel("Segundos:");
 					lblSegundo.setFont(new Font("Tahoma", Font.BOLD, 14));
 					GridBagConstraints gbc_lblSegundo = new GridBagConstraints();
 					gbc_lblSegundo.insets = new Insets(0, 0, 5, 5);
@@ -342,6 +362,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				}
 				{
 					listSegundos = new JList<Plato>(new DefaultListModel<Plato>());
+					listSegundos.addListSelectionListener(new ListSegundosListSelectionListener());
 					GridBagConstraints gbc_listSegundos = new GridBagConstraints();
 					gbc_listSegundos.gridwidth = 2;
 					gbc_listSegundos.gridheight = 2;
@@ -352,7 +373,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					panelComanda.add(listSegundos, gbc_listSegundos);
 				}
 				{
-					lblPostre = new JLabel("Postre:");
+					lblPostre = new JLabel("Postres:");
 					lblPostre.setFont(new Font("Tahoma", Font.BOLD, 14));
 					GridBagConstraints gbc_lblPostre = new GridBagConstraints();
 					gbc_lblPostre.insets = new Insets(0, 0, 5, 5);
@@ -362,6 +383,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				}
 				{
 					listPostres = new JList<Plato>(new DefaultListModel<Plato>());
+					listPostres.addListSelectionListener(new ListPostresListSelectionListener());
 					GridBagConstraints gbc_listPostres = new GridBagConstraints();
 					gbc_listPostres.gridwidth = 2;
 					gbc_listPostres.gridheight = 2;
@@ -394,11 +416,15 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				}
 			}
 		}
+		{
+			panelCamareria = new JPanel();
+			contentPane.add(panelCamareria, "name_880407293944900");
+		}
 	}
 
 	private void retrasarIds(int k) {
 		DefaultListModel<Plato> modelo = null;
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 1; i <= 4; i++) { // (CAMBIAR A 5 AL AÑADIR LAS BEBIDAS)
 			switch (i) {
 			case 1:
 				modelo = (DefaultListModel<Plato>) listEntrantes.getModel();
@@ -413,7 +439,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				modelo = (DefaultListModel<Plato>) listPostres.getModel();
 				break;
 			case 5:
-				//modelo = (DefaultListModel<Plato>) listBebidas.getModel();
+				// modelo = (DefaultListModel<Plato>) listBebidas.getModel();
 				break;
 			}
 
@@ -425,84 +451,149 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 		}
 	}
 
+	// ENTRANTES
+	private class CbEntrantesActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+
+			Plato aux = new Plato(index, (String) cbEntrantes.getSelectedItem());
+			if (Almacen.comprobarStockVirtualPlatos(stockVirtualPlatos, aux.getIngredientes())) {
+				btnAñadirEntrante.setEnabled(true);
+
+				cadenaEstado = "Plato " + aux.getNombre() + " seleccionado. Se puede añadir dicho plato.";
+				System.out.println(cadenaEstado);
+				// textPaneEstado.setText(cadenaEstado);
+			} else {
+				btnAñadirEntrante.setEnabled(false);
+
+				cadenaEstado = "Plato " + (String) cbEntrantes.getSelectedItem()
+						+ " seleccionado. No se puede añadir dicho plato por insuficiencia de stock. (Stock virtual: "
+						+ Auxiliar.imprimirVector(stockVirtualPlatos) + "). (Stock necesario: "
+						+ Auxiliar.imprimirVector(aux.getIngredientes()) + ").";
+				System.out.println(cadenaEstado);
+				// textPaneEstado.setText(cadenaEstado);
+			}
+
+		}
+	}
+
 	private class BtnAñadirEntranteActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 
 			Plato p = new Plato(index++, (String) cbEntrantes.getSelectedItem());
-			if (Almacen.comprobarStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes())) {
-				((DefaultListModel<Plato>) listEntrantes.getModel()).addElement(p);
-				stockVirtualPlatos = Almacen.reducirStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes());
-				
-				System.out.print("Plato añadido. ");
-				Auxiliar.imprimirVectorStockVirtual(stockVirtualPlatos);
-				// textPaneEstado.setText("Plato añadido");
-			} else {
-				index--;
-				System.out.print("No hay stock para ese plato. ");
-				Auxiliar.imprimirVectorStockVirtual(stockVirtualPlatos);
-				// textPaneEstado.setText("no hay stock")
+
+			((DefaultListModel<Plato>) listEntrantes.getModel()).addElement(p);
+			stockVirtualPlatos = Almacen.reducirStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes());
+
+			cadenaEstado = "Plato " + p.toString() + " añadido con éxito. " + "(Stock virtual: "
+					+ Auxiliar.imprimirVector(stockVirtualPlatos) + ").";
+			System.out.println(cadenaEstado);
+			// textPaneEstado.setText(cadenaEstado);
+
+			Plato aux = new Plato(index, (String) cbEntrantes.getSelectedItem());
+			if (!Almacen.comprobarStockVirtualPlatos(stockVirtualPlatos, aux.getIngredientes())) {
+				btnAñadirEntrante.setEnabled(false);
+				cadenaEstado = "Se acaba de terminar el stock de ingredientes para cocinar este plato "
+						+ aux.getNombre() + ". (Stock virtual: " + Auxiliar.imprimirVector(stockVirtualPlatos)
+						+ "). (Stock necesario: " + Auxiliar.imprimirVector(p.getIngredientes()) + ").";
+				System.out.println(cadenaEstado);
+				// textPaneEstado.setText(cadenaEstado);
 			}
-		}
-	}
-
-	private class BtnAñadirPrimeroActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
 
 		}
 	}
 
-	private class BtnAñadirSegundoActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
+	private class ListEntrantesListSelectionListener implements ListSelectionListener {
+		public void valueChanged(ListSelectionEvent arg0) {
 
-		}
-	}
-
-	private class BtnAñadirPostreActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
+			if (listEntrantes.getSelectedIndex() >= 0)
+				btnQuitarEntrante.setEnabled(true);
+			else
+				btnQuitarEntrante.setEnabled(false);
 
 		}
 	}
 
 	private class BtnQuitarEntranteActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			if (listEntrantes.getSelectedIndex() >= 0) {
-				Plato p = ((DefaultListModel<Plato>) listEntrantes.getModel()).get(listEntrantes.getSelectedIndex());
-				stockVirtualPlatos = Almacen.aumentarStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes());
-				((DefaultListModel<Plato>) listEntrantes.getModel()).remove(listEntrantes.getSelectedIndex());
-				retrasarIds(p.getId());
 
-				System.out.print("Plato eliminado. ");
-				Auxiliar.imprimirVectorStockVirtual(stockVirtualPlatos);
-				// textPaneEstado.setText("Plato eliminado correctamente");
-			} else {
-				System.out.print("No existe nada seleccionado. ");
-				Auxiliar.imprimirVectorStockVirtual(stockVirtualPlatos);
-				// textPaneEstado.setText("Debe existir y seleccionar un plato");
-			}
+			Plato p = ((DefaultListModel<Plato>) listEntrantes.getModel()).get(listEntrantes.getSelectedIndex());
+			stockVirtualPlatos = Almacen.aumentarStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes());
+			((DefaultListModel<Plato>) listEntrantes.getModel()).remove(listEntrantes.getSelectedIndex());
+
+			retrasarIds(p.getId());
+			index--;
+
+			cadenaEstado = "Plato " + p.toString() + " eliminado con éxito, e identificadores corridos. "
+					+ "(Stock virtual: " + Auxiliar.imprimirVector(stockVirtualPlatos) + ").";
+			System.out.println(cadenaEstado);
+			// textPaneEstado.setText(cadenaEstado);
+		}
+	}
+
+	// PRIMEROS
+	private class CbPrimerosActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+		}
+	}
+
+	private class BtnAñadirPrimeroActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+		}
+	}
+
+	private class ListPrimerosListSelectionListener implements ListSelectionListener {
+		public void valueChanged(ListSelectionEvent arg0) {
 		}
 	}
 
 	private class BtnQuitarPrimeroActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
+		}
+	}
 
+	// SEGUNDOS
+	private class CbSegundosActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+		}
+	}
+
+	private class BtnAñadirSegundoActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+		}
+	}
+
+	private class ListSegundosListSelectionListener implements ListSelectionListener {
+		public void valueChanged(ListSelectionEvent arg0) {
 		}
 	}
 
 	private class BtnQuitarSegundoActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
+		}
+	}
 
+	// POSTRES
+	private class CbPostresActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+		}
+	}
+
+	private class BtnAñadirPostreActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+		}
+	}
+
+	private class ListPostresListSelectionListener implements ListSelectionListener {
+		public void valueChanged(ListSelectionEvent arg0) {
 		}
 	}
 
 	private class BtnQuitarPostreActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
+		}
+	}
 
-		}
-	}
-	private class CbEntrantesActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-			System.out.println(cbEntrantes.getSelectedItem().toString() + " seleccionado.");
-		}
-	}
+	// BEBIDAS
+	// private class...
 
 }
