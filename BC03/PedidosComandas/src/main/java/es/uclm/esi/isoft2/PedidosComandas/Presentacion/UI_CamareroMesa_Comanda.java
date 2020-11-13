@@ -70,7 +70,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 	private JPanel panelCamareria;
 	private JButton btnQuitarBebida;
 	private JButton btnAñadirBebida;
-	private JComboBox<String> cbBebida;
+	private JComboBox<String> cbBebidas;
 	private JLabel lblBebidas;
 	private JList<Bebida> listBebidas;
 	private JList<Plato> listPostres;
@@ -98,16 +98,17 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 	public UI_CamareroMesa_Comanda() {
 
 		index = 1;
-		
+
 		stockVirtualPlatos = new int[3];
 		stockVirtualBebidas = new int[Carta.BEBIDAS.length];
-		
-		// Ésto es de prueba. Luego el stock se leerá de la BBDD por medio de AlmacenDAO (CDU2):
+
+		// Ésto es de prueba. Luego el stock se leerá de la BBDD por medio de AlmacenDAO
+		// (CDU2):
 		for (int i = 0; i < stockVirtualPlatos.length; i++)
 			stockVirtualPlatos[i] = 1000;
 		for (int i = 0; i < stockVirtualBebidas.length; i++)
 			stockVirtualBebidas[i] = 10;
-		
+
 		setTitle("Camarero");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 789);
@@ -160,8 +161,8 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				gbl_panelComanda.columnWidths = new int[] { 0, 0, 0, 0, 15, 0, 0 };
 				gbl_panelComanda.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 				gbl_panelComanda.columnWeights = new double[] { 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE };
-				gbl_panelComanda.rowWeights = new double[] { 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
-						1.0, 1.0, 0.0, Double.MIN_VALUE };
+				gbl_panelComanda.rowWeights = new double[] { 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
+						1.0, 1.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE };
 				panelComanda.setLayout(gbl_panelComanda);
 				{
 					lblBebidas = new JLabel("Bebidas:");
@@ -187,8 +188,8 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					gbl_panelCarta.columnWidths = new int[] { 8, 222, 0, 10, 0, 0 };
 					gbl_panelCarta.rowHeights = new int[] { 21, 0, 45, 0, 0, 51, 0, 29, 0, -5, 30, 0, 0, 0, 0 };
 					gbl_panelCarta.columnWeights = new double[] { 0.0, 1.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
-					gbl_panelCarta.rowWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0,
-							0.0, Double.MIN_VALUE };
+					gbl_panelCarta.rowWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0,
+							1.0, 0.0, 0.0, Double.MIN_VALUE };
 					panelCarta.setLayout(gbl_panelCarta);
 					{
 						{
@@ -203,18 +204,19 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 									cbEntrantes = new JComboBox<String>();
 									cbEntrantes.addActionListener(new CbEntrantesActionListener());
 									{
-										cbBebida = new JComboBox();
-										cbBebida.addActionListener(new CbBebidaActionListener());
-										cbBebida.setModel(new DefaultComboBoxModel(new String[] {"Bebida1", "Bebida2", "Bebida3", "Bebida4", "Bebida5"}));
-										GridBagConstraints gbc_cbBebida = new GridBagConstraints();
-										gbc_cbBebida.insets = new Insets(0, 0, 5, 5);
-										gbc_cbBebida.fill = GridBagConstraints.HORIZONTAL;
-										gbc_cbBebida.gridx = 1;
-										gbc_cbBebida.gridy = 0;
-										panelCarta.add(cbBebida, gbc_cbBebida);
+										cbBebidas = new JComboBox<String>();
+										cbBebidas.addActionListener(new CbBebidaActionListener());
+										cbBebidas.setModel(new DefaultComboBoxModel<String>(Carta.BEBIDAS));
+										GridBagConstraints gbc_cbBebidas = new GridBagConstraints();
+										gbc_cbBebidas.insets = new Insets(0, 0, 5, 5);
+										gbc_cbBebidas.fill = GridBagConstraints.HORIZONTAL;
+										gbc_cbBebidas.gridx = 1;
+										gbc_cbBebidas.gridy = 0;
+										panelCarta.add(cbBebidas, gbc_cbBebidas);
 									}
 									{
 										btnAñadirBebida = new JButton("Añadir");
+										btnAñadirBebida.setEnabled(false);
 										btnAñadirBebida.addActionListener(new BtnAñadirBebidaActionListener());
 										GridBagConstraints gbc_btnAñadirBebida = new GridBagConstraints();
 										gbc_btnAñadirBebida.insets = new Insets(0, 0, 5, 5);
@@ -224,6 +226,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 									}
 									{
 										btnQuitarBebida = new JButton("Quitar");
+										btnQuitarBebida.setEnabled(false);
 										btnQuitarBebida.addActionListener(new BtnQuitarBebidaActionListener());
 										GridBagConstraints gbc_btnQuitarBebida = new GridBagConstraints();
 										gbc_btnQuitarBebida.insets = new Insets(0, 0, 5, 5);
@@ -273,13 +276,16 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 											cbSegundos.addActionListener(new CbSegundosActionListener());
 											{
 												btnQuitarPrimero = new JButton("Quitar");
-												btnQuitarPrimero.addActionListener(new BtnQuitarPrimeroActionListener());
+												btnQuitarPrimero
+														.addActionListener(new BtnQuitarPrimeroActionListener());
 												{
 													btnAñadirPrimero = new JButton("Añadir");
-													btnAñadirPrimero.addActionListener(new BtnAñadirPrimeroActionListener());
+													btnAñadirPrimero
+															.addActionListener(new BtnAñadirPrimeroActionListener());
 													cbPrimeros = new JComboBox<String>();
 													cbPrimeros.addActionListener(new CbPrimerosActionListener());
-													cbPrimeros.setModel(new DefaultComboBoxModel<String>(Carta.PRIMEROS));
+													cbPrimeros
+															.setModel(new DefaultComboBoxModel<String>(Carta.PRIMEROS));
 													GridBagConstraints gbc_cbPrimeros = new GridBagConstraints();
 													gbc_cbPrimeros.insets = new Insets(0, 0, 5, 5);
 													gbc_cbPrimeros.fill = GridBagConstraints.HORIZONTAL;
@@ -431,6 +437,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				}
 				{
 					listPostres = new JList<Plato>(new DefaultListModel<Plato>());
+					listPostres.addListSelectionListener(new ListPostresListSelectionListener());
 					GridBagConstraints gbc_listPostres = new GridBagConstraints();
 					gbc_listPostres.gridheight = 2;
 					gbc_listPostres.gridwidth = 2;
@@ -470,33 +477,68 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 	}
 
 	private void mostrarMsgEstado(String mensaje) {
-		//System.out.println(mensaje);
 		textEstado.setText(mensaje);
 	}
 
-	//BEBIDAS
+	// BEBIDAS
 	private class CbBebidaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			eventoComboBox(cbBebida, btnAñadirBebida);
-		}
-	}
-	private class BtnAñadirBebidaActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			//eventoAñadir(cbBebida, btnAñadirBebida, listBebidas);
-		}
-	}
-	private class ListBebidasListSelectionListener implements ListSelectionListener {
-		public void valueChanged(ListSelectionEvent e) {
-			//eventoLista(listBebidas, btnQuitarBebida);
-		}
-	}
-	private class BtnQuitarBebidaActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			//eventoQuitar(listBebidas);
+			Bebida aux = new Bebida(index, (String) cbBebidas.getSelectedItem());
+			if (Almacen.comprobarStockVirtualBebidas(stockVirtualBebidas, aux.getNombre())) {
+				btnAñadirBebida.setEnabled(true);
+				
+				mostrarMsgEstado("Se ha seleccionado " + aux.getNombre() + ". Se puede añadir.");
+			} else {
+				btnAñadirBebida.setEnabled(false);
+				
+				mostrarMsgEstado("Se ha seleccionado " + (String) cbBebidas.getSelectedItem()
+						+ ". No se puede añadir por insuficiencia de stock. (Stock virtual: "
+						+ Auxiliar.imprimirVector(stockVirtualBebidas) + ").");
+			}
 		}
 	}
 
-	
+	private class BtnAñadirBebidaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			Bebida b = new Bebida(index++, (String) cbBebidas.getSelectedItem());
+
+			((DefaultListModel<Bebida>) listBebidas.getModel()).addElement(b);
+			stockVirtualBebidas = Almacen.reducirStockVirtualBebidas(stockVirtualBebidas, b.getNombre());
+
+			mostrarMsgEstado("Bebida " + b.toString() + " añadida con éxito. " + "(Stock virtual: "
+					+ Auxiliar.imprimirVector(stockVirtualBebidas) + ").");
+
+			Bebida aux = new Bebida(index, (String) cbBebidas.getSelectedItem());
+			if (!Almacen.comprobarStockVirtualBebidas(stockVirtualBebidas, aux.getNombre())) {
+				btnAñadirBebida.setEnabled(false);
+				mostrarMsgEstado("Se acaba de terminar el stock de esta bebida " + aux.getNombre() + ".\n(Stock virtual: " + Auxiliar.imprimirVector(stockVirtualBebidas) + ").");
+			}
+		}
+	}
+
+	private class ListBebidasListSelectionListener implements ListSelectionListener {
+		public void valueChanged(ListSelectionEvent e) {
+			if (listBebidas.getSelectedIndex() >= 0)
+				btnQuitarBebida.setEnabled(true);
+			else
+				btnQuitarBebida.setEnabled(false);
+		}
+	}
+
+	private class BtnQuitarBebidaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			Bebida b = ((DefaultListModel<Bebida>) listBebidas.getModel()).get(listBebidas.getSelectedIndex());
+			stockVirtualBebidas = Almacen.aumentarStockVirtualBebidas(stockVirtualBebidas, b.getNombre());
+			((DefaultListModel<Bebida>) listBebidas.getModel()).remove(listBebidas.getSelectedIndex());
+
+			retrasarIds(b.getId());
+			index--;
+
+			mostrarMsgEstado("Bebida " + b.toString() + " eliminado con éxito. \n(Stock virtual: "
+					+ Auxiliar.imprimirVector(stockVirtualBebidas) + ").");
+		}
+	}
+
 	// ENTRANTES
 	private class CbEntrantesActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
@@ -591,6 +633,12 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 		}
 	}
 
+	private class ListPostresListSelectionListener implements ListSelectionListener {
+		public void valueChanged(ListSelectionEvent arg0) {
+			eventoLista(listPostres, btnQuitarPostre);
+		}
+	}
+
 	// MODULARIDAD DE EVENTOS DE PLATOS
 	private void eventoComboBox(JComboBox<String> comboBox, JButton btnAñadir) {
 		Plato aux = new Plato(index, (String) comboBox.getSelectedItem());
@@ -647,32 +695,35 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 	}
 
 	private void retrasarIds(int k) {
-		DefaultListModel<Plato> modelo = null;
-		for (int i = 1; i <= 4; i++) { // (CAMBIAR A 5 AL AÑADIR LAS BEBIDAS)
+		DefaultListModel<Plato> modeloPlatos = null;
+		for (int i = 1; i <= 4; i++) {
 			switch (i) {
 			case 1:
-				modelo = (DefaultListModel<Plato>) listEntrantes.getModel();
+				modeloPlatos = (DefaultListModel<Plato>) listEntrantes.getModel();
 				break;
 			case 2:
-				modelo = (DefaultListModel<Plato>) listPrimeros.getModel();
+				modeloPlatos = (DefaultListModel<Plato>) listPrimeros.getModel();
 				break;
 			case 3:
-				modelo = (DefaultListModel<Plato>) listSegundos.getModel();
+				modeloPlatos = (DefaultListModel<Plato>) listSegundos.getModel();
 				break;
 			case 4:
-				modelo = (DefaultListModel<Plato>) listPostres.getModel();
-				break;
-			case 5:
-				// modelo = (DefaultListModel<Plato>) listBebidas.getModel();
+				modeloPlatos = (DefaultListModel<Plato>) listPostres.getModel();
 				break;
 			}
 
-			for (int j = 0; j < modelo.size(); j++) {
-				Plato p = modelo.get(j);
+			for (int j = 0; j < modeloPlatos.size(); j++) {
+				Plato p = modeloPlatos.get(j);
 				if (p.getId() > k)
 					p.reducirId();
 			}
 		}
-	}
 
+		DefaultListModel<Bebida> modeloBebidas = (DefaultListModel<Bebida>) listBebidas.getModel();
+		for (int j = 0; j < modeloBebidas.size(); j++) {
+			Bebida b = modeloBebidas.get(j);
+			if (b.getId() > k)
+				b.reducirId();
+		}
+	}
 }

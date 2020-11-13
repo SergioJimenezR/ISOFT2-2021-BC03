@@ -4,8 +4,8 @@ public class Bebida {
 
 	private int id;
 	private String nombre;
-	
-	public Bebida (int id, String nombre) {
+
+	public Bebida(int id, String nombre) {
 		setId(id);
 		setNombre(nombre);
 	}
@@ -28,7 +28,11 @@ public class Bebida {
 
 	@Override
 	public String toString() {
-		return nombre;
+		return nombre + " (id: " + id + ")";
 	}
-	
+
+	public void reducirId() {
+		this.id--;
+	}
+
 }
