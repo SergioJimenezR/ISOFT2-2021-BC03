@@ -11,7 +11,7 @@ public class Comanda extends Aviso {
 	private ArrayList<Plato> segundos;
 	private ArrayList<Plato> postres;
 
-	public Comanda(int id, Mesa mesa, ArrayList<Plato> entrantes, ArrayList<Plato> primeros, ArrayList<Plato> segundos,
+	public Comanda(int id, Mesa mesa, ArrayList<Bebida> bebidas, ArrayList<Plato> entrantes, ArrayList<Plato> primeros, ArrayList<Plato> segundos,
 			ArrayList<Plato> postres) {
 		super(id, mesa);
 		setBebidas(bebidas);

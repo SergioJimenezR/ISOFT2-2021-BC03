@@ -4,6 +4,9 @@ import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Plato;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Auxiliar;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Bebida;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -37,6 +40,7 @@ import java.awt.Color;
 import javax.swing.JSpinner;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class UI_CamareroMesa_Comanda extends JFrame {
 
@@ -587,6 +591,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				}
 				{
 					btnCerrarComanda = new JButton("Cerrar Comanda");
+					btnCerrarComanda.addActionListener(new BtnCerrarComandaActionListener());
 					btnCerrarComanda.setFont(new Font("Tahoma", Font.BOLD, 15));
 					GridBagConstraints gbc_btnCerrarComanda = new GridBagConstraints();
 					gbc_btnCerrarComanda.fill = GridBagConstraints.BOTH;
@@ -765,6 +770,18 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 	}
 	private class BtnPanelActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			if(e.getSource()==btnCancelar) {
+				int sel = JOptionPane.showOptionDialog(contentPane, "¿Seguro que quieres cancelar?", "Cancelar comadna",
+						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+				if(sel == JOptionPane.YES_OPTION){
+					CardLayout panel = (CardLayout) (contentPane.getLayout());
+					panel.show(contentPane, e.getActionCommand());			
+					vaciarListas(listBebidas,listEntrantes,listPrimeros,listSegundos,listPostres);		
+					lblNumMesa.setText("Mesa Número: "+cbMesa.getSelectedItem());
+				} else {
+					return;
+				}
+			}
 			CardLayout panel = (CardLayout) (contentPane.getLayout());
 			panel.show(contentPane, e.getActionCommand());			
 			vaciarListas(listBebidas,listEntrantes,listPrimeros,listSegundos,listPostres);		
@@ -784,6 +801,54 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 			}
 		}
 	}
+	private class BtnCerrarComandaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {		
+			Comanda comanda = crearComanda();		
+			System.out.println(comanda.toString());
+			
+			CardLayout panel = (CardLayout) (contentPane.getLayout());
+			panel.show(contentPane, "Cancelar");			
+			vaciarListas(listBebidas,listEntrantes,listPrimeros,listSegundos,listPostres);		
+
+		}
+	}
+	
+	public Comanda crearComanda() {
+		
+		ArrayList<Bebida> arrayListBebidas = obtenerArrayListBebida(listBebidas);
+		ArrayList<Plato> arrayListEntrantes = obtenerArrayListPlato(listEntrantes);
+		ArrayList<Plato> arrayListPrimeros = obtenerArrayListPlato(listPrimeros);
+		ArrayList<Plato> arrayListSegundos = obtenerArrayListPlato(listSegundos);
+		ArrayList<Plato> arrayListPostres = obtenerArrayListPlato(listPostres);
+		
+		int idMesa = Integer.parseInt((String) cbMesa.getSelectedItem());
+		Mesa m = new Mesa(idMesa);
+		m.setEstadoMesa(EstadosMesas.ESPERANDOCOMIDA);	
+		
+		Comanda c = new Comanda(123, m, arrayListBebidas, arrayListEntrantes, 
+				arrayListPrimeros, arrayListSegundos, arrayListPostres);
+		return c;
+	}
+	
+	public ArrayList<Bebida> obtenerArrayListBebida(JList list){
+			ArrayList<Bebida> arrayListBebidas = new ArrayList<Bebida>();
+			for (int i = 0; i<list.getModel().getSize(); i++) {
+				Bebida b = ((DefaultListModel<Bebida>) list.getModel()).get(i);
+				arrayListBebidas.add(b);
+			}
+			return arrayListBebidas;
+	}
+	
+	public ArrayList<Plato> obtenerArrayListPlato(JList list){
+		ArrayList<Plato> arrayListPlato = new ArrayList<Plato>();
+		
+		for(int i = 0; i<list.getModel().getSize(); i++) {
+			Plato p = ((DefaultListModel<Plato>) list.getModel()).get(i);
+			arrayListPlato.add(p);
+		}
+		
+		return arrayListPlato;
+}
 
 	// MODULARIDAD DE EVENTOS DE PLATOS
 	private void eventoComboBox(JComboBox<String> comboBox, JButton btnAñadir) {
