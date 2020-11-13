@@ -63,7 +63,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 
 	static int[] stockVirtualPlatos;
 	static int[] stockVirtualBebidas;
-	static int index;;
+	static int index;
 
 	/**
 	 * Launch the application.
@@ -87,10 +87,10 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 	public UI_CamareroMesa_Comanda() {
 
 		index = 1;
-		
+
 		// Ésto es de prueba. Luego va con la BBDD.
 		stockVirtualPlatos = new int[3];
-		for(int i = 0; i < stockVirtualPlatos.length; i++)
+		for (int i = 0; i < stockVirtualPlatos.length; i++)
 			stockVirtualPlatos[i] = 1000;
 		stockVirtualBebidas = new int[Carta.bebidas.length];
 
@@ -187,6 +187,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					panelCarta.setLayout(gbl_panelCarta);
 					{
 						cbEntrantes = new JComboBox<String>();
+						cbEntrantes.addActionListener(new CbEntrantesActionListener());
 						cbEntrantes.setModel(new DefaultComboBoxModel<String>(Carta.entrantes));
 						GridBagConstraints gbc_cbEntrantes = new GridBagConstraints();
 						gbc_cbEntrantes.insets = new Insets(0, 0, 5, 5);
@@ -395,6 +396,35 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 		}
 	}
 
+	private void retrasarIds(int k) {
+		DefaultListModel<Plato> modelo = null;
+		for (int i = 1; i <= 5; i++) {
+			switch (i) {
+			case 1:
+				modelo = (DefaultListModel<Plato>) listEntrantes.getModel();
+				break;
+			case 2:
+				modelo = (DefaultListModel<Plato>) listPrimeros.getModel();
+				break;
+			case 3:
+				modelo = (DefaultListModel<Plato>) listSegundos.getModel();
+				break;
+			case 4:
+				modelo = (DefaultListModel<Plato>) listPostres.getModel();
+				break;
+			case 5:
+				//modelo = (DefaultListModel<Plato>) listBebidas.getModel();
+				break;
+			}
+
+			for (int j = 0; j < modelo.size(); j++) {
+				Plato p = modelo.get(j);
+				if (p.getId() > k)
+					p.reducirId();
+			}
+		}
+	}
+
 	private class BtnAñadirEntranteActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 
@@ -402,31 +432,34 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 			if (Almacen.comprobarStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes())) {
 				((DefaultListModel<Plato>) listEntrantes.getModel()).addElement(p);
 				stockVirtualPlatos = Almacen.reducirStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes());
+				
+				System.out.print("Plato añadido. ");
 				Auxiliar.imprimirVectorStockVirtual(stockVirtualPlatos);
-				// Estado.setText("Plato añadido");
+				// textPaneEstado.setText("Plato añadido");
 			} else {
 				index--;
+				System.out.print("No hay stock para ese plato. ");
 				Auxiliar.imprimirVectorStockVirtual(stockVirtualPlatos);
-				// Estado.setText("no hay stock")
+				// textPaneEstado.setText("no hay stock")
 			}
 		}
 	}
 
 	private class BtnAñadirPrimeroActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			
+
 		}
 	}
 
 	private class BtnAñadirSegundoActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			
+
 		}
 	}
 
 	private class BtnAñadirPostreActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			
+
 		}
 	}
 
@@ -436,30 +469,39 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				Plato p = ((DefaultListModel<Plato>) listEntrantes.getModel()).get(listEntrantes.getSelectedIndex());
 				stockVirtualPlatos = Almacen.aumentarStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes());
 				((DefaultListModel<Plato>) listEntrantes.getModel()).remove(listEntrantes.getSelectedIndex());
+				retrasarIds(p.getId());
+
+				System.out.print("Plato eliminado. ");
 				Auxiliar.imprimirVectorStockVirtual(stockVirtualPlatos);
-				// Estado.setText("Plato eliminado correctamente");
+				// textPaneEstado.setText("Plato eliminado correctamente");
 			} else {
+				System.out.print("No existe nada seleccionado. ");
 				Auxiliar.imprimirVectorStockVirtual(stockVirtualPlatos);
-				// Estado.setText("Debe existir y seleccionar un plato");
+				// textPaneEstado.setText("Debe existir y seleccionar un plato");
 			}
 		}
 	}
 
 	private class BtnQuitarPrimeroActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			
+
 		}
 	}
 
 	private class BtnQuitarSegundoActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			
+
 		}
 	}
 
 	private class BtnQuitarPostreActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			
+
+		}
+	}
+	private class CbEntrantesActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			System.out.println(cbEntrantes.getSelectedItem().toString() + " seleccionado.");
 		}
 	}
 

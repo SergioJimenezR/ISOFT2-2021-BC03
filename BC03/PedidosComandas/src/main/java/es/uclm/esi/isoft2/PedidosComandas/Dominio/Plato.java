@@ -76,5 +76,9 @@ public class Plato {
 		}
 		return ingredientes;
 	}
+	
+	public void reducirId() {
+		this.id--;
+	}
 
 }
