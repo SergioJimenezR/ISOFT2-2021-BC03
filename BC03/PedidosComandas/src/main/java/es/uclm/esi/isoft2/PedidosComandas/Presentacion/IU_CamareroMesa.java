@@ -42,7 +42,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
-public class UI_CamareroMesa_Comanda extends JFrame {
+public class IU_CamareroMesa extends JFrame {
 
 	static int[] stockVirtualPlatos;
 	static int[] stockVirtualBebidas;
@@ -106,7 +106,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UI_CamareroMesa_Comanda frame = new UI_CamareroMesa_Comanda();
+					IU_CamareroMesa frame = new IU_CamareroMesa();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -118,7 +118,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UI_CamareroMesa_Comanda() {
+	public IU_CamareroMesa() {
 		addWindowListener(new ThisWindowListener());
 
 		index = 1;
