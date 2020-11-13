@@ -31,6 +31,10 @@ import javax.swing.event.ListSelectionEvent;
 
 public class UI_CamareroMesa_Comanda extends JFrame {
 
+	static int[] stockVirtualPlatos;
+	static int[] stockVirtualBebidas;
+	static int index;
+
 	private static final long serialVersionUID = 1L;
 
 	private JPanel contentPane;
@@ -64,13 +68,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 	private JLabel lblSegundo;
 	private JLabel lblPostre;
 
-	static int[] stockVirtualPlatos;
-	static int[] stockVirtualBebidas;
-	static int index;
-
-	static String cadenaEstado; // Acoplar el contenido de cadenaEstado al argumento de
 	private JPanel panelCamareria;
-								// textPaneEstado.setText(AQUÍ) y eliminar esta variable global innecesaria.
 
 	/**
 	 * Launch the application.
@@ -94,13 +92,16 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 	public UI_CamareroMesa_Comanda() {
 
 		index = 1;
-
-		// Ésto es de prueba. Luego va con la BBDD.
+		
 		stockVirtualPlatos = new int[3];
+		stockVirtualBebidas = new int[Carta.BEBIDAS.length];
+		
+		// Ésto es de prueba. Luego el stock se leerá de la BBDD por medio de AlmacenDAO (CDU2):
 		for (int i = 0; i < stockVirtualPlatos.length; i++)
 			stockVirtualPlatos[i] = 1000;
-		stockVirtualBebidas = new int[Carta.bebidas.length];
-
+		for (int i = 0; i < stockVirtualBebidas.length; i++)
+			stockVirtualBebidas[i] = 10;
+		
 		setTitle("Camarero");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 672);
@@ -144,6 +145,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 				}
 				{
 					cbNComensales = new JComboBox<Integer>();
+					cbNComensales.addActionListener(new CbNComensalesActionListener());
 					cbNComensales.setModel(new DefaultComboBoxModel<Integer>(new Integer[] { 1, 2, 3, 4, 5 }));
 					GridBagConstraints gbc_cbNComensales = new GridBagConstraints();
 					gbc_cbNComensales.fill = GridBagConstraints.HORIZONTAL;
@@ -195,7 +197,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					{
 						cbEntrantes = new JComboBox<String>();
 						cbEntrantes.addActionListener(new CbEntrantesActionListener());
-						cbEntrantes.setModel(new DefaultComboBoxModel<String>(Carta.entrantes));
+						cbEntrantes.setModel(new DefaultComboBoxModel<String>(Carta.ENTRANTES));
 						GridBagConstraints gbc_cbEntrantes = new GridBagConstraints();
 						gbc_cbEntrantes.insets = new Insets(0, 0, 5, 5);
 						gbc_cbEntrantes.anchor = GridBagConstraints.NORTH;
@@ -227,7 +229,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					{
 						cbPrimeros = new JComboBox<String>();
 						cbPrimeros.addActionListener(new CbPrimerosActionListener());
-						cbPrimeros.setModel(new DefaultComboBoxModel<String>(Carta.primeros));
+						cbPrimeros.setModel(new DefaultComboBoxModel<String>(Carta.PRIMEROS));
 						GridBagConstraints gbc_cbPrimeros = new GridBagConstraints();
 						gbc_cbPrimeros.insets = new Insets(0, 0, 5, 5);
 						gbc_cbPrimeros.fill = GridBagConstraints.HORIZONTAL;
@@ -258,7 +260,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					{
 						cbSegundos = new JComboBox<String>();
 						cbSegundos.addActionListener(new CbSegundosActionListener());
-						cbSegundos.setModel(new DefaultComboBoxModel<String>(Carta.segundos));
+						cbSegundos.setModel(new DefaultComboBoxModel<String>(Carta.SEGUNDOS));
 						GridBagConstraints gbc_cbSegundos = new GridBagConstraints();
 						gbc_cbSegundos.insets = new Insets(0, 0, 5, 5);
 						gbc_cbSegundos.fill = GridBagConstraints.HORIZONTAL;
@@ -289,7 +291,7 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 					{
 						cbPostres = new JComboBox<String>();
 						cbPostres.addActionListener(new CbPostresActionListener());
-						cbPostres.setModel(new DefaultComboBoxModel<String>(Carta.postres));
+						cbPostres.setModel(new DefaultComboBoxModel<String>(Carta.POSTRES));
 						GridBagConstraints gbc_cbPostres = new GridBagConstraints();
 						gbc_cbPostres.insets = new Insets(0, 0, 5, 5);
 						gbc_cbPostres.fill = GridBagConstraints.HORIZONTAL;
@@ -422,6 +424,166 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 		}
 	}
 
+	private void mostrarMsgEstado(String mensaje) {
+		System.out.println(mensaje);
+		// textPaneEstado.setText(mensaje);
+	}
+
+	// ENTRANTES
+	private class CbEntrantesActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			eventoComboBox(cbEntrantes, btnAñadirEntrante);
+		}
+	}
+
+	private class BtnAñadirEntranteActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			eventoAñadir(cbEntrantes, btnAñadirEntrante, listEntrantes);
+		}
+	}
+
+	private class ListEntrantesListSelectionListener implements ListSelectionListener {
+		public void valueChanged(ListSelectionEvent arg0) {
+			eventoLista(listEntrantes, btnQuitarEntrante);
+		}
+	}
+
+	private class BtnQuitarEntranteActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			eventoQuitar(listEntrantes);
+		}
+	}
+
+	// PRIMEROS
+	private class CbPrimerosActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			eventoComboBox(cbPrimeros, btnAñadirPrimero);
+		}
+	}
+
+	private class BtnAñadirPrimeroActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			eventoAñadir(cbPrimeros, btnAñadirPrimero, listPrimeros);
+		}
+	}
+
+	private class ListPrimerosListSelectionListener implements ListSelectionListener {
+		public void valueChanged(ListSelectionEvent arg0) {
+			eventoLista(listPrimeros, btnQuitarPrimero);
+		}
+	}
+
+	private class BtnQuitarPrimeroActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			eventoQuitar(listPrimeros);
+		}
+	}
+
+	// SEGUNDOS
+	private class CbSegundosActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			eventoComboBox(cbSegundos, btnAñadirSegundo);
+		}
+	}
+
+	private class BtnAñadirSegundoActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			eventoAñadir(cbSegundos, btnAñadirSegundo, listSegundos);
+		}
+	}
+
+	private class ListSegundosListSelectionListener implements ListSelectionListener {
+		public void valueChanged(ListSelectionEvent arg0) {
+			eventoLista(listSegundos, btnQuitarSegundo);
+		}
+	}
+
+	private class BtnQuitarSegundoActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			eventoQuitar(listSegundos);
+		}
+	}
+
+	// POSTRES
+	private class CbPostresActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			eventoComboBox(cbPostres, btnAñadirPostre);
+		}
+	}
+
+	private class BtnAñadirPostreActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			eventoAñadir(cbPostres, btnAñadirPostre, listPostres);
+		}
+	}
+
+	private class ListPostresListSelectionListener implements ListSelectionListener {
+		public void valueChanged(ListSelectionEvent arg0) {
+			eventoLista(listPostres, btnQuitarPostre);
+		}
+	}
+
+	private class BtnQuitarPostreActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			eventoQuitar(listPostres);
+		}
+	}
+
+	// MODULARIDAD DE EVENTOS DE PLATOS
+	private void eventoComboBox(JComboBox<String> comboBox, JButton btnAñadir) {
+		Plato aux = new Plato(index, (String) comboBox.getSelectedItem());
+		if (Almacen.comprobarStockVirtualPlatos(stockVirtualPlatos, aux.getIngredientes())) {
+			btnAñadir.setEnabled(true);
+
+			mostrarMsgEstado("Se ha seleccionado " + aux.getNombre() + ". Se puede añadir.");
+		} else {
+			btnAñadir.setEnabled(false);
+
+			mostrarMsgEstado("Se ha seleccionado " + (String) comboBox.getSelectedItem()
+					+ ". No se puede añadir por insuficiencia de stock. (Stock virtual: "
+					+ Auxiliar.imprimirVector(stockVirtualPlatos) + "). (Stock necesario: "
+					+ Auxiliar.imprimirVector(aux.getIngredientes()) + ").");
+		}
+	}
+
+	private void eventoAñadir(JComboBox<String> comboBox, JButton btnAñadir, JList<Plato> lista) {
+		Plato p = new Plato(index++, (String) comboBox.getSelectedItem());
+
+		((DefaultListModel<Plato>) lista.getModel()).addElement(p);
+		stockVirtualPlatos = Almacen.reducirStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes());
+
+		mostrarMsgEstado("Plato " + p.toString() + " añadido con éxito. " + "(Stock virtual: "
+				+ Auxiliar.imprimirVector(stockVirtualPlatos) + ").");
+
+		Plato aux = new Plato(index, (String) comboBox.getSelectedItem());
+		if (!Almacen.comprobarStockVirtualPlatos(stockVirtualPlatos, aux.getIngredientes())) {
+			btnAñadir.setEnabled(false);
+			mostrarMsgEstado("Se acaba de terminar el stock de ingredientes para cocinar este plato " + aux.getNombre()
+					+ ". (Stock virtual: " + Auxiliar.imprimirVector(stockVirtualPlatos) + "). (Stock necesario: "
+					+ Auxiliar.imprimirVector(p.getIngredientes()) + ").");
+		}
+
+	}
+
+	private void eventoLista(JList<Plato> lista, JButton btnQuitar) {
+		if (lista.getSelectedIndex() >= 0)
+			btnQuitar.setEnabled(true);
+		else
+			btnQuitar.setEnabled(false);
+	}
+
+	private void eventoQuitar(JList<Plato> lista) {
+		Plato p = ((DefaultListModel<Plato>) lista.getModel()).get(lista.getSelectedIndex());
+		stockVirtualPlatos = Almacen.aumentarStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes());
+		((DefaultListModel<Plato>) lista.getModel()).remove(lista.getSelectedIndex());
+
+		retrasarIds(p.getId());
+		index--;
+
+		mostrarMsgEstado("Plato " + p.toString() + " eliminado con éxito. (Stock virtual: "
+				+ Auxiliar.imprimirVector(stockVirtualPlatos) + ").");
+	}
+
 	private void retrasarIds(int k) {
 		DefaultListModel<Plato> modelo = null;
 		for (int i = 1; i <= 4; i++) { // (CAMBIAR A 5 AL AÑADIR LAS BEBIDAS)
@@ -451,149 +613,18 @@ public class UI_CamareroMesa_Comanda extends JFrame {
 		}
 	}
 
-	// ENTRANTES
-	private class CbEntrantesActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-
-			Plato aux = new Plato(index, (String) cbEntrantes.getSelectedItem());
-			if (Almacen.comprobarStockVirtualPlatos(stockVirtualPlatos, aux.getIngredientes())) {
-				btnAñadirEntrante.setEnabled(true);
-
-				cadenaEstado = "Plato " + aux.getNombre() + " seleccionado. Se puede añadir dicho plato.";
-				System.out.println(cadenaEstado);
-				// textPaneEstado.setText(cadenaEstado);
-			} else {
-				btnAñadirEntrante.setEnabled(false);
-
-				cadenaEstado = "Plato " + (String) cbEntrantes.getSelectedItem()
-						+ " seleccionado. No se puede añadir dicho plato por insuficiencia de stock. (Stock virtual: "
-						+ Auxiliar.imprimirVector(stockVirtualPlatos) + "). (Stock necesario: "
-						+ Auxiliar.imprimirVector(aux.getIngredientes()) + ").";
-				System.out.println(cadenaEstado);
-				// textPaneEstado.setText(cadenaEstado);
-			}
-
-		}
-	}
-
-	private class BtnAñadirEntranteActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-
-			Plato p = new Plato(index++, (String) cbEntrantes.getSelectedItem());
-
-			((DefaultListModel<Plato>) listEntrantes.getModel()).addElement(p);
-			stockVirtualPlatos = Almacen.reducirStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes());
-
-			cadenaEstado = "Plato " + p.toString() + " añadido con éxito. " + "(Stock virtual: "
-					+ Auxiliar.imprimirVector(stockVirtualPlatos) + ").";
-			System.out.println(cadenaEstado);
-			// textPaneEstado.setText(cadenaEstado);
-
-			Plato aux = new Plato(index, (String) cbEntrantes.getSelectedItem());
-			if (!Almacen.comprobarStockVirtualPlatos(stockVirtualPlatos, aux.getIngredientes())) {
-				btnAñadirEntrante.setEnabled(false);
-				cadenaEstado = "Se acaba de terminar el stock de ingredientes para cocinar este plato "
-						+ aux.getNombre() + ". (Stock virtual: " + Auxiliar.imprimirVector(stockVirtualPlatos)
-						+ "). (Stock necesario: " + Auxiliar.imprimirVector(p.getIngredientes()) + ").";
-				System.out.println(cadenaEstado);
-				// textPaneEstado.setText(cadenaEstado);
-			}
-
-		}
-	}
-
-	private class ListEntrantesListSelectionListener implements ListSelectionListener {
-		public void valueChanged(ListSelectionEvent arg0) {
-
-			if (listEntrantes.getSelectedIndex() >= 0)
-				btnQuitarEntrante.setEnabled(true);
-			else
-				btnQuitarEntrante.setEnabled(false);
-
-		}
-	}
-
-	private class BtnQuitarEntranteActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-
-			Plato p = ((DefaultListModel<Plato>) listEntrantes.getModel()).get(listEntrantes.getSelectedIndex());
-			stockVirtualPlatos = Almacen.aumentarStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes());
-			((DefaultListModel<Plato>) listEntrantes.getModel()).remove(listEntrantes.getSelectedIndex());
-
-			retrasarIds(p.getId());
-			index--;
-
-			cadenaEstado = "Plato " + p.toString() + " eliminado con éxito, e identificadores corridos. "
-					+ "(Stock virtual: " + Auxiliar.imprimirVector(stockVirtualPlatos) + ").";
-			System.out.println(cadenaEstado);
-			// textPaneEstado.setText(cadenaEstado);
-		}
-	}
-
-	// PRIMEROS
-	private class CbPrimerosActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-		}
-	}
-
-	private class BtnAñadirPrimeroActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-		}
-	}
-
-	private class ListPrimerosListSelectionListener implements ListSelectionListener {
-		public void valueChanged(ListSelectionEvent arg0) {
-		}
-	}
-
-	private class BtnQuitarPrimeroActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-		}
-	}
-
-	// SEGUNDOS
-	private class CbSegundosActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-		}
-	}
-
-	private class BtnAñadirSegundoActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-		}
-	}
-
-	private class ListSegundosListSelectionListener implements ListSelectionListener {
-		public void valueChanged(ListSelectionEvent arg0) {
-		}
-	}
-
-	private class BtnQuitarSegundoActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-		}
-	}
-
-	// POSTRES
-	private class CbPostresActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-		}
-	}
-
-	private class BtnAñadirPostreActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-		}
-	}
-
-	private class ListPostresListSelectionListener implements ListSelectionListener {
-		public void valueChanged(ListSelectionEvent arg0) {
-		}
-	}
-
-	private class BtnQuitarPostreActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-		}
-	}
-
 	// BEBIDAS
-	// private class...
+	// No usar la modularidad de los platos propuesta porque conlleva el tipado de objeto Plato etc), sino coger el contenido y adaptarlo.
+	// Nótese que las principales cuestiones diferenciatorias son los parámetros de entrada de esa modularidad.
+	// private class CbBebidasActionListener implements ActionListener
+	// private class BtnAñadirBebidaActionListener implements ActionListener
+	// private class ListBebidasListSelectionListener implements ListSelectionListener
+	// private class BtnQuitarBebidaActionListener implements ActionListener
+
+	private class CbNComensalesActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			mostrarMsgEstado("Se han seleccionado " + (Integer) cbNComensales.getSelectedItem() + " comensales.");
+		}
+	}
 
 }

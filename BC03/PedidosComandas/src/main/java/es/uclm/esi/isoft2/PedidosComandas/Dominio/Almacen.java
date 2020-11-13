@@ -25,8 +25,8 @@ public class Almacen {
 	}
 
 	public static boolean comprobarStockVirtualBebidas(int[] stockVirtualBebidas, String nombreBebida) {
-		for (int i = 0; i < Carta.bebidas.length; i++) {
-			if (Carta.bebidas[i].equals(nombreBebida)) {
+		for (int i = 0; i < Carta.BEBIDAS.length; i++) {
+			if (Carta.BEBIDAS[i].equals(nombreBebida)) {
 				if (stockVirtualBebidas[i] > 0) {
 					return true;
 				} else {
@@ -39,8 +39,8 @@ public class Almacen {
 
 	public static int[] reducirStockVirtualBebidas(int[] stockVirtualBebidas, String nombreBebida) {
 		boolean encontrado = false;
-		for (int i = 0; i < Carta.bebidas.length && !encontrado; i++)
-			if (Carta.bebidas[i].equals(nombreBebida)) {
+		for (int i = 0; i < Carta.BEBIDAS.length && !encontrado; i++)
+			if (Carta.BEBIDAS[i].equals(nombreBebida)) {
 				stockVirtualBebidas[i]--;
 				encontrado = true;
 			}
@@ -49,8 +49,8 @@ public class Almacen {
 
 	public static int[] aumentarStockVirtualBebidas(int[] stockVirtualBebidas, String nombreBebida) {
 		boolean encontrado = false;
-		for (int i = 0; i < Carta.bebidas.length && !encontrado; i++)
-			if (Carta.bebidas[i].equals(nombreBebida)) {
+		for (int i = 0; i < Carta.BEBIDAS.length && !encontrado; i++)
+			if (Carta.BEBIDAS[i].equals(nombreBebida)) {
 				stockVirtualBebidas[i]++;
 				encontrado = true;
 			}

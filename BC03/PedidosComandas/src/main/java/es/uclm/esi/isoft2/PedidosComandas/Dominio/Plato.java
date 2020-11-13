@@ -52,20 +52,20 @@ public class Plato {
 			int[][] auxingredientes = null;
 			switch (i) {
 			case 0:
-				auxplatos = Carta.entrantes;
-				auxingredientes = Ingredientes.entrantes;
+				auxplatos = Carta.ENTRANTES;
+				auxingredientes = Ingredientes.ENTRANTES;
 				break;
 			case 1:
-				auxplatos = Carta.primeros;
-				auxingredientes = Ingredientes.primeros;
+				auxplatos = Carta.PRIMEROS;
+				auxingredientes = Ingredientes.PRIMEROS;
 				break;
 			case 2:
-				auxplatos = Carta.segundos;
-				auxingredientes = Ingredientes.segundos;
+				auxplatos = Carta.SEGUNDOS;
+				auxingredientes = Ingredientes.SEGUNDOS;
 				break;
 			case 3:
-				auxplatos = Carta.postres;
-				auxingredientes = Ingredientes.postres;
+				auxplatos = Carta.POSTRES;
+				auxingredientes = Ingredientes.POSTRES;
 			}
 			for (int j = 0; j < auxplatos.length && !encontrado; j++) {
 				if (auxplatos[j].equals(nombre)) {
