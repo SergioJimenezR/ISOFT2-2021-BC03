@@ -151,7 +151,6 @@ public class IU_Cocina extends JFrame {
 	public static void receiveFromCamareroMesa(Comanda C, IU_CamareroMesa origen, IU_Cocina destino) {
 		frmCamareroMesa = origen;
 		frmCocina = destino;
-		
 		frmCocina.enlistarComanda(C);
 	}
 	

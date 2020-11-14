@@ -1,12 +1,16 @@
 package es.uclm.esi.isoft2.PedidosComandas.Presentacion;
 
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
+
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Plato;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Auxiliar;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Bebida;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Aviso;
+
+
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -44,6 +48,8 @@ import javax.swing.JTextPane;
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
 
+import javax.swing.Timer;
+
 public class IU_CamareroMesa extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -70,7 +76,7 @@ public class IU_CamareroMesa extends JFrame {
 	private JPanel Avisos;
 	private JPanel panelNuevaComanda;
 	private JPanel panelAvisos;
-	private JComboBox<Comanda> cbAvisos;
+	private JComboBox<Aviso> cbAvisos;
 	private JPanel panelDatosAviso;
 	private JLabel lblInfo;
 	private JComboBox<Mesa> cbMesa;
@@ -110,6 +116,7 @@ public class IU_CamareroMesa extends JFrame {
 	private JLabel lblPostre;
 	private JButton btnLimpiar;
 
+	private static Timer timer;
 	/**
 	 * Launch the application.
 	 */
@@ -126,6 +133,7 @@ public class IU_CamareroMesa extends JFrame {
 
 					frmCamareroBarra = new IU_CamareroBarra();
 					frmCamareroBarra.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -188,7 +196,7 @@ public class IU_CamareroMesa extends JFrame {
 					panelAvisos = new JPanel();
 					Avisos.add(panelAvisos, BorderLayout.NORTH);
 					{
-						cbAvisos = new JComboBox<Comanda>();
+						cbAvisos = new JComboBox<Aviso>();
 						cbAvisos.addActionListener(new CbAvisosActionListener());
 						cbAvisos.setEnabled(false);
 						panelAvisos.add(cbAvisos);
@@ -955,23 +963,28 @@ public class IU_CamareroMesa extends JFrame {
 	}
 
 	private class BtnCerrarComandaActionListener implements ActionListener {
+		
 		public void actionPerformed(ActionEvent e) {
 
 			Comanda comanda = crearComanda();
-
+			//Falta la persistencia de los tiempos de atención que establece la directivaa
+			iniciarTimer(comanda);
+			
 			if (comanda.tienePlatos()) {
 				IU_Cocina.receiveFromCamareroMesa(comanda, frmCamareroMesa, frmCocina);
 			}
 			if (comanda.tieneBebidas()) {
 				IU_CamareroBarra.receiveFromCamareroMesa(comanda, frmCamareroMesa, frmCamareroBarra);
 			}
+			
+			
 
 			CardLayout panel = (CardLayout) (contentPane.getLayout());
 			panel.show(contentPane, "Cancelar");
 			cbMesa.setSelectedItem(null);
 			btnIniciarComanda.setEnabled(false);
 			limpiarAnotacionComanda();
-
+			
 		}
 	}
 
@@ -997,23 +1010,39 @@ public class IU_CamareroMesa extends JFrame {
 
 	private class CbAvisosActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			if (cbAvisos.getSelectedIndex() >= 0)
+			if (cbAvisos.getItemCount() > 0) {
+				cbAvisos.setEnabled(true);
+				cbAvisos.setSelectedIndex(0);
 				btnBorrarAviso.setEnabled(true);
-			else
+				lblNumNotificaciones.setText("("+cbAvisos.getItemCount()+")");
+				Aviso seleccionado = (Aviso)cbAvisos.getSelectedItem();
+				textTituloAviso.setText(seleccionado.toString());
+			}else
 				btnBorrarAviso.setEnabled(false);
 		}
 	}
 
 	private class BtnBorrarAvisoActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			Comanda comandaSeleccionada = (Comanda) cbAvisos.getSelectedItem();
-			((DefaultComboBoxModel<Comanda>) cbAvisos.getModel()).removeElement(comandaSeleccionada);
-			cbAvisos.setSelectedIndex(-1);
-			textPaneNotificacion.setText("Aviso eliminado correctamente.");
-			btnBorrarAviso.setEnabled(false);
-			lblNumNotificaciones.setText("(" + --numNotificacionesPendientes + ")");
-			if (numNotificacionesPendientes == 0)
-				cbAvisos.setEnabled(false);
+			if(cbAvisos.getSelectedIndex() >=0) {
+				Aviso comandaSeleccionada = (Aviso) cbAvisos.getSelectedItem();
+				((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).removeElement(comandaSeleccionada);
+				
+				textPaneNotificacion.setText("Aviso eliminado correctamente.");
+				btnBorrarAviso.setEnabled(false);
+				lblNumNotificaciones.setText("(" + cbAvisos.getItemCount() + ")");
+				if(cbAvisos.getItemCount() == 0) {
+					cbAvisos.setEnabled(false);
+					cbAvisos.setSelectedIndex(-1);
+					textTituloAviso.setText("** No hay avisos **");
+					textNMesaAviso.setText("Mesa número: ***");
+					textEstadoMesa.setText("Estado mesa: ***");
+				}
+				else
+					cbAvisos.setSelectedIndex(0);
+			}else {
+				textPaneNotificacion.setText("No ha seleccionado un aviso.");
+			}
 		}
 	}
 
@@ -1138,7 +1167,7 @@ public class IU_CamareroMesa extends JFrame {
 		cbAvisos.setEnabled(true);
 		textPaneNotificacion.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
 		lblNumNotificaciones.setText("(" + ++numNotificacionesPendientes + ")");
-		((DefaultComboBoxModel<Comanda>) cbAvisos.getModel()).addElement(comanda);
+		((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).addElement(comanda);
 		textNMesaAviso.setText("Mesa Número: "+comanda.getMesa().getId());
 		textEstadoMesa.setText("Estado Mesa: "+comanda.getMesa().getEstadoMesa());
 		
@@ -1146,6 +1175,27 @@ public class IU_CamareroMesa extends JFrame {
 
 	private void preparativos() {
 		frmCamareroMesa.cbMesa.setSelectedIndex(-1);
+	}
+	
+	public void iniciarTimer(Aviso aviso) {
+		Aviso lanzado;
+		
+		if(aviso instanceof Comanda) 
+			lanzado = new Aviso(aviso.getId(), aviso.getMesa());
+		else
+			lanzado = aviso;
+		
+			timer = new Timer(lanzado.getTiempoEspera(), new ActionListener(){
+			public void actionPerformed(ActionEvent f) {
+				
+				((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).addElement(lanzado);
+				textNMesaAviso.setText("Mesa número: "+lanzado.getMesa().getId());
+				textEstadoMesa.setText("Estado de la mesa: " + lanzado.getMesa().getEstadoMesa().name());
+				timer.stop();
+			}
+			});
+		
+		timer.start();
 	}
 
 }

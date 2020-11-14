@@ -160,16 +160,15 @@ public class IU_CamareroBarra extends JFrame {
 	private void enlistarComanda(Comanda comanda) {
 		cbComandasPendientes.setEnabled(true);
 		textPaneComandaEntrante.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
-		lblNumComandasPendientes.setText("(" + ++numComandasPendientes + ")");
 		((DefaultComboBoxModel<Comanda>) cbComandasPendientes.getModel()).addElement(comanda);
+		lblNumComandasPendientes.setText("("+ cbComandasPendientes.getItemCount() +")");
 	}
 
 	private class CbComandasPendientesActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			btnAvisar.setEnabled(true);
 			try {
-				textPaneInfoComandaSeleccionada
-						.setText(((Comanda) cbComandasPendientes.getSelectedItem()).toStringBebidas());
+				textPaneInfoComandaSeleccionada.setText(((Comanda) cbComandasPendientes.getSelectedItem()).toStringBebidas());
 			} catch (NullPointerException NPE) {
 				// Al eliminar un elemento de la ComboBox, el índice cambia y se ejecuta este
 				// método, devolviendo una NullPointer porque no hay nada seleccionado.
@@ -184,8 +183,8 @@ public class IU_CamareroBarra extends JFrame {
 			cbComandasPendientes.setSelectedIndex(-1);
 			textPaneInfoComandaSeleccionada.setText("Aviso enviado correctamente.");
 			btnAvisar.setEnabled(false);
-			lblNumComandasPendientes.setText("(" + --numComandasPendientes + ")");
-			if (numComandasPendientes == 0)
+			lblNumComandasPendientes.setText("(" + cbComandasPendientes.getItemCount() + ")");
+			if (cbComandasPendientes.getItemCount() == 0)
 				cbComandasPendientes.setEnabled(false);
 
 			IU_CamareroMesa.receiveFromCamareroBarra(comandaSeleccionada, frmCamareroBarra, frmCamareroMesa);

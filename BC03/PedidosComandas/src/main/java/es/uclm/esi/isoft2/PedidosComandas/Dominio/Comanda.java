@@ -10,6 +10,7 @@ public class Comanda extends Aviso {
 	private ArrayList<Plato> primeros;
 	private ArrayList<Plato> segundos;
 	private ArrayList<Plato> postres;
+	
 
 	public Comanda(int id, Mesa mesa, ArrayList<Bebida> bebidas, ArrayList<Plato> entrantes, ArrayList<Plato> primeros,
 			ArrayList<Plato> segundos, ArrayList<Plato> postres) {
@@ -72,7 +73,7 @@ public class Comanda extends Aviso {
 
 	@Override
 	public String toString() {
-		return "Comanda n.º " + id;
+		return "Comanda de para la mesa n.º " + mesa.getId() +" preparada.";
 	}
 
 	public String toStringPlatos() {
@@ -107,7 +108,7 @@ public class Comanda extends Aviso {
 		return cadena;
 	}
 
-	public String toStringBebidas() {
+	public String toStringBebidas() { //Puede haber un problema a la hora de llamar
 		String cadena = "Bebidas: ";
 		for (int i = 0; i < bebidas.size(); i++)
 			cadena += bebidas.get(i).getNombre();
