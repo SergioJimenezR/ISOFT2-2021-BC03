@@ -41,6 +41,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.JTextPane;
+import java.awt.event.ContainerAdapter;
+import java.awt.event.ContainerEvent;
 
 public class IU_CamareroMesa extends JFrame {
 
@@ -975,6 +977,10 @@ public class IU_CamareroMesa extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			if (cbMesa.getSelectedItem() != null) {
 				btnIniciarComanda.setEnabled(true);
+				Mesa m = (Mesa)cbMesa.getSelectedItem();
+				if(m.getEstadoMesa()!=EstadosMesas.LIBRE) {
+					btnIniciarComanda.setEnabled(false);
+				}
 			}
 			// (Propuesta) Se podría implementar que solamente se active si la mesa está en
 			// un determinado estado, previo a haber pedido.
@@ -1131,6 +1137,9 @@ public class IU_CamareroMesa extends JFrame {
 		textPaneNotificacion.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
 		lblNumNotificaciones.setText("(" + ++numNotificacionesPendientes + ")");
 		((DefaultComboBoxModel<Comanda>) cbAvisos.getModel()).addElement(comanda);
+		textNMesaAviso.setText("Mesa Número: "+comanda.getMesa().getId());
+		textEstadoMesa.setText("Estado Mesa: "+comanda.getMesa().getEstadoMesa());
+		
 	}
 
 	private void preparativos() {
