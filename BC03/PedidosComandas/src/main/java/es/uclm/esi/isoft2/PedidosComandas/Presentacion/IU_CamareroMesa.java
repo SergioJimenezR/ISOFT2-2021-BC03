@@ -968,6 +968,8 @@ public class IU_CamareroMesa extends JFrame {
 
 			CardLayout panel = (CardLayout) (contentPane.getLayout());
 			panel.show(contentPane, "Cancelar");
+			cbMesa.setSelectedItem(null);
+			btnIniciarComanda.setEnabled(false);
 			limpiarAnotacionComanda();
 
 		}
