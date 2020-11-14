@@ -15,24 +15,30 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class IU_CamareroBarra extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
+	private static IU_CamareroMesa frmCamareroMesa;
+	private static IU_CamareroBarra frmCamareroBarra;
+
 	private JPanel contentPane;
 	private JPanel panel;
 	private JLabel lblUltimaComandaEntrante;
-	private JTextPane textPaneInfoUltimaComandaEntrante;
+	private JTextPane textPaneComandaEntrante;
 	private JLabel lblComandaPendiente;
 	private JLabel lblDescripcion;
 	private JTextPane textPaneInfoComandaSeleccionada;
 	private JButton btnAvisar;
 	private JComboBox<Comanda> cbComandasPendientes;
-	private JLabel lblNumComandas;
+	private JLabel lblNumComandasPendientes;
 
 	private int numComandasPendientes;
 
@@ -43,15 +49,17 @@ public class IU_CamareroBarra extends JFrame {
 
 		numComandasPendientes = 0;
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 478, 218);
+		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 400, 478, 226);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		{
 			panel = new JPanel();
-			panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "CAMARERO DE BARRA", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel.setBorder(new TitledBorder(
+					new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+					"CAMARERO DE BARRA", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPane.add(panel, BorderLayout.NORTH);
 			GridBagLayout gbl_panel = new GridBagLayout();
 			gbl_panel.columnWidths = new int[] { 0, 279, 26, 0 };
@@ -69,15 +77,15 @@ public class IU_CamareroBarra extends JFrame {
 				panel.add(lblUltimaComandaEntrante, gbc_lblUltimaComandaEntrante);
 			}
 			{
-				textPaneInfoUltimaComandaEntrante = new JTextPane();
-				textPaneInfoUltimaComandaEntrante.setEditable(false);
-				GridBagConstraints gbc_textPaneInfoUltimaComandaEntrante = new GridBagConstraints();
-				gbc_textPaneInfoUltimaComandaEntrante.fill = GridBagConstraints.BOTH;
-				gbc_textPaneInfoUltimaComandaEntrante.gridwidth = 2;
-				gbc_textPaneInfoUltimaComandaEntrante.insets = new Insets(0, 0, 5, 0);
-				gbc_textPaneInfoUltimaComandaEntrante.gridx = 1;
-				gbc_textPaneInfoUltimaComandaEntrante.gridy = 0;
-				panel.add(textPaneInfoUltimaComandaEntrante, gbc_textPaneInfoUltimaComandaEntrante);
+				textPaneComandaEntrante = new JTextPane();
+				textPaneComandaEntrante.setEditable(false);
+				GridBagConstraints gbc_textPaneComandaEntrante = new GridBagConstraints();
+				gbc_textPaneComandaEntrante.fill = GridBagConstraints.BOTH;
+				gbc_textPaneComandaEntrante.gridwidth = 2;
+				gbc_textPaneComandaEntrante.insets = new Insets(0, 0, 5, 0);
+				gbc_textPaneComandaEntrante.gridx = 1;
+				gbc_textPaneComandaEntrante.gridy = 0;
+				panel.add(textPaneComandaEntrante, gbc_textPaneComandaEntrante);
 			}
 			{
 				lblComandaPendiente = new JLabel("Comandas pendientes:");
@@ -90,6 +98,8 @@ public class IU_CamareroBarra extends JFrame {
 			}
 			{
 				cbComandasPendientes = new JComboBox<Comanda>();
+				cbComandasPendientes.setEnabled(false);
+				cbComandasPendientes.addActionListener(new CbComandasPendientesActionListener());
 				cbComandasPendientes.setModel(new DefaultComboBoxModel<Comanda>());
 				GridBagConstraints gbc_cbComandasPendientes = new GridBagConstraints();
 				gbc_cbComandasPendientes.insets = new Insets(0, 0, 5, 5);
@@ -99,12 +109,12 @@ public class IU_CamareroBarra extends JFrame {
 				panel.add(cbComandasPendientes, gbc_cbComandasPendientes);
 			}
 			{
-				lblNumComandas = new JLabel("(" + numComandasPendientes + ")");
-				GridBagConstraints gbc_lblNumComandas = new GridBagConstraints();
-				gbc_lblNumComandas.insets = new Insets(0, 0, 5, 0);
-				gbc_lblNumComandas.gridx = 2;
-				gbc_lblNumComandas.gridy = 1;
-				panel.add(lblNumComandas, gbc_lblNumComandas);
+				lblNumComandasPendientes = new JLabel("(" + numComandasPendientes + ")");
+				GridBagConstraints gbc_lblNumComandasPendientes = new GridBagConstraints();
+				gbc_lblNumComandasPendientes.insets = new Insets(0, 0, 5, 0);
+				gbc_lblNumComandasPendientes.gridx = 2;
+				gbc_lblNumComandasPendientes.gridy = 1;
+				panel.add(lblNumComandasPendientes, gbc_lblNumComandasPendientes);
 			}
 			{
 				lblDescripcion = new JLabel("Descripción:");
@@ -128,6 +138,8 @@ public class IU_CamareroBarra extends JFrame {
 			}
 			{
 				btnAvisar = new JButton("Avisar de Bebidas preparadas");
+				btnAvisar.setEnabled(false);
+				btnAvisar.addActionListener(new BtnAvisarActionListener());
 				GridBagConstraints gbc_btnAvisar = new GridBagConstraints();
 				gbc_btnAvisar.fill = GridBagConstraints.HORIZONTAL;
 				gbc_btnAvisar.gridwidth = 2;
@@ -138,4 +150,45 @@ public class IU_CamareroBarra extends JFrame {
 		}
 	}
 
+	public static void receiveFromCamareroMesa(Comanda C, IU_CamareroMesa origen, IU_CamareroBarra destino) {
+		frmCamareroMesa = origen;
+		frmCamareroBarra = destino;
+
+		frmCamareroBarra.enlistarComanda(C);
+	}
+
+	private void enlistarComanda(Comanda comanda) {
+		cbComandasPendientes.setEnabled(true);
+		textPaneComandaEntrante.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
+		lblNumComandasPendientes.setText("(" + ++numComandasPendientes + ")");
+		((DefaultComboBoxModel<Comanda>) cbComandasPendientes.getModel()).addElement(comanda);
+	}
+
+	private class CbComandasPendientesActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			btnAvisar.setEnabled(true);
+			try {
+				textPaneInfoComandaSeleccionada
+						.setText(((Comanda) cbComandasPendientes.getSelectedItem()).toStringBebidas());
+			} catch (NullPointerException NPE) {
+				// Al eliminar un elemento de la ComboBox, el índice cambia y se ejecuta este
+				// método, devolviendo una NullPointer porque no hay nada seleccionado.
+			}
+		}
+	}
+
+	private class BtnAvisarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			Comanda comandaSeleccionada = (Comanda) cbComandasPendientes.getSelectedItem();
+			((DefaultComboBoxModel<Comanda>) cbComandasPendientes.getModel()).removeElement(comandaSeleccionada);
+			cbComandasPendientes.setSelectedIndex(-1);
+			textPaneInfoComandaSeleccionada.setText("Aviso enviado correctamente.");
+			btnAvisar.setEnabled(false);
+			lblNumComandasPendientes.setText("(" + --numComandasPendientes + ")");
+			if (numComandasPendientes == 0)
+				cbComandasPendientes.setEnabled(false);
+
+			IU_CamareroMesa.receiveFromCamareroBarra(comandaSeleccionada, frmCamareroBarra, frmCamareroMesa);
+		}
+	}
 }

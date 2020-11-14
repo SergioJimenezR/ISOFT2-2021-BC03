@@ -2,6 +2,8 @@ package es.uclm.esi.isoft2.PedidosComandas.Presentacion;
 
 public interface Constantes {
 
+	public final int INDICE_INICIAL_PRODUCTOS = 1;
+	
 	public final int NUM_MESAS = 6;
 	
 	public final String[] NOMBRES_BEBIDAS = {"Bebida1", "Bebida2", "Bebida3", "Bebida4", "Bebida5"};

@@ -10,19 +10,19 @@ public class Aviso {
 		setMesa(mesa);
 	}
 	
-	protected int getId() {
+	public int getId() {
 		return id;
 	}
 	
-	protected void setId(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
-	protected Mesa getMesa() {
+	public Mesa getMesa() {
 		return mesa;
 	}
 
-	protected void setMesa(Mesa mesa) {
+	public void setMesa(Mesa mesa) {
 		this.mesa = mesa;
 	}
 
