@@ -10,8 +10,6 @@ import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Aviso;
 
-
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -45,8 +43,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.JTextPane;
-import java.awt.event.ContainerAdapter;
-import java.awt.event.ContainerEvent;
 
 import javax.swing.Timer;
 
@@ -117,6 +113,7 @@ public class IU_CamareroMesa extends JFrame {
 	private JButton btnLimpiar;
 
 	private static Timer timer;
+
 	/**
 	 * Launch the application.
 	 */
@@ -133,7 +130,7 @@ public class IU_CamareroMesa extends JFrame {
 
 					frmCamareroBarra = new IU_CamareroBarra();
 					frmCamareroBarra.setVisible(true);
-					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -963,28 +960,26 @@ public class IU_CamareroMesa extends JFrame {
 	}
 
 	private class BtnCerrarComandaActionListener implements ActionListener {
-		
+
 		public void actionPerformed(ActionEvent e) {
 
 			Comanda comanda = crearComanda();
-			//Falta la persistencia de los tiempos de atención que establece la directivaa
+			// Falta la persistencia de los tiempos de atención que establece la directivaa
 			iniciarTimer(comanda);
-			
+
 			if (comanda.tienePlatos()) {
 				IU_Cocina.receiveFromCamareroMesa(comanda, frmCamareroMesa, frmCocina);
 			}
 			if (comanda.tieneBebidas()) {
 				IU_CamareroBarra.receiveFromCamareroMesa(comanda, frmCamareroMesa, frmCamareroBarra);
 			}
-			
-			
 
 			CardLayout panel = (CardLayout) (contentPane.getLayout());
 			panel.show(contentPane, "Cancelar");
 			cbMesa.setSelectedItem(null);
 			btnIniciarComanda.setEnabled(false);
 			limpiarAnotacionComanda();
-			
+
 		}
 	}
 
@@ -992,8 +987,8 @@ public class IU_CamareroMesa extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			if (cbMesa.getSelectedItem() != null) {
 				btnIniciarComanda.setEnabled(true);
-				Mesa m = (Mesa)cbMesa.getSelectedItem();
-				if(m.getEstadoMesa()!=EstadosMesas.LIBRE) {
+				Mesa m = (Mesa) cbMesa.getSelectedItem();
+				if (m.getEstadoMesa() != EstadosMesas.LIBRE) {
 					btnIniciarComanda.setEnabled(false);
 				}
 			}
@@ -1014,35 +1009,34 @@ public class IU_CamareroMesa extends JFrame {
 				cbAvisos.setEnabled(true);
 				cbAvisos.setSelectedIndex(0);
 				btnBorrarAviso.setEnabled(true);
-				lblNumNotificaciones.setText("("+cbAvisos.getItemCount()+")");
-				Aviso seleccionado = (Aviso)cbAvisos.getSelectedItem();
+				lblNumNotificaciones.setText("(" + cbAvisos.getItemCount() + ")");
+				Aviso seleccionado = (Aviso) cbAvisos.getSelectedItem();
 				textTituloAviso.setText(seleccionado.toString());
-			}else
+			} else
 				btnBorrarAviso.setEnabled(false);
 		}
 	}
 
 	private class BtnBorrarAvisoActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			if(cbAvisos.getSelectedIndex() >=0) {
+			if (cbAvisos.getSelectedIndex() >= 0) {
 				Aviso comandaSeleccionada = (Aviso) cbAvisos.getSelectedItem();
 				comandaSeleccionada.setAtendidoTrue();
 				comandaSeleccionada.getMesa().setEstadoMesa(EstadosMesas.SERVIDOS);
 				((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).removeElement(comandaSeleccionada);
-				
+
 				textPaneNotificacion.setText("Aviso eliminado correctamente.");
 				btnBorrarAviso.setEnabled(false);
 				lblNumNotificaciones.setText("(" + cbAvisos.getItemCount() + ")");
-				if(cbAvisos.getItemCount() == 0) {
+				if (cbAvisos.getItemCount() == 0) {
 					cbAvisos.setEnabled(false);
 					cbAvisos.setSelectedIndex(-1);
 					textTituloAviso.setText("** No hay avisos **");
 					textNMesaAviso.setText("Mesa número: ***");
 					textEstadoMesa.setText("Estado mesa: ***");
-				}
-				else
+				} else
 					cbAvisos.setSelectedIndex(0);
-			}else {
+			} else {
 				textPaneNotificacion.setText("No ha seleccionado un aviso.");
 			}
 		}
@@ -1170,39 +1164,38 @@ public class IU_CamareroMesa extends JFrame {
 		textPaneNotificacion.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
 		lblNumNotificaciones.setText("(" + ++numNotificacionesPendientes + ")");
 		((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).addElement(comanda);
-		textNMesaAviso.setText("Mesa Número: "+comanda.getMesa().getId());
-		textEstadoMesa.setText("Estado Mesa: "+comanda.getMesa().getEstadoMesa());
-		
+		textNMesaAviso.setText("Mesa Número: " + comanda.getMesa().getId());
+		textEstadoMesa.setText("Estado Mesa: " + comanda.getMesa().getEstadoMesa());
+
 	}
 
 	private void preparativos() {
 		frmCamareroMesa.cbMesa.setSelectedIndex(-1);
 	}
-	
+
 	public void iniciarTimer(Aviso aviso) {
 		Aviso lanzado;
-		
-		if(aviso instanceof Comanda) 
+
+		if (aviso instanceof Comanda)
 			lanzado = new Aviso(aviso.getId(), aviso.getMesa());
 		else
 			lanzado = aviso;
-		
-			timer = new Timer(lanzado.getTiempoEspera(), new ActionListener(){
+
+		timer = new Timer(lanzado.getTiempoEspera(), new ActionListener() {
 			public void actionPerformed(ActionEvent f) {
-				
-				if(aviso.getAtendido()) {
+
+				if (aviso.getAtendido()) {
 					timer.stop();
-				}
-				else {
+				} else {
 					((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).addElement(lanzado);
-					textNMesaAviso.setText("Mesa número: "+lanzado.getMesa().getId());
+					textNMesaAviso.setText("Mesa número: " + lanzado.getMesa().getId());
 					textEstadoMesa.setText("Estado de la mesa: " + lanzado.getMesa().getEstadoMesa().name());
 					timer.stop();
 				}
-				
+
 			}
-			});
-		
+		});
+
 		timer.start();
 	}
 

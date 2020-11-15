@@ -161,14 +161,15 @@ public class IU_CamareroBarra extends JFrame {
 		cbComandasPendientes.setEnabled(true);
 		textPaneComandaEntrante.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
 		((DefaultComboBoxModel<Comanda>) cbComandasPendientes.getModel()).addElement(comanda);
-		lblNumComandasPendientes.setText("("+ cbComandasPendientes.getItemCount() +")");
+		lblNumComandasPendientes.setText("(" + cbComandasPendientes.getItemCount() + ")");
 	}
 
 	private class CbComandasPendientesActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			btnAvisar.setEnabled(true);
 			try {
-				textPaneInfoComandaSeleccionada.setText(((Comanda) cbComandasPendientes.getSelectedItem()).toStringBebidas());
+				textPaneInfoComandaSeleccionada
+						.setText(((Comanda) cbComandasPendientes.getSelectedItem()).toStringBebidas());
 			} catch (NullPointerException NPE) {
 				// Al eliminar un elemento de la ComboBox, el índice cambia y se ejecuta este
 				// método, devolviendo una NullPointer porque no hay nada seleccionado.

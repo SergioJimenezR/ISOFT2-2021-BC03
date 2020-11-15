@@ -4,7 +4,7 @@ public class Mesa {
 
 	private int id;
 	private EstadosMesas estadoMesa;
-	
+
 	public Mesa(int id) {
 		setId(id);
 		setEstadoMesa(EstadosMesas.LIBRE);
@@ -30,5 +30,5 @@ public class Mesa {
 	public String toString() {
 		return Integer.toString(this.id) + " - " + estadoMesa.name();
 	}
-	
+
 }

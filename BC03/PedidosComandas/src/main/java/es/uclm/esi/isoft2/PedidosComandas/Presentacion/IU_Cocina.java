@@ -28,7 +28,7 @@ public class IU_Cocina extends JFrame {
 
 	private static IU_CamareroMesa frmCamareroMesa;
 	private static IU_Cocina frmCocina;
-	
+
 	private JPanel contentPane;
 	private JPanel panel;
 	private JLabel lblUltimaComandaEntrante;
@@ -49,7 +49,7 @@ public class IU_Cocina extends JFrame {
 
 		numComandasPendientes = 0;
 
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 478, 226);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -57,7 +57,9 @@ public class IU_Cocina extends JFrame {
 		setContentPane(contentPane);
 		{
 			panel = new JPanel();
-			panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "COCINA", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			panel.setBorder(new TitledBorder(
+					new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+					"COCINA", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPane.add(panel, BorderLayout.NORTH);
 			GridBagLayout gbl_panel = new GridBagLayout();
 			gbl_panel.columnWidths = new int[] { 0, 279, 26, 0 };
@@ -147,13 +149,13 @@ public class IU_Cocina extends JFrame {
 			}
 		}
 	}
-	
+
 	public static void receiveFromCamareroMesa(Comanda C, IU_CamareroMesa origen, IU_Cocina destino) {
 		frmCamareroMesa = origen;
 		frmCocina = destino;
 		frmCocina.enlistarComanda(C);
 	}
-	
+
 	private void enlistarComanda(Comanda comanda) {
 		cbComandasPendientes.setEnabled(true);
 		textPaneComandaEntrante.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
@@ -165,12 +167,15 @@ public class IU_Cocina extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			btnAvisar.setEnabled(true);
 			try {
-				textPaneInfoComandaSeleccionada.setText(((Comanda) cbComandasPendientes.getSelectedItem()).toStringPlatos());
+				textPaneInfoComandaSeleccionada
+						.setText(((Comanda) cbComandasPendientes.getSelectedItem()).toStringPlatos());
 			} catch (NullPointerException NPE) {
-				// Al eliminar un elemento de la ComboBox, el índice cambia y se ejecuta este método, devolviendo una NullPointer porque no hay nada seleccionado.
+				// Al eliminar un elemento de la ComboBox, el índice cambia y se ejecuta este
+				// método, devolviendo una NullPointer porque no hay nada seleccionado.
 			}
 		}
 	}
+
 	private class BtnAvisarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			Comanda comandaSeleccionada = (Comanda) cbComandasPendientes.getSelectedItem();
@@ -179,9 +184,9 @@ public class IU_Cocina extends JFrame {
 			textPaneInfoComandaSeleccionada.setText("Aviso enviado correctamente.");
 			btnAvisar.setEnabled(false);
 			lblNumComandasPendientes.setText("(" + --numComandasPendientes + ")");
-			if(numComandasPendientes == 0)
+			if (numComandasPendientes == 0)
 				cbComandasPendientes.setEnabled(false);
-			
+
 			IU_CamareroMesa.receiveFromCocina(comandaSeleccionada, frmCocina, frmCamareroMesa);
 		}
 	}

@@ -1,4 +1,5 @@
 package es.uclm.esi.isoft2.PedidosComandas.Persistencia;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,7 +10,7 @@ public class Agente implements BDConstantes {
 
 	protected static Agente mInstancia = null;
 	protected Connection mBD;
-	
+
 	protected Agente() throws SQLException {
 		mBD = DriverManager.getConnection(CONNECTION_STRING, DBUSER, DBPASS);
 	}
