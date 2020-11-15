@@ -5,11 +5,13 @@ public class Aviso {
 	protected int id;
 	protected Mesa mesa;
 	private int tiempoEspera;
+	private boolean atendido;
 	
 	public Aviso(int id, Mesa mesa) {
 		setId(id);
 		setMesa(mesa);
-		tiempoEspera = 1000;
+		tiempoEspera = 10000;
+		atendido = false;
 	}
 	
 	public int getId() {
@@ -30,6 +32,14 @@ public class Aviso {
 	
 	public int getTiempoEspera() {
 		return tiempoEspera;
+	}
+	
+	public boolean getAtendido() {
+		return atendido;
+	}
+	
+	public void setAtendidoTrue() {
+		atendido = true;
 	}
 
 	public void setTiempoEspera(int tiempoEspera) {

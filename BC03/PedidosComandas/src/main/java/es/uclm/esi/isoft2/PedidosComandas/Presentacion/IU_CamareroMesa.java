@@ -1026,6 +1026,8 @@ public class IU_CamareroMesa extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			if(cbAvisos.getSelectedIndex() >=0) {
 				Aviso comandaSeleccionada = (Aviso) cbAvisos.getSelectedItem();
+				comandaSeleccionada.setAtendidoTrue();
+				comandaSeleccionada.getMesa().setEstadoMesa(EstadosMesas.SERVIDOS);
 				((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).removeElement(comandaSeleccionada);
 				
 				textPaneNotificacion.setText("Aviso eliminado correctamente.");
@@ -1188,10 +1190,16 @@ public class IU_CamareroMesa extends JFrame {
 			timer = new Timer(lanzado.getTiempoEspera(), new ActionListener(){
 			public void actionPerformed(ActionEvent f) {
 				
-				((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).addElement(lanzado);
-				textNMesaAviso.setText("Mesa número: "+lanzado.getMesa().getId());
-				textEstadoMesa.setText("Estado de la mesa: " + lanzado.getMesa().getEstadoMesa().name());
-				timer.stop();
+				if(aviso.getAtendido()) {
+					timer.stop();
+				}
+				else {
+					((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).addElement(lanzado);
+					textNMesaAviso.setText("Mesa número: "+lanzado.getMesa().getId());
+					textEstadoMesa.setText("Estado de la mesa: " + lanzado.getMesa().getEstadoMesa().name());
+					timer.stop();
+				}
+				
 			}
 			});
 		
