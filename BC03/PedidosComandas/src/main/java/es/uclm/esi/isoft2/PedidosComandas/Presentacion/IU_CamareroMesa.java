@@ -1081,8 +1081,6 @@ public class IU_CamareroMesa extends JFrame {
 
 	public void limpiarAnotacionComanda() {
 
-		textPaneEstado.setText("Seleccione platos o bebidas.");
-
 		((DefaultListModel<Bebida>) listBebidas.getModel()).removeAllElements();
 		((DefaultListModel<Plato>) listEntrantes.getModel()).removeAllElements();
 		((DefaultListModel<Plato>) listPrimeros.getModel()).removeAllElements();
@@ -1109,6 +1107,8 @@ public class IU_CamareroMesa extends JFrame {
 		cbPrimeros.setSelectedIndex(-1);
 		cbSegundos.setSelectedIndex(-1);
 		cbPostres.setSelectedIndex(-1);
+		
+		textPaneEstado.setText("Seleccione platos o bebidas.");
 
 	}
 
