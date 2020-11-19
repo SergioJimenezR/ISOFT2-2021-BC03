@@ -110,7 +110,7 @@ public class Comanda extends Aviso {
 	public String toStringBebidas() { // Puede haber un problema a la hora de llamar
 		String cadena = "Bebidas: ";
 		for (int i = 0; i < bebidas.size(); i++)
-			cadena += bebidas.get(i).getNombre();
+			cadena += bebidas.get(i).getNombre() + " ";
 		return cadena;
 	}
 
