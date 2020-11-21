@@ -2,30 +2,37 @@ package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
 public class Bebida {
 
-	private int idBebida;
+	private int id;
 	private String nombre;
-	private boolean disponible;
-	
-	public Bebida(int idBebida, String nombre, boolean disponible) {
-		this.idBebida = idBebida;
-		this.nombre = nombre;
-		this.disponible = disponible;
+
+	public Bebida(int id, String nombre) {
+		setId(id);
+		setNombre(nombre);
 	}
 
-	public boolean isDisponible() {
-		return disponible;
+	public int getId() {
+		return id;
 	}
 
-	public void setDisponible(boolean disponible) {
-		this.disponible = disponible;
-	}
-
-	public int getIdBebida() {
-		return idBebida;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
 		return nombre;
-	}	
-	
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	@Override
+	public String toString() {
+		return nombre + " (id: " + id + ")";
+	}
+
+	public void reducirId() {
+		this.id--;
+	}
+
 }
