@@ -10,6 +10,7 @@
   <groupId>es.uclm.esi.isoft2</groupId>
   <artifactId>CocinaAlmacen</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
   <name>CocinaAlmacen</name>
   <!-- FIXME change it to the project's website -->
