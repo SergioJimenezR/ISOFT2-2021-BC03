@@ -10,7 +10,7 @@
   <groupId>es.uclm.esi.isoft2</groupId>
   <artifactId>PagoLiberacion</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
   <name>PagoLiberacion</name>
   <!-- FIXME change it to the project's website -->
