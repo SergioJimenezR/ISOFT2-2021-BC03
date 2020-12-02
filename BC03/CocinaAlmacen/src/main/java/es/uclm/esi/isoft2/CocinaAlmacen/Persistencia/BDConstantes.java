@@ -1,4 +1,4 @@
-package es.uclm.esi.isoft2.PedidosComandas.Persistencia;
+package es.uclm.esi.isoft2.CocinaAlmacen.Persistencia;
 
 public interface BDConstantes {
 
