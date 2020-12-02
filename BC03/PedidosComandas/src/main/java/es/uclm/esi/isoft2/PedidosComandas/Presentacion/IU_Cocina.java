@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -13,8 +16,6 @@ import java.awt.Insets;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EtchedBorder;
