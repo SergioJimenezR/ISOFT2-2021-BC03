@@ -51,7 +51,6 @@ public class IU_CamareroBarra extends JFrame {
 	private JButton btnGuardar;
 	private JButton btnReponer;
 
-
 	/**
 	 * Create the frame.
 	 */

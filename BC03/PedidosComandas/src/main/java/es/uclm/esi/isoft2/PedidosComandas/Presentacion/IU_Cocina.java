@@ -53,7 +53,6 @@ public class IU_Cocina extends JFrame {
 	private JButton btnGuardar;
 	private JButton btnReponer;
 
-
 	/**
 	 * Create the frame.
 	 */
@@ -245,7 +244,7 @@ public class IU_Cocina extends JFrame {
 			lblNumComandasPendientes.setText("(" + --numComandasPendientes + ")");
 			if (numComandasPendientes == 0)
 				cbComandasPendientes.setEnabled(false);
-      
+
 			reducirStockPlatos(comandaSeleccionada);
 
 			IU_CamareroMesa.receiveFromCocina(comandaSeleccionada, frmCocina, frmCamareroMesa);

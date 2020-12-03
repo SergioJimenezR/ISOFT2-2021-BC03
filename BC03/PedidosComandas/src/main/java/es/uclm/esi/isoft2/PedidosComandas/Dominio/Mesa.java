@@ -51,11 +51,10 @@ public class Mesa {
 		return Integer.toString(this.id) + " - " + estadoMesa.name();
 	}
 
-	
 	public void cerrarCuenta() {
 		this.setPrecio(calcularPrecio());
 	}
-	
+
 	private int calcularPrecio() {
 		return 1;
 	}

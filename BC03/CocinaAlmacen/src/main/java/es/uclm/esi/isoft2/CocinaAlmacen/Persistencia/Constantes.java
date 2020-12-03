@@ -1,4 +1,4 @@
-package es.uclm.esi.isoft2.PedidosComandas.Presentacion;
+package es.uclm.esi.isoft2.CocinaAlmacen.Persistencia;
 
 public interface Constantes {
 

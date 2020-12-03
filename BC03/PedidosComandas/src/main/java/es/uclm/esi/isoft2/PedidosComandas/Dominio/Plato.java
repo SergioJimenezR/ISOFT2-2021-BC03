@@ -1,6 +1,6 @@
 package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
-import es.uclm.esi.isoft2.PedidosComandas.Presentacion.Constantes;
+import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.Constantes;
 
 public class Plato {
 

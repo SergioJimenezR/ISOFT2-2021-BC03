@@ -3,30 +3,27 @@ package es.uclm.esi.isoft2.CocinaAlmacen.Persistencia;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
-public class AlmacenDAO  {
+public class AlmacenDAO implements Constantes {
 
 	public static int[] leerStockPlatos() throws SQLException {
 
-		int[] stockIngredientesPlatos = new int[3];
+		int[] stockIngredientesPlatos = new int[Constantes.NOMBRES_INGREDIENTES.length];
 
 		String instruccion = "SELECT * FROM STOCK_PLATOS;";
 		ResultSet RS = Agente.getAgente().select(instruccion);
-		while (RS.next()) {
+		while (RS.next())
 			stockIngredientesPlatos[RS.getInt("id")] = RS.getInt("cantidad");
-		}
 
 		return stockIngredientesPlatos;
 	}
 
 	public static int[] leerStockBebidas() throws SQLException {
-		int[] stockBebidas = new int[5];
+		int[] stockBebidas = new int[Constantes.NOMBRES_BEBIDAS.length];
 
 		String instruccion = "SELECT * FROM STOCK_BEBIDAS;";
 		ResultSet RS = Agente.getAgente().select(instruccion);
-		while (RS.next()) {
+		while (RS.next())
 			stockBebidas[RS.getInt("id")] = RS.getInt("cantidad");
-		}
 
 		return stockBebidas;
 	}

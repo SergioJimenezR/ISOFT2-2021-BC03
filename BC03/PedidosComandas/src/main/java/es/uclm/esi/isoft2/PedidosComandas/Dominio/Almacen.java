@@ -4,10 +4,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.AlmacenDAO;
+import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.Constantes;
 
-import es.uclm.esi.isoft2.PedidosComandas.Presentacion.Constantes;
-
-public class Almacen {
+public class Almacen implements Constantes {
 
 	private static int[] stockPlatos;
 	private static int[] stockBebidas;
