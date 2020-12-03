@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -23,6 +26,7 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
 import java.awt.event.ActionEvent;
 
 public class IU_Cocina extends JFrame {
@@ -35,7 +39,10 @@ public class IU_Cocina extends JFrame {
 	private JPanel contentPane;
 	private JPanel panel;
 	private JLabel lblUltimaComandaEntrante;
+
 	private JTextPane textPaneAvisosComandaEntrante;
+
+
 	private JLabel lblComandaPendiente;
 	private JLabel lblDescripcion;
 	private JTextPane textPaneInfoComandaSeleccionada;
@@ -44,9 +51,11 @@ public class IU_Cocina extends JFrame {
 	private JLabel lblNumComandasPendientes;
 
 	private int numComandasPendientes;
+
 	private JPanel panelMantenimiento;
 	private JButton btnGuardar;
 	private JButton btnReponer;
+
 
 	/**
 	 * Create the frame.
@@ -56,6 +65,7 @@ public class IU_Cocina extends JFrame {
 		numComandasPendientes = 0;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		setBounds(100, 100, 478, 226);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -75,6 +85,7 @@ public class IU_Cocina extends JFrame {
 			panel.setLayout(gbl_panel);
 			{
 				lblUltimaComandaEntrante = new JLabel("Avisos / Última comanda entrante:");
+
 				GridBagConstraints gbc_lblUltimaComandaEntrante = new GridBagConstraints();
 				gbc_lblUltimaComandaEntrante.anchor = GridBagConstraints.EAST;
 				gbc_lblUltimaComandaEntrante.insets = new Insets(0, 0, 5, 5);
@@ -83,15 +94,19 @@ public class IU_Cocina extends JFrame {
 				panel.add(lblUltimaComandaEntrante, gbc_lblUltimaComandaEntrante);
 			}
 			{
+
 				textPaneAvisosComandaEntrante = new JTextPane();
 				textPaneAvisosComandaEntrante.setEditable(false);
+
 				GridBagConstraints gbc_textPaneComandaEntrante = new GridBagConstraints();
 				gbc_textPaneComandaEntrante.fill = GridBagConstraints.BOTH;
 				gbc_textPaneComandaEntrante.gridwidth = 2;
 				gbc_textPaneComandaEntrante.insets = new Insets(0, 0, 5, 0);
 				gbc_textPaneComandaEntrante.gridx = 1;
 				gbc_textPaneComandaEntrante.gridy = 0;
+
 				panel.add(textPaneAvisosComandaEntrante, gbc_textPaneComandaEntrante);
+
 			}
 			{
 				lblComandaPendiente = new JLabel("Comandas pendientes:");
@@ -146,6 +161,7 @@ public class IU_Cocina extends JFrame {
 				btnAvisar = new JButton("Avisar de Platos preparados");
 				btnAvisar.setEnabled(false);
 				btnAvisar.addActionListener(new BtnAvisarActionListener());
+
 				{
 					panelMantenimiento = new JPanel();
 					panelMantenimiento.setBorder(null);
@@ -166,6 +182,7 @@ public class IU_Cocina extends JFrame {
 						panelMantenimiento.add(btnReponer);
 					}
 				}
+
 				GridBagConstraints gbc_btnAvisar = new GridBagConstraints();
 				gbc_btnAvisar.fill = GridBagConstraints.HORIZONTAL;
 				gbc_btnAvisar.gridwidth = 2;
@@ -184,7 +201,9 @@ public class IU_Cocina extends JFrame {
 
 	private void enlistarComanda(Comanda comanda) {
 		cbComandasPendientes.setEnabled(true);
+
 		textPaneAvisosComandaEntrante.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
+
 		lblNumComandasPendientes.setText("(" + ++numComandasPendientes + ")");
 		((DefaultComboBoxModel<Comanda>) cbComandasPendientes.getModel()).addElement(comanda);
 	}
