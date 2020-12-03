@@ -17,16 +17,10 @@ import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Plato;
-
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import java.awt.event.ActionEvent;
 
 public class IU_Cocina extends JFrame {
@@ -39,10 +33,7 @@ public class IU_Cocina extends JFrame {
 	private JPanel contentPane;
 	private JPanel panel;
 	private JLabel lblUltimaComandaEntrante;
-
-	private JTextPane textPaneAvisosComandaEntrante;
-
-
+	private JTextPane textPaneComandaEntrante;
 	private JLabel lblComandaPendiente;
 	private JLabel lblDescripcion;
 	private JTextPane textPaneInfoComandaSeleccionada;
@@ -52,11 +43,6 @@ public class IU_Cocina extends JFrame {
 
 	private int numComandasPendientes;
 
-	private JPanel panelMantenimiento;
-	private JButton btnGuardar;
-	private JButton btnReponer;
-
-
 	/**
 	 * Create the frame.
 	 */
@@ -64,8 +50,7 @@ public class IU_Cocina extends JFrame {
 
 		numComandasPendientes = 0;
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 478, 226);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -78,14 +63,13 @@ public class IU_Cocina extends JFrame {
 					"COCINA", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPane.add(panel, BorderLayout.NORTH);
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[] { 182, 279, 26, 0 };
+			gbl_panel.columnWidths = new int[] { 0, 279, 26, 0 };
 			gbl_panel.rowHeights = new int[] { 50, 0, 50, 0, 0 };
 			gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
-			gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+			gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 			panel.setLayout(gbl_panel);
 			{
-				lblUltimaComandaEntrante = new JLabel("Avisos / Última comanda entrante:");
-
+				lblUltimaComandaEntrante = new JLabel("Última comanda entrante:");
 				GridBagConstraints gbc_lblUltimaComandaEntrante = new GridBagConstraints();
 				gbc_lblUltimaComandaEntrante.anchor = GridBagConstraints.EAST;
 				gbc_lblUltimaComandaEntrante.insets = new Insets(0, 0, 5, 5);
@@ -94,19 +78,15 @@ public class IU_Cocina extends JFrame {
 				panel.add(lblUltimaComandaEntrante, gbc_lblUltimaComandaEntrante);
 			}
 			{
-
-				textPaneAvisosComandaEntrante = new JTextPane();
-				textPaneAvisosComandaEntrante.setEditable(false);
-
+				textPaneComandaEntrante = new JTextPane();
+				textPaneComandaEntrante.setEditable(false);
 				GridBagConstraints gbc_textPaneComandaEntrante = new GridBagConstraints();
 				gbc_textPaneComandaEntrante.fill = GridBagConstraints.BOTH;
 				gbc_textPaneComandaEntrante.gridwidth = 2;
 				gbc_textPaneComandaEntrante.insets = new Insets(0, 0, 5, 0);
 				gbc_textPaneComandaEntrante.gridx = 1;
 				gbc_textPaneComandaEntrante.gridy = 0;
-
-				panel.add(textPaneAvisosComandaEntrante, gbc_textPaneComandaEntrante);
-
+				panel.add(textPaneComandaEntrante, gbc_textPaneComandaEntrante);
 			}
 			{
 				lblComandaPendiente = new JLabel("Comandas pendientes:");
@@ -161,28 +141,6 @@ public class IU_Cocina extends JFrame {
 				btnAvisar = new JButton("Avisar de Platos preparados");
 				btnAvisar.setEnabled(false);
 				btnAvisar.addActionListener(new BtnAvisarActionListener());
-
-				{
-					panelMantenimiento = new JPanel();
-					panelMantenimiento.setBorder(null);
-					GridBagConstraints gbc_panelMantenimiento = new GridBagConstraints();
-					gbc_panelMantenimiento.insets = new Insets(0, 0, 0, 5);
-					gbc_panelMantenimiento.fill = GridBagConstraints.BOTH;
-					gbc_panelMantenimiento.gridx = 0;
-					gbc_panelMantenimiento.gridy = 3;
-					panel.add(panelMantenimiento, gbc_panelMantenimiento);
-					{
-						btnGuardar = new JButton("Guardar");
-						btnGuardar.addActionListener(new BtnGuardarActionListener());
-						panelMantenimiento.add(btnGuardar);
-					}
-					{
-						btnReponer = new JButton("Reponer");
-						btnReponer.addActionListener(new BtnReponerActionListener());
-						panelMantenimiento.add(btnReponer);
-					}
-				}
-
 				GridBagConstraints gbc_btnAvisar = new GridBagConstraints();
 				gbc_btnAvisar.fill = GridBagConstraints.HORIZONTAL;
 				gbc_btnAvisar.gridwidth = 2;
@@ -201,37 +159,9 @@ public class IU_Cocina extends JFrame {
 
 	private void enlistarComanda(Comanda comanda) {
 		cbComandasPendientes.setEnabled(true);
-
-		textPaneAvisosComandaEntrante.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
-
+		textPaneComandaEntrante.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
 		lblNumComandasPendientes.setText("(" + ++numComandasPendientes + ")");
 		((DefaultComboBoxModel<Comanda>) cbComandasPendientes.getModel()).addElement(comanda);
-	}
-
-	private void reducirStockPlatos(Comanda c) {
-		ArrayList<Plato> listaPlatos = null;
-		for (int i = 0; i < 3; i++) {
-			switch (i) {
-			case 0:
-				listaPlatos = c.getEntrantes();
-				break;
-			case 1:
-				listaPlatos = c.getPrimeros();
-				break;
-			case 2:
-				listaPlatos = c.getSegundos();
-				break;
-			case 3:
-				listaPlatos = c.getPostres();
-				break;
-			}
-			for (int j = 0; j < listaPlatos.size(); j++) {
-				Almacen.reducirStockPlatos(listaPlatos.get(j).getIngredientes());
-			}
-		}
-
-		textPaneAvisosComandaEntrante.setText(
-				"Restado el stock de ingredientes de los platos de esta última comanda.\n" + c.toStringPlatos());
 	}
 
 	private class CbComandasPendientesActionListener implements ActionListener {
@@ -258,22 +188,7 @@ public class IU_Cocina extends JFrame {
 			if (numComandasPendientes == 0)
 				cbComandasPendientes.setEnabled(false);
 
-			reducirStockPlatos(comandaSeleccionada);
-
 			IU_CamareroMesa.receiveFromCocina(comandaSeleccionada, frmCocina, frmCamareroMesa);
 		}
 	}
-
-	private class BtnGuardarActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-			Almacen.actualizacionBD();
-		}
-	}
-
-	private class BtnReponerActionListener implements ActionListener {
-		public void actionPerformed(ActionEvent arg0) {
-			Almacen.reponerStocks();
-		}
-	}
-
 }

@@ -50,7 +50,7 @@ public class Mesa {
 	public String toString() {
 		return Integer.toString(this.id) + " - " + estadoMesa.name();
 	}
-
+	
 	public void cerrarCuenta() {
 		this.setPrecio(calcularPrecio());
 	}

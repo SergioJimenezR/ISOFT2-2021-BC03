@@ -80,11 +80,4 @@ public class Plato {
 		this.id--;
 	}
 
-	public String toStringIngredientes() {
-		String cadena = "";
-		for (int i = 0; i < ingredientes.length - 1; i++)
-			cadena += ingredientes[i] + ", ";
-		return cadena + ingredientes[ingredientes.length - 1];
-	}
-
 }
