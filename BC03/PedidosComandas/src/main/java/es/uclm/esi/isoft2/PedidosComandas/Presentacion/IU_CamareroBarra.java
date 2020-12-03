@@ -17,10 +17,17 @@ import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Bebida;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+
+import java.util.ArrayList;
+
 import java.awt.event.ActionEvent;
 
 public class IU_CamareroBarra extends JFrame {
@@ -33,7 +40,10 @@ public class IU_CamareroBarra extends JFrame {
 	private JPanel contentPane;
 	private JPanel panel;
 	private JLabel lblUltimaComandaEntrante;
+	private JTextPane textPaneAvisosComandaEntrante;
+
 	private JTextPane textPaneComandaEntrante;
+
 	private JLabel lblComandaPendiente;
 	private JLabel lblDescripcion;
 	private JTextPane textPaneInfoComandaSeleccionada;
@@ -42,6 +52,9 @@ public class IU_CamareroBarra extends JFrame {
 	private JLabel lblNumComandasPendientes;
 
 	private int numComandasPendientes;
+	private JPanel panelMantenimiento;
+	private JButton btnGuardar;
+	private JButton btnReponer;
 
 	/**
 	 * Create the frame.
@@ -50,7 +63,8 @@ public class IU_CamareroBarra extends JFrame {
 
 		numComandasPendientes = 0;
 
-		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		setBounds(100, 400, 478, 226);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,13 +77,15 @@ public class IU_CamareroBarra extends JFrame {
 					"CAMARERO DE BARRA", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPane.add(panel, BorderLayout.NORTH);
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[] { 0, 279, 26, 0 };
+      
+			gbl_panel.columnWidths = new int[] { 205, 279, 26, 0 };
 			gbl_panel.rowHeights = new int[] { 50, 0, 50, 0, 0 };
 			gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
-			gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+			gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 			panel.setLayout(gbl_panel);
 			{
-				lblUltimaComandaEntrante = new JLabel("Última comanda entrante:");
+				lblUltimaComandaEntrante = new JLabel("Avisos / Última comanda entrante:");
+
 				GridBagConstraints gbc_lblUltimaComandaEntrante = new GridBagConstraints();
 				gbc_lblUltimaComandaEntrante.anchor = GridBagConstraints.EAST;
 				gbc_lblUltimaComandaEntrante.insets = new Insets(0, 0, 5, 5);
@@ -78,15 +94,15 @@ public class IU_CamareroBarra extends JFrame {
 				panel.add(lblUltimaComandaEntrante, gbc_lblUltimaComandaEntrante);
 			}
 			{
-				textPaneComandaEntrante = new JTextPane();
-				textPaneComandaEntrante.setEditable(false);
+				textPaneAvisosComandaEntrante = new JTextPane();
+				textPaneAvisosComandaEntrante.setEditable(false);
 				GridBagConstraints gbc_textPaneComandaEntrante = new GridBagConstraints();
 				gbc_textPaneComandaEntrante.fill = GridBagConstraints.BOTH;
 				gbc_textPaneComandaEntrante.gridwidth = 2;
 				gbc_textPaneComandaEntrante.insets = new Insets(0, 0, 5, 0);
 				gbc_textPaneComandaEntrante.gridx = 1;
 				gbc_textPaneComandaEntrante.gridy = 0;
-				panel.add(textPaneComandaEntrante, gbc_textPaneComandaEntrante);
+				panel.add(textPaneAvisosComandaEntrante, gbc_textPaneComandaEntrante);
 			}
 			{
 				lblComandaPendiente = new JLabel("Comandas pendientes:");
@@ -141,6 +157,26 @@ public class IU_CamareroBarra extends JFrame {
 				btnAvisar = new JButton("Avisar de Bebidas preparadas");
 				btnAvisar.setEnabled(false);
 				btnAvisar.addActionListener(new BtnAvisarActionListener());
+				{
+					panelMantenimiento = new JPanel();
+					panelMantenimiento.setBorder(null);
+					GridBagConstraints gbc_panelMantenimiento = new GridBagConstraints();
+					gbc_panelMantenimiento.insets = new Insets(0, 0, 0, 5);
+					gbc_panelMantenimiento.fill = GridBagConstraints.BOTH;
+					gbc_panelMantenimiento.gridx = 0;
+					gbc_panelMantenimiento.gridy = 3;
+					panel.add(panelMantenimiento, gbc_panelMantenimiento);
+					{
+						btnGuardar = new JButton("Guardar");
+						btnGuardar.addActionListener(new BtnGuardarActionListener());
+						panelMantenimiento.add(btnGuardar);
+					}
+					{
+						btnReponer = new JButton("Reponer");
+						btnReponer.addActionListener(new BtnReponerActionListener());
+						panelMantenimiento.add(btnReponer);
+					}
+				}
 				GridBagConstraints gbc_btnAvisar = new GridBagConstraints();
 				gbc_btnAvisar.fill = GridBagConstraints.HORIZONTAL;
 				gbc_btnAvisar.gridwidth = 2;
@@ -160,9 +196,19 @@ public class IU_CamareroBarra extends JFrame {
 
 	private void enlistarComanda(Comanda comanda) {
 		cbComandasPendientes.setEnabled(true);
-		textPaneComandaEntrante.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
+		textPaneAvisosComandaEntrante.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
 		((DefaultComboBoxModel<Comanda>) cbComandasPendientes.getModel()).addElement(comanda);
 		lblNumComandasPendientes.setText("(" + cbComandasPendientes.getItemCount() + ")");
+	}
+
+	private void reducirStockBebidas(Comanda c) {
+		ArrayList<Bebida> listaBebidas = c.getBebidas();
+		for (int i = 0; i < listaBebidas.size(); i++) {
+			Almacen.reducirStockBebidas(listaBebidas.get(i).getNombre());
+		}
+
+		textPaneAvisosComandaEntrante
+				.setText("Restado el stock de unidades de bebidas de esta última comanda.\n" + c.toStringBebidas());
 	}
 
 	private class CbComandasPendientesActionListener implements ActionListener {
@@ -189,7 +235,22 @@ public class IU_CamareroBarra extends JFrame {
 			if (cbComandasPendientes.getItemCount() == 0)
 				cbComandasPendientes.setEnabled(false);
 
+			reducirStockBebidas(comandaSeleccionada);
+
 			IU_CamareroMesa.receiveFromCamareroBarra(comandaSeleccionada, frmCamareroBarra, frmCamareroMesa);
 		}
 	}
+
+	private class BtnGuardarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			Almacen.actualizacionBD();
+		}
+	}
+
+	private class BtnReponerActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			Almacen.reponerStocks();
+		}
+	}
+
 }

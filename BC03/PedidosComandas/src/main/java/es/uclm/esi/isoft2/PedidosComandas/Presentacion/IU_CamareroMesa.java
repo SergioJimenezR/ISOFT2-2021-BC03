@@ -1,5 +1,14 @@
 package es.uclm.esi.isoft2.PedidosComandas.Presentacion;
 
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
+
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Plato;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Bebida;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Aviso;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -41,12 +50,17 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import java.sql.SQLException;
+
 import java.util.ArrayList;
 import javax.swing.JTextPane;
 
 import javax.swing.Timer;
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 
 public class IU_CamareroMesa extends JFrame {
 
@@ -54,6 +68,7 @@ public class IU_CamareroMesa extends JFrame {
 
 	private int[] stockVirtualPlatos;
 	private int[] stockVirtualBebidas;
+
 	private int index;
 	private int numNotificacionesPendientes;
 
@@ -115,11 +130,15 @@ public class IU_CamareroMesa extends JFrame {
 	private JButton btnLimpiar;
 
 	private static Timer timer;
+
+	private JButton btnGuardar;
+
 	private JButton btnCerrarCuenta;
 	private JButton btnConfirmarPago;
 	private JButton btnMesaPreparada;
 	private JTextField textFieldPrecio;
 	private JButton btnImprimirCuenta;
+
 
 	/**
 	 * Launch the application.
@@ -127,6 +146,16 @@ public class IU_CamareroMesa extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				frmCamareroMesa = new IU_CamareroMesa();
+				frmCamareroMesa.setVisible(true);
+
+				frmCocina = new IU_Cocina();
+				frmCocina.setVisible(true);
+
+				frmCamareroBarra = new IU_CamareroBarra();
+				frmCamareroBarra.setVisible(true);
+
+				preparativos();
 				try {
 					frmCamareroMesa = new IU_CamareroMesa();
 					frmCamareroMesa.setVisible(true);
@@ -143,6 +172,19 @@ public class IU_CamareroMesa extends JFrame {
 				}
 			}
 		});
+	}
+
+	private static void preparativos() {
+		frmCamareroMesa.cbMesa.setSelectedIndex(-1);
+
+		try {
+			Almacen.primeraLectura();
+		} catch (SQLException e) {
+			System.out.println("Error con la base de datos. Posible no conexión a la VPN, o caída del servicio.");
+			e.printStackTrace();
+			System.exit(1);
+		}
+
 	}
 
 	/**
@@ -184,6 +226,15 @@ public class IU_CamareroMesa extends JFrame {
 			gbl_panelCamareria.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
 			gbl_panelCamareria.rowWeights = new double[] { 0.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE };
 			panelCamareria.setLayout(gbl_panelCamareria);
+			{
+				btnGuardar = new JButton("Guardar");
+				btnGuardar.addActionListener(new BtnGuardarActionListener());
+				GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
+				gbc_btnGuardar.insets = new Insets(0, 0, 5, 0);
+				gbc_btnGuardar.gridx = 2;
+				gbc_btnGuardar.gridy = 0;
+				panelCamareria.add(btnGuardar, gbc_btnGuardar);
+			}
 			{
 				Avisos = new JPanel();
 				Avisos.setBorder(new TitledBorder(
@@ -274,7 +325,9 @@ public class IU_CamareroMesa extends JFrame {
 			}
 			{
 				panelNuevaComanda = new JPanel();
-				panelNuevaComanda.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Control de mesas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				panelNuevaComanda.setBorder(new TitledBorder(
+						new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+						"Nueva comanda", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 				panelNuevaComanda.setLayout(null);
 				GridBagConstraints gbc_panelNuevaComanda = new GridBagConstraints();
 				gbc_panelNuevaComanda.gridheight = 2;
@@ -685,7 +738,7 @@ public class IU_CamareroMesa extends JFrame {
 				}
 				{
 					btnCancelar = new JButton("Cancelar");
-					btnCancelar.addActionListener(new BtnPanelActionListener());
+					btnCancelar.addActionListener(new BtnCancelarActionListener());
 					btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 					GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 					gbc_btnCancelar.fill = GridBagConstraints.BOTH;
@@ -732,7 +785,7 @@ public class IU_CamareroMesa extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				Bebida aux = new Bebida(index, (String) cbBebidas.getSelectedItem());
-				if (Almacen.comprobarStockVirtualBebidas(stockVirtualBebidas, aux.getNombre())) {
+				if (Almacen.comprobarStockBebidas(aux.getNombre())) {
 					btnAñadirBebida.setEnabled(true);
 
 					mostrarMsgEstado("Se ha seleccionado " + aux.getNombre() + ". Se puede añadir.");
@@ -741,7 +794,9 @@ public class IU_CamareroMesa extends JFrame {
 
 					mostrarMsgEstado("Se ha seleccionado " + (String) cbBebidas.getSelectedItem()
 							+ ". No se puede añadir por insuficiencia de stock. (Stock virtual: "
-							+ Auxiliar.imprimirVector(stockVirtualBebidas) + ").");
+
+							+ Almacen.toStringStockBebidas() + ").");
+
 				}
 			} catch (NullPointerException exc) {
 				// Se causa e ignora con el comboBox.setSelectedIndex(-1);
@@ -755,16 +810,16 @@ public class IU_CamareroMesa extends JFrame {
 			Bebida b = new Bebida(index++, (String) cbBebidas.getSelectedItem());
 
 			((DefaultListModel<Bebida>) listBebidas.getModel()).addElement(b);
-			stockVirtualBebidas = Almacen.reducirStockVirtualBebidas(stockVirtualBebidas, b.getNombre());
+			Almacen.reducirStockBebidas(b.getNombre());
 
 			mostrarMsgEstado("Bebida " + b.toString() + " añadida con éxito. " + "(Stock virtual: "
-					+ Auxiliar.imprimirVector(stockVirtualBebidas) + ").");
+					+ Almacen.toStringStockBebidas() + ").");
 
 			Bebida aux = new Bebida(index, (String) cbBebidas.getSelectedItem());
-			if (!Almacen.comprobarStockVirtualBebidas(stockVirtualBebidas, aux.getNombre())) {
+			if (!Almacen.comprobarStockBebidas(aux.getNombre())) {
 				btnAñadirBebida.setEnabled(false);
 				mostrarMsgEstado("Se acaba de terminar el stock de esta bebida " + aux.getNombre()
-						+ ".\n(Stock virtual: " + Auxiliar.imprimirVector(stockVirtualBebidas) + ").");
+						+ ".\n(Stock virtual: " + Almacen.toStringStockBebidas() + ").");
 			}
 
 			btnCerrarComanda.setEnabled(true);
@@ -784,14 +839,14 @@ public class IU_CamareroMesa extends JFrame {
 	private class BtnQuitarBebidaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			Bebida b = ((DefaultListModel<Bebida>) listBebidas.getModel()).get(listBebidas.getSelectedIndex());
-			stockVirtualBebidas = Almacen.aumentarStockVirtualBebidas(stockVirtualBebidas, b.getNombre());
+			Almacen.aumentarStockBebidas(b.getNombre());
 			((DefaultListModel<Bebida>) listBebidas.getModel()).remove(listBebidas.getSelectedIndex());
 
 			retrasarIds(b.getId());
 			index--;
 
-			mostrarMsgEstado("Bebida " + b.toString() + " eliminado con éxito. \n(Stock virtual: "
-					+ Auxiliar.imprimirVector(stockVirtualBebidas) + ").");
+			mostrarMsgEstado("Bebida " + b.toString() + " eliminada con éxito. \n(Stock virtual: "
+					+ Almacen.toStringStockBebidas() + ").");
 
 			if (index == Constantes.INDICE_INICIAL_PRODUCTOS) {
 				btnCerrarComanda.setEnabled(false);
@@ -904,7 +959,7 @@ public class IU_CamareroMesa extends JFrame {
 	private void eventoComboBox(JComboBox<String> comboBox, JButton btnAñadir) {
 		try {
 			Plato aux = new Plato(index, (String) comboBox.getSelectedItem());
-			if (Almacen.comprobarStockVirtualPlatos(stockVirtualPlatos, aux.getIngredientes())) {
+			if (Almacen.comprobarStockPlatos(aux.getIngredientes())) {
 				btnAñadir.setEnabled(true);
 
 				mostrarMsgEstado("Se ha seleccionado " + aux.getNombre() + ". Se puede añadir.");
@@ -913,8 +968,7 @@ public class IU_CamareroMesa extends JFrame {
 
 				mostrarMsgEstado("Se ha seleccionado " + (String) comboBox.getSelectedItem()
 						+ ". No se puede añadir por insuficiencia de stock. (Stock virtual: "
-						+ Auxiliar.imprimirVector(stockVirtualPlatos) + "). (Stock necesario: "
-						+ Auxiliar.imprimirVector(aux.getIngredientes()) + ").");
+						+ Almacen.toStringStockPlatos() + "). (Stock necesario: " + aux.toStringIngredientes() + ").");
 			}
 		} catch (NullPointerException exc) {
 			// Se causa e ignora con el comboBox.setSelectedIndex(-1);
@@ -922,25 +976,24 @@ public class IU_CamareroMesa extends JFrame {
 	}
 
 	private void eventoAñadir(JComboBox<String> comboBox, JButton btnAñadir, JList<Plato> lista) {
-		Plato p = new Plato(index++, (String) comboBox.getSelectedItem());
-
-		((DefaultListModel<Plato>) lista.getModel()).addElement(p);
-		stockVirtualPlatos = Almacen.reducirStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes());
-
-		mostrarMsgEstado("Plato " + p.toString() + " añadido con éxito. " + "(Stock virtual: "
-				+ Auxiliar.imprimirVector(stockVirtualPlatos) + ").");
-
 		Plato aux = new Plato(index, (String) comboBox.getSelectedItem());
-		if (!Almacen.comprobarStockVirtualPlatos(stockVirtualPlatos, aux.getIngredientes())) {
+		if (!Almacen.comprobarStockPlatos(aux.getIngredientes())) {
 			btnAñadir.setEnabled(false);
 			mostrarMsgEstado("Se acaba de terminar el stock de ingredientes para cocinar este plato " + aux.getNombre()
-					+ ". \n(Stock virtual: " + Auxiliar.imprimirVector(stockVirtualPlatos) + "). (Stock necesario: "
-					+ Auxiliar.imprimirVector(p.getIngredientes()) + ").");
+					+ ". \n(Stock virtual: " + Almacen.toStringStockPlatos() + "). (Stock necesario: "
+					+ aux.toStringIngredientes() + ").");
+		} else {
+			Plato p = new Plato(index++, (String) comboBox.getSelectedItem());
+
+			((DefaultListModel<Plato>) lista.getModel()).addElement(p);
+			Almacen.reducirStockPlatos(p.getIngredientes());
+
+			mostrarMsgEstado("Plato " + p.toString() + " añadido con éxito. " + "(Stock virtual: "
+					+ Almacen.toStringStockPlatos() + ").");
+
+			btnCerrarComanda.setEnabled(true);
+			btnLimpiar.setEnabled(true);
 		}
-
-		btnCerrarComanda.setEnabled(true);
-		btnLimpiar.setEnabled(true);
-
 	}
 
 	private void eventoLista(JList<Plato> lista, JButton btnQuitar) {
@@ -952,14 +1005,14 @@ public class IU_CamareroMesa extends JFrame {
 
 	private void eventoQuitar(JList<Plato> lista) {
 		Plato p = ((DefaultListModel<Plato>) lista.getModel()).get(lista.getSelectedIndex());
-		stockVirtualPlatos = Almacen.aumentarStockVirtualPlatos(stockVirtualPlatos, p.getIngredientes());
+		Almacen.aumentarStockPlatos(p.getIngredientes());
 		((DefaultListModel<Plato>) lista.getModel()).remove(lista.getSelectedIndex());
 
 		retrasarIds(p.getId());
 		index--;
 
 		mostrarMsgEstado("Plato " + p.toString() + " eliminado con éxito. \n(Stock virtual: "
-				+ Auxiliar.imprimirVector(stockVirtualPlatos) + ").");
+				+ Almacen.toStringStockPlatos() + ").");
 
 		if (index == Constantes.INDICE_INICIAL_PRODUCTOS) {
 			btnCerrarComanda.setEnabled(false);
@@ -967,7 +1020,7 @@ public class IU_CamareroMesa extends JFrame {
 		}
 	}
 
-	private class BtnPanelActionListener implements ActionListener {
+	private class BtnCancelarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnCancelar) {
 				int sel = JOptionPane.showOptionDialog(contentPane, "¿Seguro que quieres cancelar?", "Cancelar comadna",
@@ -975,6 +1028,7 @@ public class IU_CamareroMesa extends JFrame {
 				if (sel == JOptionPane.YES_OPTION) {
 					CardLayout panel = (CardLayout) (contentPane.getLayout());
 					panel.show(contentPane, e.getActionCommand());
+					restaurarStock(crearComanda(0));
 					limpiarAnotacionComanda();
 					lblNumMesa.setText("Mesa Número: " + cbMesa.getSelectedItem());
 				} else {
@@ -994,7 +1048,12 @@ public class IU_CamareroMesa extends JFrame {
 			int sel = JOptionPane.showOptionDialog(contentPane, "¿Seguro que quieres salir?", "Salir del programa",
 					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 			if (sel == JOptionPane.YES_OPTION) {
+				if (panelAnotacionComanda.isShowing()) {
+					restaurarStock(crearComanda(0));
+					Almacen.actualizacionBD();
+				}
 				setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Yes
+				System.exit(1);
 			} else {
 				setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); // No
 			}
@@ -1005,8 +1064,11 @@ public class IU_CamareroMesa extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 
-			Comanda comanda = crearComanda();
-			// Falta la persistencia de los tiempos de atención que establece la directivaa
+			Comanda comanda = crearComanda(index++);
+
+			// restaurarStock(comanda);
+
+			// Falta la persistencia de los tiempos de atención que establece la directiva
 			iniciarTimer(comanda);
 
 			if (comanda.tienePlatos()) {
@@ -1018,14 +1080,11 @@ public class IU_CamareroMesa extends JFrame {
 
 			CardLayout panel = (CardLayout) (contentPane.getLayout());
 			panel.show(contentPane, "Cancelar");
-			
-			((Mesa) cbMesa.getSelectedItem()).setComanda(comanda);
-			
-			cbMesa.setSelectedItem(null);
+
 			btnIniciarComanda.setEnabled(false);
 			limpiarAnotacionComanda();
-			
-			//btnCerrarCuenta.setEnabled(false);
+
+			cbMesa.setSelectedItem(null);
 
 		}
 	}
@@ -1038,10 +1097,8 @@ public class IU_CamareroMesa extends JFrame {
 				btnImprimirCuenta.setEnabled(false);
 				btnConfirmarPago.setEnabled(false);
 				btnMesaPreparada.setEnabled(false);
+
 				Mesa m = (Mesa) cbMesa.getSelectedItem();
-				if (m.getEstadoMesa() != EstadosMesas.LIBRE) {
-					btnIniciarComanda.setEnabled(false);
-				}
 				if(m.getEstadoMesa() == EstadosMesas.SERVIDOS) {
 					btnCerrarCuenta.setEnabled(true);
 				}
@@ -1089,9 +1146,7 @@ public class IU_CamareroMesa extends JFrame {
 				Aviso comandaSeleccionada = (Aviso) cbAvisos.getSelectedItem();
 				comandaSeleccionada.setAtendidoTrue();
 				comandaSeleccionada.getMesa().setEstadoMesa(EstadosMesas.SERVIDOS);
-				
-				// El btnCerrarCuenta.setEnabled(true) se pone en el evento de la combobox, porque parte a deseleccionada.
-				
+
 				((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).removeElement(comandaSeleccionada);
 
 				textPaneNotificacion.setText("Aviso eliminado correctamente.");
@@ -1110,6 +1165,20 @@ public class IU_CamareroMesa extends JFrame {
 			}
 		}
 	}
+	private class BtnGuardarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			Almacen.actualizacionBD();
+		}
+	}
+
+	private class BtnIniciarComandaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			CardLayout panel = (CardLayout) (contentPane.getLayout());
+			panel.show(contentPane, "Iniciar Comanda");
+		}
+	}
+
+	public Comanda crearComanda(int index) {
 	private class BtnCerrarCuentaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			btnCerrarCuenta.setEnabled(false);
@@ -1197,6 +1266,8 @@ public class IU_CamareroMesa extends JFrame {
 
 	public void limpiarAnotacionComanda() {
 
+		restaurarStock(crearComanda(0));
+
 		((DefaultListModel<Bebida>) listBebidas.getModel()).removeAllElements();
 		((DefaultListModel<Plato>) listEntrantes.getModel()).removeAllElements();
 		((DefaultListModel<Plato>) listPrimeros.getModel()).removeAllElements();
@@ -1223,7 +1294,7 @@ public class IU_CamareroMesa extends JFrame {
 		cbPrimeros.setSelectedIndex(-1);
 		cbSegundos.setSelectedIndex(-1);
 		cbPostres.setSelectedIndex(-1);
-		
+
 		textPaneEstado.setText("Seleccione platos o bebidas.");
 
 	}
@@ -1285,6 +1356,9 @@ public class IU_CamareroMesa extends JFrame {
 
 	}
 
+	private void restaurarStock(Comanda c) {
+		Almacen.aumentarStock(c);
+}
 	private void preparativos() {
 		frmCamareroMesa.cbMesa.setSelectedIndex(-1);
 	}
