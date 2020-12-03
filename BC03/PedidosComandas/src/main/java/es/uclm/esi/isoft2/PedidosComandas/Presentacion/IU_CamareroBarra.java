@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -13,7 +16,6 @@ import java.awt.Insets;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Bebida;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
@@ -23,6 +25,7 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
 import java.awt.event.ActionEvent;
 
 public class IU_CamareroBarra extends JFrame {
@@ -36,6 +39,7 @@ public class IU_CamareroBarra extends JFrame {
 	private JPanel panel;
 	private JLabel lblUltimaComandaEntrante;
 	private JTextPane textPaneAvisosComandaEntrante;
+
 	private JLabel lblComandaPendiente;
 	private JLabel lblDescripcion;
 	private JTextPane textPaneInfoComandaSeleccionada;
@@ -48,13 +52,13 @@ public class IU_CamareroBarra extends JFrame {
 	private JButton btnGuardar;
 	private JButton btnReponer;
 
+
 	/**
 	 * Create the frame.
 	 */
 	public IU_CamareroBarra() {
 
 		numComandasPendientes = 0;
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 400, 478, 226);
 		contentPane = new JPanel();

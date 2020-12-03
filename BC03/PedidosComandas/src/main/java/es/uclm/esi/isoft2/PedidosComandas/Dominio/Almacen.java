@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.AlmacenDAO;
+
 import es.uclm.esi.isoft2.PedidosComandas.Presentacion.Constantes;
 
 public class Almacen {
@@ -57,6 +58,7 @@ public class Almacen {
 		for (int i = 0; i < Constantes.NOMBRES_BEBIDAS.length; i++) {
 			if (Constantes.NOMBRES_BEBIDAS[i].equals(nombreBebida)) {
 				if (stockBebidas[i] > 0) {
+
 					return true;
 				} else {
 					return false;

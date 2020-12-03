@@ -1,5 +1,6 @@
 package es.uclm.esi.isoft2.PedidosComandas.Presentacion;
 
+
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
 
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Plato;
@@ -34,17 +35,33 @@ import java.awt.event.ActionEvent;
 
 import java.awt.CardLayout;
 import javax.swing.event.ListSelectionListener;
+
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Auxiliar;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Aviso;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Bebida;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Plato;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JTextArea;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import javax.swing.JTextPane;
 
 import javax.swing.Timer;
+
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 
 public class IU_CamareroMesa extends JFrame {
 
@@ -111,7 +128,15 @@ public class IU_CamareroMesa extends JFrame {
 	private JButton btnLimpiar;
 
 	private static Timer timer;
+
 	private JButton btnGuardar;
+
+	private JButton btnCerrarCuenta;
+	private JButton btnConfirmarPago;
+	private JButton btnMesaPreparada;
+	private JTextField textFieldPrecio;
+	private JButton btnImprimirCuenta;
+
 
 	/**
 	 * Launch the application.
@@ -119,16 +144,21 @@ public class IU_CamareroMesa extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				frmCamareroMesa = new IU_CamareroMesa();
-				frmCamareroMesa.setVisible(true);
 
-				frmCocina = new IU_Cocina();
-				frmCocina.setVisible(true);
+				try {
+					frmCamareroMesa = new IU_CamareroMesa();
+					frmCamareroMesa.setVisible(true);
+					frmCamareroMesa.preparativos();
 
-				frmCamareroBarra = new IU_CamareroBarra();
-				frmCamareroBarra.setVisible(true);
+					frmCocina = new IU_Cocina();
+					frmCocina.setVisible(true);
 
-				preparativos();
+					frmCamareroBarra = new IU_CamareroBarra();
+					frmCamareroBarra.setVisible(true);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}
@@ -155,7 +185,6 @@ public class IU_CamareroMesa extends JFrame {
 
 		index = Constantes.INDICE_INICIAL_PRODUCTOS;
 		numNotificacionesPendientes = 0;
-
 		setTitle("Camarero");
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 789);
@@ -273,9 +302,8 @@ public class IU_CamareroMesa extends JFrame {
 			}
 			{
 				panelNuevaComanda = new JPanel();
-				panelNuevaComanda.setBorder(new TitledBorder(
-						new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
-						"Nueva comanda", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+
+				panelNuevaComanda.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Control de mesas", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 				panelNuevaComanda.setLayout(null);
 				GridBagConstraints gbc_panelNuevaComanda = new GridBagConstraints();
 				gbc_panelNuevaComanda.gridheight = 2;
@@ -302,11 +330,48 @@ public class IU_CamareroMesa extends JFrame {
 				}
 				{
 					btnIniciarComanda = new JButton("Iniciar Comanda");
-					btnIniciarComanda.addActionListener(new BtnIniciarComandaActionListener());
 					btnIniciarComanda.setEnabled(false);
+					btnIniciarComanda.addActionListener(new BtnPanelActionListener());
 					btnIniciarComanda.setFont(new Font("Tahoma", Font.BOLD, 16));
-					btnIniciarComanda.setBounds(397, 65, 202, 72);
+					btnIniciarComanda.setBounds(397, 22, 202, 72);
 					panelNuevaComanda.add(btnIniciarComanda);
+				}
+				{
+					btnCerrarCuenta = new JButton("Cerrar cuenta");
+					btnCerrarCuenta.addActionListener(new BtnCerrarCuentaActionListener());
+					btnCerrarCuenta.setEnabled(false);
+					btnCerrarCuenta.setBounds(397, 118, 202, 21);
+					panelNuevaComanda.add(btnCerrarCuenta);
+				}
+				{
+					btnConfirmarPago = new JButton("Confirmar Pago");
+					btnConfirmarPago.addActionListener(new BtnConfirmarPagoActionListener());
+					btnConfirmarPago.setEnabled(false);
+					btnConfirmarPago.setBounds(397, 178, 202, 21);
+					panelNuevaComanda.add(btnConfirmarPago);
+				}
+				{
+					btnMesaPreparada = new JButton("Mesa Preparada");
+					btnMesaPreparada.addActionListener(new BtnMesaPreparadaActionListener());
+					btnMesaPreparada.setEnabled(false);
+					btnMesaPreparada.setBounds(397, 209, 202, 21);
+					panelNuevaComanda.add(btnMesaPreparada);
+				}
+				{
+					textFieldPrecio = new JTextField();
+					textFieldPrecio.setHorizontalAlignment(SwingConstants.CENTER);
+					textFieldPrecio.setText("-");
+					textFieldPrecio.setEnabled(false);
+					textFieldPrecio.setBounds(286, 148, 96, 19);
+					panelNuevaComanda.add(textFieldPrecio);
+					textFieldPrecio.setColumns(10);
+				}
+				{
+					btnImprimirCuenta = new JButton("Imprimir cuenta");
+					btnImprimirCuenta.addActionListener(new BtnImprimirCuentaActionListener());
+					btnImprimirCuenta.setEnabled(false);
+					btnImprimirCuenta.setBounds(397, 149, 202, 21);
+					panelNuevaComanda.add(btnImprimirCuenta);
 				}
 			}
 		}
@@ -697,6 +762,7 @@ public class IU_CamareroMesa extends JFrame {
 			try {
 				Bebida aux = new Bebida(index, (String) cbBebidas.getSelectedItem());
 				if (Almacen.comprobarStockBebidas(aux.getNombre())) {
+
 					btnAñadirBebida.setEnabled(true);
 
 					mostrarMsgEstado("Se ha seleccionado " + aux.getNombre() + ". Se puede añadir.");
@@ -706,6 +772,7 @@ public class IU_CamareroMesa extends JFrame {
 					mostrarMsgEstado("Se ha seleccionado " + (String) cbBebidas.getSelectedItem()
 							+ ". No se puede añadir por insuficiencia de stock. (Stock virtual: "
 							+ Almacen.toStringStockBebidas() + ").");
+
 				}
 			} catch (NullPointerException exc) {
 				// Se causa e ignora con el comboBox.setSelectedIndex(-1);
@@ -719,6 +786,7 @@ public class IU_CamareroMesa extends JFrame {
 			Bebida b = new Bebida(index++, (String) cbBebidas.getSelectedItem());
 
 			((DefaultListModel<Bebida>) listBebidas.getModel()).addElement(b);
+
 			Almacen.reducirStockBebidas(b.getNombre());
 
 			mostrarMsgEstado("Bebida " + b.toString() + " añadida con éxito. " + "(Stock virtual: "
@@ -729,6 +797,7 @@ public class IU_CamareroMesa extends JFrame {
 				btnAñadirBebida.setEnabled(false);
 				mostrarMsgEstado("Se acaba de terminar el stock de esta bebida " + aux.getNombre()
 						+ ".\n(Stock virtual: " + Almacen.toStringStockBebidas() + ").");
+
 			}
 
 			btnCerrarComanda.setEnabled(true);
@@ -748,7 +817,9 @@ public class IU_CamareroMesa extends JFrame {
 	private class BtnQuitarBebidaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			Bebida b = ((DefaultListModel<Bebida>) listBebidas.getModel()).get(listBebidas.getSelectedIndex());
+
 			Almacen.aumentarStockBebidas(b.getNombre());
+
 			((DefaultListModel<Bebida>) listBebidas.getModel()).remove(listBebidas.getSelectedIndex());
 
 			retrasarIds(b.getId());
@@ -756,6 +827,7 @@ public class IU_CamareroMesa extends JFrame {
 
 			mostrarMsgEstado("Bebida " + b.toString() + " eliminada con éxito. \n(Stock virtual: "
 					+ Almacen.toStringStockBebidas() + ").");
+
 
 			if (index == Constantes.INDICE_INICIAL_PRODUCTOS) {
 				btnCerrarComanda.setEnabled(false);
@@ -868,7 +940,9 @@ public class IU_CamareroMesa extends JFrame {
 	private void eventoComboBox(JComboBox<String> comboBox, JButton btnAñadir) {
 		try {
 			Plato aux = new Plato(index, (String) comboBox.getSelectedItem());
+
 			if (Almacen.comprobarStockPlatos(aux.getIngredientes())) {
+
 				btnAñadir.setEnabled(true);
 
 				mostrarMsgEstado("Se ha seleccionado " + aux.getNombre() + ". Se puede añadir.");
@@ -878,6 +952,7 @@ public class IU_CamareroMesa extends JFrame {
 				mostrarMsgEstado("Se ha seleccionado " + (String) comboBox.getSelectedItem()
 						+ ". No se puede añadir por insuficiencia de stock. (Stock virtual: "
 						+ Almacen.toStringStockPlatos() + "). (Stock necesario: " + aux.toStringIngredientes() + ").");
+
 			}
 		} catch (NullPointerException exc) {
 			// Se causa e ignora con el comboBox.setSelectedIndex(-1);
@@ -905,6 +980,7 @@ public class IU_CamareroMesa extends JFrame {
 			btnLimpiar.setEnabled(true);
 		}
 
+
 	}
 
 	private void eventoLista(JList<Plato> lista, JButton btnQuitar) {
@@ -925,6 +1001,7 @@ public class IU_CamareroMesa extends JFrame {
 		mostrarMsgEstado("Plato " + p.toString() + " eliminado con éxito. \n(Stock virtual: "
 				+ Almacen.toStringStockPlatos() + ").");
 
+
 		if (index == Constantes.INDICE_INICIAL_PRODUCTOS) {
 			btnCerrarComanda.setEnabled(false);
 			btnLimpiar.setEnabled(false);
@@ -932,6 +1009,7 @@ public class IU_CamareroMesa extends JFrame {
 	}
 
 	private class BtnCancelarActionListener implements ActionListener {
+
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnCancelar) {
 				int sel = JOptionPane.showOptionDialog(contentPane, "¿Seguro que quieres cancelar?", "Cancelar comadna",
@@ -940,6 +1018,7 @@ public class IU_CamareroMesa extends JFrame {
 					CardLayout panel = (CardLayout) (contentPane.getLayout());
 					panel.show(contentPane, e.getActionCommand());
 					restaurarStock(crearComanda(0));
+
 					limpiarAnotacionComanda();
 					lblNumMesa.setText("Mesa Número: " + cbMesa.getSelectedItem());
 				} else {
@@ -976,6 +1055,7 @@ public class IU_CamareroMesa extends JFrame {
 			// restaurarStock(comanda);
 
 			// Falta la persistencia de los tiempos de atención que establece la directiva
+
 			iniciarTimer(comanda);
 
 			if (comanda.tienePlatos()) {
@@ -987,9 +1067,9 @@ public class IU_CamareroMesa extends JFrame {
 
 			CardLayout panel = (CardLayout) (contentPane.getLayout());
 			panel.show(contentPane, "Cancelar");
-			btnIniciarComanda.setEnabled(false);
+			((Mesa) cbMesa.getSelectedItem()).setComanda(comanda);
+      btnIniciarComanda.setEnabled(false);
 			limpiarAnotacionComanda();
-
 			cbMesa.setSelectedItem(null);
 
 		}
@@ -999,13 +1079,32 @@ public class IU_CamareroMesa extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			if (cbMesa.getSelectedItem() != null) {
 				btnIniciarComanda.setEnabled(true);
+				btnCerrarCuenta.setEnabled(false);
+				btnImprimirCuenta.setEnabled(false);
+				btnConfirmarPago.setEnabled(false);
+				btnMesaPreparada.setEnabled(false);
 				Mesa m = (Mesa) cbMesa.getSelectedItem();
 				if (m.getEstadoMesa() != EstadosMesas.LIBRE) {
 					btnIniciarComanda.setEnabled(false);
 				}
+
+				if(m.getEstadoMesa() == EstadosMesas.SERVIDOS) {
+					btnCerrarCuenta.setEnabled(true);
+				}
+				if(m.getEstadoMesa() == EstadosMesas.ESPERANDOCUENTA) {
+					btnImprimirCuenta.setEnabled(true);
+				}
+				if(m.getEstadoMesa() == EstadosMesas.PAGANDO) {
+					btnConfirmarPago.setEnabled(true);
+					textFieldPrecio.setText(((Mesa) cbMesa.getSelectedItem()).getPrecio() + " €");
+				}
+				if(m.getEstadoMesa() != EstadosMesas.PAGANDO) {
+					textFieldPrecio.setText("-");
+				}
+				if(m.getEstadoMesa() == EstadosMesas.ENPREPARACION) {
+					btnMesaPreparada.setEnabled(true);
+				}
 			}
-			// (Propuesta) Se podría implementar que solamente se active si la mesa está en
-			// un determinado estado, previo a haber pedido.
 		}
 	}
 
@@ -1067,6 +1166,55 @@ public class IU_CamareroMesa extends JFrame {
 		}
 	}
 
+	private class BtnCerrarCuentaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			btnCerrarCuenta.setEnabled(false);
+			((Mesa) cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.ESPERANDOCUENTA);
+			
+			((Mesa) cbMesa.getSelectedItem()).cerrarCuenta();
+			
+			btnImprimirCuenta.setEnabled(false);
+			cbMesa.setSelectedItem(null);
+		}
+	}
+	
+	private class BtnImprimirCuentaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			
+			textFieldPrecio.setText(((Mesa) cbMesa.getSelectedItem()).getPrecio() + " €");
+			
+			btnImprimirCuenta.setEnabled(false);
+			((Mesa) cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.PAGANDO);
+			
+			btnConfirmarPago.setEnabled(false);
+			cbMesa.setSelectedItem(null);
+		}
+	}
+	
+	private class BtnConfirmarPagoActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			btnConfirmarPago.setEnabled(false);
+			((Mesa) cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.ENPREPARACION);
+			// Aviso aviso = new Aviso
+			// añadirAviso(aviso);
+			
+			textFieldPrecio.setText("-");
+			
+			btnMesaPreparada.setEnabled(false);
+			cbMesa.setSelectedItem(null);
+		}
+	}
+	
+	private class BtnMesaPreparadaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			btnMesaPreparada.setEnabled(false);
+			((Mesa) cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.LIBRE);
+			
+			cbMesa.setSelectedItem(null);
+		}
+	}
+
+	
 	public Comanda crearComanda(int index) {
 
 		ArrayList<Bebida> arrayListBebidas = obtenerArrayListBebida(listBebidas);
@@ -1079,6 +1227,7 @@ public class IU_CamareroMesa extends JFrame {
 		m.setEstadoMesa(EstadosMesas.ESPERANDOCOMIDA);
 
 		Comanda c = new Comanda(index, m, arrayListBebidas, arrayListEntrantes, arrayListPrimeros, arrayListSegundos,
+
 				arrayListPostres);
 
 		return c;
@@ -1198,7 +1347,8 @@ public class IU_CamareroMesa extends JFrame {
 
 	private void restaurarStock(Comanda c) {
 		Almacen.aumentarStock(c);
-	}
+}
+
 
 	public void iniciarTimer(Aviso aviso) {
 		Aviso lanzado;
@@ -1225,5 +1375,10 @@ public class IU_CamareroMesa extends JFrame {
 
 		timer.start();
 	}
-
+	
+	public void añadirAviso(Aviso aviso) {
+		((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).addElement(aviso);
+		textNMesaAviso.setText("Mesa número: " + aviso.getMesa().getId());
+		textEstadoMesa.setText("Estado de la mesa: " + aviso.getMesa().getEstadoMesa().name());
+	}
 }

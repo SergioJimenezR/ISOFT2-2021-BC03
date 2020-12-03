@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -22,7 +25,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+
 import java.util.ArrayList;
+
 import java.awt.event.ActionEvent;
 
 public class IU_Cocina extends JFrame {
@@ -36,6 +41,7 @@ public class IU_Cocina extends JFrame {
 	private JPanel panel;
 	private JLabel lblUltimaComandaEntrante;
 	private JTextPane textPaneAvisosComandaEntrante;
+
 	private JLabel lblComandaPendiente;
 	private JLabel lblDescripcion;
 	private JTextPane textPaneInfoComandaSeleccionada;
@@ -47,6 +53,7 @@ public class IU_Cocina extends JFrame {
 	private JPanel panelMantenimiento;
 	private JButton btnGuardar;
 	private JButton btnReponer;
+
 
 	/**
 	 * Create the frame.
@@ -185,6 +192,7 @@ public class IU_Cocina extends JFrame {
 	private void enlistarComanda(Comanda comanda) {
 		cbComandasPendientes.setEnabled(true);
 		textPaneAvisosComandaEntrante.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
+
 		lblNumComandasPendientes.setText("(" + ++numComandasPendientes + ")");
 		((DefaultComboBoxModel<Comanda>) cbComandasPendientes.getModel()).addElement(comanda);
 	}
@@ -238,7 +246,7 @@ public class IU_Cocina extends JFrame {
 			lblNumComandasPendientes.setText("(" + --numComandasPendientes + ")");
 			if (numComandasPendientes == 0)
 				cbComandasPendientes.setEnabled(false);
-
+      
 			reducirStockPlatos(comandaSeleccionada);
 
 			IU_CamareroMesa.receiveFromCocina(comandaSeleccionada, frmCocina, frmCamareroMesa);
