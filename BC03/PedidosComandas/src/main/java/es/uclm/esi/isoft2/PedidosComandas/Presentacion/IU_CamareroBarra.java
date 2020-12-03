@@ -6,9 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
-
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -25,9 +22,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
-
 import java.util.ArrayList;
-
 import java.awt.event.ActionEvent;
 
 public class IU_CamareroBarra extends JFrame {
@@ -41,9 +36,6 @@ public class IU_CamareroBarra extends JFrame {
 	private JPanel panel;
 	private JLabel lblUltimaComandaEntrante;
 	private JTextPane textPaneAvisosComandaEntrante;
-
-	private JTextPane textPaneComandaEntrante;
-
 	private JLabel lblComandaPendiente;
 	private JLabel lblDescripcion;
 	private JTextPane textPaneInfoComandaSeleccionada;
@@ -64,7 +56,6 @@ public class IU_CamareroBarra extends JFrame {
 		numComandasPendientes = 0;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		setBounds(100, 400, 478, 226);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -77,7 +68,6 @@ public class IU_CamareroBarra extends JFrame {
 					"CAMARERO DE BARRA", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPane.add(panel, BorderLayout.NORTH);
 			GridBagLayout gbl_panel = new GridBagLayout();
-      
 			gbl_panel.columnWidths = new int[] { 205, 279, 26, 0 };
 			gbl_panel.rowHeights = new int[] { 50, 0, 50, 0, 0 };
 			gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
@@ -85,7 +75,6 @@ public class IU_CamareroBarra extends JFrame {
 			panel.setLayout(gbl_panel);
 			{
 				lblUltimaComandaEntrante = new JLabel("Avisos / Última comanda entrante:");
-
 				GridBagConstraints gbc_lblUltimaComandaEntrante = new GridBagConstraints();
 				gbc_lblUltimaComandaEntrante.anchor = GridBagConstraints.EAST;
 				gbc_lblUltimaComandaEntrante.insets = new Insets(0, 0, 5, 5);
@@ -252,5 +241,4 @@ public class IU_CamareroBarra extends JFrame {
 			Almacen.reponerStocks();
 		}
 	}
-
 }
