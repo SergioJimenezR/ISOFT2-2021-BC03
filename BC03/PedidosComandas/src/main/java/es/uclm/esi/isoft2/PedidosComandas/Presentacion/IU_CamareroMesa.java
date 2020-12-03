@@ -36,15 +36,6 @@ import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import javax.swing.event.ListSelectionListener;
 
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Auxiliar;
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Aviso;
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Bebida;
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Plato;
-
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.JTextArea;
 import javax.swing.border.EtchedBorder;
@@ -331,7 +322,7 @@ public class IU_CamareroMesa extends JFrame {
 				{
 					btnIniciarComanda = new JButton("Iniciar Comanda");
 					btnIniciarComanda.setEnabled(false);
-					btnIniciarComanda.addActionListener(new BtnPanelActionListener());
+					btnIniciarComanda.addActionListener(new BtnIniciarComandaActionListener());
 					btnIniciarComanda.setFont(new Font("Tahoma", Font.BOLD, 16));
 					btnIniciarComanda.setBounds(397, 22, 202, 72);
 					panelNuevaComanda.add(btnIniciarComanda);

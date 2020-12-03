@@ -18,7 +18,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Bebida;
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EtchedBorder;
