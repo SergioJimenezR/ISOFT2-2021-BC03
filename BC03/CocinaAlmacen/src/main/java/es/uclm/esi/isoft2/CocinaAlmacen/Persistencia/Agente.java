@@ -21,6 +21,13 @@ public class Agente implements BDConstantes {
 		return mInstancia;
 	}
 
+	public int create(String instruccion) throws SQLException {
+		Statement stmt = mBD.createStatement();
+		int res = stmt.executeUpdate(instruccion);
+		stmt.close();
+		return res;
+	}
+
 	public int insert(String instruccion) throws SQLException {
 		Statement stmt = mBD.createStatement();
 		int res = stmt.executeUpdate(instruccion);
@@ -35,7 +42,14 @@ public class Agente implements BDConstantes {
 		return res;
 	}
 
-	public int create(String instruccion) throws SQLException {
+	public int update(String instruccion) throws SQLException {
+		Statement stmt = mBD.createStatement();
+		int res = stmt.executeUpdate(instruccion);
+		stmt.close();
+		return res;
+	}
+
+	public int ejecutar(String instruccion) throws SQLException {
 		Statement stmt = mBD.createStatement();
 		int res = stmt.executeUpdate(instruccion);
 		stmt.close();
