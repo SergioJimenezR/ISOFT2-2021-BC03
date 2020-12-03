@@ -213,7 +213,7 @@ public class IU_Cocina extends JFrame {
 				break;
 			}
 			for (int j = 0; j < listaPlatos.size(); j++) {
-				Almacen.reducirStockPlatos(listaPlatos.get(j).getIngredientes());
+				Almacen.getAlmacen().reducirStockPlatos(listaPlatos.get(j).getIngredientes());
 			}
 		}
 
@@ -253,13 +253,13 @@ public class IU_Cocina extends JFrame {
 
 	private class BtnGuardarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			Almacen.actualizacionBD();
+			Almacen.getAlmacen().actualizacionBD();
 		}
 	}
 
 	private class BtnReponerActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			Almacen.reponerStocks();
+			Almacen.getAlmacen().reponerStocks();
 		}
 	}
 

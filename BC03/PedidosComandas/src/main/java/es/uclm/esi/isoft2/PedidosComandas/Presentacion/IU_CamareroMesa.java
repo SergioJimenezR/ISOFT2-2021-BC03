@@ -43,8 +43,6 @@ import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import java.sql.SQLException;
-
 import java.util.ArrayList;
 import javax.swing.JTextPane;
 
@@ -155,13 +153,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	private static void preparativos() {
 		frmCamareroMesa.cbMesa.setSelectedIndex(-1);
 
-		try {
-			Almacen.primeraLectura();
-		} catch (SQLException e) {
-			System.out.println("Error con la base de datos. Posible no conexión a la VPN, o caída del servicio.");
-			e.printStackTrace();
-			System.exit(1);
-		}
+		Almacen.getAlmacen();
 
 	}
 
@@ -752,7 +744,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		public void actionPerformed(ActionEvent e) {
 			try {
 				Bebida aux = new Bebida(index, (String) cbBebidas.getSelectedItem());
-				if (Almacen.comprobarStockBebidas(aux.getNombre())) {
+				if (Almacen.getAlmacen().comprobarStockBebidas(aux.getNombre())) {
 
 					btnAñadirBebida.setEnabled(true);
 
@@ -762,7 +754,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 					mostrarMsgEstado("Se ha seleccionado " + (String) cbBebidas.getSelectedItem()
 							+ ". No se puede añadir por insuficiencia de stock. (Stock virtual: "
-							+ Almacen.toStringStockBebidas() + ").");
+							+ Almacen.getAlmacen().toStringStockBebidas() + ").");
 
 				}
 			} catch (NullPointerException exc) {
@@ -778,16 +770,16 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 			((DefaultListModel<Bebida>) listBebidas.getModel()).addElement(b);
 
-			Almacen.reducirStockBebidas(b.getNombre());
+			Almacen.getAlmacen().reducirStockBebidas(b.getNombre());
 
 			mostrarMsgEstado("Bebida " + b.toString() + " añadida con éxito. " + "(Stock virtual: "
-					+ Almacen.toStringStockBebidas() + ").");
+					+ Almacen.getAlmacen().toStringStockBebidas() + ").");
 
 			Bebida aux = new Bebida(index, (String) cbBebidas.getSelectedItem());
-			if (!Almacen.comprobarStockBebidas(aux.getNombre())) {
+			if (!Almacen.getAlmacen().comprobarStockBebidas(aux.getNombre())) {
 				btnAñadirBebida.setEnabled(false);
 				mostrarMsgEstado("Se acaba de terminar el stock de esta bebida " + aux.getNombre()
-						+ ".\n(Stock virtual: " + Almacen.toStringStockBebidas() + ").");
+						+ ".\n(Stock virtual: " + Almacen.getAlmacen().toStringStockBebidas() + ").");
 
 			}
 
@@ -809,7 +801,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		public void actionPerformed(ActionEvent e) {
 			Bebida b = ((DefaultListModel<Bebida>) listBebidas.getModel()).get(listBebidas.getSelectedIndex());
 
-			Almacen.aumentarStockBebidas(b.getNombre());
+			Almacen.getAlmacen().aumentarStockBebidas(b.getNombre());
 
 			((DefaultListModel<Bebida>) listBebidas.getModel()).remove(listBebidas.getSelectedIndex());
 
@@ -817,7 +809,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 			index--;
 
 			mostrarMsgEstado("Bebida " + b.toString() + " eliminada con éxito. \n(Stock virtual: "
-					+ Almacen.toStringStockBebidas() + ").");
+					+ Almacen.getAlmacen().toStringStockBebidas() + ").");
 
 			if (index == Constantes.INDICE_INICIAL_PRODUCTOS) {
 				btnCerrarComanda.setEnabled(false);
@@ -931,7 +923,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		try {
 			Plato aux = new Plato(index, (String) comboBox.getSelectedItem());
 
-			if (Almacen.comprobarStockPlatos(aux.getIngredientes())) {
+			if (Almacen.getAlmacen().comprobarStockPlatos(aux.getIngredientes())) {
 
 				btnAñadir.setEnabled(true);
 
@@ -941,7 +933,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 				mostrarMsgEstado("Se ha seleccionado " + (String) comboBox.getSelectedItem()
 						+ ". No se puede añadir por insuficiencia de stock. (Stock virtual: "
-						+ Almacen.toStringStockPlatos() + "). (Stock necesario: " + aux.toStringIngredientes() + ").");
+						+ Almacen.getAlmacen().toStringStockPlatos() + "). (Stock necesario: "
+						+ aux.toStringIngredientes() + ").");
 
 			}
 		} catch (NullPointerException exc) {
@@ -952,19 +945,19 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	private void eventoAñadir(JComboBox<String> comboBox, JButton btnAñadir, JList<Plato> lista) {
 
 		Plato aux = new Plato(index, (String) comboBox.getSelectedItem());
-		if (!Almacen.comprobarStockPlatos(aux.getIngredientes())) {
+		if (!Almacen.getAlmacen().comprobarStockPlatos(aux.getIngredientes())) {
 			btnAñadir.setEnabled(false);
 			mostrarMsgEstado("Se acaba de terminar el stock de ingredientes para cocinar este plato " + aux.getNombre()
-					+ ". \n(Stock virtual: " + Almacen.toStringStockPlatos() + "). (Stock necesario: "
+					+ ". \n(Stock virtual: " + Almacen.getAlmacen().toStringStockPlatos() + "). (Stock necesario: "
 					+ aux.toStringIngredientes() + ").");
 		} else {
 			Plato p = new Plato(index++, (String) comboBox.getSelectedItem());
 
 			((DefaultListModel<Plato>) lista.getModel()).addElement(p);
-			Almacen.reducirStockPlatos(p.getIngredientes());
+			Almacen.getAlmacen().reducirStockPlatos(p.getIngredientes());
 
 			mostrarMsgEstado("Plato " + p.toString() + " añadido con éxito. " + "(Stock virtual: "
-					+ Almacen.toStringStockPlatos() + ").");
+					+ Almacen.getAlmacen().toStringStockPlatos() + ").");
 
 			btnCerrarComanda.setEnabled(true);
 			btnLimpiar.setEnabled(true);
@@ -981,14 +974,14 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	private void eventoQuitar(JList<Plato> lista) {
 		Plato p = ((DefaultListModel<Plato>) lista.getModel()).get(lista.getSelectedIndex());
-		Almacen.aumentarStockPlatos(p.getIngredientes());
+		Almacen.getAlmacen().aumentarStockPlatos(p.getIngredientes());
 		((DefaultListModel<Plato>) lista.getModel()).remove(lista.getSelectedIndex());
 
 		retrasarIds(p.getId());
 		index--;
 
 		mostrarMsgEstado("Plato " + p.toString() + " eliminado con éxito. \n(Stock virtual: "
-				+ Almacen.toStringStockPlatos() + ").");
+				+ Almacen.getAlmacen().toStringStockPlatos() + ").");
 
 		if (index == Constantes.INDICE_INICIAL_PRODUCTOS) {
 			btnCerrarComanda.setEnabled(false);
@@ -1024,7 +1017,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 			if (sel == JOptionPane.YES_OPTION) {
 				if (panelAnotacionComanda.isShowing()) {
 					restaurarStock(crearComanda(0));
-					Almacen.actualizacionBD();
+					Almacen.getAlmacen().actualizacionBD();
 				}
 				setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Yes
 				System.exit(1);
@@ -1143,7 +1136,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	private class BtnGuardarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			Almacen.actualizacionBD();
+			Almacen.getAlmacen().actualizacionBD();
 		}
 	}
 
@@ -1333,7 +1326,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	private void restaurarStock(Comanda c) {
-		Almacen.aumentarStock(c);
+		Almacen.getAlmacen().aumentarStock(c);
 	}
 
 	public void iniciarTimer(Aviso aviso) {

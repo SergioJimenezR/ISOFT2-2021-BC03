@@ -195,7 +195,7 @@ public class IU_CamareroBarra extends JFrame {
 	private void reducirStockBebidas(Comanda c) {
 		ArrayList<Bebida> listaBebidas = c.getBebidas();
 		for (int i = 0; i < listaBebidas.size(); i++) {
-			Almacen.reducirStockBebidas(listaBebidas.get(i).getNombre());
+			Almacen.getAlmacen().reducirStockBebidas(listaBebidas.get(i).getNombre());
 		}
 
 		textPaneAvisosComandaEntrante
@@ -234,13 +234,13 @@ public class IU_CamareroBarra extends JFrame {
 
 	private class BtnGuardarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			Almacen.actualizacionBD();
+			Almacen.getAlmacen().actualizacionBD();
 		}
 	}
 
 	private class BtnReponerActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			Almacen.reponerStocks();
+			Almacen.getAlmacen().reponerStocks();
 		}
 	}
 }

@@ -8,15 +8,32 @@ import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.Constantes;
 
 public class Almacen implements Constantes {
 
-	private static int[] stockPlatos;
-	private static int[] stockBebidas;
+	private static Almacen mInstancia = null;
+	private int[] stockPlatos;
+	private int[] stockBebidas;
 
-	public static void primeraLectura() throws SQLException {
-		stockPlatos = AlmacenDAO.leerStockPlatos();
-		stockBebidas = AlmacenDAO.leerStockBebidas();
+	private Almacen() {
+		primeraLectura();
 	}
 
-	public static void actualizacionBD() {
+	public static Almacen getAlmacen() { // Patrón Singleton
+		if (mInstancia == null)
+			mInstancia = new Almacen();
+		return mInstancia;
+	}
+
+	public void primeraLectura() {
+		try {
+			stockPlatos = AlmacenDAO.leerStockPlatos();
+			stockBebidas = AlmacenDAO.leerStockBebidas();
+		} catch (SQLException e) {
+			System.out.println("Ha ocurrido un error al conectarse con la base de datos. "
+					+ "Posible fallo de la VPN o caída del servicio.\n" + e.getMessage());
+			System.exit(1);
+		}
+	}
+
+	public void actualizacionBD() {
 		try {
 			AlmacenDAO.actualizarStockPlatos(stockPlatos);
 			AlmacenDAO.actualizarStockBebidas(stockBebidas);
@@ -26,12 +43,12 @@ public class Almacen implements Constantes {
 		}
 	}
 
-	public static void aumentarStockPlatos(int[] ingredientesPlato) {
+	public void aumentarStockPlatos(int[] ingredientesPlato) {
 		for (int i = 0; i < stockPlatos.length; i++)
 			stockPlatos[i] += ingredientesPlato[i];
 	}
 
-	public static boolean comprobarStockPlatos(int[] ingredientesPlato) {
+	public boolean comprobarStockPlatos(int[] ingredientesPlato) {
 		boolean supuesto = true;
 		for (int i = 0; i < stockPlatos.length && supuesto; i++)
 			if (stockPlatos[i] < ingredientesPlato[i])
@@ -39,12 +56,12 @@ public class Almacen implements Constantes {
 		return supuesto;
 	}
 
-	public static void reducirStockPlatos(int[] ingredientesPlato) {
+	public void reducirStockPlatos(int[] ingredientesPlato) {
 		for (int i = 0; i < stockPlatos.length; i++)
 			stockPlatos[i] -= ingredientesPlato[i];
 	}
 
-	public static void aumentarStockBebidas(String nombreBebida) {
+	public void aumentarStockBebidas(String nombreBebida) {
 		boolean encontrado = false;
 		for (int i = 0; i < Constantes.NOMBRES_BEBIDAS.length && !encontrado; i++)
 			if (Constantes.NOMBRES_BEBIDAS[i].equals(nombreBebida)) {
@@ -53,7 +70,7 @@ public class Almacen implements Constantes {
 			}
 	}
 
-	public static boolean comprobarStockBebidas(String nombreBebida) {
+	public boolean comprobarStockBebidas(String nombreBebida) {
 		for (int i = 0; i < Constantes.NOMBRES_BEBIDAS.length; i++) {
 			if (Constantes.NOMBRES_BEBIDAS[i].equals(nombreBebida)) {
 				if (stockBebidas[i] > 0) {
@@ -67,7 +84,7 @@ public class Almacen implements Constantes {
 		return false;
 	}
 
-	public static void reducirStockBebidas(String nombreBebida) {
+	public void reducirStockBebidas(String nombreBebida) {
 		boolean encontrado = false;
 		for (int i = 0; i < Constantes.NOMBRES_BEBIDAS.length && !encontrado; i++)
 			if (Constantes.NOMBRES_BEBIDAS[i].equals(nombreBebida)) {
@@ -76,7 +93,7 @@ public class Almacen implements Constantes {
 			}
 	}
 
-	public static void aumentarStock(Comanda c) {
+	public void aumentarStock(Comanda c) {
 		ArrayList<Plato> listaPlatos = null;
 		for (int i = 0; i < 3; i++) {
 			switch (i) {
@@ -104,7 +121,7 @@ public class Almacen implements Constantes {
 		}
 	}
 
-	public static void reponerStocks() {
+	public void reponerStocks() {
 
 		for (int i = 0; i < stockPlatos.length; i++)
 			stockPlatos[i] = 1000;
@@ -115,14 +132,14 @@ public class Almacen implements Constantes {
 
 	}
 
-	public static String toStringStockPlatos() {
+	public String toStringStockPlatos() {
 		String cadena = "";
 		for (int i = 0; i < stockPlatos.length - 1; i++)
 			cadena += stockPlatos[i] + ", ";
 		return cadena + stockPlatos[stockPlatos.length - 1];
 	}
 
-	public static String toStringStockBebidas() {
+	public String toStringStockBebidas() {
 		String cadena = "";
 		for (int i = 0; i < stockBebidas.length - 1; i++)
 			cadena += stockBebidas[i] + ", ";
