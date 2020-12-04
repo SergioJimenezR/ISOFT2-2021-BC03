@@ -31,8 +31,7 @@ public class IU_CamareroBarra extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private static IU_CamareroMesa frmCamareroMesa;
-	private static IU_CamareroBarra frmCamareroBarra;
+	private static IU_CamareroBarra mInstancia;
 
 	private JPanel contentPane;
 	private JPanel panel;
@@ -50,6 +49,14 @@ public class IU_CamareroBarra extends JFrame {
 	private JPanel panelMantenimiento;
 	private JButton btnGuardar;
 	private JButton btnReponer;
+
+	public static IU_CamareroBarra getInterfaz() { // Patrón Singleton
+		if (mInstancia == null) {
+			mInstancia = new IU_CamareroBarra();
+			mInstancia.setVisible(true);
+		}
+		return mInstancia;
+	}
 
 	/**
 	 * Create the frame.
@@ -178,14 +185,7 @@ public class IU_CamareroBarra extends JFrame {
 		}
 	}
 
-	public static void receiveFromCamareroMesa(Comanda C, IU_CamareroMesa origen, IU_CamareroBarra destino) {
-		frmCamareroMesa = origen;
-		frmCamareroBarra = destino;
-
-		frmCamareroBarra.enlistarComanda(C);
-	}
-
-	private void enlistarComanda(Comanda comanda) {
+	public void enlistarComanda(Comanda comanda) {
 		cbComandasPendientes.setEnabled(true);
 		textPaneAvisosComandaEntrante.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
 		((DefaultComboBoxModel<Comanda>) cbComandasPendientes.getModel()).addElement(comanda);
@@ -228,7 +228,7 @@ public class IU_CamareroBarra extends JFrame {
 
 			reducirStockBebidas(comandaSeleccionada);
 
-			IU_CamareroMesa.receiveFromCamareroBarra(comandaSeleccionada, frmCamareroBarra, frmCamareroMesa);
+			IU_CamareroMesa.getInterfaz().enlistarComanda(comandaSeleccionada);
 		}
 	}
 

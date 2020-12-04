@@ -8,10 +8,10 @@ import java.sql.Statement;
 
 public class Agente implements BDConstantes {
 
-	protected static Agente mInstancia = null;
-	protected Connection mBD;
+	private static Agente mInstancia = null;
+	private Connection mBD;
 
-	protected Agente() throws SQLException {
+	private Agente() throws SQLException {
 		mBD = DriverManager.getConnection(CONNECTION_STRING, DBUSER, DBPASS);
 	}
 

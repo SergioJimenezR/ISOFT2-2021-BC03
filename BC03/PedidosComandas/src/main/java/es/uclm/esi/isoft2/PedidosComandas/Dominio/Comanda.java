@@ -72,7 +72,7 @@ public class Comanda extends Aviso {
 
 	@Override
 	public String toString() {
-		return "Comanda de para la mesa n.º " + mesa.getId() + " preparada.";
+		return "Comanda " + id + " de la mesa n.º " + mesa.getId() + " preparada.";
 	}
 
 	public String toStringPlatos() {

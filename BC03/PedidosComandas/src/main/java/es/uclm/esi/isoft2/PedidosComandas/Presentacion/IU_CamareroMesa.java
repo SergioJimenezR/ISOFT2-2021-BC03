@@ -53,14 +53,10 @@ import javax.swing.SwingConstants;
 
 public class IU_CamareroMesa extends JFrame implements Constantes {
 
-	private static final long serialVersionUID = 1L;
+	private static IU_CamareroMesa mInstancia;
 
 	private int index;
 	private int numNotificacionesPendientes;
-
-	private static IU_CamareroMesa frmCamareroMesa;
-	private static IU_Cocina frmCocina;
-	private static IU_CamareroBarra frmCamareroBarra;
 
 	private JPanel contentPane;
 
@@ -125,6 +121,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	private JTextField textFieldPrecio;
 	private JButton btnImprimirCuenta;
 
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Launch the application.
 	 */
@@ -132,35 +130,28 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 
-				try {
-					frmCamareroMesa = new IU_CamareroMesa();
-					frmCamareroMesa.setVisible(true);
-					preparativos();
+				Almacen.getAlmacen();
 
-					frmCocina = new IU_Cocina();
-					frmCocina.setVisible(true);
+				IU_CamareroMesa.getInterfaz();
+				IU_Cocina.getInterfaz();
+				IU_CamareroBarra.getInterfaz();
 
-					frmCamareroBarra = new IU_CamareroBarra();
-					frmCamareroBarra.setVisible(true);
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			}
 		});
 	}
 
-	private static void preparativos() {
-		frmCamareroMesa.cbMesa.setSelectedIndex(-1);
-
-		Almacen.getAlmacen();
-
+	public static IU_CamareroMesa getInterfaz() { // Patrón Singleton
+		if (mInstancia == null) {
+			mInstancia = new IU_CamareroMesa();
+			mInstancia.setVisible(true);
+		}
+		return mInstancia;
 	}
 
 	/**
 	 * Create the frame.
 	 */
-	public IU_CamareroMesa() {
+	private IU_CamareroMesa() {
 
 		addWindowListener(new ThisWindowListener()); // Botón de cerrar.
 
@@ -732,6 +723,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 				}
 			}
 		}
+		cbMesa.setSelectedIndex(-1);
 
 	}
 
@@ -998,10 +990,16 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 				if (sel == JOptionPane.YES_OPTION) {
 					CardLayout panel = (CardLayout) (contentPane.getLayout());
 					panel.show(contentPane, e.getActionCommand());
-					restaurarStock(crearComanda(0));
 
+					index -= ((DefaultListModel<Bebida>) listBebidas.getModel()).size()
+							+ ((DefaultListModel<Plato>) listEntrantes.getModel()).size()
+							+ ((DefaultListModel<Plato>) listPrimeros.getModel()).size()
+							+ ((DefaultListModel<Plato>) listSegundos.getModel()).size()
+							+ ((DefaultListModel<Plato>) listPostres.getModel()).size();
 					limpiarAnotacionComanda();
-					lblNumMesa.setText("Mesa Número: " + cbMesa.getSelectedItem());
+					
+					cbMesa.setSelectedItem(null);
+					btnIniciarComanda.setEnabled(false);
 				} else {
 					return;
 				}
@@ -1016,7 +1014,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 			if (sel == JOptionPane.YES_OPTION) {
 				if (panelAnotacionComanda.isShowing()) {
-					restaurarStock(crearComanda(0));
+					limpiarAnotacionComanda();
 					Almacen.getAlmacen().actualizacionBD();
 				}
 				setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Yes
@@ -1033,17 +1031,18 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 			Comanda comanda = crearComanda(index++);
 
-			// restaurarStock(comanda);
+			Mesa m = (Mesa) cbMesa.getSelectedItem();
+			m.setEstadoMesa(EstadosMesas.ESPERANDOCOMIDA);
 
 			// Falta la persistencia de los tiempos de atención que establece la directiva
 
 			iniciarTimer(comanda);
 
 			if (comanda.tienePlatos()) {
-				IU_Cocina.receiveFromCamareroMesa(comanda, frmCamareroMesa, frmCocina);
+				IU_Cocina.getInterfaz().enlistarComanda(comanda);
 			}
 			if (comanda.tieneBebidas()) {
-				IU_CamareroBarra.receiveFromCamareroMesa(comanda, frmCamareroMesa, frmCamareroBarra);
+				IU_CamareroBarra.getInterfaz().enlistarComanda(comanda);
 			}
 
 			CardLayout panel = (CardLayout) (contentPane.getLayout());
@@ -1144,6 +1143,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		public void actionPerformed(ActionEvent arg0) {
 			CardLayout panel = (CardLayout) (contentPane.getLayout());
 			panel.show(contentPane, "Iniciar Comanda");
+			lblNumMesa.setText("Mesa Número: " + cbMesa.getSelectedItem());
 		}
 	}
 
@@ -1204,10 +1204,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		ArrayList<Plato> arrayListPostres = obtenerArrayListPlato(listPostres);
 
 		Mesa m = (Mesa) cbMesa.getSelectedItem();
-		m.setEstadoMesa(EstadosMesas.ESPERANDOCOMIDA);
 
 		Comanda c = new Comanda(index, m, arrayListBebidas, arrayListEntrantes, arrayListPrimeros, arrayListSegundos,
-
 				arrayListPostres);
 
 		return c;
@@ -1235,7 +1233,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	public void limpiarAnotacionComanda() {
 
-		restaurarStock(crearComanda(0));
+		Almacen.getAlmacen().aumentarStock(crearComanda(0));
 
 		((DefaultListModel<Bebida>) listBebidas.getModel()).removeAllElements();
 		((DefaultListModel<Plato>) listEntrantes.getModel()).removeAllElements();
@@ -1301,21 +1299,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		}
 	}
 
-	public static void receiveFromCocina(Comanda comanda, IU_Cocina origen, IU_CamareroMesa destino) {
-		frmCocina = origen;
-		frmCamareroMesa = destino;
-
-		frmCamareroMesa.enlistarComanda(comanda);
-	}
-
-	public static void receiveFromCamareroBarra(Comanda comanda, IU_CamareroBarra origen, IU_CamareroMesa destino) {
-		frmCamareroBarra = origen;
-		frmCamareroMesa = destino;
-
-		frmCamareroMesa.enlistarComanda(comanda);
-	}
-
-	private void enlistarComanda(Comanda comanda) {
+	public void enlistarComanda(Comanda comanda) {
 		cbAvisos.setEnabled(true);
 		textPaneNotificacion.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
 		lblNumNotificaciones.setText("(" + ++numNotificacionesPendientes + ")");
@@ -1323,10 +1307,6 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		textNMesaAviso.setText("Mesa Número: " + comanda.getMesa().getId());
 		textEstadoMesa.setText("Estado Mesa: " + comanda.getMesa().getEstadoMesa());
 
-	}
-
-	private void restaurarStock(Comanda c) {
-		Almacen.getAlmacen().aumentarStock(c);
 	}
 
 	public void iniciarTimer(Aviso aviso) {

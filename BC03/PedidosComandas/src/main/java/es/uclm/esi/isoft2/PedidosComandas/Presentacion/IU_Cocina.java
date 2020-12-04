@@ -33,8 +33,7 @@ public class IU_Cocina extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private static IU_CamareroMesa frmCamareroMesa;
-	private static IU_Cocina frmCocina;
+	private static IU_Cocina mInstancia = null;
 
 	private JPanel contentPane;
 	private JPanel panel;
@@ -53,10 +52,15 @@ public class IU_Cocina extends JFrame {
 	private JButton btnGuardar;
 	private JButton btnReponer;
 
-	/**
-	 * Create the frame.
-	 */
-	public IU_Cocina() {
+	public static IU_Cocina getInterfaz() { // Patrón Singleton
+		if (mInstancia == null) {
+			mInstancia = new IU_Cocina();
+			mInstancia.setVisible(true);
+		}
+		return mInstancia;
+	}
+
+	private IU_Cocina() {
 
 		numComandasPendientes = 0;
 
@@ -181,13 +185,7 @@ public class IU_Cocina extends JFrame {
 		}
 	}
 
-	public static void receiveFromCamareroMesa(Comanda C, IU_CamareroMesa origen, IU_Cocina destino) {
-		frmCamareroMesa = origen;
-		frmCocina = destino;
-		frmCocina.enlistarComanda(C);
-	}
-
-	private void enlistarComanda(Comanda comanda) {
+	public void enlistarComanda(Comanda comanda) {
 		cbComandasPendientes.setEnabled(true);
 		textPaneAvisosComandaEntrante.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
 
@@ -247,7 +245,7 @@ public class IU_Cocina extends JFrame {
 
 			reducirStockPlatos(comandaSeleccionada);
 
-			IU_CamareroMesa.receiveFromCocina(comandaSeleccionada, frmCocina, frmCamareroMesa);
+			IU_CamareroMesa.getInterfaz().enlistarComanda(comandaSeleccionada);
 		}
 	}
 
