@@ -997,7 +997,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 							+ ((DefaultListModel<Plato>) listSegundos.getModel()).size()
 							+ ((DefaultListModel<Plato>) listPostres.getModel()).size();
 					limpiarAnotacionComanda();
-					
+
 					cbMesa.setSelectedItem(null);
 					btnIniciarComanda.setEnabled(false);
 				} else {

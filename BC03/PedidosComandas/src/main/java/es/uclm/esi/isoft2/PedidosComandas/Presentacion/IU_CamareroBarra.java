@@ -198,8 +198,14 @@ public class IU_CamareroBarra extends JFrame {
 			Almacen.getAlmacen().reducirStockBebidas(listaBebidas.get(i).getNombre());
 		}
 
-		textPaneAvisosComandaEntrante
-				.setText("Restado el stock de unidades de bebidas de esta última comanda.\n" + c.toStringBebidas());
+		if (Almacen.getAlmacen().comprobarUmbralBebidas()) {
+			textPaneAvisosComandaEntrante
+					.setText("Restado el stock de unidades de bebidas de esta última comanda.\n" + c.toStringBebidas());
+		} else {
+			textPaneAvisosComandaEntrante.setText("Restado el stock de unidades de bebidas de esta última comanda.\n"
+					+ c.toStringBebidas() + ".\nIMPORTANTE: El stock de bebidas ha descendido por debajo del umbral.");
+		}
+
 	}
 
 	private class CbComandasPendientesActionListener implements ActionListener {

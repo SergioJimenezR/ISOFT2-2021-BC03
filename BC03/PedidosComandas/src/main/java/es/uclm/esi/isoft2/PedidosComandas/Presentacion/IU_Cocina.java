@@ -215,8 +215,15 @@ public class IU_Cocina extends JFrame {
 			}
 		}
 
-		textPaneAvisosComandaEntrante.setText(
-				"Restado el stock de ingredientes de los platos de esta última comanda.\n" + c.toStringPlatos());
+		if (Almacen.getAlmacen().comprobarUmbralIngredientes()) {
+			textPaneAvisosComandaEntrante.setText(
+					"Restado el stock de ingredientes de los platos de esta última comanda.\n" + c.toStringPlatos());
+		} else {
+			textPaneAvisosComandaEntrante.setText(
+					"Restado el stock de ingredientes de los platos de esta última comanda.\n" + c.toStringPlatos()
+							+ ".\nIMPORTANTE: El stock de ingredientes ha descendido por debajo del umbral.");
+		}
+
 	}
 
 	private class CbComandasPendientesActionListener implements ActionListener {

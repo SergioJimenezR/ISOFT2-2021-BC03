@@ -121,12 +121,34 @@ public class Almacen implements Constantes {
 		}
 	}
 
+	public boolean comprobarUmbralIngredientes() {
+
+		boolean suficiente = true;
+
+		for (int i = 0; i < stockPlatos.length && suficiente; i++)
+			if (stockPlatos[i] < UMBRAL * STOCK_MAXIMO_INGREDIENTES)
+				suficiente = false;
+
+		return suficiente;
+	}
+
+	public boolean comprobarUmbralBebidas() {
+
+		boolean suficiente = true;
+
+		for (int i = 0; i < stockBebidas.length && suficiente; i++)
+			if (stockBebidas[i] < UMBRAL * STOCK_MAXIMO_BEBIDAS)
+				suficiente = false;
+
+		return suficiente;
+	}
+
 	public void reponerStocks() {
 
 		for (int i = 0; i < stockPlatos.length; i++)
-			stockPlatos[i] = 1000;
+			stockPlatos[i] = Constantes.STOCK_MAXIMO_INGREDIENTES;
 		for (int i = 0; i < stockBebidas.length; i++)
-			stockBebidas[i] = 50;
+			stockBebidas[i] = Constantes.STOCK_MAXIMO_BEBIDAS;
 
 		actualizacionBD();
 

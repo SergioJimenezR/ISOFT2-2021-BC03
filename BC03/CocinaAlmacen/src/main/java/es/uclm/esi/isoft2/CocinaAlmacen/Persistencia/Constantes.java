@@ -6,6 +6,12 @@ public interface Constantes {
 
 	public final int NUM_MESAS = 6;
 
+	public final int STOCK_MAXIMO_BEBIDAS = 50;
+
+	public final int STOCK_MAXIMO_INGREDIENTES = 1000;
+
+	public final double UMBRAL = 0.2;
+
 	public final String[] NOMBRES_BEBIDAS = { "Bebida1", "Bebida2", "Bebida3", "Bebida4", "Bebida5" };
 
 	public final String[] NOMBRES_INGREDIENTES = { "Ingrediente1", "Ingrediente2", "Ingrediente3" };
