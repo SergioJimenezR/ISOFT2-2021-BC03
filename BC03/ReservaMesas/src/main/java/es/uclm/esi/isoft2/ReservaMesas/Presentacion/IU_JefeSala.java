@@ -50,6 +50,8 @@ public class IU_JefeSala extends JFrame {
 	private JLabel lblTelefono;
 	private JFormattedTextField fTFTelefono;
 	private JButton btnReservar;
+	private JLabel lblNombreCliente;
+	private JTextField txtNombre;
 
 	/**
 	 * Launch the application.
@@ -204,17 +206,36 @@ public class IU_JefeSala extends JFrame {
 			contentPane.add(panel_1, gbc_panel_1);
 			GridBagLayout gbl_panel_1 = new GridBagLayout();
 			gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
-			gbl_panel_1.rowHeights = new int[]{0, 0, 0};
+			gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0};
 			gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-			gbl_panel_1.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+			gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel_1.setLayout(gbl_panel_1);
+			{
+				lblNombreCliente = new JLabel("Nombre:");
+				GridBagConstraints gbc_lblNombreCliente = new GridBagConstraints();
+				gbc_lblNombreCliente.anchor = GridBagConstraints.EAST;
+				gbc_lblNombreCliente.insets = new Insets(0, 0, 5, 5);
+				gbc_lblNombreCliente.gridx = 1;
+				gbc_lblNombreCliente.gridy = 1;
+				panel_1.add(lblNombreCliente, gbc_lblNombreCliente);
+			}
+			{
+				txtNombre = new JTextField();
+				txtNombre.setColumns(10);
+				GridBagConstraints gbc_txtNombre = new GridBagConstraints();
+				gbc_txtNombre.insets = new Insets(0, 0, 5, 5);
+				gbc_txtNombre.fill = GridBagConstraints.HORIZONTAL;
+				gbc_txtNombre.gridx = 2;
+				gbc_txtNombre.gridy = 1;
+				panel_1.add(txtNombre, gbc_txtNombre);
+			}
 			{
 				lblReserva = new JLabel("Reserva:");
 				GridBagConstraints gbc_lblReserva = new GridBagConstraints();
 				gbc_lblReserva.insets = new Insets(0, 0, 0, 5);
 				gbc_lblReserva.anchor = GridBagConstraints.EAST;
 				gbc_lblReserva.gridx = 1;
-				gbc_lblReserva.gridy = 1;
+				gbc_lblReserva.gridy = 2;
 				panel_1.add(lblReserva, gbc_lblReserva);
 			}
 			{
@@ -223,15 +244,16 @@ public class IU_JefeSala extends JFrame {
 				gbc_cBLlegadaReserva.insets = new Insets(0, 0, 0, 5);
 				gbc_cBLlegadaReserva.fill = GridBagConstraints.HORIZONTAL;
 				gbc_cBLlegadaReserva.gridx = 2;
-				gbc_cBLlegadaReserva.gridy = 1;
+				gbc_cBLlegadaReserva.gridy = 2;
 				panel_1.add(cBLlegadaReserva, gbc_cBLlegadaReserva);
 			}
 			{
 				btnLlegada = new JButton("Llegada");
+				btnLlegada.addActionListener(new BtnLlegadaActionListener());
 				GridBagConstraints gbc_btnLlegada = new GridBagConstraints();
 				gbc_btnLlegada.insets = new Insets(0, 0, 0, 5);
 				gbc_btnLlegada.gridx = 4;
-				gbc_btnLlegada.gridy = 1;
+				gbc_btnLlegada.gridy = 2;
 				panel_1.add(btnLlegada, gbc_btnLlegada);
 			}
 		}
@@ -270,6 +292,7 @@ public class IU_JefeSala extends JFrame {
 			}
 			{
 				btnCancelarReserva = new JButton("Cancelar");
+				btnCancelarReserva.addActionListener(new BtnCancelarReservaActionListener());
 				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 				gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
 				gbc_btnNewButton.gridx = 5;
@@ -290,7 +313,7 @@ public class IU_JefeSala extends JFrame {
 		}
 		this.cBMesas.setModel(modelo);
 	}
-	private class BtnCancelarReservanActionListener implements ActionListener {
+	private class BtnCancelarReservaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
 			Mesa m = (Mesa) cBCancelarReserva.getSelectedItem();
@@ -300,6 +323,10 @@ public class IU_JefeSala extends JFrame {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
+		}
+	}
+	private class BtnLlegadaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
 		}
 	}
 		
