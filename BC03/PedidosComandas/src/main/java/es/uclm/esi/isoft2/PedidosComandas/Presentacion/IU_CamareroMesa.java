@@ -75,7 +75,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	private JComboBox<Aviso> cbAvisos;
 	private JPanel panelDatosAviso;
 	private JLabel lblInfo;
-	private JComboBox<Mesa> cbMesa;
+	private static JComboBox<Mesa> cbMesa;
 	private JButton btnIniciarComanda;
 	private JTextArea textTituloAviso;
 	private JTextArea textNMesaAviso;
@@ -1367,5 +1367,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).addElement(aviso);
 		textNMesaAviso.setText("Mesa número: " + aviso.getMesa().getId());
 		textEstadoMesa.setText("Estado de la mesa: " + aviso.getMesa().getEstadoMesa().name());
+	}
+	
+	public static JComboBox<Mesa> getComboBoxMesas () {
+		return cbMesa;
 	}
 }
