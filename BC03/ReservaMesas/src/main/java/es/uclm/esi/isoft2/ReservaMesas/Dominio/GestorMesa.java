@@ -3,8 +3,9 @@ package es.uclm.esi.isoft2.ReservaMesas.Dominio;
 import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroMesa;
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.Constantes;
 import javax.swing.JComboBox;
-
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.*;
+
+
 public class GestorMesa {
 	public static boolean cambiarEstadoOcupado(int idMesa) {
 		JComboBox<Mesa> mesas = IU_CamareroMesa.getComboBoxMesas();

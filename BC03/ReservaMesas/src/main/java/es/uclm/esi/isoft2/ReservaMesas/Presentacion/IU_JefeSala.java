@@ -16,6 +16,12 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
+
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
+import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroMesa;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
 public class IU_JefeSala extends JFrame {
@@ -27,7 +33,7 @@ public class IU_JefeSala extends JFrame {
 	private JTextField textFieldNombre;
 	private JLabel lblNombre;
 	private JLabel lblMesa;
-	private JComboBox cBMesas;
+	private JComboBox <Mesa> cBMesas;
 	private JLabel lblFecha;
 	private JFormattedTextField ftfFecha;
 	private JLabel lblReserva;
@@ -36,6 +42,9 @@ public class IU_JefeSala extends JFrame {
 	private JLabel lblReservaCancel;
 	private JComboBox cBCancelarReserva;
 	private JButton btnNewButton;
+	private JLabel lblTelefono;
+	private JFormattedTextField fTFTelefono;
+	private JButton btnReservar;
 
 	/**
 	 * Launch the application.
@@ -79,10 +88,10 @@ public class IU_JefeSala extends JFrame {
 			gbc_panel.gridy = 1;
 			contentPane.add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[]{0, 0, 64, 235, 0, 0};
-			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-			gbl_panel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_panel.columnWidths = new int[]{0, 0, 64, 235, 0, 0, 0};
+			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+			gbl_panel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
 			{
 				lblNombre = new JLabel("Nombre:");
@@ -114,32 +123,60 @@ public class IU_JefeSala extends JFrame {
 				panel.add(lblMesa, gbc_lblMesa);
 			}
 			{
-				cBMesas = new JComboBox();
+				cBMesas = new JComboBox<Mesa>();
 				GridBagConstraints gbc_cBMesas = new GridBagConstraints();
 				gbc_cBMesas.insets = new Insets(0, 0, 5, 5);
 				gbc_cBMesas.fill = GridBagConstraints.HORIZONTAL;
 				gbc_cBMesas.gridx = 2;
 				gbc_cBMesas.gridy = 3;
 				panel.add(cBMesas, gbc_cBMesas);
+				this.completarComboBoxMesas();
+			}
+			{
+				lblTelefono = new JLabel("Teléfono");
+				GridBagConstraints gbc_lblTelefono = new GridBagConstraints();
+				gbc_lblTelefono.anchor = GridBagConstraints.EAST;
+				gbc_lblTelefono.insets = new Insets(0, 0, 5, 5);
+				gbc_lblTelefono.gridx = 1;
+				gbc_lblTelefono.gridy = 4;
+				panel.add(lblTelefono, gbc_lblTelefono);
+			}
+			{
+				MaskFormatter formatoTelefono= new MaskFormatter("#########");
+				fTFTelefono = new JFormattedTextField(formatoTelefono);
+				GridBagConstraints gbc_fTFTelefono = new GridBagConstraints();
+				gbc_fTFTelefono.insets = new Insets(0, 0, 5, 5);
+				gbc_fTFTelefono.fill = GridBagConstraints.HORIZONTAL;
+				gbc_fTFTelefono.gridx = 2;
+				gbc_fTFTelefono.gridy = 4;
+				panel.add(fTFTelefono, gbc_fTFTelefono);
 			}
 			{
 				lblFecha = new JLabel("Fecha:");
 				GridBagConstraints gbc_lblFecha = new GridBagConstraints();
 				gbc_lblFecha.anchor = GridBagConstraints.EAST;
-				gbc_lblFecha.insets = new Insets(0, 0, 0, 5);
+				gbc_lblFecha.insets = new Insets(0, 0, 5, 5);
 				gbc_lblFecha.gridx = 1;
 				gbc_lblFecha.gridy = 5;
 				panel.add(lblFecha, gbc_lblFecha);
 			}
 			{
-				MaskFormatter formato= new MaskFormatter("##/##/##");
-				ftfFecha = new JFormattedTextField(formato);
+				MaskFormatter formatoFecha= new MaskFormatter("##/##/##");
+				ftfFecha = new JFormattedTextField(formatoFecha);
 				GridBagConstraints gbc_ftfFecha = new GridBagConstraints();
-				gbc_ftfFecha.insets = new Insets(0, 0, 0, 5);
+				gbc_ftfFecha.insets = new Insets(0, 0, 5, 5);
 				gbc_ftfFecha.fill = GridBagConstraints.HORIZONTAL;
 				gbc_ftfFecha.gridx = 2;
 				gbc_ftfFecha.gridy = 5;
 				panel.add(ftfFecha, gbc_ftfFecha);
+			}
+			{
+				btnReservar = new JButton("Reservar");
+				GridBagConstraints gbc_btnReservar = new GridBagConstraints();
+				gbc_btnReservar.insets = new Insets(0, 0, 0, 5);
+				gbc_btnReservar.gridx = 4;
+				gbc_btnReservar.gridy = 6;
+				panel.add(btnReservar, gbc_btnReservar);
 			}
 		}
 		{
@@ -225,7 +262,16 @@ public class IU_JefeSala extends JFrame {
 				gbc_btnNewButton.gridy = 1;
 				panel_2.add(btnNewButton, gbc_btnNewButton);
 			}
-		}
+		}			
 	}
-
+	
+	public void completarComboBoxMesas() {
+		JComboBox<Mesa> mesas = IU_CamareroMesa.getComboBoxMesas();
+		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
+		for (int i = 0; i < mesas.getItemCount(); i++) {
+			modelo.addElement(mesas.getItemAt(i));
+		}
+		this.cBMesas.setModel(modelo);
+	}
+	
 }
