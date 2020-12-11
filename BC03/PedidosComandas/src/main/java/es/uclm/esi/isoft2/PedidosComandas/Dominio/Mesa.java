@@ -75,13 +75,13 @@ public class Mesa {
 		return listaDeDias;
 	}
 
-	public void setListaDeDias(ArrayList<Date> listaDeDias, Date fecha) {	
+	public void anadirFechaReserva(ArrayList<Date> listaDeDias, Date fecha) {	
 		listaDeDias.add(fecha);
 	}
 	
-	public boolean modificarDatosReservado(String nombre, String apellidos) {
+	public boolean modificarDatosReservado(String nombre, Date fecha) {
 		cliente.setNombre(nombre);
-		cliente.setApellido(apellidos);
+		anadirFechaReserva(listaDeDias,fecha);
 		estadoMesa=EstadosMesas.RESERVADA;
 		return true;
 	}

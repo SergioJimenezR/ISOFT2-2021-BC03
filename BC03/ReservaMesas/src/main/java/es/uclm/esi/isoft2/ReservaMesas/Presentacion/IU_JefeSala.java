@@ -1,11 +1,12 @@
 package es.uclm.esi.isoft2.ReservaMesas.Presentacion;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -17,7 +18,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
-import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.MesaDAO;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
 import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroMesa;
@@ -31,6 +31,8 @@ import java.awt.event.ActionEvent;
 
 public class IU_JefeSala extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+	
 	private JPanel contentPane;
 	private JPanel panel;
 	private JPanel panel_1;
@@ -42,10 +44,10 @@ public class IU_JefeSala extends JFrame {
 	private JLabel lblFecha;
 	private JFormattedTextField ftfFecha;
 	private JLabel lblReserva;
-	private JComboBox cBLlegadaReserva;
+	private JComboBox <Mesa> cBLlegadaReserva;
 	private JButton btnLlegada;
 	private JLabel lblReservaCancel;
-	private JComboBox cBCancelarReserva;
+	private JComboBox <Mesa> cBCancelarReserva;
 	private JButton btnCancelarReserva;
 	private JLabel lblTelefono;
 	private JFormattedTextField fTFTelefono;
@@ -179,15 +181,7 @@ public class IU_JefeSala extends JFrame {
 			}
 			{
 				btnReservar = new JButton("Reservar");
-				btnReservar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						String nombre = lblNombre.getText();
-						String telefono = fTFTelefono.getText();
-						String fecha = ftfFecha.getText();
-						Mesa reservada = (Mesa)cBMesas.getSelectedItem();
-						//Nueva reserva
-					}
-				});
+				btnReservar.addActionListener(new BtnReservarActionListener());
 				GridBagConstraints gbc_btnReservar = new GridBagConstraints();
 				gbc_btnReservar.insets = new Insets(0, 0, 0, 5);
 				gbc_btnReservar.gridx = 4;
@@ -239,7 +233,7 @@ public class IU_JefeSala extends JFrame {
 				panel_1.add(lblReserva, gbc_lblReserva);
 			}
 			{
-				cBLlegadaReserva = new JComboBox();
+				cBLlegadaReserva = new JComboBox<Mesa>();
 				GridBagConstraints gbc_cBLlegadaReserva = new GridBagConstraints();
 				gbc_cBLlegadaReserva.insets = new Insets(0, 0, 0, 5);
 				gbc_cBLlegadaReserva.fill = GridBagConstraints.HORIZONTAL;
@@ -281,7 +275,7 @@ public class IU_JefeSala extends JFrame {
 				panel_2.add(lblReservaCancel, gbc_lblReservaCancel);
 			}
 			{
-				cBCancelarReserva = new JComboBox();
+				cBCancelarReserva = new JComboBox<Mesa>();
 				GridBagConstraints gbc_cBCancelarReserva = new GridBagConstraints();
 				gbc_cBCancelarReserva.gridwidth = 2;
 				gbc_cBCancelarReserva.insets = new Insets(0, 0, 0, 5);
@@ -327,6 +321,27 @@ public class IU_JefeSala extends JFrame {
 	}
 	private class BtnLlegadaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			String nombre = lblNombreCliente.getText();
+			Mesa reservada = (Mesa)cBLlegadaReserva.getSelectedItem();
+			try {
+				GestorMesa.cambiarEstadoOcupado(reservada.getId(), nombre);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+	private class BtnReservarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+				String nombre = lblNombre.getText();
+				String fechaString = ftfFecha.getText();
+				Mesa reservada = (Mesa)cBMesas.getSelectedItem();
+
+				try {
+					Date fecha = new SimpleDateFormat("dd/MM/yyyy").parse(fechaString);
+					reservada.modificarDatosReservado(nombre, fecha);
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}		
 		}
 	}
 		
