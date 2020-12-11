@@ -121,5 +121,5 @@ public class Comanda extends Aviso {
 	public boolean tienePlatos() {
 		return entrantes.size() > 0 || primeros.size() > 0 || segundos.size() > 0 || postres.size() > 0;
 	}
-
+	
 }
