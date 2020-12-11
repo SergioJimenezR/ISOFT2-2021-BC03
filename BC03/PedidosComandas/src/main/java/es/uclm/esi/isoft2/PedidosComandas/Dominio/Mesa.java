@@ -19,6 +19,12 @@ public class Mesa {
 		comanda = null;
 		precio = 0;
 	}
+	public Mesa(int id, EstadosMesas estado) {
+		setId(id);
+		setEstadoMesa(estado);
+		comanda = null;
+		precio = 0;
+	}
 
 	public int getId() {
 		return id;

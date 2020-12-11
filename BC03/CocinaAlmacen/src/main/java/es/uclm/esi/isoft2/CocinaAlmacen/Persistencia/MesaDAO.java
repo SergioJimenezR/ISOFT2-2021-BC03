@@ -6,22 +6,22 @@ import java.util.ArrayList;
 
 public class MesaDAO {
 
-	public void addMesa (int id, String estado)  throws SQLException {
+	public static void addMesa (int id, String estado)  throws SQLException {
 		//String instruccion = "INSERT MESAS WHERE (id = '" + id + "');";
 		//Agente.getAgente().insert(instruccion);
 	}
 	
-	public void eliminarMesa(int id, String estado) throws SQLException {
+	public static void eliminarMesa(int id, String estado) throws SQLException {
 		String instruccion = "DELETE MESAS WHERE (id = '" + id + "');";
 		Agente.getAgente().delete(instruccion);
 	}
 	
-	public void actualizarNumMesa(int id, String estado) throws SQLException {
+	public static void actualizarNumMesa(int id, String estado) throws SQLException {
 		String instruccion = "UPDATE MESAS SET estado = " + estado + " WHERE (id = '" + id + "');";
 		Agente.getAgente().update(instruccion);
 	}
 	
-	public ArrayList<Integer> consultarMesasDisponibles() throws SQLException {
+	public static ArrayList<Integer> consultarMesasDisponibles() throws SQLException {
 		ArrayList<Integer> listIdMesas = new ArrayList<>();
 
 		String instruccion = "SELECT * FROM MESAS;";
@@ -35,7 +35,7 @@ public class MesaDAO {
 		return listIdMesas;
 	}
 	
-	public ArrayList<Integer> consultarMesasOcupadas() throws SQLException {
+	public static ArrayList<Integer> consultarMesasOcupadas() throws SQLException {
 		ArrayList<Integer> listIdMesas = new ArrayList<>();
 		String instruccion = "SELECT * FROM MESAS;";
 		ResultSet RS = Agente.getAgente().select(instruccion);
@@ -47,7 +47,7 @@ public class MesaDAO {
 		return listIdMesas;
 	}
 	
-	public ArrayList<Integer> consultarMesasReservadas() throws SQLException {
+	public static ArrayList<Integer> consultarMesasReservadas() throws SQLException {
 		ArrayList<Integer> listIdMesas = new ArrayList<>();
 		String instruccion = "SELECT * FROM MESAS;";
 		ResultSet RS = Agente.getAgente().select(instruccion);
