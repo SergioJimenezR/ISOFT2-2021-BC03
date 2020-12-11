@@ -24,6 +24,10 @@ public class Mesa {
 		this.id = id;
 	}
 
+	public double[] getVectorTiempos() {
+		return vectorTiempos;
+	}
+
 	public EstadosMesas getEstadoMesa() {
 		return estadoMesa;
 	}
