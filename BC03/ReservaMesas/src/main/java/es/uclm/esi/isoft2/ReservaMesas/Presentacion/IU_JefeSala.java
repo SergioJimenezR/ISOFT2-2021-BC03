@@ -1,7 +1,6 @@
 package es.uclm.esi.isoft2.ReservaMesas.Presentacion;
 
 import java.awt.BorderLayout;
-import es.uclm.esi.isoft2.ReservaMesas.Dominio.GestorMesa;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -18,9 +17,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
+import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.MesaDAO;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
 import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroMesa;
+import es.uclm.esi.isoft2.ReservaMesas.Dominio.GestorMesa;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -45,7 +46,7 @@ public class IU_JefeSala extends JFrame {
 	private JButton btnLlegada;
 	private JLabel lblReservaCancel;
 	private JComboBox cBCancelarReserva;
-	private JButton btnNewButton;
+	private JButton btnCancelarReserva;
 	private JLabel lblTelefono;
 	private JFormattedTextField fTFTelefono;
 	private JButton btnReservar;
@@ -53,6 +54,18 @@ public class IU_JefeSala extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					IU_JefeSala frame = new IU_JefeSala();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
@@ -256,12 +269,12 @@ public class IU_JefeSala extends JFrame {
 				panel_2.add(cBCancelarReserva, gbc_cBCancelarReserva);
 			}
 			{
-				btnNewButton = new JButton("Cancelar");
+				btnCancelarReserva = new JButton("Cancelar");
 				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 				gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
 				gbc_btnNewButton.gridx = 5;
 				gbc_btnNewButton.gridy = 1;
-				panel_2.add(btnNewButton, gbc_btnNewButton);
+				panel_2.add(btnCancelarReserva, gbc_btnNewButton);
 			}
 		}			
 	}
