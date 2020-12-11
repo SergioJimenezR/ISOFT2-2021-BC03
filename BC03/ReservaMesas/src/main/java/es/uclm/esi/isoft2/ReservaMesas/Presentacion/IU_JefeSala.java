@@ -6,6 +6,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JComboBox;
@@ -18,6 +19,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
+import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.Constantes;
+import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.MesaDAO;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
 import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroMesa;
@@ -75,8 +78,9 @@ public class IU_JefeSala extends JFrame {
 	/**
 	 * Create the frame.
 	 * @throws ParseException 
+	 * @throws SQLException 
 	 */
-	public IU_JefeSala() throws ParseException {
+	public IU_JefeSala() throws ParseException, SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 557, 552);
 		contentPane = new JPanel();
@@ -353,7 +357,7 @@ public class IU_JefeSala extends JFrame {
 				Mesa reservada = (Mesa)cBMesas.getSelectedItem();
 
 				try {
-					Date fecha = new SimpleDateFormat("dd/MM/yyyy").parse(fechaString);
+					Date fecha = new SimpleDateFormat("dd/MM/yy").parse(fechaString);
 					reservada.modificarDatosReservado(nombre, fecha);
 				} catch (ParseException e1) {
 					e1.printStackTrace();
@@ -369,11 +373,11 @@ public class IU_JefeSala extends JFrame {
 	public static DefaultComboBoxModel<Mesa> rellenarCbReserva() throws SQLException {
 		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
 		for (int m = 1; m <= Constantes.NUM_MESAS; m++) {
-			ArrayList<Integer> mesasDisponibles = MesaDAO.consultarMesasDisponibles();
-			for (int i = 0; i < mesasDisponibles.size(); i++) {
-				if (mesasDisponibles.size() > 0) {
-					if (mesasDisponibles.get(i) == m) {
-						modelo.addElement(new Mesa(m, EstadosMesas.LIBRE));
+			ArrayList<Integer> mesasReservadas = MesaDAO.consultarMesasReservadas();
+			for (int i = 0; i < mesasReservadas.size(); i++) {
+				if (mesasReservadas.size() > 0) {
+					if (mesasReservadas.get(i) == m) {
+						modelo.addElement(new Mesa(m, EstadosMesas.RESERVADA));
 					}
 				}
 			}
@@ -384,11 +388,11 @@ public class IU_JefeSala extends JFrame {
 	public static DefaultComboBoxModel<Mesa> rellenarCbLibres() throws SQLException {
 		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
 		for (int m = 1; m <= Constantes.NUM_MESAS; m++) {
-			ArrayList<Integer> mesasReservadas = MesaDAO.consultarMesasReservadas();
-			for (int i = 0; i < mesasReservadas.size(); i++) {
-				if (mesasReservadas.size() > 0) {
-					if (mesasReservadas.get(i) == m) {
-						modelo.addElement(new Mesa(m, EstadosMesas.RESERVADA));
+			ArrayList<Integer> mesasDisponibles = MesaDAO.consultarMesasDisponibles();
+			for (int i = 0; i < mesasDisponibles.size(); i++) {
+				if (mesasDisponibles.size() > 0) {
+					if (mesasDisponibles.get(i) == m) {
+						modelo.addElement(new Mesa(m, EstadosMesas.LIBRE));
 					}
 				}
 			}
