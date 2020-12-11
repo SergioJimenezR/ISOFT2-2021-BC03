@@ -13,6 +13,7 @@ import es.uclm.esi.isoft2.PedidosComandas.Dominio.Aviso;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -1081,7 +1082,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 				if (m.getEstadoMesa() != EstadosMesas.PAGANDO) {
 					textFieldPrecio.setText("-");
 				}
-				if (m.getEstadoMesa() == EstadosMesas.ENPREPARACION) {
+				if (m.getEstadoMesa() == EstadosMesas.ENSUCIADA) {
 					btnMesaPreparada.setEnabled(true);
 				}
 			}
@@ -1175,7 +1176,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	private class BtnConfirmarPagoActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			btnConfirmarPago.setEnabled(false);
-			((Mesa) cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.ENPREPARACION);
+			((Mesa) cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.ENSUCIADA);
 			// Aviso aviso = new Aviso
 			// añadirAviso(aviso);
 

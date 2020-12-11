@@ -4,14 +4,14 @@ public class Mesa {
 
 	private int id;
 	private EstadosMesas estadoMesa;
-	private Comanda comanda;
-	private int precio;
+	private int numeroConmensales;
+	private double [] vectorTiempos;
+	private long tiempoEnEstado;
 
 	public Mesa(int id) {
+		vectorTiempos = new double[9];
 		setId(id);
 		setEstadoMesa(EstadosMesas.LIBRE);
-		comanda = null;
-		precio = 0;
 	}
 
 	public int getId() {

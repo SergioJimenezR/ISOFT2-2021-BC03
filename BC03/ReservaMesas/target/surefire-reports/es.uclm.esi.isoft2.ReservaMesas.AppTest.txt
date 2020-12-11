@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: es.uclm.esi.isoft2.ReservaMesas.AppTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.156 s - in es.uclm.esi.isoft2.ReservaMesas.AppTest
