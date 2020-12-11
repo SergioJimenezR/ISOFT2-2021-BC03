@@ -1,5 +1,6 @@
 package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -10,7 +11,7 @@ public class Mesa {
 	private Comanda comanda;
 	private int precio;
 	private Cliente cliente;
-	private Date date;
+	private ArrayList<Date> listaDeDias;
 
 	public Mesa(int id) {
 		setId(id);
@@ -26,7 +27,7 @@ public class Mesa {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 	public EstadosMesas getEstadoMesa() {
 		return estadoMesa;
 	}
@@ -63,11 +64,21 @@ public class Mesa {
 	private int calcularPrecio() {
 		return 1;
 	}
+
+	public ArrayList<Date> getListaDeDias() {
+		return listaDeDias;
+	}
+
+	public void setListaDeDias(ArrayList<Date> listaDeDias, Date fecha) {	
+		listaDeDias.add(fecha);
+	}
 	
-	private boolean modificarDatosReservado(String nombre, String apellidos) {
+	public boolean modificarDatosReservado(String nombre, String apellidos) {
 		cliente.setNombre(nombre);
 		cliente.setApellido(apellidos);
+		estadoMesa=EstadosMesas.RESERVADA;
 		return true;
 	}
+
 
 }
