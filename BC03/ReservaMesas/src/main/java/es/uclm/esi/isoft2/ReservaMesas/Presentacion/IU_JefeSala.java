@@ -17,12 +17,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
+import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.MesaDAO;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
 import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroMesa;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class IU_JefeSala extends JFrame {
 
@@ -269,9 +272,11 @@ public class IU_JefeSala extends JFrame {
 		JComboBox<Mesa> mesas = IU_CamareroMesa.getComboBoxMesas();
 		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
 		for (int i = 0; i < mesas.getItemCount(); i++) {
-			modelo.addElement(mesas.getItemAt(i));
+			if (mesas.getItemAt(i).getEstadoMesa() != EstadosMesas.LIBRE 
+					&& mesas.getItemAt(i).getEstadoMesa() != EstadosMesas.RESERVADA) {
+				modelo.addElement(mesas.getItemAt(i));
+			}
 		}
 		this.cBMesas.setModel(modelo);
 	}
-	
 }
