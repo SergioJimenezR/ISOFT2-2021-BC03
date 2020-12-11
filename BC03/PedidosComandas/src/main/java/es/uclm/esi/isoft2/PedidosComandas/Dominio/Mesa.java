@@ -1,11 +1,16 @@
 package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
+import java.util.Date;
+
+
 public class Mesa {
 
 	private int id;
 	private EstadosMesas estadoMesa;
 	private Comanda comanda;
 	private int precio;
+	private Cliente cliente;
+	private Date date;
 
 	public Mesa(int id) {
 		setId(id);
@@ -57,6 +62,12 @@ public class Mesa {
 
 	private int calcularPrecio() {
 		return 1;
+	}
+	
+	private boolean modificarDatosReservado(String nombre, String apellidos) {
+		cliente.setNombre(nombre);
+		cliente.setApellido(apellidos);
+		return true;
 	}
 
 }

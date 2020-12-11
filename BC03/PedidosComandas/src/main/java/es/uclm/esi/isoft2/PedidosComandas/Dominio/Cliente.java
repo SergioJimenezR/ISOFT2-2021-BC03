@@ -1,4 +1,4 @@
-package es.uclm.esi.isoft2.ReservaMesas.Dominio;
+package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
 public class Cliente {
 
