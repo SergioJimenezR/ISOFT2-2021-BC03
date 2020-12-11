@@ -1,6 +1,5 @@
 package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 

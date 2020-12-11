@@ -1360,14 +1360,6 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		textEstadoMesa.setText("Estado de la mesa: " + aviso.getMesa().getEstadoMesa().name());
 	}
 	
-	public static JComboBox<Mesa> getComboBoxMesas () {
-		return cbMesa;
-	}
-	
-	public static void setComboBoxMesas (JComboBox<Mesa> mesas) {
-		cbMesa = mesas;
-	}
-	
 	public static DefaultComboBoxModel<Mesa> rellenarCbMesas() throws SQLException {
 		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
 		for (int m = 1; m <= Constantes.NUM_MESAS; m++) {
