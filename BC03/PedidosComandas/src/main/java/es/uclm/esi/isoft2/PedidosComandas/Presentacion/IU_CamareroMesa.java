@@ -137,8 +137,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 				try {
 					IU_CamareroMesa.getInterfaz();
-					IU_JefeSala jefe = new IU_JefeSala();
-				} catch (SQLException | ParseException e) {
+				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
