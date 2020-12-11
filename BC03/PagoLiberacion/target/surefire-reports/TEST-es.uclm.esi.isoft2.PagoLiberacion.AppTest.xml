@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="es.uclm.esi.isoft2.PagoLiberacion.AppTest" time="0.125" tests="1" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="sun.desktop" value="windows"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\Usuario\git\ISOFT2-2021-BC03\BC03\PagoLiberacion\target\test-classes;C:\Users\Usuario\git\ISOFT2-2021-BC03\BC03\PagoLiberacion\target\classes;C:\Users\Usuario\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\Usuario\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="user.timezone" value="Europe/Paris"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="user.country" value="ES"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_241\jre\bin"/>
+    <property name="sun.java.command" value="C:\Users\Usuario\AppData\Local\Temp\surefire3756432945633365857\surefirebooter34445683757192338.jar C:\Users\Usuario\AppData\Local\Temp\surefire3756432945633365857 2020-12-11T13-31-04_793-jvmRun1 surefire7898028912762267723tmp surefire_39063109190522935076tmp"/>
+    <property name="surefire.test.class.path" value="C:\Users\Usuario\git\ISOFT2-2021-BC03\BC03\PagoLiberacion\target\test-classes;C:\Users\Usuario\git\ISOFT2-2021-BC03\BC03\PagoLiberacion\target\classes;C:\Users\Usuario\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\Usuario\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\Usuario"/>
+    <property name="user.language" value="es"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_241\jre"/>
+    <property name="basedir" value="C:\Users\Usuario\git\ISOFT2-2021-BC03\BC03\PagoLiberacion"/>
+    <property name="file.separator" value="\"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="surefire.real.class.path" value="C:\Users\Usuario\AppData\Local\Temp\surefire3756432945633365857\surefirebooter34445683757192338.jar"/>
+    <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_241\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_241\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_241\jre\classes"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="1.8.0_241-b07"/>
+    <property name="user.name" value="Usuario"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_241\jre\lib\endorsed"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\Usuario\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\Usuario\AppData\Local\Temp\"/>
+    <property name="java.version" value="1.8.0_241"/>
+    <property name="user.dir" value="C:\Users\Usuario\git\ISOFT2-2021-BC03\BC03\PagoLiberacion"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_241\jre\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Users/Usuario/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_14.0.2.v20200815-0932/jre/bin/server;C:/Users/Usuario/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_14.0.2.v20200815-0932/jre/bin;C:\Program Files\Java\jdk1.8.0_241\bin;C:\Windows\System32;;."/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="25.241-b07"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_241\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="52.0"/>
+  </properties>
+  <testcase name="shouldAnswerWithTrue" classname="es.uclm.esi.isoft2.PagoLiberacion.AppTest" time="0.004"/>
+</testsuite>
