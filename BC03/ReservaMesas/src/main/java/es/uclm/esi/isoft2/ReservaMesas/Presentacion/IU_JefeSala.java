@@ -269,7 +269,10 @@ public class IU_JefeSala extends JFrame {
 		JComboBox<Mesa> mesas = IU_CamareroMesa.getComboBoxMesas();
 		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
 		for (int i = 0; i < mesas.getItemCount(); i++) {
-			modelo.addElement(mesas.getItemAt(i));
+			if (mesas.getItemAt(i).getEstadoMesa() != EstadosMesas.LIBRE 
+					&& mesas.getItemAt(i).getEstadoMesa() != EstadosMesas.RESERVADA) {
+				modelo.addElement(mesas.getItemAt(i));
+			}
 		}
 		this.cBMesas.setModel(modelo);
 	}
