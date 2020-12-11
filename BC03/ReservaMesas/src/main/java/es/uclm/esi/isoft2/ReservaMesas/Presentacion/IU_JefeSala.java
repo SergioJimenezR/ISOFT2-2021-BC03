@@ -140,7 +140,8 @@ public class IU_JefeSala extends JFrame {
 				gbc_cBMesas.gridx = 2;
 				gbc_cBMesas.gridy = 3;
 				panel.add(cBMesas, gbc_cBMesas);
-				//this.completarComboBoxMesas();
+				DefaultComboBoxModel<Mesa> modelo = rellenarCbLibres();
+				cBMesas.setModel(modelo);
 			}
 			{
 				lblTelefono = new JLabel("Teléfono");
@@ -240,6 +241,8 @@ public class IU_JefeSala extends JFrame {
 				gbc_cBLlegadaReserva.fill = GridBagConstraints.HORIZONTAL;
 				gbc_cBLlegadaReserva.gridx = 2;
 				gbc_cBLlegadaReserva.gridy = 2;
+				DefaultComboBoxModel<Mesa> modelo = rellenarCbReserva();
+				cBLlegadaReserva.setModel(modelo);
 				panel_1.add(cBLlegadaReserva, gbc_cBLlegadaReserva);
 			}
 			{
@@ -283,6 +286,8 @@ public class IU_JefeSala extends JFrame {
 				gbc_cBCancelarReserva.fill = GridBagConstraints.HORIZONTAL;
 				gbc_cBCancelarReserva.gridx = 2;
 				gbc_cBCancelarReserva.gridy = 1;
+				DefaultComboBoxModel<Mesa> modelo = rellenarCbReserva();
+				cBCancelarReserva.setModel(modelo);
 				panel_2.add(cBCancelarReserva, gbc_cBCancelarReserva);
 			}
 			{
@@ -361,5 +366,33 @@ public class IU_JefeSala extends JFrame {
 		}
 	}
 		
+	public static DefaultComboBoxModel<Mesa> rellenarCbReserva() throws SQLException {
+		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
+		for (int m = 1; m <= Constantes.NUM_MESAS; m++) {
+			ArrayList<Integer> mesasDisponibles = MesaDAO.consultarMesasDisponibles();
+			for (int i = 0; i < mesasDisponibles.size(); i++) {
+				if (mesasDisponibles.size() > 0) {
+					if (mesasDisponibles.get(i) == m) {
+						modelo.addElement(new Mesa(m, EstadosMesas.LIBRE));
+					}
+				}
+			}
+		}
+		return modelo;
+	}
 	
+	public static DefaultComboBoxModel<Mesa> rellenarCbLibres() throws SQLException {
+		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
+		for (int m = 1; m <= Constantes.NUM_MESAS; m++) {
+			ArrayList<Integer> mesasReservadas = MesaDAO.consultarMesasReservadas();
+			for (int i = 0; i < mesasReservadas.size(); i++) {
+				if (mesasReservadas.size() > 0) {
+					if (mesasReservadas.get(i) == m) {
+						modelo.addElement(new Mesa(m, EstadosMesas.RESERVADA));
+					}
+				}
+			}
+		}
+		return modelo;
+	}	
 }
