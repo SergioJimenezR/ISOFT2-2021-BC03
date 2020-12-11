@@ -21,10 +21,12 @@ import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.MesaDAO;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
 import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroMesa;
+import es.uclm.esi.isoft2.ReservaMesas.Dominio.GestorMesa;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class IU_JefeSala extends JFrame {
@@ -44,7 +46,7 @@ public class IU_JefeSala extends JFrame {
 	private JButton btnLlegada;
 	private JLabel lblReservaCancel;
 	private JComboBox cBCancelarReserva;
-	private JButton btnNewButton;
+	private JButton btnCancelarReserva;
 	private JLabel lblTelefono;
 	private JFormattedTextField fTFTelefono;
 	private JButton btnReservar;
@@ -258,12 +260,13 @@ public class IU_JefeSala extends JFrame {
 				panel_2.add(cBCancelarReserva, gbc_cBCancelarReserva);
 			}
 			{
-				btnNewButton = new JButton("Cancelar");
-				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-				gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-				gbc_btnNewButton.gridx = 5;
-				gbc_btnNewButton.gridy = 1;
-				panel_2.add(btnNewButton, gbc_btnNewButton);
+				btnCancelarReserva = new JButton("Cancelar");
+				btnCancelarReserva.addActionListener(new BtnCancelarReservanActionListener());
+				GridBagConstraints gbc_btnCancelarReserva = new GridBagConstraints();
+				gbc_btnCancelarReserva.insets = new Insets(0, 0, 0, 5);
+				gbc_btnCancelarReserva.gridx = 5;
+				gbc_btnCancelarReserva.gridy = 1;
+				panel_2.add(btnCancelarReserva, gbc_btnCancelarReserva);
 			}
 		}			
 	}
@@ -278,5 +281,17 @@ public class IU_JefeSala extends JFrame {
 			}
 		}
 		this.cBMesas.setModel(modelo);
+	}
+	private class BtnCancelarReservanActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			
+			Mesa m = (Mesa) cBCancelarReserva.getSelectedItem();
+			
+			try {
+				GestorMesa.cancelarMesa(m.getId());
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
 	}
 }
