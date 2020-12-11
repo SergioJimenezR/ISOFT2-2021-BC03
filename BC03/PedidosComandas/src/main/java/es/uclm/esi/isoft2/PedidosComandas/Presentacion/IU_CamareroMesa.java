@@ -13,6 +13,7 @@ import es.uclm.esi.isoft2.PedidosComandas.Dominio.Aviso;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
