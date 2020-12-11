@@ -1372,4 +1372,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	public static JComboBox<Mesa> getComboBoxMesas () {
 		return cbMesa;
 	}
+	public static void setComboBoxMesas (JComboBox<Mesa> mesas) {
+		cbMesa = mesas;
+	}
 }
