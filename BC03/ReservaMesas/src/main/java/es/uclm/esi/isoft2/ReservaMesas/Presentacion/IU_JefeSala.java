@@ -54,6 +54,7 @@ public class IU_JefeSala extends JFrame {
 	private JButton btnReservar;
 	private JLabel lblNombreCliente;
 	private JTextField txtNombre;
+	private JButton btnRefrescar;
 
 	/**
 	 * Launch the application.
@@ -83,9 +84,9 @@ public class IU_JefeSala extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 172, 110, 100, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 172, 110, 100, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		{
 			panel = new JPanel();
@@ -294,6 +295,16 @@ public class IU_JefeSala extends JFrame {
 				panel_2.add(btnCancelarReserva, gbc_btnNewButton);
 			}
 		}			
+		{
+			btnRefrescar = new JButton("Refrescar");
+			btnRefrescar.addActionListener(new BtnRefrescarActionListener());
+			GridBagConstraints gbc_btnRefrescar = new GridBagConstraints();
+			gbc_btnRefrescar.fill = GridBagConstraints.BOTH;
+			gbc_btnRefrescar.insets = new Insets(0, 0, 5, 5);
+			gbc_btnRefrescar.gridx = 1;
+			gbc_btnRefrescar.gridy = 5;
+			contentPane.add(btnRefrescar, gbc_btnRefrescar);
+		}
 	}
 	
 	public void completarComboBoxMesas() {
@@ -342,6 +353,11 @@ public class IU_JefeSala extends JFrame {
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}		
+		}
+	}
+	private class BtnRefrescarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			
 		}
 	}
 		
