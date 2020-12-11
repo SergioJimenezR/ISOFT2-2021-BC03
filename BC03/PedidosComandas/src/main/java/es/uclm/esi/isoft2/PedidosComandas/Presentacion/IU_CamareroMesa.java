@@ -124,6 +124,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	private JButton btnImprimirCuenta;
 
 	private static final long serialVersionUID = 1L;
+	private JButton btnRefrescar;
 
 	/**
 	 * Launch the application.
@@ -754,6 +755,12 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 			}
 		}
 		cbMesa.setSelectedIndex(-1);
+		{
+			btnRefrescar = new JButton("Refrescar");
+			btnRefrescar.addActionListener(new BtnRefrescarActionListener());
+			btnRefrescar.setBounds(76, 209, 109, 21);
+			panelNuevaComanda.add(btnRefrescar);
+		}
 
 	}
 
@@ -1222,6 +1229,11 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 			((Mesa) cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.LIBRE);
 
 			cbMesa.setSelectedItem(null);
+		}
+	}
+	private class BtnRefrescarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			
 		}
 	}
 
