@@ -1078,7 +1078,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 				btnConfirmarPago.setEnabled(false);
 				btnMesaPreparada.setEnabled(false);
 				Mesa m = (Mesa) cbMesa.getSelectedItem();
-				if (m.getEstadoMesa() != EstadosMesas.LIBRE) {
+				if (m.getEstadoMesa() != EstadosMesas.OCUPADA) {
 					btnIniciarComanda.setEnabled(false);
 				}
 
@@ -1204,13 +1204,25 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		public void actionPerformed(ActionEvent arg0) {
 			btnMesaPreparada.setEnabled(false);
 			((Mesa) cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.LIBRE);
-
-			cbMesa.setSelectedItem(null);
+			Mesa mesa = (Mesa) cbMesa.getSelectedItem();
+			cbMesa.removeItem(mesa);
+			try {
+				MesaDAO.actualizarNumMesa(mesa.getId(), mesa.getEstadoMesa().toString(), mesa.getDni());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	private class BtnRefrescarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			
+			DefaultComboBoxModel<Mesa> modelo;
+			try {
+				modelo = rellenarCbMesas();
+				cbMesa.setModel(modelo);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 
