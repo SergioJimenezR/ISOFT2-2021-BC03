@@ -15,6 +15,7 @@ public class GestorMesa {
 			if (mesa.getId() == idMesa && nombreCliente.equals(cliente.getNombre())) {
 				mesa.setEstadoMesa(EstadosMesas.OCUPADA);
 				mesas.setSelectedItem(mesa);
+				IU_CamareroMesa.setComboBoxMesas(mesas);
 				return true;
 			}
 		}
@@ -29,6 +30,7 @@ public class GestorMesa {
 			if (mesa.getId() == idMesa) {
 				mesa.setEstadoMesa(EstadosMesas.LIBRE);
 				mesas.setSelectedItem(mesa);
+				IU_CamareroMesa.setComboBoxMesas(mesas);
 				return true;
 			}
 		}
