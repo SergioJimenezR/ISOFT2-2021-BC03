@@ -5,19 +5,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MesaDAO {
-
-	public static void addMesa (int id, String estado)  throws SQLException {
-		//String instruccion = "INSERT MESAS WHERE (id = '" + id + "');";
-		//Agente.getAgente().insert(instruccion);
-	}
 	
-	public static void eliminarMesa(int id, String estado) throws SQLException {
-		String instruccion = "DELETE MESAS WHERE (id = '" + id + "');";
-		Agente.getAgente().delete(instruccion);
-	}
-	
-	public static void actualizarNumMesa(int id, String estado) throws SQLException {
-		String instruccion = "UPDATE MESAS SET estado = '" + estado + "' WHERE (id = '" + id + "');";
+	public static void actualizarNumMesa(int id, String estado, String dni) throws SQLException {
+		String instruccion = "UPDATE MESAS SET estado = '" + estado + "', dni = '" + dni + "' WHERE (id = '" + id + "');";
 		Agente.getAgente().update(instruccion);
 	}
 	

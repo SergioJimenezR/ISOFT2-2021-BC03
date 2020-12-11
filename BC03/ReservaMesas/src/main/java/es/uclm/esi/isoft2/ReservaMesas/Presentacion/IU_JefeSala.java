@@ -280,7 +280,7 @@ public class IU_JefeSala extends JFrame {
 			Mesa reservada = (Mesa)cBLlegadaReserva.getSelectedItem();
 			try {
 				GestorMesa.cambiarEstadoOcupado(reservada.getId(), dni);
-				//cBLlegadaReserva.removeItem(reservada);
+				cBLlegadaReserva.removeItem(reservada);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -288,7 +288,7 @@ public class IU_JefeSala extends JFrame {
 	}
 	private class BtnReservarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-				String dni = lblDni.getText();
+				String dni = textFieldDni.getText();
 				String fechaString = ftfFecha.getText();
 				Mesa reservada = (Mesa)cBMesas.getSelectedItem();
 
@@ -297,7 +297,7 @@ public class IU_JefeSala extends JFrame {
 					reservada.modificarDatosReservado(dni, fecha);
 					cBLlegadaReserva.addItem(reservada);
 					cBMesas.removeItem(reservada);
-					MesaDAO.actualizarNumMesa(reservada.getId(), "RESERVADA");
+					MesaDAO.actualizarNumMesa(reservada.getId(), "RESERVADA", reservada.getDni());
 				} catch (ParseException | SQLException e1) {
 					e1.printStackTrace();
 				}		

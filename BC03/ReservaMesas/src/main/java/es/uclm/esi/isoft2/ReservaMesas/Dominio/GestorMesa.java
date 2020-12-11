@@ -22,8 +22,7 @@ public class GestorMesa {
 				mesas.setSelectedItem(mesa);
 				IU_JefeSala.setComboBoxReservadas(mesas);
 				String estado = mesa.getEstadoMesa().toString();
-				System.out.println(estado);
-				MesaDAO.actualizarNumMesa(mesa.getId(), estado);
+				MesaDAO.actualizarNumMesa(mesa.getId(), estado, mesa.getDni());
 				return true;
 			}
 		}
@@ -40,7 +39,7 @@ public class GestorMesa {
 				mesas.setSelectedItem(mesa);
 				IU_JefeSala.setComboBoxReservadas(mesas);
 				String estado = mesa.getEstadoMesa().toString();
-				MesaDAO.actualizarNumMesa(mesa.getId(), estado);
+				MesaDAO.actualizarNumMesa(mesa.getId(), estado, mesa.getDni());
 				return true;
 			}
 		}
