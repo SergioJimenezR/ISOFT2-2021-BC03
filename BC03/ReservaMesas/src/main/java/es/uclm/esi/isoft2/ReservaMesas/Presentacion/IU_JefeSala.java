@@ -1,6 +1,7 @@
 package es.uclm.esi.isoft2.ReservaMesas.Presentacion;
 
 import java.awt.BorderLayout;
+import es.uclm.esi.isoft2.ReservaMesas.Dominio.GestorMesa;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -23,6 +24,9 @@ import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroMesa;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
 
 public class IU_JefeSala extends JFrame {
 
@@ -49,18 +53,6 @@ public class IU_JefeSala extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					IU_JefeSala frame = new IU_JefeSala();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -88,9 +80,9 @@ public class IU_JefeSala extends JFrame {
 			gbc_panel.gridy = 1;
 			contentPane.add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[]{0, 0, 64, 235, 0, 0, 0};
+			gbl_panel.columnWidths = new int[]{0, 0, 103, 235, 0, 0, 0};
 			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-			gbl_panel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
 			{
@@ -130,7 +122,7 @@ public class IU_JefeSala extends JFrame {
 				gbc_cBMesas.gridx = 2;
 				gbc_cBMesas.gridy = 3;
 				panel.add(cBMesas, gbc_cBMesas);
-				this.completarComboBoxMesas();
+				//this.completarComboBoxMesas();
 			}
 			{
 				lblTelefono = new JLabel("Teléfono");
@@ -172,6 +164,15 @@ public class IU_JefeSala extends JFrame {
 			}
 			{
 				btnReservar = new JButton("Reservar");
+				btnReservar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						String nombre = lblNombre.getText();
+						String telefono = fTFTelefono.getText();
+						String fecha = ftfFecha.getText();
+						Mesa reservada = (Mesa)cBMesas.getSelectedItem();
+						//Nueva reserva
+					}
+				});
 				GridBagConstraints gbc_btnReservar = new GridBagConstraints();
 				gbc_btnReservar.insets = new Insets(0, 0, 0, 5);
 				gbc_btnReservar.gridx = 4;
@@ -269,9 +270,25 @@ public class IU_JefeSala extends JFrame {
 		JComboBox<Mesa> mesas = IU_CamareroMesa.getComboBoxMesas();
 		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
 		for (int i = 0; i < mesas.getItemCount(); i++) {
-			modelo.addElement(mesas.getItemAt(i));
+			if (mesas.getItemAt(i).getEstadoMesa() != EstadosMesas.LIBRE 
+					&& mesas.getItemAt(i).getEstadoMesa() != EstadosMesas.RESERVADA) {
+				modelo.addElement(mesas.getItemAt(i));
+			}
 		}
 		this.cBMesas.setModel(modelo);
 	}
+	private class BtnCancelarReservanActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			
+			Mesa m = (Mesa) cBCancelarReserva.getSelectedItem();
+			
+			try {
+				GestorMesa.cancelarMesa(m.getId());
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+		
 	
 }
