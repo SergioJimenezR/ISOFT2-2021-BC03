@@ -1,4 +1,4 @@
-package es.uclm.esi.isoft2.ReservaMesas.dominio;
+package es.uclm.esi.isoft2.ReservaMesas.Dominio;
 
 public class GestorMesa {
 	public static boolean cambiarEstadoOcupado() {
