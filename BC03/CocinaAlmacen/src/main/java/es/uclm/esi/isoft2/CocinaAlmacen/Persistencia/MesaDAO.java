@@ -35,13 +35,25 @@ public class MesaDAO {
 		return listIdMesas;
 	}
 	
-	public ArrayList<Integer> consultarmesasOcupadas() throws SQLException {
+	public ArrayList<Integer> consultarMesasOcupadas() throws SQLException {
 		ArrayList<Integer> listIdMesas = new ArrayList<>();
 		String instruccion = "SELECT * FROM MESAS;";
 		ResultSet RS = Agente.getAgente().select(instruccion);
 		
 		while (RS.next())
 			if(RS.getString("estado").equals("OCUPADA")) {
+				listIdMesas.add(RS.getInt("id"));
+			}
+		return listIdMesas;
+	}
+	
+	public ArrayList<Integer> consultarMesasReservadas() throws SQLException {
+		ArrayList<Integer> listIdMesas = new ArrayList<>();
+		String instruccion = "SELECT * FROM MESAS;";
+		ResultSet RS = Agente.getAgente().select(instruccion);
+		
+		while (RS.next())
+			if(RS.getString("estado").equals("RESERVADA")) {
 				listIdMesas.add(RS.getInt("id"));
 			}
 		return listIdMesas;
