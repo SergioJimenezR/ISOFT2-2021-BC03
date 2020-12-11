@@ -85,6 +85,10 @@ public class Mesa {
 		estadoMesa=EstadosMesas.RESERVADA;
 		return true;
 	}
-
-
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 }
