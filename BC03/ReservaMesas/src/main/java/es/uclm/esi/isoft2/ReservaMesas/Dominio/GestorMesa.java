@@ -11,13 +11,12 @@ import es.uclm.esi.isoft2.PedidosComandas.Dominio.*;
 
 
 public class GestorMesa {
-	public static boolean cambiarEstadoOcupado(int idMesa, String nombreCliente) throws SQLException {
+	public static boolean cambiarEstadoOcupado(int idMesa, String dniCliente) throws SQLException {
 		JComboBox<Mesa> mesas = IU_CamareroMesa.getComboBoxMesas();
 		for (int i = 0; i < mesas.getItemCount(); i++) {
 			mesas.setSelectedIndex(i);
 			Mesa mesa = (Mesa) mesas.getSelectedItem();
-			Cliente cliente = mesa.getCliente();
-			if (mesa.getId() == idMesa && nombreCliente.equals(cliente.getNombre())) {
+			if (mesa.getId() == idMesa && dniCliente.equals(mesa.getDni())) {
 				mesa.setEstadoMesa(EstadosMesas.OCUPADA);
 				mesas.setSelectedItem(mesa);
 				IU_CamareroMesa.setComboBoxMesas(mesas);

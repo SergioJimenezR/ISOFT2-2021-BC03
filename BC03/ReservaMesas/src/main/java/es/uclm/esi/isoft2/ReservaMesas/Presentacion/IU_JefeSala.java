@@ -40,8 +40,8 @@ public class IU_JefeSala extends JFrame {
 	private JPanel panel;
 	private JPanel panel_1;
 	private JPanel panel_2;
-	private JTextField textFieldNombre;
-	private JLabel lblNombre;
+	private JTextField textFieldDni;
+	private JLabel lblDni;
 	private JLabel lblMesa;
 	private JComboBox <Mesa> cBMesas;
 	private JLabel lblFecha;
@@ -52,11 +52,9 @@ public class IU_JefeSala extends JFrame {
 	private JLabel lblReservaCancel;
 	private JComboBox <Mesa> cBCancelarReserva;
 	private JButton btnCancelarReserva;
-	private JLabel lblTelefono;
-	private JFormattedTextField fTFTelefono;
 	private JButton btnReservar;
-	private JLabel lblNombreCliente;
-	private JTextField txtNombre;
+	private JLabel lblDniCliente;
+	private JTextField txtDni;
 	private JButton btnRefrescar;
 
 	/**
@@ -90,7 +88,7 @@ public class IU_JefeSala extends JFrame {
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0};
 		gbl_contentPane.rowHeights = new int[]{0, 172, 110, 100, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		{
 			panel = new JPanel();
@@ -102,30 +100,30 @@ public class IU_JefeSala extends JFrame {
 			gbc_panel.gridy = 1;
 			contentPane.add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[]{0, 0, 103, 235, 0, 0, 0};
+			gbl_panel.columnWidths = new int[]{0, 85, 103, 235, 0, 0, 0};
 			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 			gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
 			{
-				lblNombre = new JLabel("Nombre:");
-				GridBagConstraints gbc_lblNombre = new GridBagConstraints();
-				gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
-				gbc_lblNombre.anchor = GridBagConstraints.EAST;
-				gbc_lblNombre.gridx = 1;
-				gbc_lblNombre.gridy = 1;
-				panel.add(lblNombre, gbc_lblNombre);
+				lblDni = new JLabel("Dni Cliente:");
+				GridBagConstraints gbc_lblDni = new GridBagConstraints();
+				gbc_lblDni.insets = new Insets(0, 0, 5, 5);
+				gbc_lblDni.anchor = GridBagConstraints.EAST;
+				gbc_lblDni.gridx = 1;
+				gbc_lblDni.gridy = 1;
+				panel.add(lblDni, gbc_lblDni);
 			}
 			{
-				textFieldNombre = new JTextField();
-				GridBagConstraints gbc_textFieldNombre = new GridBagConstraints();
-				gbc_textFieldNombre.gridwidth = 2;
-				gbc_textFieldNombre.insets = new Insets(0, 0, 5, 5);
-				gbc_textFieldNombre.fill = GridBagConstraints.HORIZONTAL;
-				gbc_textFieldNombre.gridx = 2;
-				gbc_textFieldNombre.gridy = 1;
-				panel.add(textFieldNombre, gbc_textFieldNombre);
-				textFieldNombre.setColumns(10);
+				textFieldDni = new JTextField();
+				GridBagConstraints gbc_textFieldDni = new GridBagConstraints();
+				gbc_textFieldDni.gridwidth = 2;
+				gbc_textFieldDni.insets = new Insets(0, 0, 5, 5);
+				gbc_textFieldDni.fill = GridBagConstraints.HORIZONTAL;
+				gbc_textFieldDni.gridx = 2;
+				gbc_textFieldDni.gridy = 1;
+				panel.add(textFieldDni, gbc_textFieldDni);
+				textFieldDni.setColumns(10);
 			}
 			{
 				lblMesa = new JLabel("Mesa:");
@@ -148,25 +146,6 @@ public class IU_JefeSala extends JFrame {
 				cBMesas.setModel(modelo);
 			}
 			{
-				lblTelefono = new JLabel("Teléfono");
-				GridBagConstraints gbc_lblTelefono = new GridBagConstraints();
-				gbc_lblTelefono.anchor = GridBagConstraints.EAST;
-				gbc_lblTelefono.insets = new Insets(0, 0, 5, 5);
-				gbc_lblTelefono.gridx = 1;
-				gbc_lblTelefono.gridy = 4;
-				panel.add(lblTelefono, gbc_lblTelefono);
-			}
-			{
-				MaskFormatter formatoTelefono= new MaskFormatter("#########");
-				fTFTelefono = new JFormattedTextField(formatoTelefono);
-				GridBagConstraints gbc_fTFTelefono = new GridBagConstraints();
-				gbc_fTFTelefono.insets = new Insets(0, 0, 5, 5);
-				gbc_fTFTelefono.fill = GridBagConstraints.HORIZONTAL;
-				gbc_fTFTelefono.gridx = 2;
-				gbc_fTFTelefono.gridy = 4;
-				panel.add(fTFTelefono, gbc_fTFTelefono);
-			}
-			{
 				lblFecha = new JLabel("Fecha:");
 				GridBagConstraints gbc_lblFecha = new GridBagConstraints();
 				gbc_lblFecha.anchor = GridBagConstraints.EAST;
@@ -176,7 +155,7 @@ public class IU_JefeSala extends JFrame {
 				panel.add(lblFecha, gbc_lblFecha);
 			}
 			{
-				MaskFormatter formatoFecha= new MaskFormatter("##/##/##");
+				MaskFormatter formatoFecha= new MaskFormatter("##/##/####");
 				ftfFecha = new JFormattedTextField(formatoFecha);
 				GridBagConstraints gbc_ftfFecha = new GridBagConstraints();
 				gbc_ftfFecha.insets = new Insets(0, 0, 5, 5);
@@ -211,23 +190,23 @@ public class IU_JefeSala extends JFrame {
 			gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel_1.setLayout(gbl_panel_1);
 			{
-				lblNombreCliente = new JLabel("Nombre:");
-				GridBagConstraints gbc_lblNombreCliente = new GridBagConstraints();
-				gbc_lblNombreCliente.anchor = GridBagConstraints.EAST;
-				gbc_lblNombreCliente.insets = new Insets(0, 0, 5, 5);
-				gbc_lblNombreCliente.gridx = 1;
-				gbc_lblNombreCliente.gridy = 1;
-				panel_1.add(lblNombreCliente, gbc_lblNombreCliente);
+				lblDniCliente = new JLabel("Dni Cliente::");
+				GridBagConstraints gbc_lblDniCliente = new GridBagConstraints();
+				gbc_lblDniCliente.anchor = GridBagConstraints.EAST;
+				gbc_lblDniCliente.insets = new Insets(0, 0, 5, 5);
+				gbc_lblDniCliente.gridx = 1;
+				gbc_lblDniCliente.gridy = 1;
+				panel_1.add(lblDniCliente, gbc_lblDniCliente);
 			}
 			{
-				txtNombre = new JTextField();
-				txtNombre.setColumns(10);
-				GridBagConstraints gbc_txtNombre = new GridBagConstraints();
-				gbc_txtNombre.insets = new Insets(0, 0, 5, 5);
-				gbc_txtNombre.fill = GridBagConstraints.HORIZONTAL;
-				gbc_txtNombre.gridx = 2;
-				gbc_txtNombre.gridy = 1;
-				panel_1.add(txtNombre, gbc_txtNombre);
+				txtDni = new JTextField();
+				txtDni.setColumns(10);
+				GridBagConstraints gbc_txtDni = new GridBagConstraints();
+				gbc_txtDni.insets = new Insets(0, 0, 5, 5);
+				gbc_txtDni.fill = GridBagConstraints.HORIZONTAL;
+				gbc_txtDni.gridx = 2;
+				gbc_txtDni.gridy = 1;
+				panel_1.add(txtDni, gbc_txtDni);
 			}
 			{
 				lblReserva = new JLabel("Reserva:");
@@ -330,8 +309,7 @@ public class IU_JefeSala extends JFrame {
 	private class BtnCancelarReservaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
-			Mesa m = (Mesa) cBCancelarReserva.getSelectedItem();
-			
+			Mesa m = (Mesa) cBCancelarReserva.getSelectedItem();		
 			try {
 				GestorMesa.cancelarMesa(m.getId());
 			} catch (SQLException e1) {
@@ -341,10 +319,10 @@ public class IU_JefeSala extends JFrame {
 	}
 	private class BtnLlegadaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String nombre = lblNombreCliente.getText();
+			String dni = lblDniCliente.getText();
 			Mesa reservada = (Mesa)cBLlegadaReserva.getSelectedItem();
 			try {
-				GestorMesa.cambiarEstadoOcupado(reservada.getId(), nombre);
+				GestorMesa.cambiarEstadoOcupado(reservada.getId(), dni);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -352,21 +330,33 @@ public class IU_JefeSala extends JFrame {
 	}
 	private class BtnReservarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-				String nombre = lblNombre.getText();
+				String dni = lblDni.getText();
 				String fechaString = ftfFecha.getText();
 				Mesa reservada = (Mesa)cBMesas.getSelectedItem();
 
 				try {
 					Date fecha = new SimpleDateFormat("dd/MM/yy").parse(fechaString);
-					reservada.modificarDatosReservado(nombre, fecha);
-				} catch (ParseException e1) {
+					reservada.modificarDatosReservado(dni, fecha);
+					MesaDAO.actualizarNumMesa(reservada.getId(), "RESERVADA");
+				} catch (ParseException | SQLException e1) {
 					e1.printStackTrace();
 				}		
 		}
 	}
 	private class BtnRefrescarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			
+			DefaultComboBoxModel<Mesa> modelo;
+			DefaultComboBoxModel<Mesa> modelo2;
+			try {
+				modelo = rellenarCbReserva();
+				modelo2 = rellenarCbLibres();
+
+				cBLlegadaReserva.setModel(modelo);
+				cBCancelarReserva.setModel(modelo);
+				cBMesas.setModel(modelo2);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 		

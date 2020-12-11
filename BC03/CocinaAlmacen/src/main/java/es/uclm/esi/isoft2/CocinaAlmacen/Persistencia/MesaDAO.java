@@ -17,7 +17,7 @@ public class MesaDAO {
 	}
 	
 	public static void actualizarNumMesa(int id, String estado) throws SQLException {
-		String instruccion = "UPDATE MESAS SET estado = " + estado + " WHERE (id = '" + id + "');";
+		String instruccion = "UPDATE MESAS SET estado = '" + estado + "' WHERE (id = '" + id + "');";
 		Agente.getAgente().update(instruccion);
 	}
 	

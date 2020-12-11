@@ -10,8 +10,8 @@ public class Mesa {
 	private EstadosMesas estadoMesa;
 	private Comanda comanda;
 	private int precio;
-	private Cliente cliente;
-	private ArrayList<Date> listaDeDias;
+	private String dni;
+	private Date dia;
 
 	public Mesa(int id) {
 		setId(id);
@@ -70,25 +70,23 @@ public class Mesa {
 	private int calcularPrecio() {
 		return 1;
 	}
-
-	public ArrayList<Date> getListaDeDias() {
-		return listaDeDias;
-	}
-
-	public void anadirFechaReserva(ArrayList<Date> listaDeDias, Date fecha) {	
-		listaDeDias.add(fecha);
-	}
 	
-	public boolean modificarDatosReservado(String nombre, Date fecha) {
-		cliente.setNombre(nombre);
-		anadirFechaReserva(listaDeDias,fecha);
+	public boolean modificarDatosReservado(String dni, Date fecha) {
+		setDni(dni);
+		setDia(fecha);
 		estadoMesa=EstadosMesas.RESERVADA;
 		return true;
 	}
-	public Cliente getCliente() {
-		return cliente;
+	public String getDni() {
+		return dni;
 	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+	public Date getDia() {
+		return dia;
+	}
+	public void setDia(Date dia) {
+		this.dia = dia;
 	}
 }
