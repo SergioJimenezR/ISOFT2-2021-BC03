@@ -305,31 +305,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 				{
 					cbMesa = new JComboBox<Mesa>();
 					cbMesa.addActionListener(new CbMesaActionListener());
-					DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
-					for (int m = 1; m <= Constantes.NUM_MESAS; m++) {
-						
-						ArrayList<Integer> mesasDisponibles = MesaDAO.consultarMesasDisponibles();
-						ArrayList<Integer> mesasReservadas = MesaDAO.consultarMesasReservadas();
-						ArrayList<Integer> mesasOcupadas = MesaDAO.consultarMesasOcupadas();
-						for (int i = 0; i < mesasDisponibles.size(); i++) {
-							if (mesasDisponibles.get(i) == m) {
-								modelo.addElement(new Mesa(m, EstadosMesas.LIBRE));
-							}
-							else if (mesasReservadas.get(i) == m) {
-								modelo.addElement(new Mesa(m, EstadosMesas.RESERVADA));
-							}
-							else if (mesasOcupadas.get(i) == m) {
-								modelo.addElement(new Mesa(m, EstadosMesas.OCUPADA));
-							}
-						}
-						for (int i = 0; i < mesasDisponibles.size(); i++) {
-							if (mesasDisponibles.get(i) == m) {
-								modelo.addElement(new Mesa(m, EstadosMesas.LIBRE));
-							}
-						}
-						
-					}
-											cbMesa.setModel(modelo);
+					DefaultComboBoxModel<Mesa> modelo = rellenarCbMesas();
+					cbMesa.setModel(modelo);
 					cbMesa.setBounds(183, 88, 142, 31);
 					panelNuevaComanda.add(cbMesa);
 				}
@@ -1386,7 +1363,23 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	public static JComboBox<Mesa> getComboBoxMesas () {
 		return cbMesa;
 	}
+	
 	public static void setComboBoxMesas (JComboBox<Mesa> mesas) {
 		cbMesa = mesas;
+	}
+	
+	public static DefaultComboBoxModel<Mesa> rellenarCbMesas() throws SQLException {
+		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
+		for (int m = 1; m <= Constantes.NUM_MESAS; m++) {
+			ArrayList<Integer> mesasOcupadas = MesaDAO.consultarMesasOcupadas();
+			for (int i = 0; i < mesasOcupadas.size(); i++) {
+				if (mesasOcupadas.size() > 0) {
+					if (mesasOcupadas.get(i) == m) {
+						modelo.addElement(new Mesa(m, EstadosMesas.OCUPADA));
+					}
+				}
+			}
+		}
+		return modelo;
 	}
 }
