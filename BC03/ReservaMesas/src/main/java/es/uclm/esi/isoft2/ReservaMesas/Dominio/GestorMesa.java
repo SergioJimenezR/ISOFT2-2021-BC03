@@ -45,4 +45,8 @@ public class GestorMesa {
 		return false;
 	}
 	
+	public static void actualizarMesa(int id, String estado, String dni) throws SQLException {
+		MesaDAO.actualizarNumMesa(id, estado, dni);
+	}
+	
 }

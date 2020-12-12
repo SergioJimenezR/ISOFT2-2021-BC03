@@ -23,7 +23,6 @@ import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.Constantes;
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.MesaDAO;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
-import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroMesa;
 import es.uclm.esi.isoft2.ReservaMesas.Dominio.GestorMesa;
 
 import javax.swing.DefaultComboBoxModel;
@@ -297,7 +296,7 @@ public class IU_JefeSala extends JFrame {
 					reservada.modificarDatosReservado(dni, fecha);
 					cBLlegadaReserva.addItem(reservada);
 					cBMesas.removeItem(reservada);
-					MesaDAO.actualizarNumMesa(reservada.getId(), "RESERVADA", reservada.getDni());
+					GestorMesa.actualizarMesa(reservada.getId(), "RESERVADA", reservada.getDni());
 				} catch (ParseException | SQLException e1) {
 					e1.printStackTrace();
 				}		
