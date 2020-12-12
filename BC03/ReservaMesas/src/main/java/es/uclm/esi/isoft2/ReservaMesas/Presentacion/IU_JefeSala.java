@@ -34,18 +34,18 @@ import java.awt.event.ActionEvent;
 public class IU_JefeSala extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private JPanel contentPane;
 	private JPanel panel;
 	private JPanel panel_1;
 	private JTextField textFieldDni;
 	private JLabel lblDni;
 	private JLabel lblMesa;
-	private JComboBox <Mesa> cBMesas;
+	private JComboBox<Mesa> cBMesas;
 	private JLabel lblFecha;
 	private JFormattedTextField ftfFecha;
 	private JLabel lblReserva;
-	private static JComboBox <Mesa> cBLlegadaReserva;
+	private static JComboBox<Mesa> cBLlegadaReserva;
 	private JButton btnLlegada;
 	private JButton btnCancelarReserva;
 	private JButton btnReservar;
@@ -71,8 +71,9 @@ public class IU_JefeSala extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @throws ParseException 
-	 * @throws SQLException 
+	 * 
+	 * @throws ParseException
+	 * @throws SQLException
 	 */
 	public IU_JefeSala() throws ParseException, SQLException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,14 +82,15 @@ public class IU_JefeSala extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 172, 110, 100, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 0, 172, 110, 100, 0, 0, 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 		{
 			panel = new JPanel();
-			panel.setBorder(new TitledBorder(null, "Nueva reserva", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel.setBorder(
+					new TitledBorder(null, "Nueva reserva", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			GridBagConstraints gbc_panel = new GridBagConstraints();
 			gbc_panel.insets = new Insets(0, 0, 5, 5);
 			gbc_panel.fill = GridBagConstraints.BOTH;
@@ -96,10 +98,10 @@ public class IU_JefeSala extends JFrame {
 			gbc_panel.gridy = 1;
 			contentPane.add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[]{0, 85, 103, 235, 0, 0, 0};
-			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-			gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_panel.columnWidths = new int[] { 0, 85, 103, 235, 0, 0, 0 };
+			gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+			gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+			gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 			panel.setLayout(gbl_panel);
 			{
 				lblDni = new JLabel("Dni Cliente:");
@@ -151,7 +153,7 @@ public class IU_JefeSala extends JFrame {
 				panel.add(lblFecha, gbc_lblFecha);
 			}
 			{
-				MaskFormatter formatoFecha= new MaskFormatter("##/##/####");
+				MaskFormatter formatoFecha = new MaskFormatter("##/##/####");
 				ftfFecha = new JFormattedTextField(formatoFecha);
 				GridBagConstraints gbc_ftfFecha = new GridBagConstraints();
 				gbc_ftfFecha.insets = new Insets(0, 0, 5, 5);
@@ -172,7 +174,8 @@ public class IU_JefeSala extends JFrame {
 		}
 		{
 			panel_1 = new JPanel();
-			panel_1.setBorder(new TitledBorder(null, "Llegada clientes reserva", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel_1.setBorder(new TitledBorder(null, "Llegada clientes reserva", TitledBorder.LEADING, TitledBorder.TOP,
+					null, null));
 			GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 			gbc_panel_1.insets = new Insets(0, 0, 5, 5);
 			gbc_panel_1.fill = GridBagConstraints.BOTH;
@@ -180,10 +183,10 @@ public class IU_JefeSala extends JFrame {
 			gbc_panel_1.gridy = 2;
 			contentPane.add(panel_1, gbc_panel_1);
 			GridBagLayout gbl_panel_1 = new GridBagLayout();
-			gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
-			gbl_panel_1.rowHeights = new int[]{0, 0, 0, 0};
-			gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-			gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_panel_1.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+			gbl_panel_1.rowHeights = new int[] { 0, 0, 0, 0 };
+			gbl_panel_1.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+			gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 			panel_1.setLayout(gbl_panel_1);
 			{
 				lblDniCliente = new JLabel("Dni Cliente::");
@@ -247,7 +250,7 @@ public class IU_JefeSala extends JFrame {
 			{
 				DefaultComboBoxModel<Mesa> modelo = rellenarCbReserva();
 			}
-		}			
+		}
 		{
 			btnRefrescar = new JButton("Refrescar");
 			btnRefrescar.addActionListener(new BtnRefrescarActionListener());
@@ -262,8 +265,8 @@ public class IU_JefeSala extends JFrame {
 
 	private class BtnCancelarReservaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			
-			Mesa m = (Mesa) cBLlegadaReserva.getSelectedItem();		
+
+			Mesa m = (Mesa) cBLlegadaReserva.getSelectedItem();
 			try {
 				GestorMesa.cancelarMesa(m.getId());
 				cBMesas.addItem(m);
@@ -273,10 +276,11 @@ public class IU_JefeSala extends JFrame {
 			}
 		}
 	}
+
 	private class BtnLlegadaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			String dni = txtDni.getText();
-			Mesa reservada = (Mesa)cBLlegadaReserva.getSelectedItem();
+			Mesa reservada = (Mesa) cBLlegadaReserva.getSelectedItem();
 			try {
 				GestorMesa.cambiarEstadoOcupado(reservada.getId(), dni);
 				cBLlegadaReserva.removeItem(reservada);
@@ -285,23 +289,25 @@ public class IU_JefeSala extends JFrame {
 			}
 		}
 	}
+
 	private class BtnReservarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-				String dni = textFieldDni.getText();
-				String fechaString = ftfFecha.getText();
-				Mesa reservada = (Mesa)cBMesas.getSelectedItem();
+			String dni = textFieldDni.getText();
+			String fechaString = ftfFecha.getText();
+			Mesa reservada = (Mesa) cBMesas.getSelectedItem();
 
-				try {
-					Date fecha = new SimpleDateFormat("dd/MM/yy").parse(fechaString);
-					reservada.modificarDatosReservado(dni, fecha);
-					cBLlegadaReserva.addItem(reservada);
-					cBMesas.removeItem(reservada);
-					GestorMesa.actualizarMesa(reservada.getId(), "RESERVADA", reservada.getDni());
-				} catch (ParseException | SQLException e1) {
-					e1.printStackTrace();
-				}		
+			try {
+				Date fecha = new SimpleDateFormat("dd/MM/yy").parse(fechaString);
+				reservada.modificarDatosReservado(dni, fecha);
+				cBLlegadaReserva.addItem(reservada);
+				cBMesas.removeItem(reservada);
+				GestorMesa.actualizarMesa(reservada.getId(), "RESERVADA", reservada.getDni());
+			} catch (ParseException | SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
+
 	private class BtnRefrescarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			DefaultComboBoxModel<Mesa> modelo;
@@ -317,41 +323,37 @@ public class IU_JefeSala extends JFrame {
 			}
 		}
 	}
-		
+
 	public static DefaultComboBoxModel<Mesa> rellenarCbReserva() throws SQLException {
 		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
 		for (int m = 1; m <= Constantes.NUM_MESAS; m++) {
 			ArrayList<Integer> mesasReservadas = MesaDAO.consultarMesasReservadas();
 			for (int i = 0; i < mesasReservadas.size(); i++) {
-				if (mesasReservadas.size() > 0) {
-					if (mesasReservadas.get(i) == m) {
-						modelo.addElement(new Mesa(m, EstadosMesas.RESERVADA));
-					}
+				if (mesasReservadas.get(i) == m) {
+					modelo.addElement(new Mesa(m, EstadosMesas.RESERVADA));
 				}
 			}
 		}
 		return modelo;
 	}
-	
+
 	public static DefaultComboBoxModel<Mesa> rellenarCbLibres() throws SQLException {
 		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
 		for (int m = 1; m <= Constantes.NUM_MESAS; m++) {
 			ArrayList<Integer> mesasDisponibles = MesaDAO.consultarMesasDisponibles();
 			for (int i = 0; i < mesasDisponibles.size(); i++) {
-				if (mesasDisponibles.size() > 0) {
-					if (mesasDisponibles.get(i) == m) {
-						modelo.addElement(new Mesa(m, EstadosMesas.LIBRE));
-					}
+				if (mesasDisponibles.get(i) == m) {
+					modelo.addElement(new Mesa(m, EstadosMesas.LIBRE));
 				}
 			}
 		}
 		return modelo;
-	}	
-	
+	}
+
 	public static JComboBox<Mesa> getComboBoxReservadas() {
 		return cBLlegadaReserva;
 	}
-	
+
 	public static void setComboBoxReservadas(JComboBox<Mesa> cbMesas) {
 		cBLlegadaReserva = cbMesas;
 	}
