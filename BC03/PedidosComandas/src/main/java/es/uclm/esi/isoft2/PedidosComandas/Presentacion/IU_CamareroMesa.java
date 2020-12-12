@@ -121,6 +121,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	private JButton btnMesaPreparada;
 	private JTextField textFieldPrecio;
 	private JButton btnImprimirCuenta;
+	
+	//private Estadisticas estadisticas;
 
 	private static final long serialVersionUID = 1L;
 
