@@ -37,7 +37,6 @@ public class BebidaTest {
 		} catch(NullPointerException e) {
 			assertNull("NULL EXCEPTION",bebida);
 		}
-		
 	}
 	
 	@Test
