@@ -1,6 +1,7 @@
 package es.uclm.esi.isoft2.PedidosComandas.Presentacion;
 
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.Constantes;
+import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.MesaDAO;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
 
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Plato;
@@ -42,7 +43,8 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.JTextPane;
 
@@ -74,7 +76,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	private JComboBox<Aviso> cbAvisos;
 	private JPanel panelDatosAviso;
 	private JLabel lblInfo;
-	private JComboBox<Mesa> cbMesa;
+	private static JComboBox<Mesa> cbMesa;
 	private JButton btnIniciarComanda;
 	private JTextArea textTituloAviso;
 	private JTextArea textNMesaAviso;
@@ -122,6 +124,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	private JButton btnImprimirCuenta;
 
 	private static final long serialVersionUID = 1L;
+	private JButton btnRefrescar;
 
 	/**
 	 * Launch the application.
@@ -132,7 +135,12 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 				Almacen.getAlmacen();
 
-				IU_CamareroMesa.getInterfaz();
+				try {
+					IU_CamareroMesa.getInterfaz();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				IU_Cocina.getInterfaz();
 				IU_CamareroBarra.getInterfaz();
 
@@ -140,7 +148,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		});
 	}
 
-	public static IU_CamareroMesa getInterfaz() { // Patrón Singleton
+	public static IU_CamareroMesa getInterfaz() throws SQLException { // Patrón Singleton
 		if (mInstancia == null) {
 			mInstancia = new IU_CamareroMesa();
 			mInstancia.setVisible(true);
@@ -150,8 +158,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	private IU_CamareroMesa() {
+	private IU_CamareroMesa() throws SQLException {
 
 		addWindowListener(new ThisWindowListener()); // Botón de cerrar.
 
@@ -295,9 +304,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 				{
 					cbMesa = new JComboBox<Mesa>();
 					cbMesa.addActionListener(new CbMesaActionListener());
-					DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
-					for (int m = 1; m <= Constantes.NUM_MESAS; m++)
-						modelo.addElement(new Mesa(m));
+					DefaultComboBoxModel<Mesa> modelo = rellenarCbMesas();
 					cbMesa.setModel(modelo);
 					cbMesa.setBounds(183, 88, 142, 31);
 					panelNuevaComanda.add(cbMesa);
@@ -724,6 +731,12 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 			}
 		}
 		cbMesa.setSelectedIndex(-1);
+		{
+			btnRefrescar = new JButton("Refrescar");
+			btnRefrescar.addActionListener(new BtnRefrescarActionListener());
+			btnRefrescar.setBounds(76, 209, 109, 21);
+			panelNuevaComanda.add(btnRefrescar);
+		}
 
 	}
 
@@ -1064,7 +1077,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 				btnConfirmarPago.setEnabled(false);
 				btnMesaPreparada.setEnabled(false);
 				Mesa m = (Mesa) cbMesa.getSelectedItem();
-				if (m.getEstadoMesa() != EstadosMesas.LIBRE) {
+				if (m.getEstadoMesa() != EstadosMesas.OCUPADA) {
 					btnIniciarComanda.setEnabled(false);
 				}
 
@@ -1190,8 +1203,25 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		public void actionPerformed(ActionEvent arg0) {
 			btnMesaPreparada.setEnabled(false);
 			((Mesa) cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.LIBRE);
-
-			cbMesa.setSelectedItem(null);
+			Mesa mesa = (Mesa) cbMesa.getSelectedItem();
+			cbMesa.removeItem(mesa);
+			try {
+				MesaDAO.actualizarNumMesa(mesa.getId(), mesa.getEstadoMesa().toString(), mesa.getDni());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	private class BtnRefrescarActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			DefaultComboBoxModel<Mesa> modelo;
+			try {
+				modelo = rellenarCbMesas();
+				cbMesa.setModel(modelo);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 
@@ -1339,5 +1369,20 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).addElement(aviso);
 		textNMesaAviso.setText("Mesa número: " + aviso.getMesa().getId());
 		textEstadoMesa.setText("Estado de la mesa: " + aviso.getMesa().getEstadoMesa().name());
+	}
+	
+	public static DefaultComboBoxModel<Mesa> rellenarCbMesas() throws SQLException {
+		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
+		for (int m = 1; m <= Constantes.NUM_MESAS; m++) {
+			ArrayList<Integer> mesasOcupadas = MesaDAO.consultarMesasOcupadas();
+			for (int i = 0; i < mesasOcupadas.size(); i++) {
+				if (mesasOcupadas.size() > 0) {
+					if (mesasOcupadas.get(i) == m) {
+						modelo.addElement(new Mesa(m, EstadosMesas.OCUPADA));
+					}
+				}
+			}
+		}
+		return modelo;
 	}
 }

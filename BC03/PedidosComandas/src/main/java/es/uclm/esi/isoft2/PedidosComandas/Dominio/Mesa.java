@@ -1,15 +1,26 @@
 package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
+import java.util.Date;
+
+
 public class Mesa {
 
 	private int id;
 	private EstadosMesas estadoMesa;
 	private Comanda comanda;
 	private int precio;
+	private String dni;
+	private Date dia;
 
 	public Mesa(int id) {
 		setId(id);
 		setEstadoMesa(EstadosMesas.LIBRE);
+		comanda = null;
+		precio = 0;
+	}
+	public Mesa(int id, EstadosMesas estado) {
+		setId(id);
+		setEstadoMesa(estado);
 		comanda = null;
 		precio = 0;
 	}
@@ -21,7 +32,7 @@ public class Mesa {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 	public EstadosMesas getEstadoMesa() {
 		return estadoMesa;
 	}
@@ -58,5 +69,23 @@ public class Mesa {
 	private int calcularPrecio() {
 		return 1;
 	}
-
+	
+	public boolean modificarDatosReservado(String dni, Date fecha) {
+		setDni(dni);
+		setDia(fecha);
+		estadoMesa=EstadosMesas.RESERVADA;
+		return true;
+	}
+	public String getDni() {
+		return dni;
+	}
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+	public Date getDia() {
+		return dia;
+	}
+	public void setDia(Date dia) {
+		this.dia = dia;
+	}
 }

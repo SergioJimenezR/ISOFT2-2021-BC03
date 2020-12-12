@@ -23,6 +23,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import java.awt.event.ActionEvent;
@@ -234,7 +235,12 @@ public class IU_CamareroBarra extends JFrame {
 
 			reducirStockBebidas(comandaSeleccionada);
 
-			IU_CamareroMesa.getInterfaz().enlistarComanda(comandaSeleccionada);
+			try {
+				IU_CamareroMesa.getInterfaz().enlistarComanda(comandaSeleccionada);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
