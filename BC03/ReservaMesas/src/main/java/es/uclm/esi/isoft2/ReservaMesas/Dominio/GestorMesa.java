@@ -1,6 +1,5 @@
 package es.uclm.esi.isoft2.ReservaMesas.Dominio;
 
-import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroMesa;
 import es.uclm.esi.isoft2.ReservaMesas.Presentacion.IU_JefeSala;
 
 import java.sql.SQLException;
@@ -17,7 +16,7 @@ public class GestorMesa {
 		for (int i = 0; i < mesas.getItemCount(); i++) {
 			mesas.setSelectedIndex(i);
 			Mesa mesa = (Mesa) mesas.getSelectedItem();
-			if (mesa.getId() == idMesa && dniCliente.equals(mesa.getDni())) {
+			if (mesa.getId() == idMesa && dniCliente.equals(MesaDAO.devolverDni(idMesa))) {
 				mesa.setEstadoMesa(EstadosMesas.OCUPADA);
 				mesas.setSelectedItem(mesa);
 				IU_JefeSala.setComboBoxReservadas(mesas);
@@ -44,6 +43,10 @@ public class GestorMesa {
 			}
 		}
 		return false;
+	}
+	
+	public static void actualizarMesa(int id, String estado, String dni) throws SQLException {
+		MesaDAO.actualizarNumMesa(id, estado, dni);
 	}
 	
 }

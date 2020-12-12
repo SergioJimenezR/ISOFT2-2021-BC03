@@ -44,7 +44,6 @@ import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.JTextPane;
 
@@ -158,7 +157,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	/**
 	 * Create the frame.
-	 * @throws SQLException 
+	 * 
+	 * @throws SQLException
 	 */
 	private IU_CamareroMesa() throws SQLException {
 
@@ -1213,6 +1213,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 			}
 		}
 	}
+
 	private class BtnRefrescarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			DefaultComboBoxModel<Mesa> modelo;
@@ -1370,16 +1371,14 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		textNMesaAviso.setText("Mesa número: " + aviso.getMesa().getId());
 		textEstadoMesa.setText("Estado de la mesa: " + aviso.getMesa().getEstadoMesa().name());
 	}
-	
+
 	public static DefaultComboBoxModel<Mesa> rellenarCbMesas() throws SQLException {
 		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
 		for (int m = 1; m <= Constantes.NUM_MESAS; m++) {
 			ArrayList<Integer> mesasOcupadas = MesaDAO.consultarMesasOcupadas();
 			for (int i = 0; i < mesasOcupadas.size(); i++) {
-				if (mesasOcupadas.size() > 0) {
-					if (mesasOcupadas.get(i) == m) {
-						modelo.addElement(new Mesa(m, EstadosMesas.OCUPADA));
-					}
+				if (mesasOcupadas.get(i) == m) {
+					modelo.addElement(new Mesa(m, EstadosMesas.OCUPADA));
 				}
 			}
 		}
