@@ -7,7 +7,7 @@ import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
 
 
 public class AlmacenTest {
-	Almacen almacen;
+	Almacen almacen = new Almacen();
 	@Test
 	public void testAumentarStockPlatos() {
 		int[] ingredientesPlato=null; 
