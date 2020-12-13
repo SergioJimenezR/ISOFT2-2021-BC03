@@ -11,7 +11,8 @@ import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
 import org.junit.Test;
 
 public class MesaTest {
-	Mesa m;
+	int id=2;
+	Mesa m = new Mesa(id);
 	String dniCliente=null;
 	Date fecha;
 	

@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class GestorMesaTest {
 	GestorMesa gmesa = new GestorMesa();
-	MesaDAO mdao;
+	MesaDAO mdao = new MesaDAO();
 	int idMesa;
 	String dniCliente=null;
 	String estado= null;

@@ -9,7 +9,7 @@ import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.*;
 import org.junit.Test;
 
 public class MesaDAOTest {
-	MesaDAO mdao;
+	MesaDAO mdao = new MesaDAO();
 	int idMesa;
 	String dniCliente=null;
 	String estado= null;
