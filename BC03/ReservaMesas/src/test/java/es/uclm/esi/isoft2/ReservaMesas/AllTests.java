@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ GestorMesaTest.class, MesaDAOTest.class, MesaTest.class })
+@SuiteClasses({ GestorMesaTest.class, MesaDAOTest.class })
 public class AllTests {
 
 }

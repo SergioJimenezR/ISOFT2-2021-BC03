@@ -15,12 +15,16 @@ public class MesaDAOTest {
 	String estado= null;
 	
 		@Test
-		public void testActualizarNumMesaNull() {
+		public void testActualizarNumMesaNull() throws SQLException {
 			try {
 				mdao.actualizarNumMesa(idMesa,estado,dniCliente); 
 			}catch(NullPointerException | SQLException e){
 				assertNull("NULL EXCEPTION",estado);
 			}
+			idMesa=3;
+			dniCliente= "6";
+			estado= "RESERVADA";
+			mdao.actualizarNumMesa(idMesa,estado,dniCliente); 
 		}
 		
 		@Test
