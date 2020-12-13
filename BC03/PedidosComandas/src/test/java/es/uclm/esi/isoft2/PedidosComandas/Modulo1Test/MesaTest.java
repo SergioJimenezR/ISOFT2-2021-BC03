@@ -2,14 +2,17 @@ package es.uclm.esi.isoft2.PedidosComandas.Modulo1Test;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import org.junit.*;
 
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
-import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.Constantes;
 
 public class MesaTest {
 	Mesa mesa;
+	Comanda comanda;
 
 	@Test
 	public void testIdNegativoMesa() {
@@ -35,6 +38,21 @@ public class MesaTest {
 			}
 		}
 		assertFalse("NOT FOUND EXCEPTION",contenido);
+		estado= estado.ENPREPARACION;
+		Mesa mesa2= new Mesa(2,estado);
+		comanda= new Comanda(2, mesa2, null, null, null, null,
+				null);
+		Date fecha = new Date();
+		mesa.setComanda(comanda);
+		mesa.setPrecio(100);
+		mesa.setDni("01234567A");
+		mesa.setFecha(fecha);
+		assertNotNull(mesa.getComanda());
+		assertNotNull(mesa.getPrecio());
+		assertNotNull(mesa.getDni());
+		assertNotNull(mesa.getFecha());
+		mesa.cerrarCuenta();
+		assertTrue(mesa.modificarDatosReservado(mesa.getDni(),fecha));
 	}
 	
 }

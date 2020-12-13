@@ -57,5 +57,35 @@ public class ComandaTest {
 			assertNull("NULL EXCEPTION",comanda);
 		}
 	}
+	@Test
+	public void testConstructor() {
+		arrayListBebidas = new ArrayList<Bebida>();
+		arrayListEntrantes= new ArrayList<Plato>();
+		arrayListPrimeros = new ArrayList<Plato>();
+		arrayListSegundos = new ArrayList<Plato>();
+		arrayListPostres = new ArrayList<Plato>();
+		bebida= new Bebida(2,"Nombre");
+		plato = new Plato(2,"Nombre2");
+		arrayListBebidas.add(bebida);
+		arrayListEntrantes.add(plato);
+		arrayListPrimeros.add(plato);
+		arrayListSegundos.add(plato);
+		arrayListPostres.add(plato);
+		int id=1;
+		Mesa m = new Mesa(2);
+		comanda = new Comanda(id, m, arrayListBebidas, arrayListEntrantes, arrayListPrimeros, arrayListSegundos,
+				arrayListPostres);
+		assertNotNull(comanda.getBebidas());
+		assertNotNull(comanda.getComida());
+		assertNotNull(comanda.getEntrantes());
+		assertNotNull(comanda.getPrimeros());
+		assertNotNull(comanda.getSegundos());
+		assertNotNull(comanda.getPostres());
+		assertNotNull(comanda.toString());
+		assertNotNull(comanda.toStringPlatos());
+		assertNotNull(comanda.toStringBebidas());
+		assertTrue(comanda.tieneBebidas());
+		assertTrue(comanda.tienePlatos());
+	}
 	
 }

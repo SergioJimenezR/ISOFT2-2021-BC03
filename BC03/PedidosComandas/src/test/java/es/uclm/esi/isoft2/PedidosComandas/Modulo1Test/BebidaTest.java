@@ -28,6 +28,7 @@ public class BebidaTest {
 			}
 		}
 		assertFalse("NOT FOUND EXCEPTION",contenido);
+		bebida.toString();
 	}
 	
 	@Test

@@ -15,8 +15,22 @@ public class PlatoTest {
 		plato= new Plato(2,"PRUEBA");
 		ingredientes= plato.calcularIngredientes(null);
 		assertNull("NULL EXCEPTION",ingredientes);
+		
 	}
 	
+	@Test
+	public void testConseguirInfoPlato() {
+		int[] ingredientes = new int[200];
+		plato= new Plato(2,"PRUEBA");
+		assertNotNull(plato.getNombre());
+		for(int i=0;i<ingredientes.length;i++) {
+			ingredientes[i]=100*i;
+		}
+		plato.setIngredientes(ingredientes);
+		plato.getIngredientes();
+		assertNotNull(plato.toString());
+		assertNotNull(plato.toStringIngredientes());
+	}
 	@Test
 	public void reducirIdTest() {
 		plato= new Plato(1,"Plato");
