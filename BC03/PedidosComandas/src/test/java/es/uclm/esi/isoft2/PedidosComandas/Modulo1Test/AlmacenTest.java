@@ -13,7 +13,7 @@ import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Plato;
 
 public class AlmacenTest {
-	Almacen almacen = new Almacen();
+	Almacen almacen = Almacen.getAlmacen();
 	@Test
 	public void testAumentarStockPlatos() {
 		int[] ingredientesPlato=null; 
@@ -22,7 +22,6 @@ public class AlmacenTest {
 		} catch(NullPointerException e) {
 			assertArrayEquals("NULL EXCEPTION",ingredientesPlato,null);
 		}
-		almacen.getAlmacen();
 		almacen.primeraLectura();
 		int[] ingredientesPlato1 = {900, 0, 0};
 		almacen.aumentarStockPlatos(ingredientesPlato1);
@@ -62,7 +61,6 @@ public class AlmacenTest {
 	
 	@Test
 	public void testComprobarStockBebidas() {
-		almacen.getAlmacen();
 		almacen.primeraLectura();
 		String nombreBebida= null;
 		try {
@@ -101,7 +99,6 @@ public class AlmacenTest {
 	@Test
 	public void testAumentarStock() {
 		Comanda c = new Comanda(0, null, null, null, null, null, null);
-		Almacen.getAlmacen();
 		almacen.primeraLectura();
 		
 		try {
@@ -133,7 +130,6 @@ public class AlmacenTest {
 	
 	@Test
 	public void testcomprobarUmbralIngredientes() {
-		almacen.getAlmacen();
 		almacen.primeraLectura();
 		almacen.comprobarUmbralIngredientes();
 		int[] ingredientesPlato = {900, 100, 100};
@@ -143,7 +139,6 @@ public class AlmacenTest {
 	
 	@Test
 	public void testcomprobarUmbralBebidas() {
-		almacen.getAlmacen();
 		almacen.primeraLectura();
 		almacen.comprobarUmbralBebidas();
 		String nombreBebida = "Bebida1";

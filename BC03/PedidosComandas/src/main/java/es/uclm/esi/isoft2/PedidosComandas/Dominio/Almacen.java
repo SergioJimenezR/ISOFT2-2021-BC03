@@ -12,7 +12,7 @@ public class Almacen implements Constantes {
 	private int[] stockPlatos;
 	private int[] stockBebidas;
 
-	public Almacen() {
+	private Almacen() {
 		primeraLectura();
 	}
 
