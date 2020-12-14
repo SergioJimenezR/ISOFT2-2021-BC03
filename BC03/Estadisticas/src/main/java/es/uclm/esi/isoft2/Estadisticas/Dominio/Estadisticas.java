@@ -32,6 +32,7 @@ public class Estadisticas {
 	}
 	
 	private void leerNMesas() throws SQLException {
+		
 		this.nMesas = dao.obtenerNMesas();
 	}
 
