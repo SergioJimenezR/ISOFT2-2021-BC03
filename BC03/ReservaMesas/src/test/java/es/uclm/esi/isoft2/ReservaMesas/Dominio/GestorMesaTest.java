@@ -1,4 +1,4 @@
-package es.uclm.esi.isoft2.ReservaMesas;
+package es.uclm.esi.isoft2.ReservaMesas.Dominio;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 import javax.swing.JComboBox;
 
-import es.uclm.esi.isoft2.ReservaMesas.Dominio.*;
 import es.uclm.esi.isoft2.ReservaMesas.Presentacion.IU_JefeSala;
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.*;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;

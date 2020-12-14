@@ -1,4 +1,4 @@
-package es.uclm.esi.isoft2.PedidosComandas.Modulo1Test;
+package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
 import static org.junit.Assert.*;
 

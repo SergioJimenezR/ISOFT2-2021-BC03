@@ -1,4 +1,4 @@
-package es.uclm.esi.isoft2.PedidosComandas.Modulo1Test;
+package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
 import static org.junit.Assert.*;
 
@@ -35,7 +35,7 @@ public class AlmacenTest {
 		} catch(NullPointerException e) {
 			assertArrayEquals("NULL EXCEPTION",ingredientesPlato,null);
 		}
-		int[] ingredientesPlato1 = {900, 0, 0};
+		int[] ingredientesPlato1 = {900, 1100, 0};
 		almacen.comprobarStockPlatos(ingredientesPlato1);
 	}
 	

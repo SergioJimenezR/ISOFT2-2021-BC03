@@ -1,11 +1,10 @@
-package es.uclm.esi.isoft2.ReservaMesas;
+package es.uclm.esi.isoft2.CocinaAlmacen.Persistencia;
 
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.*;
 import org.junit.Test;
 
 public class MesaDAOTest {
