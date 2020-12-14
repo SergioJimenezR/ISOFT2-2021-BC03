@@ -13,6 +13,7 @@ public class Mesa {
 	private Date dia;
 	private double[] vectorTiempos;
 	private double tiempoTranscurrido;
+	private int numComensales;
 
 	public Mesa(int id) {
 		vectorTiempos = new double[9];
@@ -29,8 +30,9 @@ public class Mesa {
 		setEstadoMesa(estado);
 		comanda = null;
 		precio = 0;
+		this.setNumComensales();
 	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -45,12 +47,10 @@ public class Mesa {
 
 	public void setEstadoMesa(EstadosMesas estadoMesa) {
 		if(this.estadoMesa != null) {
-			double tiempoEnEstado = System.currentTimeMillis() - this.tiempoTranscurrido;
+			double tiempoEnEstado = ((System.currentTimeMillis() - this.tiempoTranscurrido)/(double)numComensales)/60000.0;
 			System.out.println(tiempoEnEstado);
 			this.actualizarTiempos(tiempoEnEstado);
 		}
-		if(this.estadoMesa == null)
-			System.out.println("NULL");
 		this.tiempoTranscurrido = System.currentTimeMillis();
 		this.estadoMesa = estadoMesa;
 	}
@@ -61,6 +61,15 @@ public class Mesa {
 
 	public void setComanda(Comanda comanda) {
 		this.comanda = comanda;
+	}
+	
+	private void setNumComensales() {
+		if (this.id <3)
+			this.numComensales = 2;
+		else if (this.id >=3 && this.id <5)
+			this.numComensales = 4;
+		else
+			this.numComensales = 6;
 	}
 
 	public int getPrecio() {
@@ -154,5 +163,6 @@ public class Mesa {
 		for(int i=0; i<this.vectorTiempos.length;i++)
 			this.vectorTiempos[i]=0;
 	}
+	
 	
 }

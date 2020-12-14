@@ -147,6 +147,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	private IU_CamareroMesa() throws SQLException {
 
 		addWindowListener(new ThisWindowListener()); // Botón de cerrar.
+		
+		paraEstadisticas = new ArrayList<Mesa>();
 
 		index = Constantes.INDICE_INICIAL_PRODUCTOS;
 		numNotificacionesPendientes = 0;
@@ -1372,10 +1374,6 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		return modelo;
 	}
 
-	public JComboBox<Mesa> getCBMesa(){
-		return this.cbMesa;
-	}
-	
 	public ArrayList<Mesa> getMesaEstadisticas(){
 		return paraEstadisticas;
 	}

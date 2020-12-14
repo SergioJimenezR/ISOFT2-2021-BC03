@@ -21,9 +21,12 @@ import javax.swing.text.MaskFormatter;
 
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.Constantes;
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.MesaDAO;
+import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
+import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroBarra;
 import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroMesa;
+import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_Cocina;
 import es.uclm.esi.isoft2.ReservaMesas.Dominio.GestorMesa;
 import es.uclm.esi.isoft2.Estadisticas.Dominio.Estadisticas;
 
@@ -36,6 +39,7 @@ import java.awt.GridLayout;
 import javax.swing.JTextArea;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JScrollPane;
 
 /**
  * @author Usuario
@@ -66,6 +70,7 @@ public class IU_JefeSala extends JFrame {
 	private JButton btnVerEstadisticas;
 	private JTextArea textAreaValoresEstadisticas;
 	private Estadisticas estadisticas;
+	private JScrollPane scrollPane;
 	/**
 	 * Launch the application.
 	 */
@@ -81,6 +86,30 @@ public class IU_JefeSala extends JFrame {
 			}
 		});
 	}*/
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+
+				Almacen.getAlmacen();
+
+				try {
+					IU_CamareroMesa.getInterfaz();
+					IU_JefeSala frame = new IU_JefeSala();
+					frame.setVisible(true);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				IU_Cocina.getInterfaz();
+				IU_CamareroBarra.getInterfaz();
+
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
@@ -101,7 +130,7 @@ public class IU_JefeSala extends JFrame {
 			}
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 557, 552);
+		setBounds(100, 100, 561, 583);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -293,19 +322,22 @@ public class IU_JefeSala extends JFrame {
 				gbl_panelEstadisticas.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 				panelEstadisticas.setLayout(gbl_panelEstadisticas);
 				{
-					textAreaValoresEstadisticas = new JTextArea();
-					GridBagConstraints gbc_textAreaValoresEstadisticas = new GridBagConstraints();
-					gbc_textAreaValoresEstadisticas.gridwidth = 12;
-					gbc_textAreaValoresEstadisticas.gridheight = 2;
-					gbc_textAreaValoresEstadisticas.insets = new Insets(0, 0, 5, 5);
-					gbc_textAreaValoresEstadisticas.fill = GridBagConstraints.BOTH;
-					gbc_textAreaValoresEstadisticas.gridx = 0;
-					gbc_textAreaValoresEstadisticas.gridy = 0;
-					panelEstadisticas.add(textAreaValoresEstadisticas, gbc_textAreaValoresEstadisticas);
-				}
-				{
 					btnVerEstadisticas = new JButton("Consultar");
 					btnVerEstadisticas.addActionListener(new  BtnConsularEstadisticasActionListener());
+					{
+						scrollPane = new JScrollPane();
+						GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+						gbc_scrollPane.gridwidth = 12;
+						gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+						gbc_scrollPane.fill = GridBagConstraints.BOTH;
+						gbc_scrollPane.gridx = 0;
+						gbc_scrollPane.gridy = 0;
+						panelEstadisticas.add(scrollPane, gbc_scrollPane);
+						{
+							textAreaValoresEstadisticas = new JTextArea();
+							scrollPane.setViewportView(textAreaValoresEstadisticas);
+						}
+					}
 					GridBagConstraints gbc_btnVerEstadisticas = new GridBagConstraints();
 					gbc_btnVerEstadisticas.gridwidth = 2;
 					gbc_btnVerEstadisticas.gridx = 12;
@@ -340,12 +372,7 @@ public class IU_JefeSala extends JFrame {
 			String dni = txtDni.getText();
 			Mesa reservada = (Mesa)cBLlegadaReserva.getSelectedItem();
 			try {
-				if(estadisticas == null)
-					estadisticas = new Estadisticas();
-				
 				GestorMesa.cambiarEstadoOcupado(reservada.getId(), dni);
-				cBLlegadaReserva.removeItem(reservada);
-				estadisticas.enviarTiemposMediosMesaReserva(reservada);
 				cBLlegadaReserva.removeItem(reservada);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
@@ -379,7 +406,7 @@ public class IU_JefeSala extends JFrame {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
-				
+				if(mesas.size() > 0) {
 					try {
 						if(estadisticas == null) {
 							estadisticas = new Estadisticas();
@@ -392,7 +419,19 @@ public class IU_JefeSala extends JFrame {
 						 IU_CamareroMesa.getInterfaz().restartMesas();
 					} catch (SQLException e1) {
 						e1.printStackTrace();
-					}	
+					}
+				}
+				else {
+					if(estadisticas == null) {
+						try {
+							estadisticas = new Estadisticas();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+					textAreaValoresEstadisticas.setText(estadisticas.getTiemposEstadistica());
+				}
 		}
 	}
 	private class BtnRefrescarActionListener implements ActionListener {
@@ -418,7 +457,7 @@ public class IU_JefeSala extends JFrame {
 			for (int i = 0; i < mesasReservadas.size(); i++) {
 				if (mesasReservadas.size() > 0) {
 					if (mesasReservadas.get(i) == m) {
-						//modelo.addElement(new Mesa(m, EstadosMesas.RESERVADA));
+						modelo.addElement(new Mesa(m, EstadosMesas.RESERVADA));
 					}
 				}
 			}
@@ -428,16 +467,16 @@ public class IU_JefeSala extends JFrame {
 	
 	public static DefaultComboBoxModel<Mesa> rellenarCbLibres() throws SQLException {
 		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
-	//	for (int m = 1; m <= Constantes.NUM_MESAS; m++) {
-			ArrayList<Integer> mesasDisponibles = MesaDAO.consultarMesasDisponibles();
+		for (int m = 1; m <= Constantes.NUM_MESAS; m++) {
+			ArrayList<Integer> mesasDisponibles = MesaDAO.consultarMesasDisponibles();//Documentar que se ha saltado la capa de dominio
 			if(mesasDisponibles.size() > 0) {
 				for (int i = 0; i < mesasDisponibles.size(); i++) {
-						Mesa nuevaMesa = new Mesa(mesasDisponibles.get(i));
-						modelo.addElement(nuevaMesa);
-					//}
+					if(mesasDisponibles.get(i) == m)
+						modelo.addElement(new Mesa(m, EstadosMesas.LIBRE));
 				}
-					
 			}
+					
+		}
 		
 		return modelo;
 	}	

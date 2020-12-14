@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class Estadisticas {
 
 	
-	private static double[] vectorTiemposMediosTotales;
+	private  double[] vectorTiemposMediosTotales;
 	private int nMesas;
 	private static EstadisticasDAO dao;
 	
@@ -39,17 +39,10 @@ public class Estadisticas {
 		double[] tiemposMesa = mesa.getVectorTiempos();
 		for(int i=0; i< tiemposMesa.length;i++) {
 			++nMesas;
-			vectorTiemposMediosTotales[i] = ((vectorTiemposMediosTotales[i]) + tiemposMesa[i]);///this.nMesas;
+			vectorTiemposMediosTotales[i] = ((vectorTiemposMediosTotales[i]) + tiemposMesa[i])/(double)this.nMesas;
 		}		
 	}
-	public void enviarTiemposMediosMesaReserva(Mesa mesa) {
-		double[] tiemposMesa = mesa.getVectorTiempos();
-		for(int i=0; i< 2;i++) {
-			++nMesas;
-			vectorTiemposMediosTotales[i] = ((vectorTiemposMediosTotales[i]) + tiemposMesa[i]);///this.nMesas;
-		}		
-	}
-	
+
 	public void enviarTiemposPersistencia() throws SQLException {
 		for(int i=0; i<this.vectorTiemposMediosTotales.length;i++)
 			System.out.println(this.vectorTiemposMediosTotales[i]+" ");
@@ -59,7 +52,7 @@ public class Estadisticas {
 	}
 	
 	public String getTiemposEstadistica() {
-		return "Libre = "+ vectorTiemposMediosTotales[0] +", Reservada= "+ vectorTiemposMediosTotales[1] +", Ocupada="+ vectorTiemposMediosTotales[2] +", Pidiendo="+ vectorTiemposMediosTotales[3] +", EsperandoComida="+ vectorTiemposMediosTotales[4] +", Servidos="+ vectorTiemposMediosTotales[5] +", EsperandoCuenta="+ vectorTiemposMediosTotales[6] +", Paganado="+ vectorTiemposMediosTotales[7] +", EnPreparacion ="+ vectorTiemposMediosTotales[8]+".";
+		return "Ocupada="+ vectorTiemposMediosTotales[2] +", Pidiendo="+ vectorTiemposMediosTotales[3] +", EsperandoComida="+ vectorTiemposMediosTotales[4] +", Servidos="+ vectorTiemposMediosTotales[5] +", EsperandoCuenta="+ vectorTiemposMediosTotales[6] +", Paganado="+ vectorTiemposMediosTotales[7] +", EnPreparacion ="+ vectorTiemposMediosTotales[8]+".";
 	}
 	
 }
