@@ -1,6 +1,7 @@
 package es.uclm.esi.isoft2.PedidosComandas.Presentacion;
 
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.Constantes;
+
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.MesaDAO;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
 
@@ -111,6 +112,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	private JLabel lblSegundo;
 	private JLabel lblPostre;
 	private JButton btnLimpiar;
+	private ArrayList<Mesa> paraEstadisticas;
 
 	private static Timer timer;
 
@@ -124,29 +126,11 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	private static final long serialVersionUID = 1L;
 	private JButton btnRefrescar;
+	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-
-				Almacen.getAlmacen();
-
-				try {
-					IU_CamareroMesa.getInterfaz();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				IU_Cocina.getInterfaz();
-				IU_CamareroBarra.getInterfaz();
-
-			}
-		});
-	}
-
 	public static IU_CamareroMesa getInterfaz() throws SQLException { // Patrón Singleton
 		if (mInstancia == null) {
 			mInstancia = new IU_CamareroMesa();
@@ -163,6 +147,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	private IU_CamareroMesa() throws SQLException {
 
 		addWindowListener(new ThisWindowListener()); // Botón de cerrar.
+		
+		paraEstadisticas = new ArrayList<Mesa>();
 
 		index = Constantes.INDICE_INICIAL_PRODUCTOS;
 		numNotificacionesPendientes = 0;
@@ -1047,8 +1033,6 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 			Mesa m = (Mesa) cbMesa.getSelectedItem();
 			m.setEstadoMesa(EstadosMesas.ESPERANDOCOMIDA);
 
-			// Falta la persistencia de los tiempos de atención que establece la directiva
-
 			iniciarTimer(comanda);
 
 			if (comanda.tienePlatos()) {
@@ -1154,6 +1138,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	private class BtnIniciarComandaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
+			((Mesa)cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.PIDIENDO);;
 			CardLayout panel = (CardLayout) (contentPane.getLayout());
 			panel.show(contentPane, "Iniciar Comanda");
 			lblNumMesa.setText("Mesa Número: " + cbMesa.getSelectedItem());
@@ -1201,9 +1186,12 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	private class BtnMesaPreparadaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
+			if(paraEstadisticas == null)
+				paraEstadisticas = new ArrayList<Mesa>();
 			btnMesaPreparada.setEnabled(false);
 			((Mesa) cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.LIBRE);
 			Mesa mesa = (Mesa) cbMesa.getSelectedItem();
+			paraEstadisticas.add(mesa);
 			cbMesa.removeItem(mesa);
 			try {
 				MesaDAO.actualizarNumMesa(mesa.getId(), mesa.getEstadoMesa().toString(), mesa.getDni());
@@ -1383,5 +1371,13 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 			}
 		}
 		return modelo;
+	}
+
+	public ArrayList<Mesa> getMesaEstadisticas(){
+		return paraEstadisticas;
+	}
+	
+	public void restartMesas() {
+		paraEstadisticas = new ArrayList<Mesa>();
 	}
 }

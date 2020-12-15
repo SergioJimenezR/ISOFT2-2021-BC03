@@ -41,5 +41,10 @@
 			<artifactId>PedidosComandas</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>es.uclm.esi.isoft2</groupId>
+			<artifactId>Estadisticas</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
