@@ -1,6 +1,6 @@
 package es.uclm.esi.isoft2.ReservaMesas.Presentacion;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import javax.swing.JFrame;
 
@@ -16,7 +16,7 @@ public class IU_JefeSalaTest {
 	@Test
 	public void testGetComboBoxReservadas() throws Exception {
 		JFrame window = new IU_JefeSala();
-		((IU_JefeSala) window).getComboBoxReservadas();
+		assertNotNull(((IU_JefeSala) window).getComboBoxReservadas());
 	}
 
 	@Test
