@@ -10,10 +10,10 @@ public class Mesa {
 	private Comanda comanda;
 	private int precio;
 	private String dni;
-	private Date dia;
 	private double[] vectorTiempos;
 	private double tiempoTranscurrido;
 	private int numComensales;
+	private Date fecha;
 
 	public Mesa(int id) {
 		vectorTiempos = new double[9];
@@ -79,6 +79,22 @@ public class Mesa {
 	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
+	
+	public String getDni() {
+		return dni;
+	}
+	
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+	
+	public Date getFecha() {
+		return fecha;
+	}
+	
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 
 	@Override
 	public String toString() {
@@ -95,23 +111,11 @@ public class Mesa {
 	
 	public boolean modificarDatosReservado(String dni, Date fecha) {
 		setDni(dni);
-		setDia(fecha);
+		setFecha(fecha);
 		estadoMesa=EstadosMesas.RESERVADA;
 		return true;
 	}
-	public String getDni() {
-		return dni;
-	}
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
-	public Date getDia() {
-		return dia;
-	}
-	public void setDia(Date dia) {
-		this.dia = dia;
-	}
-	
+
 	private void actualizarTiempos(double tiempoTranscurrido) {
 		int i=-1;
 		switch(this.estadoMesa) {
@@ -163,6 +167,4 @@ public class Mesa {
 		for(int i=0; i<this.vectorTiempos.length;i++)
 			this.vectorTiempos[i]=0;
 	}
-	
-	
 }

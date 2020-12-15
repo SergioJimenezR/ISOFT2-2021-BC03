@@ -49,4 +49,14 @@ public class MesaDAO {
 		return listIdMesas;
 	}
 	
+	public static String devolverDni(int id) throws SQLException {
+		String instruccion = "SELECT * FROM MESAS WHERE (id = '" + id + "');";
+		ResultSet RS = Agente.getAgente().select(instruccion);
+		String dni = "";
+		while (RS.next())
+			if(RS.getString("estado").equals("RESERVADA")) {
+				dni = RS.getString("dni");
+			}
+		return dni;
+	}
 }
