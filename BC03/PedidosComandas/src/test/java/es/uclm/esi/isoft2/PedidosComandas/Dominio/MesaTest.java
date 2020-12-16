@@ -71,7 +71,7 @@ public class MesaTest {
 	@Test
 	public void testTodosEstadosRecorridos() throws Exception {
 		Mesa m = new Mesa(3, EstadosMesas.LIBRE);
-		assertTrue("Debe ser True",m.todosEstadosRecorridos());
+		assertFalse("Debe ser True",m.todosEstadosRecorridos());
 	}
 
 	@Test
