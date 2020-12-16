@@ -52,7 +52,7 @@ public class IU_Cocina extends JFrame {
 	private JButton btnGuardar;
 	private JButton btnReponer;
 
-	public static IU_Cocina getInterfaz() { // Patrón Singleton
+	public static IU_Cocina getInterfaz() { // Patron Singleton
 		if (mInstancia == null) {
 			mInstancia = new IU_Cocina();
 			mInstancia.setVisible(true);
@@ -83,7 +83,7 @@ public class IU_Cocina extends JFrame {
 			gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 			panel.setLayout(gbl_panel);
 			{
-				lblUltimaComandaEntrante = new JLabel("Avisos / Última comanda entrante:");
+				lblUltimaComandaEntrante = new JLabel("Avisos / ultima comanda entrante:");
 				GridBagConstraints gbc_lblUltimaComandaEntrante = new GridBagConstraints();
 				gbc_lblUltimaComandaEntrante.anchor = GridBagConstraints.EAST;
 				gbc_lblUltimaComandaEntrante.insets = new Insets(0, 0, 5, 5);
@@ -132,7 +132,7 @@ public class IU_Cocina extends JFrame {
 				panel.add(lblNumComandasPendientes, gbc_lblNumComandasPendientes);
 			}
 			{
-				lblDescripcion = new JLabel("Descripción:");
+				lblDescripcion = new JLabel("Descripcion:");
 				GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
 				gbc_lblDescripcion.anchor = GridBagConstraints.EAST;
 				gbc_lblDescripcion.insets = new Insets(0, 0, 5, 5);
@@ -217,10 +217,10 @@ public class IU_Cocina extends JFrame {
 
 		if (Almacen.getAlmacen().comprobarUmbralIngredientes()) {
 			textPaneAvisosComandaEntrante.setText(
-					"Restado el stock de ingredientes de los platos de esta última comanda.\n" + c.toStringPlatos());
+					"Restado el stock de ingredientes de los platos de esta ultima comanda.\n" + c.toStringPlatos());
 		} else {
 			textPaneAvisosComandaEntrante.setText(
-					"Restado el stock de ingredientes de los platos de esta última comanda.\n" + c.toStringPlatos()
+					"Restado el stock de ingredientes de los platos de esta ultima comanda.\n" + c.toStringPlatos()
 							+ ".\nIMPORTANTE: El stock de ingredientes ha descendido por debajo del umbral.");
 		}
 
@@ -233,8 +233,8 @@ public class IU_Cocina extends JFrame {
 				textPaneInfoComandaSeleccionada
 						.setText(((Comanda) cbComandasPendientes.getSelectedItem()).toStringPlatos());
 			} catch (NullPointerException NPE) {
-				// Al eliminar un elemento de la ComboBox, el índice cambia y se ejecuta este
-				// método, devolviendo una NullPointer porque no hay nada seleccionado.
+				// Al eliminar un elemento de la ComboBox, el indice cambia y se ejecuta este
+				// metodo, devolviendo una NullPointer porque no hay nada seleccionado.
 			}
 		}
 	}

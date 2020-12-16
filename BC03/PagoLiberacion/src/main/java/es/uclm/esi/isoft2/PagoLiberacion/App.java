@@ -1,7 +1,5 @@
 package es.uclm.esi.isoft2.PagoLiberacion;
 
-
-
 import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroMesa;
 import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_Cocina;
 import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroBarra;
@@ -13,13 +11,11 @@ import java.text.ParseException;
 
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
 
-
 /**
  * Hello world!
  *
  */
-public class App 
-{
+public class App {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

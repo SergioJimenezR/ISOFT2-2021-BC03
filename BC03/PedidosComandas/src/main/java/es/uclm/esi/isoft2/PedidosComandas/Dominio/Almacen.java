@@ -16,7 +16,7 @@ public class Almacen implements Constantes {
 		primeraLectura();
 	}
 
-	public static Almacen getAlmacen() { // Patrón Singleton
+	public static Almacen getAlmacen() { // Patron Singleton
 		if (mInstancia == null)
 			mInstancia = new Almacen();
 		return mInstancia;
@@ -28,7 +28,7 @@ public class Almacen implements Constantes {
 			stockBebidas = AlmacenDAO.leerStockBebidas();
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al conectarse con la base de datos. "
-					+ "Posible fallo de la VPN o caída del servicio.\n" + e.getMessage());
+					+ "Posible fallo de la VPN o caida del servicio.\n" + e.getMessage());
 			System.exit(1);
 		}
 	}
@@ -39,7 +39,7 @@ public class Almacen implements Constantes {
 			AlmacenDAO.actualizarStockBebidas(stockBebidas);
 		} catch (SQLException e) {
 			System.out.println("Ha ocurrido un error al actualizar la base de datos. "
-					+ "Posible fallo de la VPN o caída del servicio.\n" + e.getMessage());
+					+ "Posible fallo de la VPN o caida del servicio.\n" + e.getMessage());
 		}
 	}
 

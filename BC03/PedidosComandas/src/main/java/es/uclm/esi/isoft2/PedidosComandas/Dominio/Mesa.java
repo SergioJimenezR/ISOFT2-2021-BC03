@@ -2,7 +2,6 @@ package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
 import java.util.Date;
 
-
 public class Mesa {
 
 	private int id;
@@ -23,6 +22,7 @@ public class Mesa {
 		comanda = null;
 		precio = 0;
 	}
+
 	public Mesa(int id, EstadosMesas estado) {
 		vectorTiempos = new double[9];
 		inicializar();
@@ -32,7 +32,7 @@ public class Mesa {
 		precio = 0;
 		this.setNumComensales();
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -40,14 +40,15 @@ public class Mesa {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public EstadosMesas getEstadoMesa() {
 		return this.estadoMesa;
 	}
 
 	public void setEstadoMesa(EstadosMesas estadoMesa) {
-		if(this.estadoMesa != null) {
-			double tiempoEnEstado = ((System.currentTimeMillis() - this.tiempoTranscurrido)/(double)numComensales)/60000.0;
+		if (this.estadoMesa != null) {
+			double tiempoEnEstado = ((System.currentTimeMillis() - this.tiempoTranscurrido) / (double) numComensales)
+					/ 60000.0;
 			System.out.println(tiempoEnEstado);
 			this.actualizarTiempos(tiempoEnEstado);
 		}
@@ -62,11 +63,11 @@ public class Mesa {
 	public void setComanda(Comanda comanda) {
 		this.comanda = comanda;
 	}
-	
+
 	private void setNumComensales() {
-		if (this.id <3)
+		if (this.id < 3)
 			this.numComensales = 2;
-		else if (this.id >=3 && this.id <5)
+		else if (this.id >= 3 && this.id < 5)
 			this.numComensales = 4;
 		else
 			this.numComensales = 6;
@@ -79,19 +80,19 @@ public class Mesa {
 	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
-	
+
 	public String getDni() {
 		return dni;
 	}
-	
+
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	
+
 	public Date getFecha() {
 		return fecha;
 	}
-	
+
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
@@ -108,63 +109,63 @@ public class Mesa {
 	private int calcularPrecio() {
 		return 1;
 	}
-	
+
 	public boolean modificarDatosReservado(String dni, Date fecha) {
 		setDni(dni);
 		setFecha(fecha);
-		estadoMesa=EstadosMesas.RESERVADA;
+		estadoMesa = EstadosMesas.RESERVADA;
 		return true;
 	}
 
 	private void actualizarTiempos(double tiempoTranscurrido) {
-		int i=-1;
-		switch(this.estadoMesa) {
+		int i = -1;
+		switch (this.estadoMesa) {
 		case LIBRE:
-			i=0;
+			i = 0;
 			break;
 		case RESERVADA:
-			i=1;
+			i = 1;
 			break;
 		case OCUPADA:
-			i=2;
+			i = 2;
 			break;
 		case PIDIENDO:
-			i=3;
+			i = 3;
 			break;
 		case ESPERANDOCOMIDA:
-			i=4;
+			i = 4;
 			break;
 		case SERVIDOS:
-			i=5;
+			i = 5;
 			break;
 		case ESPERANDOCUENTA:
-			i=6;
+			i = 6;
 			break;
 		case PAGANDO:
-			i=7;
+			i = 7;
 			break;
 		case ENPREPARACION:
-			i=8;
+			i = 8;
 			break;
 		}
-		
-		this.vectorTiempos[i]=tiempoTranscurrido;
+
+		this.vectorTiempos[i] = tiempoTranscurrido;
 	}
-	
+
 	public boolean todosEstadosRecorridos() {
 		boolean result = true;
-		for(int i=0;i<this.vectorTiempos.length && result;i++)
+		for (int i = 0; i < this.vectorTiempos.length && result; i++)
 			if (this.vectorTiempos[i] == 0)
 				result = false;
 		return result;
 	}
-	
+
 	public double[] getVectorTiempos() {
 		return vectorTiempos;
 	}
-	
+
 	private void inicializar() {
-		for(int i=0; i<this.vectorTiempos.length;i++)
-			this.vectorTiempos[i]=0;
+		for (int i = 0; i < this.vectorTiempos.length; i++)
+			this.vectorTiempos[i] = 0;
 	}
 }

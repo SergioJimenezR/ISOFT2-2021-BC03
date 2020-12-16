@@ -4,8 +4,6 @@ import static org.junit.Assert.assertNotNull;
 
 import javax.swing.JList;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Aviso;
@@ -58,10 +56,10 @@ public class IU_CamareroMesaTest {
 	}
 
 	@Test
-	public void testAñadirAviso() throws Exception {
+	public void testAnyadirAviso() throws Exception {
 		Mesa m = new Mesa(13);
 		Aviso a = new Aviso(0, m);
-		IU_CamareroMesa.getInterfaz().añadirAviso(a);
+		IU_CamareroMesa.getInterfaz().anyadirAviso(a);
 	}
 
 	@Test

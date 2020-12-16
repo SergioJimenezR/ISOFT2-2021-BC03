@@ -13,7 +13,6 @@ import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Aviso;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -64,7 +63,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	private JPanel panelCamareria;
 	private JButton btnQuitarBebida;
-	private JButton btnAñadirBebida;
+	private JButton btnAnyadirBebida;
 	private JComboBox<String> cbBebidas;
 	private JLabel lblBebidas;
 	private JList<Bebida> listBebidas;
@@ -99,13 +98,13 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	private JComboBox<String> cbPrimeros;
 	private JComboBox<String> cbSegundos;
 	private JComboBox<String> cbPostres;
-	private JButton btnAñadirEntrante;
+	private JButton btnAnyadirEntrante;
 	private JButton btnQuitarEntrante;
-	private JButton btnAñadirPrimero;
+	private JButton btnAnyadirPrimero;
 	private JButton btnQuitarPrimero;
-	private JButton btnAñadirSegundo;
+	private JButton btnAnyadirSegundo;
 	private JButton btnQuitarSegundo;
-	private JButton btnAñadirPostre;
+	private JButton btnAnyadirPostre;
 	private JButton btnQuitarPostre;
 	private JLabel lblEntrantes;
 	private JLabel lblPrimero;
@@ -126,12 +125,11 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	private static final long serialVersionUID = 1L;
 	private JButton btnRefrescar;
-	
 
 	/**
 	 * Launch the application.
 	 */
-	public static IU_CamareroMesa getInterfaz() throws SQLException { // Patrón Singleton
+	public static IU_CamareroMesa getInterfaz() throws SQLException { // Patron Singleton
 		if (mInstancia == null) {
 			mInstancia = new IU_CamareroMesa();
 			mInstancia.setVisible(true);
@@ -146,8 +144,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	 */
 	private IU_CamareroMesa() throws SQLException {
 
-		addWindowListener(new ThisWindowListener()); // Botón de cerrar.
-		
+		addWindowListener(new ThisWindowListener()); // Boton de cerrar.
+
 		paraEstadisticas = new ArrayList<Mesa>();
 
 		index = Constantes.INDICE_INICIAL_PRODUCTOS;
@@ -245,7 +243,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 					}
 					{
 						textNMesaAviso = new JTextArea();
-						textNMesaAviso.setText("Mesa Número: ***");
+						textNMesaAviso.setText("Mesa Numero: ***");
 						textNMesaAviso.setEditable(false);
 						GridBagConstraints gbc_textNMesaAviso = new GridBagConstraints();
 						gbc_textNMesaAviso.insets = new Insets(0, 0, 5, 5);
@@ -282,7 +280,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 				gbc_panelNuevaComanda.gridy = 2;
 				panelCamareria.add(panelNuevaComanda, gbc_panelNuevaComanda);
 				{
-					lblInfo = new JLabel("Mesa número");
+					lblInfo = new JLabel("Mesa numero");
 					lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 					lblInfo.setBounds(64, 89, 109, 24);
 					panelNuevaComanda.add(lblInfo);
@@ -359,7 +357,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 				gbl_panelDatosMesa.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 				panelDatosMesa.setLayout(gbl_panelDatosMesa);
 				{
-					lblNumMesa = new JLabel("Mesa Número 6");
+					lblNumMesa = new JLabel("Mesa Numero 6");
 					lblNumMesa.setFont(new Font("Tahoma", Font.BOLD, 15));
 					GridBagConstraints gbc_lblNumMesa = new GridBagConstraints();
 					gbc_lblNumMesa.insets = new Insets(0, 0, 0, 5);
@@ -426,9 +424,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 							btnQuitarEntrante.setEnabled(false);
 							btnQuitarEntrante.addActionListener(new BtnQuitarEntranteActionListener());
 							{
-								btnAñadirEntrante = new JButton("Añadir");
-								btnAñadirEntrante.setEnabled(false);
-								btnAñadirEntrante.addActionListener(new BtnAñadirEntranteActionListener());
+								btnAnyadirEntrante = new JButton("Anyadir");
+								btnAnyadirEntrante.setEnabled(false);
+								btnAnyadirEntrante.addActionListener(new BtnAnyadirEntranteActionListener());
 								{
 									cbEntrantes = new JComboBox<String>();
 									cbEntrantes.addActionListener(new CbEntrantesActionListener());
@@ -445,14 +443,14 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 										panelCarta.add(cbBebidas, gbc_cbBebidas);
 									}
 									{
-										btnAñadirBebida = new JButton("Añadir");
-										btnAñadirBebida.setEnabled(false);
-										btnAñadirBebida.addActionListener(new BtnAñadirBebidaActionListener());
-										GridBagConstraints gbc_btnAñadirBebida = new GridBagConstraints();
-										gbc_btnAñadirBebida.insets = new Insets(0, 0, 5, 5);
-										gbc_btnAñadirBebida.gridx = 3;
-										gbc_btnAñadirBebida.gridy = 0;
-										panelCarta.add(btnAñadirBebida, gbc_btnAñadirBebida);
+										btnAnyadirBebida = new JButton("Anyadir");
+										btnAnyadirBebida.setEnabled(false);
+										btnAnyadirBebida.addActionListener(new BtnAnyadirBebidaActionListener());
+										GridBagConstraints gbc_btnAnyadirBebida = new GridBagConstraints();
+										gbc_btnAnyadirBebida.insets = new Insets(0, 0, 5, 5);
+										gbc_btnAnyadirBebida.gridx = 3;
+										gbc_btnAnyadirBebida.gridy = 0;
+										panelCarta.add(btnAnyadirBebida, gbc_btnAnyadirBebida);
 									}
 									{
 										btnQuitarBebida = new JButton("Quitar");
@@ -474,11 +472,11 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 									gbc_cbEntrantes.gridy = 3;
 									panelCarta.add(cbEntrantes, gbc_cbEntrantes);
 								}
-								GridBagConstraints gbc_btnAñadirEntrante = new GridBagConstraints();
-								gbc_btnAñadirEntrante.insets = new Insets(0, 0, 5, 5);
-								gbc_btnAñadirEntrante.gridx = 3;
-								gbc_btnAñadirEntrante.gridy = 3;
-								panelCarta.add(btnAñadirEntrante, gbc_btnAñadirEntrante);
+								GridBagConstraints gbc_btnAnyadirEntrante = new GridBagConstraints();
+								gbc_btnAnyadirEntrante.insets = new Insets(0, 0, 5, 5);
+								gbc_btnAnyadirEntrante.gridx = 3;
+								gbc_btnAnyadirEntrante.gridy = 3;
+								panelCarta.add(btnAnyadirEntrante, gbc_btnAnyadirEntrante);
 							}
 							GridBagConstraints gbc_btnQuitarEntrante = new GridBagConstraints();
 							gbc_btnQuitarEntrante.insets = new Insets(0, 0, 5, 5);
@@ -491,8 +489,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 						btnQuitarPostre = new JButton("Quitar");
 						btnQuitarPostre.addActionListener(new BtnQuitarPostreActionListener());
 						{
-							btnAñadirPostre = new JButton("Añadir");
-							btnAñadirPostre.addActionListener(new BtnAñadirPostreActionListener());
+							btnAnyadirPostre = new JButton("Anyadir");
+							btnAnyadirPostre.addActionListener(new BtnAnyadirPostreActionListener());
 							{
 								cbPostres = new JComboBox<String>();
 								cbPostres.addActionListener(new CbPostresActionListener());
@@ -500,8 +498,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 									btnQuitarSegundo = new JButton("Quitar");
 									btnQuitarSegundo.addActionListener(new BtnQuitarSegundoActionListener());
 									{
-										btnAñadirSegundo = new JButton("Añadir");
-										btnAñadirSegundo.addActionListener(new BtnAñadirSegundoActionListener());
+										btnAnyadirSegundo = new JButton("Anyadir");
+										btnAnyadirSegundo.addActionListener(new BtnAnyadirSegundoActionListener());
 										{
 											cbSegundos = new JComboBox<String>();
 											cbSegundos.addActionListener(new CbSegundosActionListener());
@@ -510,9 +508,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 												btnQuitarPrimero
 														.addActionListener(new BtnQuitarPrimeroActionListener());
 												{
-													btnAñadirPrimero = new JButton("Añadir");
-													btnAñadirPrimero
-															.addActionListener(new BtnAñadirPrimeroActionListener());
+													btnAnyadirPrimero = new JButton("Anyadir");
+													btnAnyadirPrimero
+															.addActionListener(new BtnAnyadirPrimeroActionListener());
 													cbPrimeros = new JComboBox<String>();
 													cbPrimeros.addActionListener(new CbPrimerosActionListener());
 													cbPrimeros.setModel(new DefaultComboBoxModel<String>(
@@ -523,12 +521,12 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 													gbc_cbPrimeros.gridx = 1;
 													gbc_cbPrimeros.gridy = 6;
 													panelCarta.add(cbPrimeros, gbc_cbPrimeros);
-													btnAñadirPrimero.setEnabled(false);
-													GridBagConstraints gbc_btnAñadirPrimero = new GridBagConstraints();
-													gbc_btnAñadirPrimero.insets = new Insets(0, 0, 5, 5);
-													gbc_btnAñadirPrimero.gridx = 3;
-													gbc_btnAñadirPrimero.gridy = 6;
-													panelCarta.add(btnAñadirPrimero, gbc_btnAñadirPrimero);
+													btnAnyadirPrimero.setEnabled(false);
+													GridBagConstraints gbc_btnAnyadirPrimero = new GridBagConstraints();
+													gbc_btnAnyadirPrimero.insets = new Insets(0, 0, 5, 5);
+													gbc_btnAnyadirPrimero.gridx = 3;
+													gbc_btnAnyadirPrimero.gridy = 6;
+													panelCarta.add(btnAnyadirPrimero, gbc_btnAnyadirPrimero);
 												}
 												btnQuitarPrimero.setEnabled(false);
 												GridBagConstraints gbc_btnQuitarPrimero = new GridBagConstraints();
@@ -546,12 +544,12 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 											gbc_cbSegundos.gridy = 9;
 											panelCarta.add(cbSegundos, gbc_cbSegundos);
 										}
-										btnAñadirSegundo.setEnabled(false);
-										GridBagConstraints gbc_btnAñadirSegundo = new GridBagConstraints();
-										gbc_btnAñadirSegundo.insets = new Insets(0, 0, 5, 5);
-										gbc_btnAñadirSegundo.gridx = 3;
-										gbc_btnAñadirSegundo.gridy = 9;
-										panelCarta.add(btnAñadirSegundo, gbc_btnAñadirSegundo);
+										btnAnyadirSegundo.setEnabled(false);
+										GridBagConstraints gbc_btnAnyadirSegundo = new GridBagConstraints();
+										gbc_btnAnyadirSegundo.insets = new Insets(0, 0, 5, 5);
+										gbc_btnAnyadirSegundo.gridx = 3;
+										gbc_btnAnyadirSegundo.gridy = 9;
+										panelCarta.add(btnAnyadirSegundo, gbc_btnAnyadirSegundo);
 									}
 									btnQuitarSegundo.setEnabled(false);
 									GridBagConstraints gbc_btnQuitarSegundo = new GridBagConstraints();
@@ -568,12 +566,12 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 								gbc_cbPostres.gridy = 12;
 								panelCarta.add(cbPostres, gbc_cbPostres);
 							}
-							btnAñadirPostre.setEnabled(false);
-							GridBagConstraints gbc_btnAñadirPostre = new GridBagConstraints();
-							gbc_btnAñadirPostre.insets = new Insets(0, 0, 5, 5);
-							gbc_btnAñadirPostre.gridx = 3;
-							gbc_btnAñadirPostre.gridy = 12;
-							panelCarta.add(btnAñadirPostre, gbc_btnAñadirPostre);
+							btnAnyadirPostre.setEnabled(false);
+							GridBagConstraints gbc_btnAnyadirPostre = new GridBagConstraints();
+							gbc_btnAnyadirPostre.insets = new Insets(0, 0, 5, 5);
+							gbc_btnAnyadirPostre.gridx = 3;
+							gbc_btnAnyadirPostre.gridy = 12;
+							panelCarta.add(btnAnyadirPostre, gbc_btnAnyadirPostre);
 						}
 						btnQuitarPostre.setEnabled(false);
 						GridBagConstraints gbc_btnQuitarPostre = new GridBagConstraints();
@@ -737,14 +735,14 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 				Bebida aux = new Bebida(index, (String) cbBebidas.getSelectedItem());
 				if (Almacen.getAlmacen().comprobarStockBebidas(aux.getNombre())) {
 
-					btnAñadirBebida.setEnabled(true);
+					btnAnyadirBebida.setEnabled(true);
 
-					mostrarMsgEstado("Se ha seleccionado " + aux.getNombre() + ". Se puede añadir.");
+					mostrarMsgEstado("Se ha seleccionado " + aux.getNombre() + ". Se puede anyadir.");
 				} else {
-					btnAñadirBebida.setEnabled(false);
+					btnAnyadirBebida.setEnabled(false);
 
 					mostrarMsgEstado("Se ha seleccionado " + (String) cbBebidas.getSelectedItem()
-							+ ". No se puede añadir por insuficiencia de stock. (Stock virtual: "
+							+ ". No se puede anyadir por insuficiencia de stock. (Stock virtual: "
 							+ Almacen.getAlmacen().toStringStockBebidas() + ").");
 
 				}
@@ -755,7 +753,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		}
 	}
 
-	private class BtnAñadirBebidaActionListener implements ActionListener {
+	private class BtnAnyadirBebidaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			Bebida b = new Bebida(index++, (String) cbBebidas.getSelectedItem());
 
@@ -763,12 +761,12 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 			Almacen.getAlmacen().reducirStockBebidas(b.getNombre());
 
-			mostrarMsgEstado("Bebida " + b.toString() + " añadida con éxito. " + "(Stock virtual: "
+			mostrarMsgEstado("Bebida " + b.toString() + " anyadida con exito. " + "(Stock virtual: "
 					+ Almacen.getAlmacen().toStringStockBebidas() + ").");
 
 			Bebida aux = new Bebida(index, (String) cbBebidas.getSelectedItem());
 			if (!Almacen.getAlmacen().comprobarStockBebidas(aux.getNombre())) {
-				btnAñadirBebida.setEnabled(false);
+				btnAnyadirBebida.setEnabled(false);
 				mostrarMsgEstado("Se acaba de terminar el stock de esta bebida " + aux.getNombre()
 						+ ".\n(Stock virtual: " + Almacen.getAlmacen().toStringStockBebidas() + ").");
 
@@ -799,7 +797,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 			retrasarIds(b.getId());
 			index--;
 
-			mostrarMsgEstado("Bebida " + b.toString() + " eliminada con éxito. \n(Stock virtual: "
+			mostrarMsgEstado("Bebida " + b.toString() + " eliminada con exito. \n(Stock virtual: "
 					+ Almacen.getAlmacen().toStringStockBebidas() + ").");
 
 			if (index == Constantes.INDICE_INICIAL_PRODUCTOS) {
@@ -812,13 +810,13 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	// ENTRANTES
 	private class CbEntrantesActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			eventoComboBox(cbEntrantes, btnAñadirEntrante);
+			eventoComboBox(cbEntrantes, btnAnyadirEntrante);
 		}
 	}
 
-	private class BtnAñadirEntranteActionListener implements ActionListener {
+	private class BtnAnyadirEntranteActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			eventoAñadir(cbEntrantes, btnAñadirEntrante, listEntrantes);
+			eventoAnyadir(cbEntrantes, btnAnyadirEntrante, listEntrantes);
 		}
 	}
 
@@ -837,13 +835,13 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	// PRIMEROS
 	private class CbPrimerosActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			eventoComboBox(cbPrimeros, btnAñadirPrimero);
+			eventoComboBox(cbPrimeros, btnAnyadirPrimero);
 		}
 	}
 
-	private class BtnAñadirPrimeroActionListener implements ActionListener {
+	private class BtnAnyadirPrimeroActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			eventoAñadir(cbPrimeros, btnAñadirPrimero, listPrimeros);
+			eventoAnyadir(cbPrimeros, btnAnyadirPrimero, listPrimeros);
 		}
 	}
 
@@ -862,13 +860,13 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	// SEGUNDOS
 	private class CbSegundosActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			eventoComboBox(cbSegundos, btnAñadirSegundo);
+			eventoComboBox(cbSegundos, btnAnyadirSegundo);
 		}
 	}
 
-	private class BtnAñadirSegundoActionListener implements ActionListener {
+	private class BtnAnyadirSegundoActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			eventoAñadir(cbSegundos, btnAñadirSegundo, listSegundos);
+			eventoAnyadir(cbSegundos, btnAnyadirSegundo, listSegundos);
 		}
 	}
 
@@ -887,13 +885,13 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	// POSTRES
 	private class CbPostresActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			eventoComboBox(cbPostres, btnAñadirPostre);
+			eventoComboBox(cbPostres, btnAnyadirPostre);
 		}
 	}
 
-	private class BtnAñadirPostreActionListener implements ActionListener {
+	private class BtnAnyadirPostreActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			eventoAñadir(cbPostres, btnAñadirPostre, listPostres);
+			eventoAnyadir(cbPostres, btnAnyadirPostre, listPostres);
 		}
 	}
 
@@ -910,20 +908,20 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	// MODULARIDAD DE EVENTOS DE PLATOS
-	private void eventoComboBox(JComboBox<String> comboBox, JButton btnAñadir) {
+	private void eventoComboBox(JComboBox<String> comboBox, JButton btnAnyadir) {
 		try {
 			Plato aux = new Plato(index, (String) comboBox.getSelectedItem());
 
 			if (Almacen.getAlmacen().comprobarStockPlatos(aux.getIngredientes())) {
 
-				btnAñadir.setEnabled(true);
+				btnAnyadir.setEnabled(true);
 
-				mostrarMsgEstado("Se ha seleccionado " + aux.getNombre() + ". Se puede añadir.");
+				mostrarMsgEstado("Se ha seleccionado " + aux.getNombre() + ". Se puede anyadir.");
 			} else {
-				btnAñadir.setEnabled(false);
+				btnAnyadir.setEnabled(false);
 
 				mostrarMsgEstado("Se ha seleccionado " + (String) comboBox.getSelectedItem()
-						+ ". No se puede añadir por insuficiencia de stock. (Stock virtual: "
+						+ ". No se puede anyadir por insuficiencia de stock. (Stock virtual: "
 						+ Almacen.getAlmacen().toStringStockPlatos() + "). (Stock necesario: "
 						+ aux.toStringIngredientes() + ").");
 
@@ -933,11 +931,11 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		}
 	}
 
-	private void eventoAñadir(JComboBox<String> comboBox, JButton btnAñadir, JList<Plato> lista) {
+	private void eventoAnyadir(JComboBox<String> comboBox, JButton btnAnyadir, JList<Plato> lista) {
 
 		Plato aux = new Plato(index, (String) comboBox.getSelectedItem());
 		if (!Almacen.getAlmacen().comprobarStockPlatos(aux.getIngredientes())) {
-			btnAñadir.setEnabled(false);
+			btnAnyadir.setEnabled(false);
 			mostrarMsgEstado("Se acaba de terminar el stock de ingredientes para cocinar este plato " + aux.getNombre()
 					+ ". \n(Stock virtual: " + Almacen.getAlmacen().toStringStockPlatos() + "). (Stock necesario: "
 					+ aux.toStringIngredientes() + ").");
@@ -947,7 +945,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 			((DefaultListModel<Plato>) lista.getModel()).addElement(p);
 			Almacen.getAlmacen().reducirStockPlatos(p.getIngredientes());
 
-			mostrarMsgEstado("Plato " + p.toString() + " añadido con éxito. " + "(Stock virtual: "
+			mostrarMsgEstado("Plato " + p.toString() + " anyadido con exito. " + "(Stock virtual: "
 					+ Almacen.getAlmacen().toStringStockPlatos() + ").");
 
 			btnCerrarComanda.setEnabled(true);
@@ -971,7 +969,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		retrasarIds(p.getId());
 		index--;
 
-		mostrarMsgEstado("Plato " + p.toString() + " eliminado con éxito. \n(Stock virtual: "
+		mostrarMsgEstado("Plato " + p.toString() + " eliminado con exito. \n(Stock virtual: "
 				+ Almacen.getAlmacen().toStringStockPlatos() + ").");
 
 		if (index == Constantes.INDICE_INICIAL_PRODUCTOS) {
@@ -1120,7 +1118,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 					cbAvisos.setEnabled(false);
 					cbAvisos.setSelectedIndex(-1);
 					textTituloAviso.setText("** No hay avisos **");
-					textNMesaAviso.setText("Mesa número: ***");
+					textNMesaAviso.setText("Mesa numero: ***");
 					textEstadoMesa.setText("Estado mesa: ***");
 				} else
 					cbAvisos.setSelectedIndex(0);
@@ -1138,10 +1136,11 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	private class BtnIniciarComandaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			((Mesa)cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.PIDIENDO);;
+			((Mesa) cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.PIDIENDO);
+			;
 			CardLayout panel = (CardLayout) (contentPane.getLayout());
 			panel.show(contentPane, "Iniciar Comanda");
-			lblNumMesa.setText("Mesa Número: " + cbMesa.getSelectedItem());
+			lblNumMesa.setText("Mesa Numero: " + cbMesa.getSelectedItem());
 		}
 	}
 
@@ -1175,7 +1174,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 			btnConfirmarPago.setEnabled(false);
 			((Mesa) cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.ENPREPARACION);
 			// Aviso aviso = new Aviso
-			// añadirAviso(aviso);
+			// anyadirAviso(aviso);
 
 			textFieldPrecio.setText("-");
 
@@ -1186,7 +1185,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	private class BtnMesaPreparadaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			if(paraEstadisticas == null)
+			if (paraEstadisticas == null)
 				paraEstadisticas = new ArrayList<Mesa>();
 			btnMesaPreparada.setEnabled(false);
 			((Mesa) cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.LIBRE);
@@ -1260,11 +1259,11 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		((DefaultListModel<Plato>) listSegundos.getModel()).removeAllElements();
 		((DefaultListModel<Plato>) listPostres.getModel()).removeAllElements();
 
-		btnAñadirBebida.setEnabled(false);
-		btnAñadirEntrante.setEnabled(false);
-		btnAñadirPrimero.setEnabled(false);
-		btnAñadirSegundo.setEnabled(false);
-		btnAñadirPostre.setEnabled(false);
+		btnAnyadirBebida.setEnabled(false);
+		btnAnyadirEntrante.setEnabled(false);
+		btnAnyadirPrimero.setEnabled(false);
+		btnAnyadirSegundo.setEnabled(false);
+		btnAnyadirPostre.setEnabled(false);
 
 		btnQuitarBebida.setEnabled(false);
 		btnQuitarEntrante.setEnabled(false);
@@ -1323,7 +1322,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		textPaneNotificacion.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
 		lblNumNotificaciones.setText("(" + ++numNotificacionesPendientes + ")");
 		((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).addElement(comanda);
-		textNMesaAviso.setText("Mesa Número: " + comanda.getMesa().getId());
+		textNMesaAviso.setText("Mesa Numero: " + comanda.getMesa().getId());
 		textEstadoMesa.setText("Estado Mesa: " + comanda.getMesa().getEstadoMesa());
 
 	}
@@ -1343,7 +1342,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 					timer.stop();
 				} else {
 					((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).addElement(lanzado);
-					textNMesaAviso.setText("Mesa número: " + lanzado.getMesa().getId());
+					textNMesaAviso.setText("Mesa numero: " + lanzado.getMesa().getId());
 					textEstadoMesa.setText("Estado de la mesa: " + lanzado.getMesa().getEstadoMesa().name());
 					timer.stop();
 				}
@@ -1354,9 +1353,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		timer.start();
 	}
 
-	public void añadirAviso(Aviso aviso) {
+	public void anyadirAviso(Aviso aviso) {
 		((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).addElement(aviso);
-		textNMesaAviso.setText("Mesa número: " + aviso.getMesa().getId());
+		textNMesaAviso.setText("Mesa numero: " + aviso.getMesa().getId());
 		textEstadoMesa.setText("Estado de la mesa: " + aviso.getMesa().getEstadoMesa().name());
 	}
 
@@ -1373,10 +1372,10 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		return modelo;
 	}
 
-	public ArrayList<Mesa> getMesaEstadisticas(){
+	public ArrayList<Mesa> getMesaEstadisticas() {
 		return paraEstadisticas;
 	}
-	
+
 	public void restartMesas() {
 		paraEstadisticas = new ArrayList<Mesa>();
 	}

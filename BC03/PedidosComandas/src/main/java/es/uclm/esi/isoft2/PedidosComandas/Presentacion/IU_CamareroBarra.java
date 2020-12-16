@@ -51,7 +51,7 @@ public class IU_CamareroBarra extends JFrame {
 	private JButton btnGuardar;
 	private JButton btnReponer;
 
-	public static IU_CamareroBarra getInterfaz() { // Patrón Singleton
+	public static IU_CamareroBarra getInterfaz() { // Patron Singleton
 		if (mInstancia == null) {
 			mInstancia = new IU_CamareroBarra();
 			mInstancia.setVisible(true);
@@ -84,7 +84,7 @@ public class IU_CamareroBarra extends JFrame {
 			gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 			panel.setLayout(gbl_panel);
 			{
-				lblUltimaComandaEntrante = new JLabel("Avisos / Última comanda entrante:");
+				lblUltimaComandaEntrante = new JLabel("Avisos / ultima comanda entrante:");
 				GridBagConstraints gbc_lblUltimaComandaEntrante = new GridBagConstraints();
 				gbc_lblUltimaComandaEntrante.anchor = GridBagConstraints.EAST;
 				gbc_lblUltimaComandaEntrante.insets = new Insets(0, 0, 5, 5);
@@ -133,7 +133,7 @@ public class IU_CamareroBarra extends JFrame {
 				panel.add(lblNumComandasPendientes, gbc_lblNumComandasPendientes);
 			}
 			{
-				lblDescripcion = new JLabel("Descripción:");
+				lblDescripcion = new JLabel("Descripcion:");
 				GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
 				gbc_lblDescripcion.anchor = GridBagConstraints.EAST;
 				gbc_lblDescripcion.insets = new Insets(0, 0, 5, 5);
@@ -201,9 +201,9 @@ public class IU_CamareroBarra extends JFrame {
 
 		if (Almacen.getAlmacen().comprobarUmbralBebidas()) {
 			textPaneAvisosComandaEntrante
-					.setText("Restado el stock de unidades de bebidas de esta última comanda.\n" + c.toStringBebidas());
+					.setText("Restado el stock de unidades de bebidas de esta ultima comanda.\n" + c.toStringBebidas());
 		} else {
-			textPaneAvisosComandaEntrante.setText("Restado el stock de unidades de bebidas de esta última comanda.\n"
+			textPaneAvisosComandaEntrante.setText("Restado el stock de unidades de bebidas de esta ultima comanda.\n"
 					+ c.toStringBebidas() + ".\nIMPORTANTE: El stock de bebidas ha descendido por debajo del umbral.");
 		}
 
@@ -216,8 +216,8 @@ public class IU_CamareroBarra extends JFrame {
 				textPaneInfoComandaSeleccionada
 						.setText(((Comanda) cbComandasPendientes.getSelectedItem()).toStringBebidas());
 			} catch (NullPointerException NPE) {
-				// Al eliminar un elemento de la ComboBox, el índice cambia y se ejecuta este
-				// método, devolviendo una NullPointer porque no hay nada seleccionado.
+				// Al eliminar un elemento de la ComboBox, el indice cambia y se ejecuta este
+				// metodo, devolviendo una NullPointer porque no hay nada seleccionado.
 			}
 		}
 	}

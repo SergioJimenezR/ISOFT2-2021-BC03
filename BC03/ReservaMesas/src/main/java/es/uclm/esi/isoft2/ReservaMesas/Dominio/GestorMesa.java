@@ -9,7 +9,6 @@ import javax.swing.JComboBox;
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.MesaDAO;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.*;
 
-
 public class GestorMesa {
 	public static boolean cambiarEstadoOcupado(int idMesa, String dniCliente) throws SQLException {
 		JComboBox<Mesa> mesas = IU_JefeSala.getComboBoxReservadas();
@@ -27,7 +26,7 @@ public class GestorMesa {
 		}
 		return false;
 	}
-	
+
 	public static boolean cancelarMesa(int idMesa) throws SQLException {
 		JComboBox<Mesa> mesas = IU_JefeSala.getComboBoxReservadas();
 		for (int i = 0; i < mesas.getItemCount(); i++) {
@@ -44,9 +43,9 @@ public class GestorMesa {
 		}
 		return false;
 	}
-	
+
 	public static void actualizarMesa(int id, String estado, String dni) throws SQLException {
 		MesaDAO.actualizarNumMesa(id, estado, dni);
 	}
-	
+
 }

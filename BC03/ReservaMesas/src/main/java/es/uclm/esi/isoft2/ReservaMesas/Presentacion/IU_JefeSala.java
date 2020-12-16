@@ -36,7 +36,6 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
-import java.awt.GridLayout;
 import javax.swing.JTextArea;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -72,22 +71,17 @@ public class IU_JefeSala extends JFrame {
 	private JTextArea textAreaValoresEstadisticas;
 	private Estadisticas estadisticas;
 	private JScrollPane scrollPane;
+
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					IU_JefeSala frame = new IU_JefeSala();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-	
+	/*
+	 * public static void main(String[] args) { EventQueue.invokeLater(new
+	 * Runnable() { public void run() { try { IU_JefeSala frame = new IU_JefeSala();
+	 * frame.setVisible(true); } catch (Exception e) { e.printStackTrace(); } } });
+	 * }
+	 */
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -122,7 +116,7 @@ public class IU_JefeSala extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				if(estadisticas != null)
+				if (estadisticas != null)
 					try {
 						estadisticas.enviarTiemposPersistencia();
 					} catch (SQLException e1) {
@@ -137,10 +131,10 @@ public class IU_JefeSala extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 172, 110, 100, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 0, 172, 110, 100, 0, 0, 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 		{
 			panel = new JPanel();
@@ -311,7 +305,8 @@ public class IU_JefeSala extends JFrame {
 			btnRefrescar.addActionListener(new BtnRefrescarActionListener());
 			{
 				panelEstadisticas = new JPanel();
-				panelEstadisticas.setBorder(new TitledBorder(null, "Estadisticas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				panelEstadisticas.setBorder(
+						new TitledBorder(null, "Estadisticas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				GridBagConstraints gbc_panelEstadisticas = new GridBagConstraints();
 				gbc_panelEstadisticas.gridheight = 2;
 				gbc_panelEstadisticas.insets = new Insets(0, 0, 5, 5);
@@ -320,14 +315,15 @@ public class IU_JefeSala extends JFrame {
 				gbc_panelEstadisticas.gridy = 3;
 				contentPane.add(panelEstadisticas, gbc_panelEstadisticas);
 				GridBagLayout gbl_panelEstadisticas = new GridBagLayout();
-				gbl_panelEstadisticas.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-				gbl_panelEstadisticas.rowHeights = new int[]{0, 0, 0};
-				gbl_panelEstadisticas.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-				gbl_panelEstadisticas.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+				gbl_panelEstadisticas.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+				gbl_panelEstadisticas.rowHeights = new int[] { 0, 0, 0 };
+				gbl_panelEstadisticas.columnWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+						0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+				gbl_panelEstadisticas.rowWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
 				panelEstadisticas.setLayout(gbl_panelEstadisticas);
 				{
 					btnVerEstadisticas = new JButton("Consultar");
-					btnVerEstadisticas.addActionListener(new  BtnConsularEstadisticasActionListener());
+					btnVerEstadisticas.addActionListener(new BtnConsularEstadisticasActionListener());
 					{
 						scrollPane = new JScrollPane();
 						GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -390,18 +386,19 @@ public class IU_JefeSala extends JFrame {
 			String dni = textFieldDni.getText();
 			String fechaString = ftfFecha.getText();
 			Mesa reservada = (Mesa) cBMesas.getSelectedItem();
-				try {
-					Date fecha = new SimpleDateFormat("dd/MM/yy").parse(fechaString);
-					reservada.modificarDatosReservado(dni, fecha);
-					cBLlegadaReserva.addItem(reservada);
-					cBMesas.removeItem(reservada);
-					MesaDAO.actualizarNumMesa(reservada.getId(), "RESERVADA", reservada.getDni());
-					((DefaultComboBoxModel)cBLlegadaReserva.getModel()).addElement(reservada);
-				} catch (ParseException | SQLException e1) {
-					e1.printStackTrace();
-				}		
+			try {
+				Date fecha = new SimpleDateFormat("dd/MM/yy").parse(fechaString);
+				reservada.modificarDatosReservado(dni, fecha);
+				cBLlegadaReserva.addItem(reservada);
+				cBMesas.removeItem(reservada);
+				MesaDAO.actualizarNumMesa(reservada.getId(), "RESERVADA", reservada.getDni());
+				((DefaultComboBoxModel) cBLlegadaReserva.getModel()).addElement(reservada);
+			} catch (ParseException | SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
+
 	private class BtnConsularEstadisticasActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			ArrayList<Mesa> mesas = null;
@@ -411,35 +408,34 @@ public class IU_JefeSala extends JFrame {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
-				if(mesas.size() > 0) {
+			if (mesas.size() > 0) {
+				try {
+					if (estadisticas == null) {
+						estadisticas = new Estadisticas();
+					}
+					for (int i = 0; i < mesas.size(); i++) {
+						estadisticas.enviarTiemposMediosMesa(mesas.get(i));
+					}
+					textAreaValoresEstadisticas.setText(estadisticas.getTiemposEstadistica());
+					estadisticas.enviarTiemposPersistencia();
+					IU_CamareroMesa.getInterfaz().restartMesas();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			} else {
+				if (estadisticas == null) {
 					try {
-						if(estadisticas == null) {
-							estadisticas = new Estadisticas();
-						}
-						for(int i=0;i<mesas.size();i++) {
-								estadisticas.enviarTiemposMediosMesa(mesas.get(i));
-						}
-						textAreaValoresEstadisticas.setText(estadisticas.getTiemposEstadistica());
-						 estadisticas.enviarTiemposPersistencia();
-						 IU_CamareroMesa.getInterfaz().restartMesas();
+						estadisticas = new Estadisticas();
 					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
-				else {
-					if(estadisticas == null) {
-						try {
-							estadisticas = new Estadisticas();
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					}
-					textAreaValoresEstadisticas.setText(estadisticas.getTiemposEstadistica());
-				}
+				textAreaValoresEstadisticas.setText(estadisticas.getTiemposEstadistica());
+			}
 		}
 	}
-  
+
 	private class BtnRefrescarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			DefaultComboBoxModel<Mesa> modelo;
@@ -478,9 +474,9 @@ public class IU_JefeSala extends JFrame {
 					modelo.addElement(new Mesa(m, EstadosMesas.LIBRE));
 				}
 			}
-					
+
 		}
-		
+
 		return modelo;
 	}
 

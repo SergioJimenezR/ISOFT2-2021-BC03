@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class AlmacenDAOTest {
-	
+
 	@Before
 	public void setUp() throws Exception {
 	}
@@ -24,32 +24,30 @@ public class AlmacenDAOTest {
 	@Test
 	public void testLeerStockBebidas() throws Exception {
 		AlmacenDAO.leerStockBebidas();
-		
+
 	}
 
 	@Test
 	public void testActualizarStockPlatos() throws Exception {
-		int [] stockPlatos = null;
+		int[] stockPlatos = null;
 		try {
 			AlmacenDAO.actualizarStockPlatos(stockPlatos);
-		}
-		catch (NullPointerException ex) {
+		} catch (NullPointerException ex) {
 			assertArrayEquals("NULL EXCEPTION", stockPlatos, null);
 		}
-		int [] stockPlatos1 = {100, 0, 0};
+		int[] stockPlatos1 = { 100, 0, 0 };
 		AlmacenDAO.actualizarStockPlatos(stockPlatos1);
 	}
 
 	@Test
 	public void testActualizarStockBebidas() throws Exception {
-		int [] stockBebidas = null;
+		int[] stockBebidas = null;
 		try {
 			AlmacenDAO.actualizarStockBebidas(stockBebidas);
-		}
-		catch (NullPointerException ex) {
+		} catch (NullPointerException ex) {
 			assertArrayEquals("NULL EXCEPTION", stockBebidas, null);
 		}
-		int [] stockBebidas1 = {100, 0, 0};
+		int[] stockBebidas1 = { 100, 0, 0 };
 		AlmacenDAO.actualizarStockBebidas(stockBebidas1);
 	}
 

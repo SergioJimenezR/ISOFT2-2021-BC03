@@ -1,11 +1,9 @@
 package es.uclm.esi.isoft2.CocinaAlmacen.Persistencia;
 
-import java.sql.ResultSet;
 import org.junit.Test;
 
 public class AgenteTest {
 
-	
 	@Test
 	public void testGetAgente() throws Exception {
 		Agente.getAgente();
@@ -13,7 +11,7 @@ public class AgenteTest {
 
 	@Test
 	public void testUpdate() throws Exception {
-		int [] stockPlatos = {1000, 1000, 1000};
+		int[] stockPlatos = { 1000, 1000, 1000 };
 		for (int i = 0; i < stockPlatos.length; i++) {
 			String instruccion = "UPDATE STOCK_PLATOS SET cantidad = " + stockPlatos[i] + " WHERE (id = '" + i + "');";
 			Agente.getAgente().update(instruccion);

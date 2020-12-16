@@ -4,7 +4,6 @@ public class Cliente {
 
 	private String nombre;
 
-	
 	public Cliente(String nombre) {
 		setNombre(nombre);
 	}
@@ -17,5 +16,4 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 
-	
 }

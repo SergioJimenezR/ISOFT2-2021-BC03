@@ -10,13 +10,12 @@ public class Agente implements BDConstantes {
 
 	private static Agente mInstancia = null;
 	private Connection mBD;
-	
 
 	private Agente() throws SQLException {
 		mBD = DriverManager.getConnection(CONNECTION_STRING, DBUSER, DBPASS);
 	}
 
-	public static Agente getAgente() throws SQLException { // Patrón Singleton
+	public static Agente getAgente() throws SQLException { // Patron Singleton
 		if (mInstancia == null)
 			mInstancia = new Agente();
 		return mInstancia;
