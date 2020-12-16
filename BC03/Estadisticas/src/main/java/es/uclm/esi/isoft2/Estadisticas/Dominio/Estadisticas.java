@@ -31,8 +31,8 @@ public class Estadisticas {
 
 	public void enviarTiemposMediosMesa(Mesa mesa) {
 		double[] tiemposMesa = mesa.getVectorTiempos();
+		++nMesas;
 		for (int i = 0; i < tiemposMesa.length; i++) {
-			++nMesas;
 			vectorTiemposMediosTotales[i] = ((vectorTiemposMediosTotales[i]) + tiemposMesa[i]) / (double) this.nMesas;
 		}
 	}
