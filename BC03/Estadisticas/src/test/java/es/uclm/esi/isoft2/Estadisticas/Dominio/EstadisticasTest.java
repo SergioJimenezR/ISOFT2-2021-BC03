@@ -8,7 +8,6 @@ import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
 
 public class EstadisticasTest {
 
-
 	@Test
 	public void testEstadisticas() throws Exception {
 		Estadisticas es = new Estadisticas();
@@ -25,7 +24,7 @@ public class EstadisticasTest {
 		Mesa m = new Mesa(5);
 		Estadisticas es = new Estadisticas();
 		es.enviarTiemposMediosMesa(m);
-		
+
 	}
 
 	@Test

@@ -10,6 +10,7 @@ public class EstadisticasDAO {
 
 	/**
 	 * Recupera de la base de datos el tiempo medio de cada estado
+	 * 
 	 * @return
 	 * @throws SQLException
 	 */
@@ -30,8 +31,10 @@ public class EstadisticasDAO {
 		return medias;
 
 	}
+
 	/**
-	 * Recupera de la base de datos el número total de mesas atendidas
+	 * Recupera de la base de datos el numero total de mesas atendidas
+	 * 
 	 * @return
 	 * @throws SQLException
 	 */
@@ -44,7 +47,9 @@ public class EstadisticasDAO {
 	}
 
 	/**
-	 * Acutaliza el tiempo de cada estado y el numero de mesas atentidas en la base de datos
+	 * Acutaliza el tiempo de cada estado y el numero de mesas atentidas en la base
+	 * de datos
+	 * 
 	 * @param vectorTiemposMediosTotales
 	 * @param nMesas
 	 * @return

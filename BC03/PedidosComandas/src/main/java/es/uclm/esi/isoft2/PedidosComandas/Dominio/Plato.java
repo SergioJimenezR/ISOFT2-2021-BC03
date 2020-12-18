@@ -3,7 +3,7 @@ package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.Constantes;
 
 /**
- * Clase que representa al Plato en cuestión.
+ * Clase que representa al Plato en cuestion.
  * 
  * @author BC03
  *
@@ -11,7 +11,7 @@ import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.Constantes;
 public class Plato {
 
 	/**
-	 * Identificador único del plato.
+	 * Identificador unico del plato.
 	 */
 	private int id;
 	/**
@@ -19,8 +19,8 @@ public class Plato {
 	 */
 	private String nombre;
 	/**
-	 * Vector de números enteros que almacenan respectivamente las cantidades de
-	 * gramos, de cada ingrediente del plato en cuestión.
+	 * Vector de numeros enteros que almacenan respectivamente las cantidades de
+	 * gramos, de cada ingrediente del plato en cuestion.
 	 */
 	private int[] ingredientes;
 
@@ -37,7 +37,7 @@ public class Plato {
 	}
 
 	/**
-	 * Método que devuelve el identificador único del plato.
+	 * Metodo que devuelve el identificador unico del plato.
 	 * 
 	 * @return id
 	 */
@@ -46,7 +46,7 @@ public class Plato {
 	}
 
 	/**
-	 * Método que fija el valor del identificador único del plato.
+	 * Metodo que fija el valor del identificador unico del plato.
 	 * 
 	 * @param id
 	 */
@@ -55,7 +55,7 @@ public class Plato {
 	}
 
 	/**
-	 * Método que devuelve el nombre del plato.
+	 * Metodo que devuelve el nombre del plato.
 	 * 
 	 * @return nombre
 	 */
@@ -64,7 +64,7 @@ public class Plato {
 	}
 
 	/**
-	 * Método que fija el nombre del plato.
+	 * Metodo que fija el nombre del plato.
 	 * 
 	 * @param nombre
 	 */
@@ -73,7 +73,7 @@ public class Plato {
 	}
 
 	/**
-	 * Método que devuelve la cantidad de ingredientes del plato.
+	 * Metodo que devuelve la cantidad de ingredientes del plato.
 	 * 
 	 * @return ingredientes
 	 */
@@ -82,7 +82,7 @@ public class Plato {
 	}
 
 	/**
-	 * Método que fija la cantidad de ingredientes del plato.
+	 * Metodo que fija la cantidad de ingredientes del plato.
 	 * 
 	 * @param ingredientes
 	 */
@@ -91,15 +91,15 @@ public class Plato {
 	}
 
 	/**
-	 * Método que devuelve la información del plato, indicando su nombre e
-	 * identificador único.
+	 * Metodo que devuelve la informacion del plato, indicando su nombre e
+	 * identificador unico.
 	 */
 	public String toString() {
 		return nombre + " (id: " + id + ")";
 	}
 
 	/**
-	 * Método que ayuda a calcular los números de cantidades de ingredientes sobre
+	 * Metodo que ayuda a calcular los numeros de cantidades de ingredientes sobre
 	 * las constantes prefijadas, del plato.
 	 * 
 	 * @param nombre
@@ -140,14 +140,14 @@ public class Plato {
 	}
 
 	/**
-	 * Método que reduce el identificador único del plato.
+	 * Metodo que reduce el identificador unico del plato.
 	 */
 	public void reducirId() {
 		this.id--;
 	}
 
 	/**
-	 * Método que devuelve la lista de ingredientes del plato.
+	 * Metodo que devuelve la lista de ingredientes del plato.
 	 * 
 	 * @return
 	 */

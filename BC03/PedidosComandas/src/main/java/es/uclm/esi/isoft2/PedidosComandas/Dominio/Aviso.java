@@ -1,7 +1,7 @@
 package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
 /**
- * Clase que representa la figura de Aviso, para superación de tiempos límite,
+ * Clase que representa la figura de Aviso, para superacion de tiempos limite,
  * entre otras cosas.
  * 
  * @author BC03
@@ -10,7 +10,7 @@ package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 public class Aviso {
 
 	/**
-	 * Atributo de identificador único del aviso o clases que heredan de ésta
+	 * Atributo de identificador unico del aviso o clases que heredan de esta
 	 * (Comanda).
 	 */
 	protected int id;
@@ -19,7 +19,7 @@ public class Aviso {
 	 */
 	protected Mesa mesa;
 	/**
-	 * Tiempo máximo de espera para el lanzamiento del aviso.
+	 * Tiempo maximo de espera para el lanzamiento del aviso.
 	 */
 	private int tiempoEspera;
 	/**
@@ -28,7 +28,7 @@ public class Aviso {
 	private boolean atendido;
 
 	/**
-	 * Método constructor de la clase Aviso. Resulta ser una clase padre en relación
+	 * Metodo constructor de la clase Aviso. Resulta ser una clase padre en relacion
 	 * de Herencia, heredada.
 	 * 
 	 * @param id
@@ -42,7 +42,7 @@ public class Aviso {
 	}
 
 	/**
-	 * Método que devuelve el identificador único del aviso o clases hijas
+	 * Metodo que devuelve el identificador unico del aviso o clases hijas
 	 * (comanda).
 	 * 
 	 * @return id
@@ -52,7 +52,7 @@ public class Aviso {
 	}
 
 	/**
-	 * Método que da valor al identificador único del aviso o comanda.
+	 * Metodo que da valor al identificador unico del aviso o comanda.
 	 * 
 	 * @param id
 	 */
@@ -61,7 +61,7 @@ public class Aviso {
 	}
 
 	/**
-	 * Método que devuelve la Mesa asociada a la instancia Aviso o clases hijas.
+	 * Metodo que devuelve la Mesa asociada a la instancia Aviso o clases hijas.
 	 * 
 	 * @return mesa
 	 */
@@ -70,7 +70,7 @@ public class Aviso {
 	}
 
 	/**
-	 * Método que fija la mesa a la instancia en concreto de Aviso o comandas.
+	 * Metodo que fija la mesa a la instancia en concreto de Aviso o comandas.
 	 * 
 	 * @param mesa
 	 */
@@ -79,7 +79,7 @@ public class Aviso {
 	}
 
 	/**
-	 * Método que obtiene el tiempo de espera fijado para el aviso.
+	 * Metodo que obtiene el tiempo de espera fijado para el aviso.
 	 * 
 	 * @return tiempoEspera
 	 */
@@ -88,7 +88,7 @@ public class Aviso {
 	}
 
 	/**
-	 * Método que accede a la información de si dicho aviso se ha atendido ya.
+	 * Metodo que accede a la informacion de si dicho aviso se ha atendido ya.
 	 * 
 	 * @return atendido
 	 */
@@ -97,7 +97,7 @@ public class Aviso {
 	}
 
 	/**
-	 * Método que fija a true el atributo atendido, indicando que se ha atendido,
+	 * Metodo que fija a true el atributo atendido, indicando que se ha atendido,
 	 * cuando se atiende un aviso.
 	 */
 	public void setAtendidoTrue() {
@@ -105,7 +105,7 @@ public class Aviso {
 	}
 
 	/**
-	 * Método que fija el tiempo de espera de un aviso.
+	 * Metodo que fija el tiempo de espera de un aviso.
 	 * 
 	 * @param tiempoEspera
 	 */
@@ -114,7 +114,7 @@ public class Aviso {
 	}
 
 	/**
-	 * Método que devuelve la información del aviso, que se muestra al personal del
+	 * Metodo que devuelve la informacion del aviso, que se muestra al personal del
 	 * restaurante.
 	 * 
 	 * @return String

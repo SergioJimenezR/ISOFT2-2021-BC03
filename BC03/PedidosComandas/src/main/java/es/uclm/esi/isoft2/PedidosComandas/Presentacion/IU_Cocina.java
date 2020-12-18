@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 /**
- * Clase que representa la interfaz gráfica de usuario de la Cocina.
+ * Clase que representa la interfaz grafica de usuario de la Cocina.
  * 
  * @author BC03
  *
@@ -40,12 +40,12 @@ public class IU_Cocina extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Instancia del patrón singleton.
+	 * Instancia del patron singleton.
 	 */
 	private static IU_Cocina mInstancia = null;
 
 	/**
-	 * Elementos de la interfaz gráfica de usuario.
+	 * Elementos de la interfaz grafica de usuario.
 	 */
 	private JPanel contentPane;
 	private JPanel panel;
@@ -64,12 +64,12 @@ public class IU_Cocina extends JFrame {
 	private JButton btnReponer;
 
 	/**
-	 * Número que representa el número de ccomandas pendientes a preparar.
+	 * Numero que representa el numero de ccomandas pendientes a preparar.
 	 */
 	private int numComandasPendientes;
 
 	/**
-	 * Método que devuelve la instancia de la interfaz, del patrón Singleton.
+	 * Metodo que devuelve la instancia de la interfaz, del patron Singleton.
 	 * 
 	 * @return instancia
 	 */
@@ -82,8 +82,8 @@ public class IU_Cocina extends JFrame {
 	}
 
 	/**
-	 * Constructor de la interfaz gráfica de usuario, que ayuda a colocar todos los
-	 * elementos sobre ésta.
+	 * Constructor de la interfaz grafica de usuario, que ayuda a colocar todos los
+	 * elementos sobre esta.
 	 */
 	private IU_Cocina() {
 
@@ -211,8 +211,8 @@ public class IU_Cocina extends JFrame {
 	}
 
 	/**
-	 * Método que ayuda a enlistar las comandas que disponen de comidas en la
-	 * JComboBox que las reúne.
+	 * Metodo que ayuda a enlistar las comandas que disponen de comidas en la
+	 * JComboBox que las reune.
 	 * 
 	 * @param comanda
 	 */
@@ -225,8 +225,8 @@ public class IU_Cocina extends JFrame {
 	}
 
 	/**
-	 * Método que reduce el stock de comidas de una determinada comanda seleccionada
-	 * en la JComboBox, cuando se pulsa el botón de Avisar.
+	 * Metodo que reduce el stock de comidas de una determinada comanda seleccionada
+	 * en la JComboBox, cuando se pulsa el boton de Avisar.
 	 * 
 	 * @param c
 	 */
@@ -264,8 +264,8 @@ public class IU_Cocina extends JFrame {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación de un
-	 * elemento de la lista desplegable JComboBox donde están enlistadas las
+	 * ActionListener segun inner class que maneja el evento de pulsacion de un
+	 * elemento de la lista desplegable JComboBox donde estan enlistadas las
 	 * Comandas Pendientes.
 	 * 
 	 * @author BC03
@@ -285,7 +285,7 @@ public class IU_Cocina extends JFrame {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
 	 * Avisar, que srive para marcar como preparada las comidas de la comanda por
 	 * parte de la cocina, para avisar al camarero de mesa para que sirva la comida
 	 * a la mesa.
@@ -316,9 +316,9 @@ public class IU_Cocina extends JFrame {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
-	 * Guardar, que sirve para actualizar la base de datos según el stock actual del
-	 * Almacén.
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
+	 * Guardar, que sirve para actualizar la base de datos segun el stock actual del
+	 * Almacen.
 	 * 
 	 * @author BC03
 	 *
@@ -330,9 +330,9 @@ public class IU_Cocina extends JFrame {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
 	 * Reponer, que sirve para actualizar los stocks de la base de datos y del
-	 * almacén al máximo de stock reglamentado, cuando se avisa de que se ha
+	 * almacen al maximo de stock reglamentado, cuando se avisa de que se ha
 	 * descendido por debajo del umbral.
 	 * 
 	 * @author BC03

@@ -12,9 +12,10 @@ import java.text.ParseException;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
 
 public class App {
-	
+
 	/**
-	 * Método principal del programa.
+	 * Metodo principal del programa.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -28,10 +29,8 @@ public class App {
 					IU_JefeSala frame = new IU_JefeSala();
 					frame.setVisible(true);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				IU_Cocina.getInterfaz();

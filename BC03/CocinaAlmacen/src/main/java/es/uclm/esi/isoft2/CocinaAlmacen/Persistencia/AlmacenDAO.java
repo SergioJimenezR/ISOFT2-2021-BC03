@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class AlmacenDAO implements Constantes {
 
 	/**
-	 * Método que realiza una lectura de los platos del estado actual de la base de
+	 * Metodo que realiza una lectura de los platos del estado actual de la base de
 	 * datos.
 	 * 
 	 * @return
@@ -35,7 +35,7 @@ public class AlmacenDAO implements Constantes {
 	}
 
 	/**
-	 * Método que realiza una lectura de las bebidas del estado actual de la base de
+	 * Metodo que realiza una lectura de las bebidas del estado actual de la base de
 	 * datos.
 	 * 
 	 * @return
@@ -53,8 +53,8 @@ public class AlmacenDAO implements Constantes {
 	}
 
 	/**
-	 * Método que actualiza el stock de los platos del Almacén sobre la base de
-	 * datos (botón Guardar).
+	 * Metodo que actualiza el stock de los platos del Almacen sobre la base de
+	 * datos (boton Guardar).
 	 * 
 	 * @param stockPlatos
 	 * @throws SQLException
@@ -67,8 +67,8 @@ public class AlmacenDAO implements Constantes {
 	}
 
 	/**
-	 * Método que actualiza el stock de las bebidas del Almacén sobre la base de
-	 * datos (botón Guardar).
+	 * Metodo que actualiza el stock de las bebidas del Almacen sobre la base de
+	 * datos (boton Guardar).
 	 * 
 	 * @param stockBebidas
 	 * @throws SQLException

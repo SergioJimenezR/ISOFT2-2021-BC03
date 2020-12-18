@@ -11,34 +11,34 @@ import java.util.ArrayList;
 public class Comanda extends Aviso {
 
 	/**
-	 * Lista dinámica que contiene las bebidas que se han solicitado en esta
+	 * Lista dinamica que contiene las bebidas que se han solicitado en esta
 	 * comanda.
 	 */
 	private ArrayList<Bebida> bebidas;
 
 	/**
-	 * Lista dinámica que contiene los entrantes que se han solicitado en esta
+	 * Lista dinamica que contiene los entrantes que se han solicitado en esta
 	 * comanda.
 	 */
 	private ArrayList<Plato> entrantes;
 	/**
-	 * Lista dinámica que contiene los primeros que se han solicitado en esta
+	 * Lista dinamica que contiene los primeros que se han solicitado en esta
 	 * comanda.
 	 */
 	private ArrayList<Plato> primeros;
 	/**
-	 * Lista dinámica que contiene los segundos que se han solicitado en esta
+	 * Lista dinamica que contiene los segundos que se han solicitado en esta
 	 * comanda.
 	 */
 	private ArrayList<Plato> segundos;
 	/**
-	 * Lista dinámica que contiene los postres que se han solicitado en esta
+	 * Lista dinamica que contiene los postres que se han solicitado en esta
 	 * comanda.
 	 */
 	private ArrayList<Plato> postres;
 
 	/**
-	 * Método constructor de la comanda, con relación de herencia sobre Aviso.
+	 * Metodo constructor de la comanda, con relacion de herencia sobre Aviso.
 	 * 
 	 * @param id
 	 * @param mesa
@@ -59,7 +59,7 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que devuelve una lista dinámica con todos los platos, de todos los
+	 * Metodo que devuelve una lista dinamica con todos los platos, de todos los
 	 * tipos de platos, de la comanda.
 	 * 
 	 * @return comidas
@@ -74,7 +74,7 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que devuelve una lista dinámica con todas las bebidas de la comanda.
+	 * Metodo que devuelve una lista dinamica con todas las bebidas de la comanda.
 	 * 
 	 * @return bebidas
 	 */
@@ -83,7 +83,7 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que fija las bebidas asociadas a una comanda en concreto.
+	 * Metodo que fija las bebidas asociadas a una comanda en concreto.
 	 * 
 	 * @param bebidas
 	 */
@@ -92,7 +92,7 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que recupera el listado de platos entrantes de la comanda.
+	 * Metodo que recupera el listado de platos entrantes de la comanda.
 	 * 
 	 * @return entrantes
 	 */
@@ -101,8 +101,8 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que fija los entrantes a una comanda en concreto, que se pasan por
-	 * parámetro.
+	 * Metodo que fija los entrantes a una comanda en concreto, que se pasan por
+	 * parametro.
 	 * 
 	 * @param entrantes
 	 */
@@ -111,7 +111,7 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que recupera el listado de primeros platos de la comanda.
+	 * Metodo que recupera el listado de primeros platos de la comanda.
 	 * 
 	 * @return primeros
 	 */
@@ -120,7 +120,7 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que fija los primeros platos a una comanda en concreto.
+	 * Metodo que fija los primeros platos a una comanda en concreto.
 	 * 
 	 * @param primeros
 	 */
@@ -129,7 +129,7 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que recupera el listado de segundos platos de la comanda.
+	 * Metodo que recupera el listado de segundos platos de la comanda.
 	 * 
 	 * @return segundos
 	 */
@@ -138,7 +138,7 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que fija los segundos platos a una comanda en concreto.
+	 * Metodo que fija los segundos platos a una comanda en concreto.
 	 * 
 	 * @param segundos
 	 */
@@ -147,7 +147,7 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que recupera el listado de postres de la comanda.
+	 * Metodo que recupera el listado de postres de la comanda.
 	 * 
 	 * @return postres
 	 */
@@ -156,7 +156,7 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que fija los postres a una comanda en concreto.
+	 * Metodo que fija los postres a una comanda en concreto.
 	 * 
 	 * @param postres
 	 */
@@ -165,7 +165,7 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que devuelve la información de dicha comanda.
+	 * Metodo que devuelve la informacion de dicha comanda.
 	 */
 	@Override
 	public String toString() {
@@ -173,7 +173,7 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que devuelve la información de la lista de todos los platos de la
+	 * Metodo que devuelve la informacion de la lista de todos los platos de la
 	 * comanda.
 	 * 
 	 * @return comidas
@@ -211,7 +211,7 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que devuelve la información de la lista de todas las bebidas de la
+	 * Metodo que devuelve la informacion de la lista de todas las bebidas de la
 	 * comanda.
 	 * 
 	 * @return bebidas
@@ -224,7 +224,7 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que desvela si la comanda tiene bebidas.
+	 * Metodo que desvela si la comanda tiene bebidas.
 	 * 
 	 * @return boolean
 	 */
@@ -233,7 +233,7 @@ public class Comanda extends Aviso {
 	}
 
 	/**
-	 * Método que desvela si la comanda dispone de platos.
+	 * Metodo que desvela si la comanda dispone de platos.
 	 * 
 	 * @return
 	 */

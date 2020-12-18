@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Clase que engloba la figura del Agente Broker, según un patrón Singleton,
+ * Clase que engloba la figura del Agente Broker, segun un patron Singleton,
  * para las operaciones del programa contra la base de datos.
  * 
  * @author BC03
@@ -21,12 +21,12 @@ public class Agente implements BDConstantes {
 	 */
 	private static Agente mInstancia = null;
 	/**
-	 * Conexión de la base de datos.
+	 * Conexion de la base de datos.
 	 */
 	private Connection mBD;
 
 	/**
-	 * Constructor privado del Agente. Patrón Singleton
+	 * Constructor privado del Agente. Patron Singleton
 	 * 
 	 * @throws SQLException
 	 */
@@ -35,7 +35,7 @@ public class Agente implements BDConstantes {
 	}
 
 	/**
-	 * Método que devuelve la instancia del Agente, según el patrón Singleton.
+	 * Metodo que devuelve la instancia del Agente, segun el patron Singleton.
 	 * 
 	 * @return
 	 * @throws SQLException
@@ -47,7 +47,7 @@ public class Agente implements BDConstantes {
 	}
 
 	/**
-	 * Método que sirve para operar sentencias SQL de creación de tablas contra el
+	 * Metodo que sirve para operar sentencias SQL de creacion de tablas contra el
 	 * esquema de la BD. Devuelve un entero de la cantidad de tuplas afectadas.
 	 * 
 	 * @param instruccion
@@ -62,7 +62,7 @@ public class Agente implements BDConstantes {
 	}
 
 	/**
-	 * Método que sirve para operar sentencias SQL de inserción de tuplas sobre las
+	 * Metodo que sirve para operar sentencias SQL de insercion de tuplas sobre las
 	 * tablas, contra el esquema de la BD. Devuelve un entero de la cantidad de
 	 * tuplas afectadas.
 	 * 
@@ -78,7 +78,7 @@ public class Agente implements BDConstantes {
 	}
 
 	/**
-	 * Método que sirve para operar sentencias SQL de eliminación de tuplas sobre
+	 * Metodo que sirve para operar sentencias SQL de eliminacion de tuplas sobre
 	 * las tablas, contra el esquema de la BD. Devuelve un entero de la cantidad de
 	 * tuplas afectadas.
 	 * 
@@ -94,7 +94,7 @@ public class Agente implements BDConstantes {
 	}
 
 	/**
-	 * Método que sirve para operar sentencias SQL de modificación o actualización
+	 * Metodo que sirve para operar sentencias SQL de modificacion o actualizacion
 	 * (update) de datos de tuplas de las tablas, contra el esquema de la BD.
 	 * Devuelve un entero de la cantidad de tuplas afectadas.
 	 * 
@@ -110,8 +110,8 @@ public class Agente implements BDConstantes {
 	}
 
 	/**
-	 * Método que sirve para operar sentencias SQL no contempladas en los demás
-	 * métodos, contra el esquema de la BD. Algunos ejemplos de sentencias son DROP
+	 * Metodo que sirve para operar sentencias SQL no contempladas en los demas
+	 * metodos, contra el esquema de la BD. Algunos ejemplos de sentencias son DROP
 	 * TABLE, ALTER USER... Devuelve un entero de la cantidad de tuplas afectadas.
 	 * 
 	 * @param instruccion
@@ -126,7 +126,7 @@ public class Agente implements BDConstantes {
 	}
 
 	/**
-	 * Método que sirve para realizar consultas SELECT de los datos de las tablas,
+	 * Metodo que sirve para realizar consultas SELECT de los datos de las tablas,
 	 * del esquema. Devuelve un ResultSet de la consulta.
 	 * 
 	 * @param instruccion

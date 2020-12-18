@@ -1,7 +1,7 @@
 package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
 /**
- * Enumeración que engloba todos los estados que puede atravesar una mesa en
+ * Enumeracion que engloba todos los estados que puede atravesar una mesa en
  * concreto.
  * 
  * @author BC03

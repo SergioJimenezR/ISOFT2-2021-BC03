@@ -42,7 +42,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JScrollPane;
 
 /**
- * @author Usuario
+ * @author BC03
  *
  */
 public class IU_JefeSala extends JFrame {

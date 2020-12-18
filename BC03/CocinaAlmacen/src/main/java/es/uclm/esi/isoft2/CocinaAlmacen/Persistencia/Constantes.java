@@ -1,7 +1,7 @@
 package es.uclm.esi.isoft2.CocinaAlmacen.Persistencia;
 
 /**
- * Interface de constantes que mantiene toda la información reglamentada del
+ * Interface de constantes que mantiene toda la informacion reglamentada del
  * programa.
  * 
  * @author BC03
@@ -11,29 +11,29 @@ package es.uclm.esi.isoft2.CocinaAlmacen.Persistencia;
 public interface Constantes {
 
 	/**
-	 * Índice en el que comienza los identificadores únicos.
+	 * Indice en el que comienza los identificadores unicos.
 	 */
 	public final int INDICE_INICIAL_PRODUCTOS = 1;
 
 	/**
-	 * Número de mesas del programa.
+	 * Numero de mesas del programa.
 	 */
 	public final int NUM_MESAS = 6;
 
 	/**
-	 * Stock máximo reglamentado de bebidas, al momento de la reposición.
+	 * Stock maximo reglamentado de bebidas, al momento de la reposicion.
 	 */
 	public final int STOCK_MAXIMO_BEBIDAS = 50;
 
 	/**
-	 * Stock máximo reglamentado de cantidad de gramos de cada ingredientes, al
-	 * momento de la reposición.
+	 * Stock maximo reglamentado de cantidad de gramos de cada ingredientes, al
+	 * momento de la reposicion.
 	 */
 	public final int STOCK_MAXIMO_INGREDIENTES = 1000;
 
 	/**
 	 * Umbral sobre el que se avisa, cuando los stocks descienden de este umbral
-	 * sobre las máximas cantidades.
+	 * sobre las maximas cantidades.
 	 */
 	public final double UMBRAL = 0.2;
 
@@ -43,7 +43,7 @@ public interface Constantes {
 	public final String[] NOMBRES_BEBIDAS = { "Bebida1", "Bebida2", "Bebida3", "Bebida4", "Bebida5" };
 
 	/**
-	 * Nombres de los tipos de ingredientes de los platos. Cada plato reúne estos 3
+	 * Nombres de los tipos de ingredientes de los platos. Cada plato reune estos 3
 	 * ingredientes.
 	 */
 	public final String[] NOMBRES_INGREDIENTES = { "Ingrediente1", "Ingrediente2", "Ingrediente3" };

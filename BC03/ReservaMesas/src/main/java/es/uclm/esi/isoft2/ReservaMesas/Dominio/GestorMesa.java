@@ -10,14 +10,16 @@ import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.MesaDAO;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.*;
 
 /**
- * Asume la comunicación con la clase MesaDAO de la capa de persistencia
- * @author 
+ * Asume la comunicacion con la clase MesaDAO de la capa de persistencia
+ * 
+ * @author BC03
  *
  */
 public class GestorMesa {
 	/**
-	 * Modifica el estado de la mesa en la base de datos cambiando su estado a ocupada y modificando
-	 * el DNI al que se asocia la mesa
+	 * Modifica el estado de la mesa en la base de datos cambiando su estado a
+	 * ocupada y modificando el DNI al que se asocia la mesa
+	 * 
 	 * @param idMesa
 	 * @param dniCliente
 	 * @return
@@ -41,8 +43,9 @@ public class GestorMesa {
 	}
 
 	/**
-	 * Modifica el estado de la mesa en la base de datos cambiando su estado a libre y modificando
-	 * el DNI al que se asocia la mesa
+	 * Modifica el estado de la mesa en la base de datos cambiando su estado a libre
+	 * y modificando el DNI al que se asocia la mesa
+	 * 
 	 * @param idMesa
 	 * @return
 	 * @throws SQLException
@@ -66,9 +69,10 @@ public class GestorMesa {
 
 	/**
 	 * Actualiza el estado de la mesa en la base de datos
-	 * @param id: el id de la mesa a modificar
+	 * 
+	 * @param id:     el id de la mesa a modificar
 	 * @param estado: el nuevo estado de la mesa
-	 * @param dni: número al que se le asocia la mesa
+	 * @param dni:    numero al que se le asocia la mesa
 	 * @throws SQLException
 	 */
 	public static void actualizarMesa(int id, String estado, String dni) throws SQLException {

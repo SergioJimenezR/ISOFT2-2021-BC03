@@ -53,11 +53,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 /**
- * Clase que representa la interfaz gráfica de usuario del Camarero de mesa,
- * núcleo del programa. NOTAS ACLARATORIAS: Nótese que al añadir y eliminar
- * platos y bebidas de la anotación de la comanda, se efectúan cambios de stock
+ * Clase que representa la interfaz grafica de usuario del Camarero de mesa,
+ * nucleo del programa. NOTAS ACLARATORIAS: Notese que al anyadir y eliminar
+ * platos y bebidas de la anotacion de la comanda, se efectuan cambios de stock
  * no definitivos, para que de esta forma, se controle que ya no se pueden
- * añadir más elementos. Nótese también que cada grupo de comensales de cada
+ * anyadir mas elementos. Notese tambien que cada grupo de comensales de cada
  * mesa solo puede realizar una comanda.
  * 
  * @author BC03
@@ -67,23 +67,23 @@ import javax.swing.SwingConstants;
 public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	/**
-	 * Instancia del patrón singleton.
+	 * Instancia del patron singleton.
 	 */
 	private static IU_CamareroMesa mInstancia;
 
 	/**
-	 * Atributo de la constancia del índice que se lleva, para la identificación
-	 * única de los productos.
+	 * Atributo de la constancia del indice que se lleva, para la identificacion
+	 * unica de los productos.
 	 */
 	private int index;
 	/**
-	 * Atributo que refleja el número de notificaciones pendientes en la lista de
+	 * Atributo que refleja el numero de notificaciones pendientes en la lista de
 	 * Avisos.
 	 */
 	private int numNotificacionesPendientes;
 
 	/**
-	 * Elementos de la interfaz gráfica de usuario:
+	 * Elementos de la interfaz grafica de usuario:
 	 */
 
 	private JPanel contentPane;
@@ -160,7 +160,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	private JButton btnRefrescar;
 
 	/**
-	 * Método que devuelve la instancia de la interfaz según el patrón Singleton.
+	 * Metodo que devuelve la instancia de la interfaz segun el patron Singleton.
 	 * 
 	 * @return instancia
 	 * @throws SQLException
@@ -174,7 +174,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * Método constructor de la clase, privado por llevar a cabo el patrón
+	 * Metodo constructor de la clase, privado por llevar a cabo el patron
 	 * Singleton.
 	 * 
 	 * @throws SQLException
@@ -762,8 +762,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * Método que modifica la información mostrada en el cuadro de texto, durante la
-	 * anotación de la comanda, referido al stock.
+	 * Metodo que modifica la informacion mostrada en el cuadro de texto, durante la
+	 * anotacion de la comanda, referido al stock.
 	 * 
 	 * @param mensaje
 	 */
@@ -773,9 +773,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	// BEBIDAS
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación de un
-	 * elemento en la lista desplegable de las Bebidas, en el panel de Anotación de
-	 * comanda, que habilita o deshabilita el botón para enlistar.
+	 * ActionListener segun inner class que maneja el evento de pulsacion de un
+	 * elemento en la lista desplegable de las Bebidas, en el panel de Anotacion de
+	 * comanda, que habilita o deshabilita el boton para enlistar.
 	 * 
 	 * @author BC03
 	 *
@@ -805,8 +805,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
-	 * de enlistar una bebida seleccionada en la JComboBox, que así lo hace.
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
+	 * de enlistar una bebida seleccionada en la JComboBox, que asi lo hace.
 	 * 
 	 * @author BC03
 	 *
@@ -836,8 +836,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación de un
-	 * elemento de la JList de Bebidas que habilita o deshabilita el acceso al botón
+	 * ActionListener segun inner class que maneja el evento de pulsacion de un
+	 * elemento de la JList de Bebidas que habilita o deshabilita el acceso al boton
 	 * Quitar.
 	 * 
 	 * @author BC03
@@ -853,7 +853,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
 	 * Quitar, que elimina el elemento seleccionado de la JList respectiva, rcupera
 	 * su stock y retrasa los siguientes ids.
 	 * 
@@ -883,8 +883,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	// ENTRANTES
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación de un
-	 * elemento en la JComboBox de Entrantes, y que llama al método que los resume.
+	 * ActionListener segun inner class que maneja el evento de pulsacion de un
+	 * elemento en la JComboBox de Entrantes, y que llama al metodo que los resume.
 	 * 
 	 * @author BC03
 	 *
@@ -896,8 +896,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
-	 * Añadir de los Entrantes, y que llama al método que lo lleva a cabo.
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
+	 * Anyadir de los Entrantes, y que llama al metodo que lo lleva a cabo.
 	 * 
 	 * @author BC03
 	 *
@@ -909,8 +909,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación de
-	 * elementos de la JList de los Entrantes, y que llama al método que lo
+	 * ActionListener segun inner class que maneja el evento de pulsacion de
+	 * elementos de la JList de los Entrantes, y que llama al metodo que lo
 	 * modulariza.
 	 * 
 	 * @author BC03
@@ -923,8 +923,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
-	 * Quitar de los Entrantes, y que llama al método que lo modulariza
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
+	 * Quitar de los Entrantes, y que llama al metodo que lo modulariza
 	 * 
 	 * @author BC03
 	 *
@@ -937,8 +937,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	// PRIMEROS
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación de un
-	 * elemento en la JComboBox de Primeros, y que llama al método que los resume.
+	 * ActionListener segun inner class que maneja el evento de pulsacion de un
+	 * elemento en la JComboBox de Primeros, y que llama al metodo que los resume.
 	 * 
 	 * @author BC03
 	 *
@@ -950,8 +950,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
-	 * Añadir de los Primeros, y que llama al método que lo lleva a cabo.
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
+	 * Anyadir de los Primeros, y que llama al metodo que lo lleva a cabo.
 	 * 
 	 * @author BC03
 	 *
@@ -963,8 +963,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación de
-	 * elementos de la JList de los Primeros, y que llama al método que lo
+	 * ActionListener segun inner class que maneja el evento de pulsacion de
+	 * elementos de la JList de los Primeros, y que llama al metodo que lo
 	 * modulariza.
 	 * 
 	 * @author BC03
@@ -977,8 +977,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
-	 * Quitar de los Primeros, y que llama al método que lo modulariza
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
+	 * Quitar de los Primeros, y que llama al metodo que lo modulariza
 	 * 
 	 * @author BC03
 	 *
@@ -991,8 +991,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	// SEGUNDOS
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación de un
-	 * elemento en la JComboBox de Segundos, y que llama al método que los resume.
+	 * ActionListener segun inner class que maneja el evento de pulsacion de un
+	 * elemento en la JComboBox de Segundos, y que llama al metodo que los resume.
 	 * 
 	 * @author BC03
 	 *
@@ -1004,8 +1004,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
-	 * Añadir de los Segundos, y que llama al método que lo lleva a cabo.
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
+	 * Anyadir de los Segundos, y que llama al metodo que lo lleva a cabo.
 	 * 
 	 * @author BC03
 	 *
@@ -1017,8 +1017,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación de
-	 * elementos de la JList de los Segundos, y que llama al método que lo
+	 * ActionListener segun inner class que maneja el evento de pulsacion de
+	 * elementos de la JList de los Segundos, y que llama al metodo que lo
 	 * modulariza.
 	 * 
 	 * @author BC03
@@ -1031,8 +1031,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
-	 * Quitar de los Segundos, y que llama al método que lo modulariza
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
+	 * Quitar de los Segundos, y que llama al metodo que lo modulariza
 	 * 
 	 * @author BC03
 	 *
@@ -1045,8 +1045,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	// POSTRES
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación de un
-	 * elemento en la JComboBox de Postres, y que llama al método que los resume.
+	 * ActionListener segun inner class que maneja el evento de pulsacion de un
+	 * elemento en la JComboBox de Postres, y que llama al metodo que los resume.
 	 * 
 	 * @author BC03
 	 *
@@ -1058,8 +1058,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
-	 * Añadir de los Postres, y que llama al método que lo lleva a cabo.
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
+	 * Anyadir de los Postres, y que llama al metodo que lo lleva a cabo.
 	 * 
 	 * @author BC03
 	 *
@@ -1071,8 +1071,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación de
-	 * elementos de la JList de los Postres, y que llama al método que lo
+	 * ActionListener segun inner class que maneja el evento de pulsacion de
+	 * elementos de la JList de los Postres, y que llama al metodo que lo
 	 * modulariza.
 	 * 
 	 * @author BC03
@@ -1085,8 +1085,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
-	 * Quitar de los Postres, y que llama al método que lo modulariza
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
+	 * Quitar de los Postres, y que llama al metodo que lo modulariza
 	 * 
 	 * @author BC03
 	 *
@@ -1099,9 +1099,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	// MODULARIDAD DE EVENTOS DE PLATOS
 	/**
-	 * Método que ejecuta las acciones cuando se pulsa un elemento de un JComboBox
-	 * en concreto, comprobando el stock para habilitar o deshabilitar el botón
-	 * Añadir.
+	 * Metodo que ejecuta las acciones cuando se pulsa un elemento de un JComboBox
+	 * en concreto, comprobando el stock para habilitar o deshabilitar el boton
+	 * Anyadir.
 	 * 
 	 * @param comboBox
 	 * @param btnAnyadir
@@ -1130,8 +1130,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * Método que ejecuta las acciones cuando se pulsa un botón Añadir en concreto,
-	 * que añade a su respectiva JList el plato seleccionado en la JComboBox.
+	 * Metodo que ejecuta las acciones cuando se pulsa un boton Anyadir en concreto,
+	 * que anyade a su respectiva JList el plato seleccionado en la JComboBox.
 	 * 
 	 * @param comboBox
 	 * @param btnAnyadir
@@ -1161,8 +1161,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * Método que ejecuta las acciones cuando se pulsa un elemento de una JList en
-	 * concreto, que habilita o deshabilita el botón Quitar.
+	 * Metodo que ejecuta las acciones cuando se pulsa un elemento de una JList en
+	 * concreto, que habilita o deshabilita el boton Quitar.
 	 * 
 	 * @param lista
 	 * @param btnQuitar
@@ -1175,9 +1175,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * Método que ejecuta las acciones cuando se pulsa un botón Quitar en concreto,
-	 * eliminando el elemento seleccionado de una JList asociada a éste, revirtiendo
-	 * el stock que se consumió para añadirlo, y retrasando los siguientes ids en 1
+	 * Metodo que ejecuta las acciones cuando se pulsa un boton Quitar en concreto,
+	 * eliminando el elemento seleccionado de una JList asociada a este, revirtiendo
+	 * el stock que se consumio para anyadirlo, y retrasando los siguientes ids en 1
 	 * unidad.
 	 * 
 	 * @param lista
@@ -1200,10 +1200,10 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
-	 * Cancelar, el cual hace aparecer un cuadro de diálogo de confirmación, y que
-	 * en el caso de pulsar el botón de Sí cancelar, se revierte el stock consumido,
-	 * revirtiendo también todos los futuros índices y limpiando el panel.
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
+	 * Cancelar, el cual hace aparecer un cuadro de dialogo de confirmacion, y que
+	 * en el caso de pulsar el boton de Si cancelar, se revierte el stock consumido,
+	 * revirtiendo tambien todos los futuros indices y limpiando el panel.
 	 * 
 	 * @author BC03
 	 *
@@ -1235,9 +1235,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
 	 * de cerrar la ventana (X), y que limpia y actualiza la base de datos hasta el
-	 * momento en el caso de pulsar Sí cerrar.
+	 * momento en el caso de pulsar Si cerrar.
 	 * 
 	 * @author BC03
 	 *
@@ -1261,9 +1261,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de Cerrar (confirmar)
-	 * la Comanda, que inicia el Timer y que envía las comandas a la cocina y barra,
-	 * además de limpiar el panel, en esencia.
+	 * ActionListener segun inner class que maneja el evento de Cerrar (confirmar)
+	 * la Comanda, que inicia el Timer y que envia las comandas a la cocina y barra,
+	 * ademas de limpiar el panel, en esencia.
 	 * 
 	 * @author BC03
 	 *
@@ -1297,7 +1297,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación de un
+	 * ActionListener segun inner class que maneja el evento de pulsacion de un
 	 * elemento de la JComboBox cbMesa para iniciar una comanda, o marcar como
 	 * realizados otros procesos del camarero.
 	 * 
@@ -1338,8 +1338,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
-	 * Limpiar de la Anotación de Comanda, restaurando el stock consumido.
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
+	 * Limpiar de la Anotacion de Comanda, restaurando el stock consumido.
 	 * 
 	 * @author BC03
 	 *
@@ -1351,7 +1351,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación de un
+	 * ActionListener segun inner class que maneja el evento de pulsacion de un
 	 * elemento del JComboBox Avisos del Camarero de Mesa.
 	 * 
 	 * @author BC03
@@ -1372,9 +1372,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
 	 * Borrar Aviso, que borra el aviso seleccionado de la JComboBox, y marca como
-	 * servida la mesa del aviso en cuestión.
+	 * servida la mesa del aviso en cuestion.
 	 * 
 	 * @author BC03
 	 *
@@ -1405,9 +1405,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
-	 * Guardar que hace una actualización del estado actual de los stocks del
-	 * Almacén contra la Base de datos.
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
+	 * Guardar que hace una actualizacion del estado actual de los stocks del
+	 * Almacen contra la Base de datos.
 	 * 
 	 * @author BC03
 	 *
@@ -1419,11 +1419,11 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
 	 * Iniciar comanda, una vez seleccionado un elemento en la JComboBox cbMesa.
-	 * Nótese que al añadir y eliminar platos y bebidas de la anotación de la
-	 * comanda, se efectúan cambios de stock no definitivos, para que de esta forma,
-	 * se controle que ya no se pueden añadir más elementos.
+	 * Notese que al anyadir y eliminar platos y bebidas de la anotacion de la
+	 * comanda, se efectuan cambios de stock no definitivos, para que de esta forma,
+	 * se controle que ya no se pueden anyadir mas elementos.
 	 * 
 	 * @author BC03
 	 *
@@ -1439,7 +1439,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
 	 * Cerrar cuenta, que cierra la cuenta de la Mesa, habilitando y deshabilitando
 	 * otras acciones sobre esta mesa, para empezar procesos posteriores, de pago,
 	 * etc.
@@ -1460,7 +1460,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
 	 * Imprimir cuenta, que imprime la cuenta.
 	 * 
 	 * @author BC03
@@ -1480,7 +1480,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
 	 * Confirmar pago, que confirma el pago efectuado de los comensales. Acto
 	 * seguido, los comensales se retiran de la mesa.
 	 * 
@@ -1502,7 +1502,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
 	 * de Mesa preparada, que remarca la limpieza de la mesa.
 	 * 
 	 * @author BC03
@@ -1527,7 +1527,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
 	 * Refrescar para actualizar la JComboBox de Mesas.
 	 * 
 	 * @author BC03
@@ -1546,7 +1546,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * Método auxiliar que ayuda a crear una comanda según lo que figura reunido en
+	 * Metodo auxiliar que ayuda a crear una comanda segun lo que figura reunido en
 	 * las JList respectivas.
 	 * 
 	 * @param index
@@ -1569,7 +1569,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * Método auxiliar que reúne en una lista dinámica que se devuelve, las bebidas
+	 * Metodo auxiliar que reune en una lista dinamica que se devuelve, las bebidas
 	 * del JList de Bebidas.
 	 * 
 	 * @param JList
@@ -1585,7 +1585,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * Método auxiliar que reúne en una lista dinámica que se devuelve, los platos
+	 * Metodo auxiliar que reune en una lista dinamica que se devuelve, los platos
 	 * de una JList de Platos en concreto.
 	 * 
 	 * @param JList
@@ -1603,9 +1603,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * Método que reinicializa el estado neutro del panel de anotación de comanda,
-	 * revirtiendo el stock consumido durante la anotación, eliminando los elementos
-	 * de la JList, deshabilitando botones y deseleccionando los índices de las
+	 * Metodo que reinicializa el estado neutro del panel de anotacion de comanda,
+	 * revirtiendo el stock consumido durante la anotacion, eliminando los elementos
+	 * de la JList, deshabilitando botones y deseleccionando los indices de las
 	 * JComboBox.
 	 */
 	public void limpiarAnotacionComanda() {
@@ -1644,9 +1644,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * Método que retrasa los ids de los posteriores items adscritos a las JList en
+	 * Metodo que retrasa los ids de los posteriores items adscritos a las JList en
 	 * una unidad, cuando se elimina un elemento anterior, para mantener una
-	 * absoluta continuidad entre los índices de los productos solicitados
+	 * absoluta continuidad entre los indices de los productos solicitados
 	 * oficialmente.
 	 * 
 	 * @param k
@@ -1685,7 +1685,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * Método que enlista una nueva Comanda en la lista desplegable JComboBox de
+	 * Metodo que enlista una nueva Comanda en la lista desplegable JComboBox de
 	 * avisos del Camarero de Mesa.
 	 * 
 	 * @param comanda
@@ -1701,8 +1701,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * Método que inicia un Timer al momento de Cerrar (confirmar) la Comanda, para
-	 * resaltar en su expedición.
+	 * Metodo que inicia un Timer al momento de Cerrar (confirmar) la Comanda, para
+	 * resaltar en su expedicion.
 	 * 
 	 * @param aviso
 	 */
@@ -1733,7 +1733,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * Método que añade un aviso a la lista JComboBox de avisos.
+	 * Metodo que anyade un aviso a la lista JComboBox de avisos.
 	 * 
 	 * @param aviso
 	 */
@@ -1744,7 +1744,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * Método que enlista en un modelo de ComboBox, las mesas que se han reservado.
+	 * Metodo que enlista en un modelo de ComboBox, las mesas que se han reservado.
 	 * 
 	 * @return modelo
 	 * @throws SQLException

@@ -11,7 +11,7 @@ import java.util.Date;
 public class Mesa {
 
 	/**
-	 * Identificador único de la mesa.
+	 * Identificador unico de la mesa.
 	 */
 	private int id;
 	/**
@@ -28,7 +28,7 @@ public class Mesa {
 	 */
 	private int precio;
 	/**
-	 * Documentación de identificación DNI del cliente que reserva la mesa.
+	 * Documentacion de identificacion DNI del cliente que reserva la mesa.
 	 */
 	private String dni;
 
@@ -37,11 +37,11 @@ public class Mesa {
 	 */
 	private double[] vectorTiempos;
 	/**
-	 * Momento de ejecución en el que la mesa cambia de estado
+	 * Momento de ejecucion en el que la mesa cambia de estado
 	 */
 	private double tiempoTranscurrido;
 	/**
-	 * Número de comensales que admite la mesa
+	 * Numero de comensales que admite la mesa
 	 */
 	private int numComensales;
 	/**
@@ -64,8 +64,8 @@ public class Mesa {
 	}
 
 	/**
-	 * Constructor 2 de la instancia Mesa, por sobreescritura con diferenciación de
-	 * métodos, que satisface otras necesidades.
+	 * Constructor 2 de la instancia Mesa, por sobreescritura con diferenciacion de
+	 * metodos, que satisface otras necesidades.
 	 * 
 	 * @param id
 	 * @param estado
@@ -81,7 +81,7 @@ public class Mesa {
 	}
 
 	/**
-	 * Método que devuelve el identificador único de la Mesa.
+	 * Metodo que devuelve el identificador unico de la Mesa.
 	 * 
 	 * @return id
 	 */
@@ -90,7 +90,7 @@ public class Mesa {
 	}
 
 	/**
-	 * Método que fija el identificador único de la Mesa.
+	 * Metodo que fija el identificador unico de la Mesa.
 	 * 
 	 * @param id
 	 */
@@ -99,8 +99,8 @@ public class Mesa {
 	}
 
 	/**
-	 * Método que devuelve el estado que está atravesando una mesa en concreto en el
-	 * momento de la llamada, de la enumeración EstadosMesas.
+	 * Metodo que devuelve el estado que esta atravesando una mesa en concreto en el
+	 * momento de la llamada, de la enumeracion EstadosMesas.
 	 * 
 	 * @return estado
 	 */
@@ -109,7 +109,7 @@ public class Mesa {
 	}
 
 	/**
-	 * Método que fija o modifica el estado de la Mesa, a otro estado.
+	 * Metodo que fija o modifica el estado de la Mesa, a otro estado.
 	 * 
 	 * @param estadoMesa
 	 */
@@ -125,7 +125,7 @@ public class Mesa {
 	}
 
 	/**
-	 * Método que devuelve la instancia de Comanda subasociada a la Mesa.
+	 * Metodo que devuelve la instancia de Comanda subasociada a la Mesa.
 	 * 
 	 * @return comanda
 	 */
@@ -134,7 +134,7 @@ public class Mesa {
 	}
 
 	/**
-	 * Método que fija una Comanda en concreto a la Mesa.
+	 * Metodo que fija una Comanda en concreto a la Mesa.
 	 * 
 	 * @param comanda
 	 */
@@ -143,7 +143,7 @@ public class Mesa {
 	}
 
 	/**
-	 * Asigna el número de comensales a la mesa
+	 * Asigna el numero de comensales a la mesa
 	 */
 	private void setNumComensales() {
 		if (this.id < 3)
@@ -155,7 +155,7 @@ public class Mesa {
 	}
 
 	/**
-	 * Método que devuelve el importe del coste de la comanda, de la Mesa.
+	 * Metodo que devuelve el importe del coste de la comanda, de la Mesa.
 	 * 
 	 * @return precio
 	 */
@@ -164,7 +164,7 @@ public class Mesa {
 	}
 
 	/**
-	 * Método que fija el importe del coste de la comanda, de la Mesa.
+	 * Metodo que fija el importe del coste de la comanda, de la Mesa.
 	 * 
 	 * @param precio
 	 */
@@ -173,7 +173,7 @@ public class Mesa {
 	}
 
 	/**
-	 * Método que devuelve el DNI del cliente que ha reservado una mesa en concreto.
+	 * Metodo que devuelve el DNI del cliente que ha reservado una mesa en concreto.
 	 * 
 	 * @return dni
 	 */
@@ -182,7 +182,7 @@ public class Mesa {
 	}
 
 	/**
-	 * Método que fija el DNI de un cliente sobre la reserva de una mesa.
+	 * Metodo que fija el DNI de un cliente sobre la reserva de una mesa.
 	 * 
 	 * @param dni
 	 */
@@ -191,7 +191,7 @@ public class Mesa {
 	}
 
 	/**
-	 * Método que devuelve la fecha de la reserva de la mesa.
+	 * Metodo que devuelve la fecha de la reserva de la mesa.
 	 * 
 	 * @return fecha
 	 */
@@ -200,7 +200,7 @@ public class Mesa {
 	}
 
 	/**
-	 * Método que fija la fecha de la reserva.
+	 * Metodo que fija la fecha de la reserva.
 	 * 
 	 * @param fecha
 	 */
@@ -209,8 +209,8 @@ public class Mesa {
 	}
 
 	/**
-	 * Método que devuelve la información de la Mesa (toString), con el
-	 * identificador único y el estado de la misma.
+	 * Metodo que devuelve la informacion de la Mesa (toString), con el
+	 * identificador unico y el estado de la misma.
 	 */
 	@Override
 	public String toString() {
@@ -218,14 +218,14 @@ public class Mesa {
 	}
 
 	/**
-	 * Método que cierra la cuenta de la Mesa, calculando el importe.
+	 * Metodo que cierra la cuenta de la Mesa, calculando el importe.
 	 */
 	public void cerrarCuenta() {
 		this.setPrecio(calcularPrecio());
 	}
 
 	/**
-	 * Método que calcula el importe de la Mesa, y que sirve para fijarlo cuando se
+	 * Metodo que calcula el importe de la Mesa, y que sirve para fijarlo cuando se
 	 * cierra la cuenta.
 	 * 
 	 * @return importe
@@ -235,7 +235,7 @@ public class Mesa {
 	}
 
 	/**
-	 * Método que modifica los datos personales del cliente de la reserva de la
+	 * Metodo que modifica los datos personales del cliente de la reserva de la
 	 * mesa.
 	 * 
 	 * @param dni
@@ -250,7 +250,7 @@ public class Mesa {
 	}
 
 	/**
-	 * Añade el tiempo de un estado al vector de tiempos
+	 * Anyade el tiempo de un estado al vector de tiempos
 	 * 
 	 * @param tiempoTranscurrido
 	 */

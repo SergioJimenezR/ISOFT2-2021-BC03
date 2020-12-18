@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 /**
- * Clase que representa la interfaz gráfica de usuario del Camarero de la Barra.
+ * Clase que representa la interfaz grafica de usuario del Camarero de la Barra.
  * 
  * @author BC03
  *
@@ -39,12 +39,12 @@ public class IU_CamareroBarra extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Instancia del patrón singleton.
+	 * Instancia del patron singleton.
 	 */
 	private static IU_CamareroBarra mInstancia;
 
 	/**
-	 * Elementos de la interfaz gráfica de usuario.
+	 * Elementos de la interfaz grafica de usuario.
 	 */
 	private JPanel contentPane;
 	private JPanel panel;
@@ -63,12 +63,12 @@ public class IU_CamareroBarra extends JFrame {
 	private JButton btnReponer;
 
 	/**
-	 * Número que representa el número de comandas pendientes a preparar.
+	 * Numero que representa el numero de comandas pendientes a preparar.
 	 */
 	private int numComandasPendientes;
 
 	/**
-	 * Método que devuelve la instancia de la interfaz, del patrón Singleton.
+	 * Metodo que devuelve la instancia de la interfaz, del patron Singleton.
 	 * 
 	 * @return instancia
 	 */
@@ -81,8 +81,8 @@ public class IU_CamareroBarra extends JFrame {
 	}
 
 	/**
-	 * Constructor de la interfaz gráfica de usuario, que ayuda a colocar todos los
-	 * elementos sobre ésta.
+	 * Constructor de la interfaz grafica de usuario, que ayuda a colocar todos los
+	 * elementos sobre esta.
 	 */
 	public IU_CamareroBarra() {
 
@@ -209,8 +209,8 @@ public class IU_CamareroBarra extends JFrame {
 	}
 
 	/**
-	 * Método que ayuda a enlistar las comandas que disponen de bebidas en la
-	 * JComboBox que las reúne.
+	 * Metodo que ayuda a enlistar las comandas que disponen de bebidas en la
+	 * JComboBox que las reune.
 	 * 
 	 * @param comanda
 	 */
@@ -222,8 +222,8 @@ public class IU_CamareroBarra extends JFrame {
 	}
 
 	/**
-	 * Método que reduce el stock de bebidas de una determinada comanda seleccionada
-	 * en la JComboBox, cuando se pulsa el botón de Avisar.
+	 * Metodo que reduce el stock de bebidas de una determinada comanda seleccionada
+	 * en la JComboBox, cuando se pulsa el boton de Avisar.
 	 * 
 	 * @param c
 	 */
@@ -244,8 +244,8 @@ public class IU_CamareroBarra extends JFrame {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación de un
-	 * elemento de la lista desplegable ComboBox donde están enlistadas las Comandas
+	 * ActionListener segun inner class que maneja el evento de pulsacion de un
+	 * elemento de la lista desplegable ComboBox donde estan enlistadas las Comandas
 	 * Pendientes.
 	 * 
 	 * @author BC03
@@ -267,7 +267,7 @@ public class IU_CamareroBarra extends JFrame {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
 	 * Avisar, que sirve para marcar como preparada las bebidas de la comanda por
 	 * parte del camarero de barra, para avisar al camarero de mesa para que sirva
 	 * las bebidas a la mesa.
@@ -298,9 +298,9 @@ public class IU_CamareroBarra extends JFrame {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
-	 * Guardar, que sirve para actualizar la base de datos según el stock actual del
-	 * Almacén.
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
+	 * Guardar, que sirve para actualizar la base de datos segun el stock actual del
+	 * Almacen.
 	 * 
 	 * @author BC03
 	 *
@@ -312,9 +312,9 @@ public class IU_CamareroBarra extends JFrame {
 	}
 
 	/**
-	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
 	 * Reponer, que sirve para actualizar los stocks de la base de datos y del
-	 * Almacen al máximo de stock reglamentado, cuando se avisa de que ha descendido
+	 * Almacen al maximo de stock reglamentado, cuando se avisa de que ha descendido
 	 * por debajo del umbral.
 	 * 
 	 * @author BC03
