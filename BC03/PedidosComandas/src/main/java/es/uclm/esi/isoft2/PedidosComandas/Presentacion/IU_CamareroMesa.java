@@ -1744,7 +1744,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * Metodo que enlista en un modelo de ComboBox, las mesas que se han reservado.
+	 * Metodo que enlista en un modelo de ComboBox, las mesas que se han marcado
+	 * como ocupadas (Llegada).
 	 * 
 	 * @return modelo
 	 * @throws SQLException
