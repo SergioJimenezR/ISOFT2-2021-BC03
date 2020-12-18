@@ -5,9 +5,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MesaDAO {
-	
+
 	/**
 	 * Actualiza el estado de una mesa en la base de datos
+	 * 
 	 * @param id
 	 * @param estado
 	 * @param dni
@@ -20,8 +21,9 @@ public class MesaDAO {
 	}
 
 	/**
-	 * Lee en la base de datos las mesas que estan en estado "Libre" y devuelve
-	 * sus id
+	 * Lee en la base de datos las mesas que estan en estado "Libre" y devuelve sus
+	 * id
+	 * 
 	 * @return
 	 * @throws SQLException
 	 */
@@ -38,10 +40,11 @@ public class MesaDAO {
 
 		return listIdMesas;
 	}
-	
+
 	/**
 	 * Lee en la base de datos las mesas que estan en estado "Ocupada" y devuelve
 	 * sus id
+	 * 
 	 * @return
 	 * @throws SQLException
 	 */
@@ -60,6 +63,7 @@ public class MesaDAO {
 	/**
 	 * Lee en la base de datos las mesas que estan en estado "Reservada" y devuelve
 	 * sus id
+	 * 
 	 * @return
 	 * @throws SQLException
 	 */
@@ -77,6 +81,7 @@ public class MesaDAO {
 
 	/**
 	 * Lee el DNI asignado a la mesa con el id indicado
+	 * 
 	 * @param id: atributo id de la mesa
 	 * @return
 	 * @throws SQLException

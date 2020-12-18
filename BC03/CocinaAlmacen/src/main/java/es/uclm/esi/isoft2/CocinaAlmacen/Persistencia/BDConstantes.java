@@ -1,5 +1,14 @@
 package es.uclm.esi.isoft2.CocinaAlmacen.Persistencia;
 
+/**
+ * Interface de constantes que reúne la información necesaria para que el
+ * Agente-Broker según patrón Singleton de este módulo se conecte a la Base de
+ * Datos JDBC - MySQL.
+ * 
+ * @author BC03
+ *
+ */
+
 public interface BDConstantes {
 
 	final static String CONNECTION_IP = "172.20.48.70";
