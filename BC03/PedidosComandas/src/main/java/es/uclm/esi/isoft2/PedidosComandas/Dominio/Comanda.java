@@ -2,15 +2,52 @@ package es.uclm.esi.isoft2.PedidosComandas.Dominio;
 
 import java.util.ArrayList;
 
+/**
+ * Clase que representa a la Comanda, que hereda de la clase Aviso.
+ * 
+ * @author BC03
+ *
+ */
 public class Comanda extends Aviso {
 
+	/**
+	 * Lista dinámica que contiene las bebidas que se han solicitado en esta
+	 * comanda.
+	 */
 	private ArrayList<Bebida> bebidas;
 
+	/**
+	 * Lista dinámica que contiene los entrantes que se han solicitado en esta
+	 * comanda.
+	 */
 	private ArrayList<Plato> entrantes;
+	/**
+	 * Lista dinámica que contiene los primeros que se han solicitado en esta
+	 * comanda.
+	 */
 	private ArrayList<Plato> primeros;
+	/**
+	 * Lista dinámica que contiene los segundos que se han solicitado en esta
+	 * comanda.
+	 */
 	private ArrayList<Plato> segundos;
+	/**
+	 * Lista dinámica que contiene los postres que se han solicitado en esta
+	 * comanda.
+	 */
 	private ArrayList<Plato> postres;
 
+	/**
+	 * Método constructor de la comanda, con relación de herencia sobre Aviso.
+	 * 
+	 * @param id
+	 * @param mesa
+	 * @param bebidas
+	 * @param entrantes
+	 * @param primeros
+	 * @param segundos
+	 * @param postres
+	 */
 	public Comanda(int id, Mesa mesa, ArrayList<Bebida> bebidas, ArrayList<Plato> entrantes, ArrayList<Plato> primeros,
 			ArrayList<Plato> segundos, ArrayList<Plato> postres) {
 		super(id, mesa);
@@ -21,6 +58,12 @@ public class Comanda extends Aviso {
 		setPostres(postres);
 	}
 
+	/**
+	 * Método que devuelve una lista dinámica con todos los platos, de todos los
+	 * tipos de platos, de la comanda.
+	 * 
+	 * @return comidas
+	 */
 	public ArrayList<ArrayList<Plato>> getComida() {
 		ArrayList<ArrayList<Plato>> comidas = new ArrayList<ArrayList<Plato>>();
 		comidas.add(entrantes);
@@ -30,51 +73,111 @@ public class Comanda extends Aviso {
 		return comidas;
 	}
 
+	/**
+	 * Método que devuelve una lista dinámica con todas las bebidas de la comanda.
+	 * 
+	 * @return bebidas
+	 */
 	public ArrayList<Bebida> getBebidas() {
 		return bebidas;
 	}
 
+	/**
+	 * Método que fija las bebidas asociadas a una comanda en concreto.
+	 * 
+	 * @param bebidas
+	 */
 	public void setBebidas(ArrayList<Bebida> bebidas) {
 		this.bebidas = bebidas;
 	}
 
+	/**
+	 * Método que recupera el listado de platos entrantes de la comanda.
+	 * 
+	 * @return entrantes
+	 */
 	public ArrayList<Plato> getEntrantes() {
 		return entrantes;
 	}
 
+	/**
+	 * Método que fija los entrantes a una comanda en concreto, que se pasan por
+	 * parámetro.
+	 * 
+	 * @param entrantes
+	 */
 	public void setEntrantes(ArrayList<Plato> entrantes) {
 		this.entrantes = entrantes;
 	}
 
+	/**
+	 * Método que recupera el listado de primeros platos de la comanda.
+	 * 
+	 * @return primeros
+	 */
 	public ArrayList<Plato> getPrimeros() {
 		return primeros;
 	}
 
+	/**
+	 * Método que fija los primeros platos a una comanda en concreto.
+	 * 
+	 * @param primeros
+	 */
 	public void setPrimeros(ArrayList<Plato> primeros) {
 		this.primeros = primeros;
 	}
 
+	/**
+	 * Método que recupera el listado de segundos platos de la comanda.
+	 * 
+	 * @return segundos
+	 */
 	public ArrayList<Plato> getSegundos() {
 		return segundos;
 	}
 
+	/**
+	 * Método que fija los segundos platos a una comanda en concreto.
+	 * 
+	 * @param segundos
+	 */
 	public void setSegundos(ArrayList<Plato> segundos) {
 		this.segundos = segundos;
 	}
 
+	/**
+	 * Método que recupera el listado de postres de la comanda.
+	 * 
+	 * @return postres
+	 */
 	public ArrayList<Plato> getPostres() {
 		return postres;
 	}
 
+	/**
+	 * Método que fija los postres a una comanda en concreto.
+	 * 
+	 * @param postres
+	 */
 	public void setPostres(ArrayList<Plato> postres) {
 		this.postres = postres;
 	}
 
+	/**
+	 * Método que devuelve la información de dicha comanda.
+	 */
 	@Override
 	public String toString() {
 		return "Comanda " + id + " de la mesa n.º " + mesa.getId() + " preparada.";
 	}
 
+	/**
+	 * Método que devuelve la información de la lista de todos los platos de la
+	 * comanda.
+	 * 
+	 * @return comidas
+	 */
 	public String toStringPlatos() {
 		String cadena = "Platos:";
 		ArrayList<Plato> lista = new ArrayList<Plato>();
@@ -107,17 +210,33 @@ public class Comanda extends Aviso {
 		return cadena;
 	}
 
-	public String toStringBebidas() { // Puede haber un problema a la hora de llamar
+	/**
+	 * Método que devuelve la información de la lista de todas las bebidas de la
+	 * comanda.
+	 * 
+	 * @return bebidas
+	 */
+	public String toStringBebidas() {
 		String cadena = "Bebidas: ";
 		for (int i = 0; i < bebidas.size(); i++)
 			cadena += bebidas.get(i).getNombre() + " ";
 		return cadena;
 	}
 
+	/**
+	 * Método que desvela si la comanda tiene bebidas.
+	 * 
+	 * @return boolean
+	 */
 	public boolean tieneBebidas() {
 		return bebidas.size() > 0;
 	}
 
+	/**
+	 * Método que desvela si la comanda dispone de platos.
+	 * 
+	 * @return
+	 */
 	public boolean tienePlatos() {
 		return entrantes.size() > 0 || primeros.size() > 0 || segundos.size() > 0 || postres.size() > 0;
 	}

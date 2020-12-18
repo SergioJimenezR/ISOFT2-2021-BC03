@@ -353,8 +353,10 @@ public class IU_JefeSala extends JFrame {
 			contentPane.add(btnRefrescar, gbc_btnRefrescar);
 		}
 	}
+
 	/**
 	 * ActionListener del boton para cancelar una reserva.
+	 * 
 	 * @author Usuario
 	 *
 	 */
@@ -371,9 +373,11 @@ public class IU_JefeSala extends JFrame {
 			}
 		}
 	}
+
 	/**
-	 * ActionListener del boton para indicar la llegada de la reserva. Lee la informacion
-	 * de los componentes del panel y lo utiliza para buscar la reserva.
+	 * ActionListener del boton para indicar la llegada de la reserva. Lee la
+	 * informacion de los componentes del panel y lo utiliza para buscar la reserva.
+	 * 
 	 * @author Usuario
 	 *
 	 */
@@ -389,9 +393,11 @@ public class IU_JefeSala extends JFrame {
 			}
 		}
 	}
+
 	/**
-	 * ActionListener del boton para Reservar una mesa. Lee los datos de los Components
-	 * del formulario y los utiliza para reservar una mesa
+	 * ActionListener del boton para Reservar una mesa. Lee los datos de los
+	 * Components del formulario y los utiliza para reservar una mesa
+	 * 
 	 * @author Usuario
 	 *
 	 */
@@ -412,11 +418,13 @@ public class IU_JefeSala extends JFrame {
 			}
 		}
 	}
-	
+
 	/**
-	 * ActionListener del boton de consulta de estadisticas. Carga en el textAreaValoresEstadisticas
-	 * la cadena que muestra el tiempo medio de cada estado de la mesa, desde persistencia o acutalizandolo
-	 * con las mesas que ya han pasado por todos los estados.
+	 * ActionListener del boton de consulta de estadisticas. Carga en el
+	 * textAreaValoresEstadisticas la cadena que muestra el tiempo medio de cada
+	 * estado de la mesa, desde persistencia o acutalizandolo con las mesas que ya
+	 * han pasado por todos los estados.
+	 * 
 	 * @author Usuario
 	 *
 	 */
@@ -456,9 +464,10 @@ public class IU_JefeSala extends JFrame {
 			}
 		}
 	}
-	
+
 	/**
 	 * Refresca la las listas de mesas de las ComboBox CbReserva y CbLibres
+	 * 
 	 * @author Usuario
 	 *
 	 */
@@ -477,8 +486,10 @@ public class IU_JefeSala extends JFrame {
 			}
 		}
 	}
+
 	/**
 	 * Carga las mesas en estado "Reservada" en la ComboBox CbReservas()
+	 * 
 	 * @return
 	 * @throws SQLException
 	 */
@@ -494,9 +505,10 @@ public class IU_JefeSala extends JFrame {
 		}
 		return modelo;
 	}
-	
+
 	/**
 	 * Carga las mesas en estado "Libre" en la ComboBox CbLibres()
+	 * 
 	 * @return
 	 * @throws SQLException
 	 */
@@ -517,20 +529,21 @@ public class IU_JefeSala extends JFrame {
 
 	/**
 	 * Setter del atributo cbLlegadaReserva
+	 * 
 	 * @param cbMesas
 	 */
 	public static void setComboBoxReservadas(JComboBox<Mesa> cbMesas) {
 		cBLlegadaReserva = cbMesas;
-		
+
 	}
+
 	/**
 	 * Getter del atributocBLlegadaReserva
+	 * 
 	 * @return
 	 */
 	public static JComboBox<Mesa> getComboBoxReservadas() {
 		return cBLlegadaReserva;
 	}
-	
-	
 
 }

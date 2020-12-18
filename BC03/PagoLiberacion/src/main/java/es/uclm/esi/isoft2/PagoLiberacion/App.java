@@ -11,11 +11,12 @@ import java.text.ParseException;
 
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
 
-/**
- * Hello world!
- *
- */
 public class App {
+	
+	/**
+	 * Método principal del programa.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

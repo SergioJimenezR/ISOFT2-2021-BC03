@@ -29,12 +29,24 @@ import java.util.ArrayList;
 
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase que representa la interfaz gráfica de usuario de la Cocina.
+ * 
+ * @author BC03
+ *
+ */
 public class IU_Cocina extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Instancia del patrón singleton.
+	 */
 	private static IU_Cocina mInstancia = null;
 
+	/**
+	 * Elementos de la interfaz gráfica de usuario.
+	 */
 	private JPanel contentPane;
 	private JPanel panel;
 	private JLabel lblUltimaComandaEntrante;
@@ -47,11 +59,20 @@ public class IU_Cocina extends JFrame {
 	private JComboBox<Comanda> cbComandasPendientes;
 	private JLabel lblNumComandasPendientes;
 
-	private int numComandasPendientes;
 	private JPanel panelMantenimiento;
 	private JButton btnGuardar;
 	private JButton btnReponer;
 
+	/**
+	 * Número que representa el número de ccomandas pendientes a preparar.
+	 */
+	private int numComandasPendientes;
+
+	/**
+	 * Método que devuelve la instancia de la interfaz, del patrón Singleton.
+	 * 
+	 * @return instancia
+	 */
 	public static IU_Cocina getInterfaz() { // Patron Singleton
 		if (mInstancia == null) {
 			mInstancia = new IU_Cocina();
@@ -60,6 +81,10 @@ public class IU_Cocina extends JFrame {
 		return mInstancia;
 	}
 
+	/**
+	 * Constructor de la interfaz gráfica de usuario, que ayuda a colocar todos los
+	 * elementos sobre ésta.
+	 */
 	private IU_Cocina() {
 
 		numComandasPendientes = 0;
@@ -185,6 +210,12 @@ public class IU_Cocina extends JFrame {
 		}
 	}
 
+	/**
+	 * Método que ayuda a enlistar las comandas que disponen de comidas en la
+	 * JComboBox que las reúne.
+	 * 
+	 * @param comanda
+	 */
 	public void enlistarComanda(Comanda comanda) {
 		cbComandasPendientes.setEnabled(true);
 		textPaneAvisosComandaEntrante.setText("Se ha recibido una nueva comanda: " + comanda.toString() + ".");
@@ -193,6 +224,12 @@ public class IU_Cocina extends JFrame {
 		((DefaultComboBoxModel<Comanda>) cbComandasPendientes.getModel()).addElement(comanda);
 	}
 
+	/**
+	 * Método que reduce el stock de comidas de una determinada comanda seleccionada
+	 * en la JComboBox, cuando se pulsa el botón de Avisar.
+	 * 
+	 * @param c
+	 */
 	private void reducirStockPlatos(Comanda c) {
 		ArrayList<Plato> listaPlatos = null;
 		for (int i = 0; i < 3; i++) {
@@ -226,6 +263,14 @@ public class IU_Cocina extends JFrame {
 
 	}
 
+	/**
+	 * ActionListener según inner class que maneja el evento de pulsación de un
+	 * elemento de la lista desplegable JComboBox donde están enlistadas las
+	 * Comandas Pendientes.
+	 * 
+	 * @author BC03
+	 *
+	 */
 	private class CbComandasPendientesActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			btnAvisar.setEnabled(true);
@@ -239,6 +284,15 @@ public class IU_Cocina extends JFrame {
 		}
 	}
 
+	/**
+	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * Avisar, que srive para marcar como preparada las comidas de la comanda por
+	 * parte de la cocina, para avisar al camarero de mesa para que sirva la comida
+	 * a la mesa.
+	 * 
+	 * @author BC03
+	 *
+	 */
 	private class BtnAvisarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			Comanda comandaSeleccionada = (Comanda) cbComandasPendientes.getSelectedItem();
@@ -261,12 +315,29 @@ public class IU_Cocina extends JFrame {
 		}
 	}
 
+	/**
+	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * Guardar, que sirve para actualizar la base de datos según el stock actual del
+	 * Almacén.
+	 * 
+	 * @author BC03
+	 *
+	 */
 	private class BtnGuardarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			Almacen.getAlmacen().actualizacionBD();
 		}
 	}
 
+	/**
+	 * ActionListener según inner class que maneja el evento de pulsación del botón
+	 * Reponer, que sirve para actualizar los stocks de la base de datos y del
+	 * almacén al máximo de stock reglamentado, cuando se avisa de que se ha
+	 * descendido por debajo del umbral.
+	 * 
+	 * @author BC03
+	 *
+	 */
 	private class BtnReponerActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			Almacen.getAlmacen().reponerStocks();
