@@ -111,6 +111,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	private JLabel lblSegundo;
 	private JLabel lblPostre;
 	private JButton btnLimpiar;
+	/**
+	 * Lista de mesas que ya han pasado por todos los estados
+	 */
 	private ArrayList<Mesa> paraEstadisticas;
 
 	private static Timer timer;
@@ -1372,10 +1375,17 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		return modelo;
 	}
 
+	/**
+	 * Getter del atributo paraEstadisticas
+	 * @return
+	 */
 	public ArrayList<Mesa> getMesaEstadisticas() {
 		return paraEstadisticas;
 	}
 
+	/**
+	 * Reinicializa la lista paraEstadisticas
+	 */
 	public void restartMesas() {
 		paraEstadisticas = new ArrayList<Mesa>();
 	}

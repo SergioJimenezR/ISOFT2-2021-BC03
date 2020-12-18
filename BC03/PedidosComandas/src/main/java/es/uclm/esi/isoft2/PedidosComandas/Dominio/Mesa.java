@@ -9,8 +9,18 @@ public class Mesa {
 	private Comanda comanda;
 	private int precio;
 	private String dni;
+	
+	/**
+	 * Tiempo de cada estado por los que pasa la mesa
+	 */
 	private double[] vectorTiempos;
+	/**
+	 * Momento de ejecución en el que la mesa cambia de estado
+	 */
 	private double tiempoTranscurrido;
+	/**
+	 * Número de comensales que admite la mesa
+	 */
 	private int numComensales;
 	private Date fecha;
 
@@ -64,6 +74,9 @@ public class Mesa {
 		this.comanda = comanda;
 	}
 
+	/**
+	 * Asigna el número de comensales a la mesa
+	 */
 	private void setNumComensales() {
 		if (this.id < 3)
 			this.numComensales = 2;
@@ -117,6 +130,10 @@ public class Mesa {
 		return true;
 	}
 
+	/**
+	 * Añade el tiempo de un estado al vector de tiempos
+	 * @param tiempoTranscurrido
+	 */
 	private void actualizarTiempos(double tiempoTranscurrido) {
 		int i = -1;
 		switch (this.estadoMesa) {
@@ -152,6 +169,10 @@ public class Mesa {
 		this.vectorTiempos[i] = tiempoTranscurrido;
 	}
 
+	/**
+	 * Comprueba que la mesa haya pasado por todos los estados
+	 * @return
+	 */
 	public boolean todosEstadosRecorridos() {
 		boolean result = true;
 		for (int i = 0; i < this.vectorTiempos.length && result; i++)
@@ -160,10 +181,17 @@ public class Mesa {
 		return result;
 	}
 
+	/**
+	 * Getter del atributo vectorTiempos
+	 * @return
+	 */
 	public double[] getVectorTiempos() {
 		return vectorTiempos;
 	}
-
+	
+	/**
+	 * Inicializa a 0 el vectorTiempos
+	 */
 	private void inicializar() {
 		for (int i = 0; i < this.vectorTiempos.length; i++)
 			this.vectorTiempos[i] = 0;

@@ -8,6 +8,11 @@ import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
 
 public class EstadisticasDAO {
 
+	/**
+	 * Recupera de la base de datos el tiempo medio de cada estado
+	 * @return
+	 * @throws SQLException
+	 */
 	public double[] obtenerMedias() throws SQLException {
 		double[] medias = new double[9];
 		ResultSet result = Agente.getAgente().select("SELECT * FROM ESTADISTICAS WHERE version = 1");
@@ -25,7 +30,11 @@ public class EstadisticasDAO {
 		return medias;
 
 	}
-
+	/**
+	 * Recupera de la base de datos el número total de mesas atendidas
+	 * @return
+	 * @throws SQLException
+	 */
 	public int obtenerNMesas() throws SQLException {
 		int nMesas;
 		ResultSet result = Agente.getAgente().select("SELECT NMesas FROM ESTADISTICAS WHERE version = 1");
@@ -34,6 +43,13 @@ public class EstadisticasDAO {
 		return nMesas;
 	}
 
+	/**
+	 * Acutaliza el tiempo de cada estado y el numero de mesas atentidas en la base de datos
+	 * @param vectorTiemposMediosTotales
+	 * @param nMesas
+	 * @return
+	 * @throws SQLException
+	 */
 	public int anyadirTiemposMedios(double[] vectorTiemposMediosTotales, int nMesas) throws SQLException {
 		return Agente.getAgente()
 				.update("UPDATE ESTADISTICAS SET NMesas = " + nMesas + ", " + EstadosMesas.LIBRE.name() + " = "

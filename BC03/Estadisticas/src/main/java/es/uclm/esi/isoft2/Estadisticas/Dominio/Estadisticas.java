@@ -6,29 +6,61 @@ import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
 import java.sql.SQLException;
 
 public class Estadisticas {
-
+	
+	/**
+	 * Contiene los tiempos medios de cada estado en todos los servicios del restaurante
+	 */
 	private double[] vectorTiemposMediosTotales;
+	/**
+	 * Contiene el numero total de mesas atendidas en todos los servicios del restaurante
+	 */
 	private int nMesas;
+	/**
+	 * Estancia de EstadisticasDAO que proporciona acceso a la capa de Persistencia
+	 */
 	private static EstadisticasDAO dao;
-
+	
+	/**
+	 * Constructor de la clase estadisticas
+	 * @throws SQLException
+	 */
 	public Estadisticas() throws SQLException {
 		dao = new EstadisticasDAO();
 		this.leerVectorTiemposMediosTotales();
 		this.leerNMesas();
 	}
-
+	
+	/**
+	 * Devuelve el vector que contiene los tiempos medios de cada calculados
+	 * a lo largo del tiempo.
+	 * @return double[]
+	 */
 	public double[] getVectorTiemposMediosTotales() {
 		return vectorTiemposMediosTotales;
 	}
-
+	
+	/**
+	 * Carga en el vectorTiemposMediosTotales los tiempos medios de todos los servicios
+	 * del restaurante, que se obtienen de la base de datos.
+	 * @throws SQLException
+	 */
 	private void leerVectorTiemposMediosTotales() throws SQLException {
 		this.vectorTiemposMediosTotales = dao.obtenerMedias();
 	}
-
+	
+	/**
+	 * Lee de la base de datos el valor de nMesas
+	 * @throws SQLException
+	 */
 	private void leerNMesas() throws SQLException {
 		this.nMesas = dao.obtenerNMesas();
 	}
 
+	/**
+	 * Anyade los tiempos de cada estado de la mesa y recalcula el tiempo medio
+	 * general de cada estado.
+	 * @param mesa
+	 */
 	public void enviarTiemposMediosMesa(Mesa mesa) {
 		double[] tiemposMesa = mesa.getVectorTiempos();
 		++nMesas;
@@ -37,14 +69,21 @@ public class Estadisticas {
 		}
 	}
 
+	/**
+	 * Envia el estado del vector de tiempos a EstadisticaDAO para actualizar
+	 * su estado en la base de datos y comprueba que se haya realizado correctamente.
+	 * @throws SQLException
+	 */
 	public void enviarTiemposPersistencia() throws SQLException {
-		for (int i = 0; i < this.vectorTiemposMediosTotales.length; i++)
-			System.out.println(this.vectorTiemposMediosTotales[i] + " ");
 		int ejecucionCorrecta = dao.anyadirTiemposMedios(vectorTiemposMediosTotales, nMesas);
 		if (ejecucionCorrecta == 1)
 			new SQLException();
 	}
 
+	/**
+	 * Devuelve una descripción del estado del vectorTiemposMediosTotales
+	 * @return
+	 */
 	public String getTiemposEstadistica() {
 		return "Ocupada=" + vectorTiemposMediosTotales[2] + ", Pidiendo=" + vectorTiemposMediosTotales[3]
 				+ ", EsperandoComida=" + vectorTiemposMediosTotales[4] + ", Servidos=" + vectorTiemposMediosTotales[5]
