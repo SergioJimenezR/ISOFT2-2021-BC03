@@ -187,7 +187,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 		index = Constantes.INDICE_INICIAL_PRODUCTOS;
 		numNotificacionesPendientes = 0;
-		setTitle("Vista Camarero");
+		setTitle("Camarero");
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 789);
 		setLocationRelativeTo(null);
@@ -327,6 +327,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 					cbMesa.addActionListener(new CbMesaActionListener());
 					DefaultComboBoxModel<Mesa> modelo = rellenarCbMesas();
 					cbMesa.setModel(modelo);
+					cbMesa.setSelectedItem(null);;
 					cbMesa.setBounds(183, 88, 142, 31);
 					panelNuevaComanda.add(cbMesa);
 				}
@@ -461,7 +462,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 							btnQuitarEntrante.setEnabled(false);
 							btnQuitarEntrante.addActionListener(new BtnQuitarEntranteActionListener());
 							{
-								btnAnyadirEntrante = new JButton("Agregar");
+								btnAnyadirEntrante = new JButton("Anyadir");
 								btnAnyadirEntrante.setEnabled(false);
 								btnAnyadirEntrante.addActionListener(new BtnAnyadirEntranteActionListener());
 								{
@@ -480,7 +481,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 										panelCarta.add(cbBebidas, gbc_cbBebidas);
 									}
 									{
-										btnAnyadirBebida = new JButton("Agregar");
+										btnAnyadirBebida = new JButton("Anyadir");
 										btnAnyadirBebida.setEnabled(false);
 										btnAnyadirBebida.addActionListener(new BtnAnyadirBebidaActionListener());
 										GridBagConstraints gbc_btnAnyadirBebida = new GridBagConstraints();
@@ -526,7 +527,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 						btnQuitarPostre = new JButton("Quitar");
 						btnQuitarPostre.addActionListener(new BtnQuitarPostreActionListener());
 						{
-							btnAnyadirPostre = new JButton("Agregar");
+							btnAnyadirPostre = new JButton("Anyadir");
 							btnAnyadirPostre.addActionListener(new BtnAnyadirPostreActionListener());
 							{
 								cbPostres = new JComboBox<String>();
@@ -535,7 +536,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 									btnQuitarSegundo = new JButton("Quitar");
 									btnQuitarSegundo.addActionListener(new BtnQuitarSegundoActionListener());
 									{
-										btnAnyadirSegundo = new JButton("Agregar");
+										btnAnyadirSegundo = new JButton("Anyadir");
 										btnAnyadirSegundo.addActionListener(new BtnAnyadirSegundoActionListener());
 										{
 											cbSegundos = new JComboBox<String>();
@@ -545,7 +546,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 												btnQuitarPrimero
 														.addActionListener(new BtnQuitarPrimeroActionListener());
 												{
-													btnAnyadirPrimero = new JButton("Agregar");
+													btnAnyadirPrimero = new JButton("Anyadir");
 													btnAnyadirPrimero
 															.addActionListener(new BtnAnyadirPrimeroActionListener());
 													cbPrimeros = new JComboBox<String>();
@@ -1215,6 +1216,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 				int sel = JOptionPane.showOptionDialog(contentPane, "¿Seguro que quieres cancelar?", "Cancelar comadna",
 						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 				if (sel == JOptionPane.YES_OPTION) {
+
+					((Mesa) cbMesa.getSelectedItem()).setEstadoMesa(EstadosMesas.OCUPADA);
+
 					CardLayout panel = (CardLayout) (contentPane.getLayout());
 					panel.show(contentPane, e.getActionCommand());
 
@@ -1539,6 +1543,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 			try {
 				modelo = rellenarCbMesas();
 				cbMesa.setModel(modelo);
+				cbMesa.setSelectedItem(null);;
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}

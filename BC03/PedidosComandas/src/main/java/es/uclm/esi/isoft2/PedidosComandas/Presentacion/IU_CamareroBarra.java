@@ -85,7 +85,6 @@ public class IU_CamareroBarra extends JFrame {
 	 * elementos sobre esta.
 	 */
 	public IU_CamareroBarra() {
-		setTitle("Vista Camarero de Barra");
 
 		numComandasPendientes = 0;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
