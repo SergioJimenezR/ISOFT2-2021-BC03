@@ -82,6 +82,7 @@ public class IU_JefeSala extends JFrame {
 	 * @throws SQLException excepcion por no estar conectado a la BBDD
 	 */
 	public IU_JefeSala() throws ParseException, SQLException {
+		setTitle("Vista Jefe de Sala");
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

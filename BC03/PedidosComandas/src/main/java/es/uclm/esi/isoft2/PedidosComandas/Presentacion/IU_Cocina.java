@@ -86,6 +86,7 @@ public class IU_Cocina extends JFrame {
 	 * elementos sobre esta.
 	 */
 	private IU_Cocina() {
+		setTitle("Vista Cocinero");
 
 		numComandasPendientes = 0;
 
