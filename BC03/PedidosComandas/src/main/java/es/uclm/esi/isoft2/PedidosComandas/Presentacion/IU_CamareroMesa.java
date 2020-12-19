@@ -1239,7 +1239,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	}
 
 	/**
-	 * ActionListener segun inner class que maneja el evento de pulsacion del boton
+	 * WindowListener segun inner class que maneja el evento de pulsacion del boton
 	 * de cerrar la ventana (X), y que limpia y actualiza la base de datos hasta el
 	 * momento en el caso de pulsar Si cerrar.
 	 * 

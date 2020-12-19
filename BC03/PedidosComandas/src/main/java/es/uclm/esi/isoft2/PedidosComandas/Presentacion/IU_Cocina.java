@@ -32,6 +32,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 /**
  * Clase que representa la interfaz grafica de usuario de la Cocina.
@@ -71,6 +72,8 @@ public class IU_Cocina extends JFrame {
 	 * Numero que representa el numero de ccomandas pendientes a preparar.
 	 */
 	private int numComandasPendientes;
+	private JScrollPane scrollPane;
+	private JScrollPane scrollPane_1;
 
 	/**
 	 * Metodo que devuelve la instancia de la interfaz, del patron Singleton.
@@ -98,7 +101,7 @@ public class IU_Cocina extends JFrame {
 		numComandasPendientes = 0;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 478, 226);
+		setBounds(100, 100, 478, 242);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -125,15 +128,19 @@ public class IU_Cocina extends JFrame {
 				panel.add(lblUltimaComandaEntrante, gbc_lblUltimaComandaEntrante);
 			}
 			{
-				textPaneAvisosComandaEntrante = new JTextPane();
-				textPaneAvisosComandaEntrante.setEditable(false);
-				GridBagConstraints gbc_textPaneComandaEntrante = new GridBagConstraints();
-				gbc_textPaneComandaEntrante.fill = GridBagConstraints.BOTH;
-				gbc_textPaneComandaEntrante.gridwidth = 2;
-				gbc_textPaneComandaEntrante.insets = new Insets(0, 0, 5, 0);
-				gbc_textPaneComandaEntrante.gridx = 1;
-				gbc_textPaneComandaEntrante.gridy = 0;
-				panel.add(textPaneAvisosComandaEntrante, gbc_textPaneComandaEntrante);
+				scrollPane = new JScrollPane();
+				GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+				gbc_scrollPane.gridwidth = 2;
+				gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
+				gbc_scrollPane.fill = GridBagConstraints.BOTH;
+				gbc_scrollPane.gridx = 1;
+				gbc_scrollPane.gridy = 0;
+				panel.add(scrollPane, gbc_scrollPane);
+				{
+					textPaneAvisosComandaEntrante = new JTextPane();
+					scrollPane.setViewportView(textPaneAvisosComandaEntrante);
+					textPaneAvisosComandaEntrante.setEditable(false);
+				}
 			}
 			{
 				lblComandaPendiente = new JLabel("Comandas pendientes:");
@@ -174,24 +181,26 @@ public class IU_Cocina extends JFrame {
 				panel.add(lblDescripcion, gbc_lblDescripcion);
 			}
 			{
-				textPaneInfoComandaSeleccionada = new JTextPane();
-				textPaneInfoComandaSeleccionada.setEditable(false);
-				GridBagConstraints gbc_textPaneInfoComandaSeleccionada = new GridBagConstraints();
-				gbc_textPaneInfoComandaSeleccionada.fill = GridBagConstraints.BOTH;
-				gbc_textPaneInfoComandaSeleccionada.gridwidth = 2;
-				gbc_textPaneInfoComandaSeleccionada.insets = new Insets(0, 0, 5, 0);
-				gbc_textPaneInfoComandaSeleccionada.gridx = 1;
-				gbc_textPaneInfoComandaSeleccionada.gridy = 2;
-				panel.add(textPaneInfoComandaSeleccionada, gbc_textPaneInfoComandaSeleccionada);
-			}
-			{
-				btnAvisar = new JButton("Avisar de Platos preparados");
-				btnAvisar.setEnabled(false);
-				btnAvisar.addActionListener(new BtnAvisarActionListener());
+				{
+					scrollPane_1 = new JScrollPane();
+					GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+					gbc_scrollPane_1.gridwidth = 2;
+					gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
+					gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
+					gbc_scrollPane_1.gridx = 1;
+					gbc_scrollPane_1.gridy = 2;
+					panel.add(scrollPane_1, gbc_scrollPane_1);
+					{
+						textPaneInfoComandaSeleccionada = new JTextPane();
+						scrollPane_1.setViewportView(textPaneInfoComandaSeleccionada);
+						textPaneInfoComandaSeleccionada.setEditable(false);
+					}
+				}
 				{
 					panelMantenimiento = new JPanel();
 					panelMantenimiento.setBorder(null);
 					GridBagConstraints gbc_panelMantenimiento = new GridBagConstraints();
+					gbc_panelMantenimiento.gridwidth = 3;
 					gbc_panelMantenimiento.insets = new Insets(0, 0, 0, 5);
 					gbc_panelMantenimiento.fill = GridBagConstraints.BOTH;
 					gbc_panelMantenimiento.gridx = 0;
@@ -207,13 +216,11 @@ public class IU_Cocina extends JFrame {
 						btnReponer.addActionListener(new BtnReponerActionListener());
 						panelMantenimiento.add(btnReponer);
 					}
+					btnAvisar = new JButton("Avisar de Platos preparados");
+					panelMantenimiento.add(btnAvisar);
+					btnAvisar.setEnabled(false);
+					btnAvisar.addActionListener(new BtnAvisarActionListener());
 				}
-				GridBagConstraints gbc_btnAvisar = new GridBagConstraints();
-				gbc_btnAvisar.fill = GridBagConstraints.HORIZONTAL;
-				gbc_btnAvisar.gridwidth = 2;
-				gbc_btnAvisar.gridx = 1;
-				gbc_btnAvisar.gridy = 3;
-				panel.add(btnAvisar, gbc_btnAvisar);
 			}
 		}
 	}
@@ -352,6 +359,14 @@ public class IU_Cocina extends JFrame {
 		}
 	}
 
+	/**
+	 * WindowListener segun inner class que maneja el evento de pulsacion del boton
+	 * de cerrar la ventana (X), y que cierra la ventana y finaliza el programa en
+	 * caso de pulsar Sí.
+	 * 
+	 * @author BC03
+	 *
+	 */
 	private class ThisWindowListener extends WindowAdapter {
 		@Override
 		public void windowClosing(WindowEvent e) {
