@@ -461,7 +461,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 							btnQuitarEntrante.setEnabled(false);
 							btnQuitarEntrante.addActionListener(new BtnQuitarEntranteActionListener());
 							{
-								btnAnyadirEntrante = new JButton("Anyadir");
+								btnAnyadirEntrante = new JButton("Agregar");
 								btnAnyadirEntrante.setEnabled(false);
 								btnAnyadirEntrante.addActionListener(new BtnAnyadirEntranteActionListener());
 								{
@@ -480,7 +480,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 										panelCarta.add(cbBebidas, gbc_cbBebidas);
 									}
 									{
-										btnAnyadirBebida = new JButton("Anyadir");
+										btnAnyadirBebida = new JButton("Agregar");
 										btnAnyadirBebida.setEnabled(false);
 										btnAnyadirBebida.addActionListener(new BtnAnyadirBebidaActionListener());
 										GridBagConstraints gbc_btnAnyadirBebida = new GridBagConstraints();
@@ -526,7 +526,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 						btnQuitarPostre = new JButton("Quitar");
 						btnQuitarPostre.addActionListener(new BtnQuitarPostreActionListener());
 						{
-							btnAnyadirPostre = new JButton("Anyadir");
+							btnAnyadirPostre = new JButton("Agregar");
 							btnAnyadirPostre.addActionListener(new BtnAnyadirPostreActionListener());
 							{
 								cbPostres = new JComboBox<String>();
@@ -535,7 +535,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 									btnQuitarSegundo = new JButton("Quitar");
 									btnQuitarSegundo.addActionListener(new BtnQuitarSegundoActionListener());
 									{
-										btnAnyadirSegundo = new JButton("Anyadir");
+										btnAnyadirSegundo = new JButton("Agregar");
 										btnAnyadirSegundo.addActionListener(new BtnAnyadirSegundoActionListener());
 										{
 											cbSegundos = new JComboBox<String>();
@@ -545,7 +545,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 												btnQuitarPrimero
 														.addActionListener(new BtnQuitarPrimeroActionListener());
 												{
-													btnAnyadirPrimero = new JButton("Anyadir");
+													btnAnyadirPrimero = new JButton("Agregar");
 													btnAnyadirPrimero
 															.addActionListener(new BtnAnyadirPrimeroActionListener());
 													cbPrimeros = new JComboBox<String>();
