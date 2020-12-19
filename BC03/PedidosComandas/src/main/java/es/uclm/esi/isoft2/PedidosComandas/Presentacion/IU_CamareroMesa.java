@@ -162,8 +162,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	/**
 	 * Metodo que devuelve la instancia de la interfaz segun el patron Singleton.
 	 * 
-	 * @return instancia
-	 * @throws SQLException
+	 * @return instancia instancia de IU_CamareroMesa
+	 * @throws SQLException excepcion que salta si no estamos conectados a la BBDD
 	 */
 	public static IU_CamareroMesa getInterfaz() throws SQLException { // Patron Singleton
 		if (mInstancia == null) {
@@ -177,7 +177,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	 * Metodo constructor de la clase, privado por llevar a cabo el patron
 	 * Singleton.
 	 * 
-	 * @throws SQLException
+	 * @throws SQLException excepcion que salta si no estamos conectados a la BBDD
 	 */
 	private IU_CamareroMesa() throws SQLException {
 
@@ -765,7 +765,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	 * Metodo que modifica la informacion mostrada en el cuadro de texto, durante la
 	 * anotacion de la comanda, referido al stock.
 	 * 
-	 * @param mensaje
+	 * @param mensaje con el estado
 	 */
 	private void mostrarMsgEstado(String mensaje) {
 		textPaneEstado.setText(mensaje);
@@ -1103,8 +1103,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	 * en concreto, comprobando el stock para habilitar o deshabilitar el boton
 	 * Anyadir.
 	 * 
-	 * @param comboBox
-	 * @param btnAnyadir
+	 * @param comboBox   donde se seleccionaran los elementos
+	 * @param btnAnyadir mandara el evento
 	 */
 	private void eventoComboBox(JComboBox<String> comboBox, JButton btnAnyadir) {
 		try {
@@ -1133,9 +1133,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	 * Metodo que ejecuta las acciones cuando se pulsa un boton Anyadir en concreto,
 	 * que anyade a su respectiva JList el plato seleccionado en la JComboBox.
 	 * 
-	 * @param comboBox
-	 * @param btnAnyadir
-	 * @param lista
+	 * @param comboBox   donde se elegira un elemento
+	 * @param btnAnyadir que lanzara el evento
+	 * @param lista      lanza el plato que estaba en la lista
 	 */
 	private void eventoAnyadir(JComboBox<String> comboBox, JButton btnAnyadir, JList<Plato> lista) {
 
@@ -1164,8 +1164,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	 * Metodo que ejecuta las acciones cuando se pulsa un elemento de una JList en
 	 * concreto, que habilita o deshabilita el boton Quitar.
 	 * 
-	 * @param lista
-	 * @param btnQuitar
+	 * @param lista     con platos
+	 * @param btnQuitar boton que permitte quitar un plato
 	 */
 	private void eventoLista(JList<Plato> lista, JButton btnQuitar) {
 		if (lista.getSelectedIndex() >= 0)
@@ -1180,7 +1180,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	 * el stock que se consumio para anyadirlo, y retrasando los siguientes ids en 1
 	 * unidad.
 	 * 
-	 * @param lista
+	 * @param lista de platos
 	 */
 	private void eventoQuitar(JList<Plato> lista) {
 		Plato p = ((DefaultListModel<Plato>) lista.getModel()).get(lista.getSelectedIndex());
@@ -1549,8 +1549,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	 * Metodo auxiliar que ayuda a crear una comanda segun lo que figura reunido en
 	 * las JList respectivas.
 	 * 
-	 * @param index
-	 * @return comanda
+	 * @param index sirve para identificar el numero de platos en la comanda
+	 * @return comanda donde se apuntaran todos los platos y bebidas
 	 */
 	public Comanda crearComanda(int index) {
 
@@ -1572,8 +1572,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	 * Metodo auxiliar que reune en una lista dinamica que se devuelve, las bebidas
 	 * del JList de Bebidas.
 	 * 
-	 * @param JList
-	 * @return lista
+	 * @param list que sera una JList
+	 * @return lista de bebidas
 	 */
 	public ArrayList<Bebida> obtenerArrayListBebida(JList<Bebida> list) {
 		ArrayList<Bebida> arrayListBebidas = new ArrayList<Bebida>();
@@ -1588,8 +1588,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	 * Metodo auxiliar que reune en una lista dinamica que se devuelve, los platos
 	 * de una JList de Platos en concreto.
 	 * 
-	 * @param JList
-	 * @return lista
+	 * @param list que sera una JList
+	 * @return lista de platos
 	 */
 	public ArrayList<Plato> obtenerArrayListPlato(JList<Plato> list) {
 		ArrayList<Plato> arrayListPlato = new ArrayList<Plato>();
@@ -1649,7 +1649,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	 * absoluta continuidad entre los indices de los productos solicitados
 	 * oficialmente.
 	 * 
-	 * @param k
+	 * @param k maximo de id
 	 */
 	private void retrasarIds(int k) {
 		DefaultListModel<Plato> modeloPlatos = null;
@@ -1704,7 +1704,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	 * Metodo que inicia un Timer al momento de Cerrar (confirmar) la Comanda, para
 	 * resaltar en su expedicion.
 	 * 
-	 * @param aviso
+	 * @param aviso que se inicia al cerrar comanda
 	 */
 	public void iniciarTimer(Aviso aviso) {
 		Aviso lanzado;
@@ -1735,7 +1735,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	/**
 	 * Metodo que anyade un aviso a la lista JComboBox de avisos.
 	 * 
-	 * @param aviso
+	 * @param aviso que anyade a la comboBox
 	 */
 	public void anyadirAviso(Aviso aviso) {
 		((DefaultComboBoxModel<Aviso>) cbAvisos.getModel()).addElement(aviso);
@@ -1747,8 +1747,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	 * Metodo que enlista en un modelo de ComboBox, las mesas que se han marcado
 	 * como ocupadas (Llegada).
 	 * 
-	 * @return modelo
-	 * @throws SQLException
+	 * @return modelo sera un comboBox default
+	 * @throws SQLException excepcion que saltara cuando no estes conectado a la
+	 *                      BBDD
 	 */
 	public static DefaultComboBoxModel<Mesa> rellenarCbMesas() throws SQLException {
 		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
@@ -1766,7 +1767,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 	/**
 	 * Getter del atributo paraEstadisticas
 	 * 
-	 * @return
+	 * @return devueve estadisticas
 	 */
 	public ArrayList<Mesa> getMesaEstadisticas() {
 		return paraEstadisticas;

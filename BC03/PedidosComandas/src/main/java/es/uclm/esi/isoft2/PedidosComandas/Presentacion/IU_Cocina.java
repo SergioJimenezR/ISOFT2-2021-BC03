@@ -214,7 +214,7 @@ public class IU_Cocina extends JFrame {
 	 * Metodo que ayuda a enlistar las comandas que disponen de comidas en la
 	 * JComboBox que las reune.
 	 * 
-	 * @param comanda
+	 * @param comanda a enlistar
 	 */
 	public void enlistarComanda(Comanda comanda) {
 		cbComandasPendientes.setEnabled(true);

@@ -75,42 +75,11 @@ public class IU_JefeSala extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	/*
-	 * public static void main(String[] args) { EventQueue.invokeLater(new
-	 * Runnable() { public void run() { try { IU_JefeSala frame = new IU_JefeSala();
-	 * frame.setVisible(true); } catch (Exception e) { e.printStackTrace(); } } });
-	 * }
-	 */
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-
-				Almacen.getAlmacen();
-
-				try {
-					IU_CamareroMesa.getInterfaz();
-					IU_JefeSala frame = new IU_JefeSala();
-					frame.setVisible(true);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				IU_Cocina.getInterfaz();
-				IU_CamareroBarra.getInterfaz();
-
-			}
-		});
-	}
-
 	/**
 	 * Create the frame.
 	 * 
-	 * @throws ParseException
-	 * @throws SQLException
+	 * @throws ParseException execpcion al parsear
+	 * @throws SQLException excepcion por no estar conectado a la BBDD
 	 */
 	public IU_JefeSala() throws ParseException, SQLException {
 		addWindowListener(new WindowAdapter() {
@@ -490,8 +459,8 @@ public class IU_JefeSala extends JFrame {
 	/**
 	 * Carga las mesas en estado "Reservada" en la ComboBox CbReservas()
 	 * 
-	 * @return
-	 * @throws SQLException
+	 * @return devuelve un modelo de comboBox estandar de Mesa
+	 * @throws SQLException si no esta conectada a la BBDD
 	 */
 	public static DefaultComboBoxModel<Mesa> rellenarCbReserva() throws SQLException {
 		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
@@ -509,8 +478,8 @@ public class IU_JefeSala extends JFrame {
 	/**
 	 * Carga las mesas en estado "Libre" en la ComboBox CbLibres()
 	 * 
-	 * @return
-	 * @throws SQLException
+	 * @return devuelve un modelo estandar de comboBox de Mesa
+	 * @throws SQLException si no esta conectada a la BBDD
 	 */
 	public static DefaultComboBoxModel<Mesa> rellenarCbLibres() throws SQLException {
 		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
@@ -530,7 +499,7 @@ public class IU_JefeSala extends JFrame {
 	/**
 	 * Setter del atributo cbLlegadaReserva
 	 * 
-	 * @param cbMesas
+	 * @param cbMesas nuevo comboBox de mesas reservadas
 	 */
 	public static void setComboBoxReservadas(JComboBox<Mesa> cbMesas) {
 		cBLlegadaReserva = cbMesas;
@@ -540,7 +509,7 @@ public class IU_JefeSala extends JFrame {
 	/**
 	 * Getter del atributocBLlegadaReserva
 	 * 
-	 * @return
+	 * @return devuelve el comboBox de mesas reservadas
 	 */
 	public static JComboBox<Mesa> getComboBoxReservadas() {
 		return cBLlegadaReserva;

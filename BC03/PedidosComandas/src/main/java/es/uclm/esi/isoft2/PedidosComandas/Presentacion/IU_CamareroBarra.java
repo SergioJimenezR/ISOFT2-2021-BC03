@@ -212,7 +212,7 @@ public class IU_CamareroBarra extends JFrame {
 	 * Metodo que ayuda a enlistar las comandas que disponen de bebidas en la
 	 * JComboBox que las reune.
 	 * 
-	 * @param comanda
+	 * @param comanda a enlistar
 	 */
 	public void enlistarComanda(Comanda comanda) {
 		cbComandasPendientes.setEnabled(true);

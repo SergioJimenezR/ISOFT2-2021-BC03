@@ -11,8 +11,8 @@ public class EstadisticasDAO {
 	/**
 	 * Recupera de la base de datos el tiempo medio de cada estado
 	 * 
-	 * @return
-	 * @throws SQLException
+	 * @return devuelve los tiempos medios
+	 * @throws SQLException excepcion que salta si no estamos conectados a la BBDD
 	 */
 	public double[] obtenerMedias() throws SQLException {
 		double[] medias = new double[9];
@@ -35,8 +35,8 @@ public class EstadisticasDAO {
 	/**
 	 * Recupera de la base de datos el numero total de mesas atendidas
 	 * 
-	 * @return
-	 * @throws SQLException
+	 * @return devuelve el numero de mesas
+	 * @throws SQLException excepcion que salta si no estamos conectados a la BBDD
 	 */
 	public int obtenerNMesas() throws SQLException {
 		int nMesas;
@@ -50,10 +50,10 @@ public class EstadisticasDAO {
 	 * Acutaliza el tiempo de cada estado y el numero de mesas atentidas en la base
 	 * de datos
 	 * 
-	 * @param vectorTiemposMediosTotales
-	 * @param nMesas
-	 * @return
-	 * @throws SQLException
+	 * @param vectorTiemposMediosTotales vector de tiempos medios totales
+	 * @param nMesas numero de mesas
+	 * @return entero
+	 * @throws SQLException excepcion que salta si no estamos conectados a la BBDD
 	 */
 	public int anyadirTiemposMedios(double[] vectorTiemposMediosTotales, int nMesas) throws SQLException {
 		return Agente.getAgente()

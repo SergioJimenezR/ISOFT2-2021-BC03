@@ -25,7 +25,7 @@ public class Estadisticas {
 	/**
 	 * Constructor de la clase estadisticas
 	 * 
-	 * @throws SQLException
+	 * @throws SQLException excepcion por no estar conectado a la BBDD
 	 */
 	public Estadisticas() throws SQLException {
 		dao = new EstadisticasDAO();
@@ -37,7 +37,7 @@ public class Estadisticas {
 	 * Devuelve el vector que contiene los tiempos medios de cada calculados a lo
 	 * largo del tiempo.
 	 * 
-	 * @return double[]
+	 * @return double[] vector de tiempos
 	 */
 	public double[] getVectorTiemposMediosTotales() {
 		return vectorTiemposMediosTotales;
@@ -47,7 +47,7 @@ public class Estadisticas {
 	 * Carga en el vectorTiemposMediosTotales los tiempos medios de todos los
 	 * servicios del restaurante, que se obtienen de la base de datos.
 	 * 
-	 * @throws SQLException
+	 * @throws SQLException excepcion por no estar conectado a la BBDD
 	 */
 	private void leerVectorTiemposMediosTotales() throws SQLException {
 		this.vectorTiemposMediosTotales = dao.obtenerMedias();
@@ -56,7 +56,7 @@ public class Estadisticas {
 	/**
 	 * Lee de la base de datos el valor de nMesas
 	 * 
-	 * @throws SQLException
+	 * @throws SQLException excepcion por no estar conectado a la BBDD
 	 */
 	private void leerNMesas() throws SQLException {
 		this.nMesas = dao.obtenerNMesas();
@@ -66,7 +66,7 @@ public class Estadisticas {
 	 * Anyade los tiempos de cada estado de la mesa y recalcula el tiempo medio
 	 * general de cada estado.
 	 * 
-	 * @param mesa
+	 * @param mesa mesa de la que medimos los tiempos
 	 */
 	public void enviarTiemposMediosMesa(Mesa mesa) {
 		double[] tiemposMesa = mesa.getVectorTiempos();
@@ -80,7 +80,7 @@ public class Estadisticas {
 	 * Envia el estado del vector de tiempos a EstadisticaDAO para actualizar su
 	 * estado en la base de datos y comprueba que se haya realizado correctamente.
 	 * 
-	 * @throws SQLException
+	 * @throws SQLException excepcion que salta si no estamos conectados a la BBDD
 	 */
 	public void enviarTiemposPersistencia() throws SQLException {
 		int ejecucionCorrecta = dao.anyadirTiemposMedios(vectorTiemposMediosTotales, nMesas);
@@ -91,7 +91,7 @@ public class Estadisticas {
 	/**
 	 * Devuelve una descripcion del estado del vectorTiemposMediosTotales
 	 * 
-	 * @return
+	 * @return devuelve los tiempos en formato String
 	 */
 	public String getTiemposEstadistica() {
 		return "Ocupada=" + vectorTiemposMediosTotales[2] + ", Pidiendo=" + vectorTiemposMediosTotales[3]
