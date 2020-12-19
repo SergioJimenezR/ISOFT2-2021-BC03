@@ -73,6 +73,7 @@ public class IU_JefeSala extends JFrame {
 	private Estadisticas estadisticas;
 	private JScrollPane scrollPane;
 	private JButton btnReiniciarEst;
+	private JLabel lblInfoEstadisticas;
 
 	/**
 	 * Launch the application.
@@ -98,7 +99,7 @@ public class IU_JefeSala extends JFrame {
 			}
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 561, 583);
+		setBounds(100, 100, 561, 656);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -288,14 +289,23 @@ public class IU_JefeSala extends JFrame {
 				contentPane.add(panelEstadisticas, gbc_panelEstadisticas);
 				GridBagLayout gbl_panelEstadisticas = new GridBagLayout();
 				gbl_panelEstadisticas.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-				gbl_panelEstadisticas.rowHeights = new int[] { 0, 0, 0 };
+				gbl_panelEstadisticas.rowHeights = new int[] { 0, 0, 0, 0 };
 				gbl_panelEstadisticas.columnWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 						0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-				gbl_panelEstadisticas.rowWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
+				gbl_panelEstadisticas.rowWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
 				panelEstadisticas.setLayout(gbl_panelEstadisticas);
 				{
 					btnVerEstadisticas = new JButton("Consultar");
 					btnVerEstadisticas.addActionListener(new BtnConsularEstadisticasActionListener());
+					{
+						lblInfoEstadisticas = new JLabel("Estadisticas expresadas en Minutos:");
+						GridBagConstraints gbc_lblInfoEstadisticas = new GridBagConstraints();
+						gbc_lblInfoEstadisticas.fill = GridBagConstraints.HORIZONTAL;
+						gbc_lblInfoEstadisticas.insets = new Insets(0, 0, 5, 5);
+						gbc_lblInfoEstadisticas.gridx = 4;
+						gbc_lblInfoEstadisticas.gridy = 0;
+						panelEstadisticas.add(lblInfoEstadisticas, gbc_lblInfoEstadisticas);
+					}
 					{
 						scrollPane = new JScrollPane();
 						GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -303,7 +313,7 @@ public class IU_JefeSala extends JFrame {
 						gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 						gbc_scrollPane.fill = GridBagConstraints.BOTH;
 						gbc_scrollPane.gridx = 0;
-						gbc_scrollPane.gridy = 0;
+						gbc_scrollPane.gridy = 1;
 						panelEstadisticas.add(scrollPane, gbc_scrollPane);
 						{
 							textAreaValoresEstadisticas = new JTextArea();
@@ -317,13 +327,13 @@ public class IU_JefeSala extends JFrame {
 						gbc_btnReiniciarEst.gridwidth = 2;
 						gbc_btnReiniciarEst.insets = new Insets(0, 0, 0, 5);
 						gbc_btnReiniciarEst.gridx = 9;
-						gbc_btnReiniciarEst.gridy = 1;
+						gbc_btnReiniciarEst.gridy = 2;
 						panelEstadisticas.add(btnReiniciarEst, gbc_btnReiniciarEst);
 					}
 					GridBagConstraints gbc_btnVerEstadisticas = new GridBagConstraints();
 					gbc_btnVerEstadisticas.gridwidth = 2;
 					gbc_btnVerEstadisticas.gridx = 12;
-					gbc_btnVerEstadisticas.gridy = 1;
+					gbc_btnVerEstadisticas.gridy = 2;
 					panelEstadisticas.add(btnVerEstadisticas, gbc_btnVerEstadisticas);
 				}
 			}
