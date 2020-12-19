@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.MaskFormatter;
 
+import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.Agente;
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.Constantes;
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.MesaDAO;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
@@ -71,6 +72,7 @@ public class IU_JefeSala extends JFrame {
 	private JTextArea textAreaValoresEstadisticas;
 	private Estadisticas estadisticas;
 	private JScrollPane scrollPane;
+	private JButton btnReiniciarEst;
 
 	/**
 	 * Launch the application.
@@ -308,6 +310,16 @@ public class IU_JefeSala extends JFrame {
 							scrollPane.setViewportView(textAreaValoresEstadisticas);
 						}
 					}
+					{
+						btnReiniciarEst = new JButton("Reiniciar Estadisitcas");
+						btnReiniciarEst.addActionListener(new BtnReiniciarEstActionListener());
+						GridBagConstraints gbc_btnReiniciarEst = new GridBagConstraints();
+						gbc_btnReiniciarEst.gridwidth = 2;
+						gbc_btnReiniciarEst.insets = new Insets(0, 0, 0, 5);
+						gbc_btnReiniciarEst.gridx = 9;
+						gbc_btnReiniciarEst.gridy = 1;
+						panelEstadisticas.add(btnReiniciarEst, gbc_btnReiniciarEst);
+					}
 					GridBagConstraints gbc_btnVerEstadisticas = new GridBagConstraints();
 					gbc_btnVerEstadisticas.gridwidth = 2;
 					gbc_btnVerEstadisticas.gridx = 12;
@@ -451,6 +463,25 @@ public class IU_JefeSala extends JFrame {
 
 				cBLlegadaReserva.setModel(modelo);
 				cBMesas.setModel(modelo2);
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+	private class BtnReiniciarEstActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			try {
+				Agente.getAgente()
+				.update("UPDATE ESTADISTICAS SET NMesas = 0, " + EstadosMesas.LIBRE.name() + " = "
+						+ 0 + ", " + EstadosMesas.RESERVADA.name() + "= "
+						+ 0 + ", " + EstadosMesas.OCUPADA.name() + "="
+						+ 0 + ", " + EstadosMesas.PIDIENDO.name() + "="
+						+ 0 + ", " + EstadosMesas.ESPERANDOCOMIDA.name() + "="
+						+ 0 + ", " + EstadosMesas.SERVIDOS.name() + "="
+						+ 0 + "," + EstadosMesas.ESPERANDOCUENTA.name() + "="
+						+ 0 + ", " + EstadosMesas.PAGANDO.name() + "="
+						+ 0 + ", " + EstadosMesas.ENPREPARACION.name() + " ="
+						+ 0 + " WHERE version = 1;");
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
