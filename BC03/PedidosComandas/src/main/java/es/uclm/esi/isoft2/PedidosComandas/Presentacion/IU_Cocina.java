@@ -11,6 +11,8 @@ import es.uclm.esi.isoft2.PedidosComandas.Dominio.Comanda;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextPane;
@@ -24,6 +26,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -86,6 +90,9 @@ public class IU_Cocina extends JFrame {
 	 * elementos sobre esta.
 	 */
 	private IU_Cocina() {
+
+		addWindowListener(new ThisWindowListener());
+
 		setTitle("Vista Cocinero");
 
 		numComandasPendientes = 0;
@@ -342,6 +349,20 @@ public class IU_Cocina extends JFrame {
 	private class BtnReponerActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			Almacen.getAlmacen().reponerStocks();
+		}
+	}
+
+	private class ThisWindowListener extends WindowAdapter {
+		@Override
+		public void windowClosing(WindowEvent e) {
+			int sel = JOptionPane.showOptionDialog(contentPane, "¿Seguro que quieres salir?", "Salir del programa",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+			if (sel == JOptionPane.YES_OPTION) {
+				setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Yes
+				System.exit(1);
+			} else {
+				setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); // No
+			}
 		}
 	}
 
