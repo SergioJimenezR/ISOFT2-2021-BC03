@@ -27,8 +27,8 @@ public class Plato {
 	/**
 	 * Constructor del plato.
 	 * 
-	 * @param id
-	 * @param nombre
+	 * @param id     Identificador unico del plato
+	 * @param nombre Nombre del plato
 	 */
 	public Plato(int id, String nombre) {
 		setId(id);
@@ -48,7 +48,7 @@ public class Plato {
 	/**
 	 * Metodo que fija el valor del identificador unico del plato.
 	 * 
-	 * @param id
+	 * @param id Identificador unico del plato
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -102,8 +102,8 @@ public class Plato {
 	 * Metodo que ayuda a calcular los numeros de cantidades de ingredientes sobre
 	 * las constantes prefijadas, del plato.
 	 * 
-	 * @param nombre
-	 * @return
+	 * @param nombre Nombre del plato
+	 * @return int[] Ingredientes del plato
 	 */
 	public static int[] calcularIngredientes(String nombre) {
 		int[] ingredientes = null;
@@ -149,7 +149,7 @@ public class Plato {
 	/**
 	 * Metodo que devuelve la lista de ingredientes del plato.
 	 * 
-	 * @return
+	 * @return String Informacion de los ingredientes
 	 */
 	public String toStringIngredientes() {
 		String cadena = "";

@@ -21,8 +21,8 @@ public class Bebida {
 	/**
 	 * Metodo constructor de la instancia Bebida.
 	 * 
-	 * @param id
-	 * @param nombre
+	 * @param id     Identificador unico de la bebida
+	 * @param nombre Nombre de la bebida
 	 */
 	public Bebida(int id, String nombre) {
 		setId(id);
@@ -32,7 +32,7 @@ public class Bebida {
 	/**
 	 * Metodo que devuelve el identificador unico de la bebida.
 	 * 
-	 * @return id
+	 * @return id Identificador unico de la bebida
 	 */
 	public int getId() {
 		return id;
@@ -41,7 +41,7 @@ public class Bebida {
 	/**
 	 * Metodo que fija el identificador unico de la bebida.
 	 * 
-	 * @param id
+	 * @param id Identificador unico fijado a la bebida
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -50,7 +50,7 @@ public class Bebida {
 	/**
 	 * Metodo que recupera el nombre de la bebida de dicha instancia.
 	 * 
-	 * @return
+	 * @return nombre Nombre de la bebida
 	 */
 	public String getNombre() {
 		return nombre;
@@ -60,7 +60,7 @@ public class Bebida {
 	 * Metodo que fija el nombre de la bebida, de dicha instancia sobre la que se
 	 * aplica.
 	 * 
-	 * @param nombre
+	 * @param nombre Nombre fijado a la Bebida
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;

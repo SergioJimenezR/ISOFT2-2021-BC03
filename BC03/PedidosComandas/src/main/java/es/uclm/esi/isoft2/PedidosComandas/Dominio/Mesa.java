@@ -52,7 +52,7 @@ public class Mesa {
 	/**
 	 * Constructor 1 de la instancia Mesa.
 	 * 
-	 * @param id
+	 * @param id Identificador unico de la mesa
 	 */
 	public Mesa(int id) {
 		vectorTiempos = new double[9];
@@ -67,8 +67,8 @@ public class Mesa {
 	 * Constructor 2 de la instancia Mesa, por sobreescritura con diferenciacion de
 	 * metodos, que satisface otras necesidades.
 	 * 
-	 * @param id
-	 * @param estado
+	 * @param id     Identificador unico de la mesa
+	 * @param estado Estado de la mesa
 	 */
 	public Mesa(int id, EstadosMesas estado) {
 		vectorTiempos = new double[9];
@@ -92,7 +92,7 @@ public class Mesa {
 	/**
 	 * Metodo que fija el identificador unico de la Mesa.
 	 * 
-	 * @param id
+	 * @param id Identificador unico de la mesa
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -111,7 +111,7 @@ public class Mesa {
 	/**
 	 * Metodo que fija o modifica el estado de la Mesa, a otro estado.
 	 * 
-	 * @param estadoMesa
+	 * @param estadoMesa Estado de la mesa
 	 */
 	public void setEstadoMesa(EstadosMesas estadoMesa) {
 		if (this.estadoMesa != null) {
@@ -136,7 +136,7 @@ public class Mesa {
 	/**
 	 * Metodo que fija una Comanda en concreto a la Mesa.
 	 * 
-	 * @param comanda
+	 * @param comanda Comanda asociada a la mesa
 	 */
 	public void setComanda(Comanda comanda) {
 		this.comanda = comanda;
@@ -166,7 +166,7 @@ public class Mesa {
 	/**
 	 * Metodo que fija el importe del coste de la comanda, de la Mesa.
 	 * 
-	 * @param precio
+	 * @param precio Importe de la mesa
 	 */
 	public void setPrecio(int precio) {
 		this.precio = precio;
@@ -184,7 +184,7 @@ public class Mesa {
 	/**
 	 * Metodo que fija el DNI de un cliente sobre la reserva de una mesa.
 	 * 
-	 * @param dni
+	 * @param dni DNI del cliente de la reserva
 	 */
 	public void setDni(String dni) {
 		this.dni = dni;
@@ -202,7 +202,7 @@ public class Mesa {
 	/**
 	 * Metodo que fija la fecha de la reserva.
 	 * 
-	 * @param fecha
+	 * @param fecha Fecha de la reserva
 	 */
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
@@ -238,9 +238,9 @@ public class Mesa {
 	 * Metodo que modifica los datos personales del cliente de la reserva de la
 	 * mesa.
 	 * 
-	 * @param dni
-	 * @param fecha
-	 * @return boolean
+	 * @param dni   DNI del cliente de la reserva
+	 * @param fecha Fecha de la reserva
+	 * @return boolean Realizado correctamente
 	 */
 	public boolean modificarDatosReservado(String dni, Date fecha) {
 		setDni(dni);
@@ -292,7 +292,7 @@ public class Mesa {
 	/**
 	 * Comprueba que la mesa haya pasado por todos los estados
 	 * 
-	 * @return
+	 * @return boolean Comprobante
 	 */
 	public boolean todosEstadosRecorridos() {
 		boolean result = true;
@@ -305,7 +305,7 @@ public class Mesa {
 	/**
 	 * Getter del atributo vectorTiempos
 	 * 
-	 * @return
+	 * @return double[] Vector de tiempos
 	 */
 	public double[] getVectorTiempos() {
 		return vectorTiempos;

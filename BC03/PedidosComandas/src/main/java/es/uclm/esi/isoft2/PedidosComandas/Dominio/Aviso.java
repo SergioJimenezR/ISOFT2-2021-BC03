@@ -54,7 +54,7 @@ public class Aviso {
 	/**
 	 * Metodo que da valor al identificador unico del aviso o comanda.
 	 * 
-	 * @param id
+	 * @param id Identificador unico del aviso
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -72,7 +72,7 @@ public class Aviso {
 	/**
 	 * Metodo que fija la mesa a la instancia en concreto de Aviso o comandas.
 	 * 
-	 * @param mesa
+	 * @param mesa Mesa a fijar al Aviso
 	 */
 	public void setMesa(Mesa mesa) {
 		this.mesa = mesa;
@@ -107,7 +107,7 @@ public class Aviso {
 	/**
 	 * Metodo que fija el tiempo de espera de un aviso.
 	 * 
-	 * @param tiempoEspera
+	 * @param tiempoEspera Tiempo de espera maximo
 	 */
 	public void setTiempoEspera(int tiempoEspera) {
 		this.tiempoEspera = tiempoEspera;

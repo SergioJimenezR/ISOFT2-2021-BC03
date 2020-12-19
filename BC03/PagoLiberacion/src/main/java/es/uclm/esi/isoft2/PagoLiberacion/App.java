@@ -16,7 +16,7 @@ public class App {
 	/**
 	 * Metodo principal del programa.
 	 * 
-	 * @param args
+	 * @param args Argumentos de la linea de ordenes
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

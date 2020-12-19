@@ -37,8 +37,9 @@ public class Agente implements BDConstantes {
 	/**
 	 * Metodo que devuelve la instancia del Agente, segun el patron Singleton.
 	 * 
-	 * @return
-	 * @throws SQLException
+	 * @return Agente Instancia Singleton
+	 * @throws SQLException Excepcion provocada por la Base de Datos al momento de
+	 *                      su conexion
 	 */
 	public static Agente getAgente() throws SQLException { // Patron Singleton
 		if (mInstancia == null)
@@ -50,9 +51,10 @@ public class Agente implements BDConstantes {
 	 * Metodo que sirve para operar sentencias SQL de creacion de tablas contra el
 	 * esquema de la BD. Devuelve un entero de la cantidad de tuplas afectadas.
 	 * 
-	 * @param instruccion
-	 * @return
-	 * @throws SQLException
+	 * @param instruccion Sentencia SQL para creacion de tablas
+	 * @return int Numero de lineas afectadas
+	 * @throws SQLException Excepcion provocada por la Base de Datos por distintos
+	 *                      tipos de problemas
 	 */
 	public int create(String instruccion) throws SQLException {
 		Statement stmt = mBD.createStatement();
@@ -66,9 +68,10 @@ public class Agente implements BDConstantes {
 	 * tablas, contra el esquema de la BD. Devuelve un entero de la cantidad de
 	 * tuplas afectadas.
 	 * 
-	 * @param instruccion
-	 * @return
-	 * @throws SQLException
+	 * @param instruccion Sentencia SQL para insercion de tuplas
+	 * @return int Numero de lineas afectadas
+	 * @throws SQLException Excepcion provocada por la Base de Datos por distintos
+	 *                      tipos de problemas
 	 */
 	public int insert(String instruccion) throws SQLException {
 		Statement stmt = mBD.createStatement();
@@ -83,7 +86,7 @@ public class Agente implements BDConstantes {
 	 * tuplas afectadas.
 	 * 
 	 * @param instruccion
-	 * @return
+	 * @return int
 	 * @throws SQLException
 	 */
 	public int delete(String instruccion) throws SQLException {
@@ -99,7 +102,7 @@ public class Agente implements BDConstantes {
 	 * Devuelve un entero de la cantidad de tuplas afectadas.
 	 * 
 	 * @param instruccion
-	 * @return
+	 * @return int
 	 * @throws SQLException
 	 */
 	public int update(String instruccion) throws SQLException {
@@ -115,7 +118,7 @@ public class Agente implements BDConstantes {
 	 * TABLE, ALTER USER... Devuelve un entero de la cantidad de tuplas afectadas.
 	 * 
 	 * @param instruccion
-	 * @return
+	 * @return int
 	 * @throws SQLException
 	 */
 	public int ejecutar(String instruccion) throws SQLException {
@@ -130,7 +133,7 @@ public class Agente implements BDConstantes {
 	 * del esquema. Devuelve un ResultSet de la consulta.
 	 * 
 	 * @param instruccion
-	 * @return
+	 * @return ResultSet
 	 * @throws SQLException
 	 */
 	public ResultSet select(String instruccion) throws SQLException {

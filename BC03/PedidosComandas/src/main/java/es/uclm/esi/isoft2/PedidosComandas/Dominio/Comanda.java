@@ -40,13 +40,13 @@ public class Comanda extends Aviso {
 	/**
 	 * Metodo constructor de la comanda, con relacion de herencia sobre Aviso.
 	 * 
-	 * @param id
-	 * @param mesa
-	 * @param bebidas
-	 * @param entrantes
-	 * @param primeros
-	 * @param segundos
-	 * @param postres
+	 * @param id        Identificador unico de la Mesa
+	 * @param mesa      Instancia mesa de la Comanda
+	 * @param bebidas   Lista de bebidas de la Comanda
+	 * @param entrantes Lista de entrantes de la Comanda
+	 * @param primeros  Lista de primeros platos de la Comanda
+	 * @param segundos  Lista de segundos platos de la Comanda
+	 * @param postres   Lista de postres de la Comanda
 	 */
 	public Comanda(int id, Mesa mesa, ArrayList<Bebida> bebidas, ArrayList<Plato> entrantes, ArrayList<Plato> primeros,
 			ArrayList<Plato> segundos, ArrayList<Plato> postres) {
@@ -85,7 +85,7 @@ public class Comanda extends Aviso {
 	/**
 	 * Metodo que fija las bebidas asociadas a una comanda en concreto.
 	 * 
-	 * @param bebidas
+	 * @param bebidas Lista de bebidas a fijar en la comanda
 	 */
 	public void setBebidas(ArrayList<Bebida> bebidas) {
 		this.bebidas = bebidas;
@@ -104,7 +104,7 @@ public class Comanda extends Aviso {
 	 * Metodo que fija los entrantes a una comanda en concreto, que se pasan por
 	 * parametro.
 	 * 
-	 * @param entrantes
+	 * @param entrantes Lista de entrantes a fijar en la comanda
 	 */
 	public void setEntrantes(ArrayList<Plato> entrantes) {
 		this.entrantes = entrantes;
@@ -122,7 +122,7 @@ public class Comanda extends Aviso {
 	/**
 	 * Metodo que fija los primeros platos a una comanda en concreto.
 	 * 
-	 * @param primeros
+	 * @param primeros Lista de primeros platos a fijar en la comanda
 	 */
 	public void setPrimeros(ArrayList<Plato> primeros) {
 		this.primeros = primeros;
@@ -140,7 +140,7 @@ public class Comanda extends Aviso {
 	/**
 	 * Metodo que fija los segundos platos a una comanda en concreto.
 	 * 
-	 * @param segundos
+	 * @param segundos Lista de segundos platos a fijar en la comanda
 	 */
 	public void setSegundos(ArrayList<Plato> segundos) {
 		this.segundos = segundos;
@@ -158,7 +158,7 @@ public class Comanda extends Aviso {
 	/**
 	 * Metodo que fija los postres a una comanda en concreto.
 	 * 
-	 * @param postres
+	 * @param postres Lista de postres a fijar en la Comanda
 	 */
 	public void setPostres(ArrayList<Plato> postres) {
 		this.postres = postres;
@@ -226,7 +226,7 @@ public class Comanda extends Aviso {
 	/**
 	 * Metodo que desvela si la comanda tiene bebidas.
 	 * 
-	 * @return boolean
+	 * @return Booleano Comprobante si tiene platos
 	 */
 	public boolean tieneBebidas() {
 		return bebidas.size() > 0;
@@ -235,7 +235,7 @@ public class Comanda extends Aviso {
 	/**
 	 * Metodo que desvela si la comanda dispone de platos.
 	 * 
-	 * @return
+	 * @return Booleano Comprobante si tiene platos
 	 */
 	public boolean tienePlatos() {
 		return entrantes.size() > 0 || primeros.size() > 0 || segundos.size() > 0 || postres.size() > 0;

@@ -40,7 +40,7 @@ public class Almacen implements Constantes {
 	/**
 	 * Metodo que ayuda a obtener la instancia de la clase Almacen.
 	 * 
-	 * @return
+	 * @return Almacen Instancia singleton
 	 */
 	public static Almacen getAlmacen() { // Patron Singleton
 		if (mInstancia == null)
@@ -84,7 +84,7 @@ public class Almacen implements Constantes {
 	 * cantidad de stock de platos que haya en el almacen (atributo stockPlatos de
 	 * la instancia Singleton).
 	 * 
-	 * @param ingredientesPlato
+	 * @param ingredientesPlato Ingredientes de plato a aumentar su stock
 	 */
 	public void aumentarStockPlatos(int[] ingredientesPlato) {
 		for (int i = 0; i < stockPlatos.length; i++)
@@ -97,8 +97,8 @@ public class Almacen implements Constantes {
 	 * platos que haya en el almacen, devolviendo un boolean que indica la
 	 * suficiencia.
 	 * 
-	 * @param ingredientesPlato
-	 * @return
+	 * @param ingredientesPlato Ingredientes de plato a comprobar su stock
+	 * @return Booleano Comprobante de la suficiencia de stock de ingredientes
 	 */
 	public boolean comprobarStockPlatos(int[] ingredientesPlato) {
 		boolean supuesto = true;
@@ -112,7 +112,7 @@ public class Almacen implements Constantes {
 	 * Metodo que, segun lo que se le indique por parametro de entrada, reduce el
 	 * stock de Platos que haya en el almacen.
 	 * 
-	 * @param ingredientesPlato
+	 * @param ingredientesPlato Ingredientes del plato a reducir su stock
 	 */
 	public void reducirStockPlatos(int[] ingredientesPlato) {
 		for (int i = 0; i < stockPlatos.length; i++)
@@ -123,7 +123,7 @@ public class Almacen implements Constantes {
 	 * Metodo que, segun lo que se le indique por parametro de entrada, aumenta el
 	 * stock de Bebidas que haya en el almacen.
 	 * 
-	 * @param nombreBebida
+	 * @param nombreBebida Nombre de la bebida a aumentar su stock
 	 */
 	public void aumentarStockBebidas(String nombreBebida) {
 		boolean encontrado = false;
@@ -140,8 +140,8 @@ public class Almacen implements Constantes {
 	 * que se invoca el metodo), devolviendo un boolean que indica dicha
 	 * suficiencia.
 	 * 
-	 * @param nombreBebida
-	 * @return
+	 * @param nombreBebida Nombre de la bebida a comprobar su stock
+	 * @return Booleano Comprobante de la suficiencia de stock de bebidas
 	 */
 	public boolean comprobarStockBebidas(String nombreBebida) {
 		for (int i = 0; i < Constantes.NOMBRES_BEBIDAS.length; i++) {
@@ -161,7 +161,7 @@ public class Almacen implements Constantes {
 	 * Metodo que, segun lo que se le indica por parametro, reduce el stock de
 	 * bebdias del Almacen.
 	 * 
-	 * @param nombreBebida
+	 * @param nombreBebida Nombre de la bebida a reducir su stock
 	 */
 	public void reducirStockBebidas(String nombreBebida) {
 		boolean encontrado = false;
@@ -176,7 +176,7 @@ public class Almacen implements Constantes {
 	 * Metodo que, segun la comanda que se le indique por parametro de entrada,
 	 * aumenta el stock de todos sus platos y bebidas contra los stocks del Almacen.
 	 * 
-	 * @param c
+	 * @param c Comanda de la cual se aumenta el stock
 	 */
 	public void aumentarStock(Comanda c) {
 		ArrayList<Plato> listaPlatos = null;
@@ -211,7 +211,7 @@ public class Almacen implements Constantes {
 	 * minimo de cantidad de ingredientes del stock de platos del Almacen,
 	 * devolviendo un boolean false en caso de insuficiencia.
 	 * 
-	 * @return
+	 * @return Booleano Comprobante del umbral de ingredientes
 	 */
 	public boolean comprobarUmbralIngredientes() {
 
@@ -229,7 +229,7 @@ public class Almacen implements Constantes {
 	 * del umbral minimo de cantidad de bebidas del stock de bebdias del Almacen,
 	 * devolviendo un boolean false en caso de insuficiencia.
 	 * 
-	 * @return
+	 * @return Booleano Comprobante del umbral de bebidas
 	 */
 	public boolean comprobarUmbralBebidas() {
 
@@ -261,7 +261,7 @@ public class Almacen implements Constantes {
 	 * Metodo que devuelve la informacion del stock de ingredientes de platos del
 	 * Almacen, indicando la cantidad de gramos de cada ingrediente (stockPlatos).
 	 * 
-	 * @return
+	 * @return Informacion del stock de platos
 	 */
 	public String toStringStockPlatos() {
 		String cadena = "";
@@ -275,7 +275,7 @@ public class Almacen implements Constantes {
 	 * indicando la cantidad de unidades de bebidas, de cada tipo de bebida
 	 * (stockBebidas).
 	 * 
-	 * @return
+	 * @return String Informacion del stock de bebidas
 	 */
 	public String toStringStockBebidas() {
 		String cadena = "";
