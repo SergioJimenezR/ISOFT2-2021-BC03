@@ -79,7 +79,7 @@ public class IU_JefeSala extends JFrame {
 	 * Create the frame.
 	 * 
 	 * @throws ParseException execpcion al parsear
-	 * @throws SQLException excepcion por no estar conectado a la BBDD
+	 * @throws SQLException   excepcion por no estar conectado a la BBDD
 	 */
 	public IU_JefeSala() throws ParseException, SQLException {
 		addWindowListener(new WindowAdapter() {
@@ -152,7 +152,7 @@ public class IU_JefeSala extends JFrame {
 			}
 			{
 				cBMesas = new JComboBox<Mesa>();
-				//cBMesas.setSelectedItem(null);
+				// cBMesas.setSelectedItem(null);
 				cBMesas.addActionListener(new CBMesasActionListener());
 				GridBagConstraints gbc_cBMesas = new GridBagConstraints();
 				gbc_cBMesas.insets = new Insets(0, 0, 5, 5);
@@ -358,10 +358,10 @@ public class IU_JefeSala extends JFrame {
 	 */
 	private class BtnLlegadaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			//btnLlegada.setEnabled(false);
+			// btnLlegada.setEnabled(false);
 			String dni = txtDni.getText();
 			Mesa reservada = (Mesa) cBLlegadaReserva.getSelectedItem();
-			
+
 			try {
 				GestorMesa.cambiarEstadoOcupado(reservada.getId(), dni);
 				cBLlegadaReserva.removeItem(reservada);
@@ -384,9 +384,9 @@ public class IU_JefeSala extends JFrame {
 			String dni = textFieldDni.getText();
 			String fechaString = ftfFecha.getText();
 			Mesa reservada = (Mesa) cBMesas.getSelectedItem();
-			
+
 			try {
-				//btnReservar.setEnabled(true);
+				// btnReservar.setEnabled(true);
 				Date fecha = new SimpleDateFormat("dd/MM/yy").parse(fechaString);
 				reservada.modificarDatosReservado(dni, fecha);
 				cBLlegadaReserva.addItem(reservada);
@@ -446,19 +446,31 @@ public class IU_JefeSala extends JFrame {
 			}
 		}
 	}
-	
+
+	/**
+	 * ActionListener de la ComboBox de reservas al momento de avisar de su llegada.
+	 * 
+	 * @author BC03
+	 *
+	 */
 	private class CBLlegadaReservaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if(cBLlegadaReserva.getSelectedItem()!= null) {
+			if (cBLlegadaReserva.getSelectedItem() != null) {
 				btnLlegada.setEnabled(true);
-			
+
 			}
 		}
 	}
-	
+
+	/**
+	 * ActionListener de la ComboBox de mesa al momento de reservar.
+	 * 
+	 * @author BC03
+	 *
+	 */
 	private class CBMesasActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if(cBMesas.getSelectedItem()!= null && ftfFecha.isValid()) {
+			if (cBMesas.getSelectedItem() != null && ftfFecha.isValid()) {
 				btnReservar.setEnabled(true);
 			}
 		}
@@ -524,7 +536,7 @@ public class IU_JefeSala extends JFrame {
 
 		return modelo;
 	}
-	
+
 	/**
 	 * Setter del atributo cbLlegadaReserva
 	 * 
@@ -543,7 +555,5 @@ public class IU_JefeSala extends JFrame {
 	public static JComboBox<Mesa> getComboBoxReservadas() {
 		return cBLlegadaReserva;
 	}
-	
-	
 
 }
