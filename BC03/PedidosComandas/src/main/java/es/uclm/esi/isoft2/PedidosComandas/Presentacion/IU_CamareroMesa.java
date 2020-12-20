@@ -51,6 +51,7 @@ import javax.swing.Timer;
 
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
 
 /**
  * Clase que representa la interfaz grafica de usuario del Camarero de mesa,
@@ -158,6 +159,11 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 	private static final long serialVersionUID = 1L;
 	private JButton btnRefrescar;
+	private JScrollPane scrollPane;
+	private JScrollPane scrollPane_1;
+	private JScrollPane scrollPane_2;
+	private JScrollPane scrollPane_3;
+	private JScrollPane scrollPane_4;
 
 	/**
 	 * Metodo que devuelve la instancia de la interfaz segun el patron Singleton.
@@ -425,8 +431,8 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 				gbl_panelComanda.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 				gbl_panelComanda.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0,
 						Double.MIN_VALUE };
-				gbl_panelComanda.rowWeights = new double[] { 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
-						1.0, 1.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE };
+				gbl_panelComanda.rowWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0,
+						0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 				panelComanda.setLayout(gbl_panelComanda);
 				{
 					lblBebidas = new JLabel("Bebidas:");
@@ -620,19 +626,21 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 					}
 				}
 				{
-					listEntrantes = new JList<Plato>(new DefaultListModel<Plato>());
-					listEntrantes.addListSelectionListener(new ListEntrantesListSelectionListener());
 					{
-						listBebidas = new JList<Bebida>(new DefaultListModel<Bebida>());
-						listBebidas.addListSelectionListener(new ListBebidasListSelectionListener());
-						GridBagConstraints gbc_listBebidas = new GridBagConstraints();
-						gbc_listBebidas.gridheight = 2;
-						gbc_listBebidas.gridwidth = 2;
-						gbc_listBebidas.insets = new Insets(0, 0, 5, 5);
-						gbc_listBebidas.fill = GridBagConstraints.BOTH;
-						gbc_listBebidas.gridx = 5;
-						gbc_listBebidas.gridy = 1;
-						panelComanda.add(listBebidas, gbc_listBebidas);
+						scrollPane = new JScrollPane();
+						GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+						gbc_scrollPane.gridheight = 2;
+						gbc_scrollPane.gridwidth = 2;
+						gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+						gbc_scrollPane.fill = GridBagConstraints.BOTH;
+						gbc_scrollPane.gridx = 5;
+						gbc_scrollPane.gridy = 1;
+						panelComanda.add(scrollPane, gbc_scrollPane);
+						{
+							listBebidas = new JList<Bebida>(new DefaultListModel<Bebida>());
+							scrollPane.setViewportView(listBebidas);
+							listBebidas.addListSelectionListener(new ListBebidasListSelectionListener());
+						}
 					}
 					{
 						lblEntrantes = new JLabel("Entrantes:");
@@ -643,14 +651,20 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 						gbc_lblEntrantes.gridy = 3;
 						panelComanda.add(lblEntrantes, gbc_lblEntrantes);
 					}
-					GridBagConstraints gbc_listEntrantes = new GridBagConstraints();
-					gbc_listEntrantes.gridwidth = 2;
-					gbc_listEntrantes.gridheight = 2;
-					gbc_listEntrantes.insets = new Insets(0, 0, 5, 5);
-					gbc_listEntrantes.fill = GridBagConstraints.BOTH;
-					gbc_listEntrantes.gridx = 5;
-					gbc_listEntrantes.gridy = 4;
-					panelComanda.add(listEntrantes, gbc_listEntrantes);
+				}
+				{
+					scrollPane_1 = new JScrollPane();
+					GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+					gbc_scrollPane_1.gridheight = 2;
+					gbc_scrollPane_1.gridwidth = 2;
+					gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
+					gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
+					gbc_scrollPane_1.gridx = 5;
+					gbc_scrollPane_1.gridy = 4;
+					panelComanda.add(scrollPane_1, gbc_scrollPane_1);
+					listEntrantes = new JList<Plato>(new DefaultListModel<Plato>());
+					scrollPane_1.setViewportView(listEntrantes);
+					listEntrantes.addListSelectionListener(new ListEntrantesListSelectionListener());
 				}
 				{
 					lblPrimero = new JLabel("Primeros:");
@@ -662,16 +676,20 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 					panelComanda.add(lblPrimero, gbc_lblPrimero);
 				}
 				{
-					listPrimeros = new JList<Plato>(new DefaultListModel<Plato>());
-					listPrimeros.addListSelectionListener(new ListPrimerosListSelectionListener());
-					GridBagConstraints gbc_listPrimeros = new GridBagConstraints();
-					gbc_listPrimeros.gridwidth = 2;
-					gbc_listPrimeros.gridheight = 2;
-					gbc_listPrimeros.insets = new Insets(0, 0, 5, 5);
-					gbc_listPrimeros.fill = GridBagConstraints.BOTH;
-					gbc_listPrimeros.gridx = 5;
-					gbc_listPrimeros.gridy = 7;
-					panelComanda.add(listPrimeros, gbc_listPrimeros);
+					scrollPane_2 = new JScrollPane();
+					GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
+					gbc_scrollPane_2.gridheight = 2;
+					gbc_scrollPane_2.gridwidth = 2;
+					gbc_scrollPane_2.insets = new Insets(0, 0, 5, 5);
+					gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
+					gbc_scrollPane_2.gridx = 5;
+					gbc_scrollPane_2.gridy = 7;
+					panelComanda.add(scrollPane_2, gbc_scrollPane_2);
+					{
+						listPrimeros = new JList<Plato>(new DefaultListModel<Plato>());
+						scrollPane_2.setViewportView(listPrimeros);
+						listPrimeros.addListSelectionListener(new ListPrimerosListSelectionListener());
+					}
 				}
 				{
 					lblSegundo = new JLabel("Segundos:");
@@ -683,16 +701,20 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 					panelComanda.add(lblSegundo, gbc_lblSegundo);
 				}
 				{
-					listSegundos = new JList<Plato>(new DefaultListModel<Plato>());
-					listSegundos.addListSelectionListener(new ListSegundosListSelectionListener());
-					GridBagConstraints gbc_listSegundos = new GridBagConstraints();
-					gbc_listSegundos.gridwidth = 2;
-					gbc_listSegundos.gridheight = 2;
-					gbc_listSegundos.insets = new Insets(0, 0, 5, 5);
-					gbc_listSegundos.fill = GridBagConstraints.BOTH;
-					gbc_listSegundos.gridx = 5;
-					gbc_listSegundos.gridy = 10;
-					panelComanda.add(listSegundos, gbc_listSegundos);
+					scrollPane_3 = new JScrollPane();
+					GridBagConstraints gbc_scrollPane_3 = new GridBagConstraints();
+					gbc_scrollPane_3.gridheight = 2;
+					gbc_scrollPane_3.gridwidth = 2;
+					gbc_scrollPane_3.insets = new Insets(0, 0, 5, 5);
+					gbc_scrollPane_3.fill = GridBagConstraints.BOTH;
+					gbc_scrollPane_3.gridx = 5;
+					gbc_scrollPane_3.gridy = 10;
+					panelComanda.add(scrollPane_3, gbc_scrollPane_3);
+					{
+						listSegundos = new JList<Plato>(new DefaultListModel<Plato>());
+						scrollPane_3.setViewportView(listSegundos);
+						listSegundos.addListSelectionListener(new ListSegundosListSelectionListener());
+					}
 				}
 				{
 					lblPostre = new JLabel("Postres:");
@@ -704,20 +726,24 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 					panelComanda.add(lblPostre, gbc_lblPostre);
 				}
 				{
-					listPostres = new JList<Plato>(new DefaultListModel<Plato>());
-					listPostres.addListSelectionListener(new ListPostresListSelectionListener());
-					GridBagConstraints gbc_listPostres = new GridBagConstraints();
-					gbc_listPostres.gridheight = 2;
-					gbc_listPostres.gridwidth = 2;
-					gbc_listPostres.insets = new Insets(0, 0, 5, 5);
-					gbc_listPostres.fill = GridBagConstraints.BOTH;
-					gbc_listPostres.gridx = 5;
-					gbc_listPostres.gridy = 13;
-					panelComanda.add(listPostres, gbc_listPostres);
-				}
-				{
 					btnCancelar = new JButton("Cancelar");
 					btnCancelar.addActionListener(new BtnCancelarActionListener());
+					{
+						scrollPane_4 = new JScrollPane();
+						GridBagConstraints gbc_scrollPane_4 = new GridBagConstraints();
+						gbc_scrollPane_4.gridheight = 2;
+						gbc_scrollPane_4.gridwidth = 2;
+						gbc_scrollPane_4.insets = new Insets(0, 0, 5, 5);
+						gbc_scrollPane_4.fill = GridBagConstraints.BOTH;
+						gbc_scrollPane_4.gridx = 5;
+						gbc_scrollPane_4.gridy = 13;
+						panelComanda.add(scrollPane_4, gbc_scrollPane_4);
+						{
+							listPostres = new JList<Plato>(new DefaultListModel<Plato>());
+							scrollPane_4.setViewportView(listPostres);
+							listPostres.addListSelectionListener(new ListPostresListSelectionListener());
+						}
+					}
 					btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 					GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 					gbc_btnCancelar.fill = GridBagConstraints.BOTH;
