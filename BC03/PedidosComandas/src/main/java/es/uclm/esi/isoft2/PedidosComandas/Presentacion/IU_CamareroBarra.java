@@ -92,6 +92,7 @@ public class IU_CamareroBarra extends JFrame {
 	 * elementos sobre esta.
 	 */
 	public IU_CamareroBarra() {
+		setTitle("Vista Camarero Barra");
 
 		addWindowListener(new ThisWindowListener());
 

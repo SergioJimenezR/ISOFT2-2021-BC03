@@ -193,7 +193,7 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 
 		index = Constantes.INDICE_INICIAL_PRODUCTOS;
 		numNotificacionesPendientes = 0;
-		setTitle("Camarero");
+		setTitle("Vista Camarero Mesa");
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 774, 789);
 		setLocationRelativeTo(null);
