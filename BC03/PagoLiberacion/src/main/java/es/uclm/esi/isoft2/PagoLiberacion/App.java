@@ -7,7 +7,6 @@ import es.uclm.esi.isoft2.ReservaMesas.Presentacion.IU_JefeSala;
 
 import java.awt.EventQueue;
 import java.sql.SQLException;
-import java.text.ParseException;
 
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
 
@@ -26,11 +25,8 @@ public class App {
 
 				try {
 					IU_CamareroMesa.getInterfaz();
-					IU_JefeSala frame = new IU_JefeSala();
-					frame.setVisible(true);
+					IU_JefeSala.getInterfaz();
 				} catch (SQLException e) {
-					e.printStackTrace();
-				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 				IU_Cocina.getInterfaz();

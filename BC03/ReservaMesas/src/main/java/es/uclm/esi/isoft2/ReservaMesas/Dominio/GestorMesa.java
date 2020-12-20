@@ -26,14 +26,14 @@ public class GestorMesa {
 	 * @throws SQLException
 	 */
 	public static boolean cambiarEstadoOcupado(int idMesa, String dniCliente) throws SQLException {
-		JComboBox<Mesa> mesas = IU_JefeSala.getComboBoxReservadas();
+		JComboBox<Mesa> mesas = IU_JefeSala.getInterfaz().getComboBoxReservadas();
 		for (int i = 0; i < mesas.getItemCount(); i++) {
 			mesas.setSelectedIndex(i);
 			Mesa mesa = (Mesa) mesas.getSelectedItem();
 			if (mesa.getId() == idMesa && dniCliente.equals(MesaDAO.devolverDni(idMesa))) {
 				mesa.setEstadoMesa(EstadosMesas.OCUPADA);
 				mesas.setSelectedItem(mesa);
-				IU_JefeSala.setComboBoxReservadas(mesas);
+				IU_JefeSala.getInterfaz().setComboBoxReservadas(mesas);
 				String estado = mesa.getEstadoMesa().toString();
 				MesaDAO.actualizarNumMesa(mesa.getId(), estado, mesa.getDni());
 				return true;
@@ -51,14 +51,14 @@ public class GestorMesa {
 	 * @throws SQLException
 	 */
 	public static boolean cancelarMesa(int idMesa) throws SQLException {
-		JComboBox<Mesa> mesas = IU_JefeSala.getComboBoxReservadas();
+		JComboBox<Mesa> mesas = IU_JefeSala.getInterfaz().getComboBoxReservadas();
 		for (int i = 0; i < mesas.getItemCount(); i++) {
 			mesas.setSelectedIndex(i);
 			Mesa mesa = (Mesa) mesas.getSelectedItem();
 			if (mesa.getId() == idMesa) {
 				mesa.setEstadoMesa(EstadosMesas.LIBRE);
 				mesas.setSelectedItem(mesa);
-				IU_JefeSala.setComboBoxReservadas(mesas);
+				IU_JefeSala.getInterfaz().setComboBoxReservadas(mesas);
 				String estado = mesa.getEstadoMesa().toString();
 				MesaDAO.actualizarNumMesa(mesa.getId(), estado, mesa.getDni());
 				return true;
