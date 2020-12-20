@@ -82,7 +82,7 @@ public class IU_JefeSala extends JFrame {
 		addWindowListener(new ThisWindowListener());
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(800, 100, 561, 583);
+		setBounds(800, 100, 561, 623);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
