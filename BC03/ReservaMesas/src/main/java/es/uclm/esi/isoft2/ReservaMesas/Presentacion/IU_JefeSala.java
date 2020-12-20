@@ -45,6 +45,9 @@ public class IU_JefeSala extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Instancia del patron Singleton
+	 */
 	private static IU_JefeSala mInstancia = null;
 
 	private JPanel contentPane;
@@ -70,6 +73,12 @@ public class IU_JefeSala extends JFrame {
 	private Estadisticas estadisticas;
 	private JScrollPane scrollPane;
 
+	/**
+	 * Metodo que ayuda a recuperar la instancia del patron Singleton
+	 * 
+	 * @return Instancia Instancia de la interfaz según Patron Singleton
+	 * @throws SQLException
+	 */
 	public static IU_JefeSala getInterfaz() throws SQLException { // Patron Singleton
 		if (mInstancia == null) {
 			mInstancia = new IU_JefeSala();
@@ -81,8 +90,7 @@ public class IU_JefeSala extends JFrame {
 	/**
 	 * Create the frame.
 	 * 
-	 * @throws ParseException execpcion al parsear
-	 * @throws SQLException   excepcion por no estar conectado a la BBDD
+	 * @throws SQLException excepcion por no estar conectado a la BBDD
 	 */
 	private IU_JefeSala() throws SQLException {
 		addWindowListener(new WindowAdapter() {
