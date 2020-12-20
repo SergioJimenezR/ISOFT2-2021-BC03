@@ -87,6 +87,13 @@ public class Estadisticas {
 		if (ejecucionCorrecta == 1)
 			new SQLException();
 	}
+	
+	public void reiniciarEstadistica() throws SQLException {
+		double [] vector = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		int ejecucionCorrecta = dao.anyadirTiemposMedios(vector, 0);
+		if (ejecucionCorrecta == 1)
+			new SQLException();
+	}
 
 	/**
 	 * Devuelve una descripcion del estado del vectorTiemposMediosTotales

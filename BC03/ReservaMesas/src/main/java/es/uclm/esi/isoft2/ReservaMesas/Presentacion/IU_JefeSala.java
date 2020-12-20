@@ -67,6 +67,8 @@ public class IU_JefeSala extends JFrame {
 	private JTextArea textAreaValoresEstadisticas;
 	private Estadisticas estadisticas;
 	private JScrollPane scrollPane;
+	private JButton btnReiniciarEstadisitcas;
+	private JLabel lblInfoEst;
 
 	/**
 	 * Launch the application.
@@ -279,14 +281,23 @@ public class IU_JefeSala extends JFrame {
 				contentPane.add(panelEstadisticas, gbc_panelEstadisticas);
 				GridBagLayout gbl_panelEstadisticas = new GridBagLayout();
 				gbl_panelEstadisticas.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-				gbl_panelEstadisticas.rowHeights = new int[] { 0, 0, 0 };
+				gbl_panelEstadisticas.rowHeights = new int[] { 0, 0, 0, 0 };
 				gbl_panelEstadisticas.columnWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 						0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-				gbl_panelEstadisticas.rowWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
+				gbl_panelEstadisticas.rowWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
 				panelEstadisticas.setLayout(gbl_panelEstadisticas);
 				{
 					btnVerEstadisticas = new JButton("Consultar");
 					btnVerEstadisticas.addActionListener(new BtnConsularEstadisticasActionListener());
+					{
+						lblInfoEst = new JLabel("Estadisticas en Minutos:");
+						GridBagConstraints gbc_lblInfoEst = new GridBagConstraints();
+						gbc_lblInfoEst.anchor = GridBagConstraints.WEST;
+						gbc_lblInfoEst.insets = new Insets(0, 0, 5, 5);
+						gbc_lblInfoEst.gridx = 0;
+						gbc_lblInfoEst.gridy = 0;
+						panelEstadisticas.add(lblInfoEst, gbc_lblInfoEst);
+					}
 					{
 						scrollPane = new JScrollPane();
 						GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -294,17 +305,27 @@ public class IU_JefeSala extends JFrame {
 						gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 						gbc_scrollPane.fill = GridBagConstraints.BOTH;
 						gbc_scrollPane.gridx = 0;
-						gbc_scrollPane.gridy = 0;
+						gbc_scrollPane.gridy = 1;
 						panelEstadisticas.add(scrollPane, gbc_scrollPane);
 						{
 							textAreaValoresEstadisticas = new JTextArea();
 							scrollPane.setViewportView(textAreaValoresEstadisticas);
 						}
 					}
+					{
+						btnReiniciarEstadisitcas = new JButton("Reiniciar");
+						btnReiniciarEstadisitcas.addActionListener(new BtnReiniciarEstadisitcasActionListener());
+						GridBagConstraints gbc_btnReiniciarEstadisitcas = new GridBagConstraints();
+						gbc_btnReiniciarEstadisitcas.gridwidth = 3;
+						gbc_btnReiniciarEstadisitcas.insets = new Insets(0, 0, 0, 5);
+						gbc_btnReiniciarEstadisitcas.gridx = 9;
+						gbc_btnReiniciarEstadisitcas.gridy = 2;
+						panelEstadisticas.add(btnReiniciarEstadisitcas, gbc_btnReiniciarEstadisitcas);
+					}
 					GridBagConstraints gbc_btnVerEstadisticas = new GridBagConstraints();
 					gbc_btnVerEstadisticas.gridwidth = 2;
 					gbc_btnVerEstadisticas.gridx = 12;
-					gbc_btnVerEstadisticas.gridy = 1;
+					gbc_btnVerEstadisticas.gridy = 2;
 					panelEstadisticas.add(btnVerEstadisticas, gbc_btnVerEstadisticas);
 				}
 			}
@@ -569,6 +590,19 @@ public class IU_JefeSala extends JFrame {
 			} else {
 				setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); // No
 			}
+		}
+	}
+	private class BtnReiniciarEstadisitcasActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			
+			try {
+				estadisticas.reiniciarEstadistica();
+				estadisticas = new Estadisticas();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			textAreaValoresEstadisticas.setText(estadisticas.getTiemposEstadistica());
 		}
 	}
 
