@@ -1,6 +1,5 @@
 package es.uclm.esi.isoft2.ReservaMesas.Presentacion;
 
-import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -13,6 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -21,13 +21,9 @@ import javax.swing.text.MaskFormatter;
 
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.Constantes;
 import es.uclm.esi.isoft2.CocinaAlmacen.Persistencia.MesaDAO;
-import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.EstadosMesas;
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Mesa;
-import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroBarra;
 import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_CamareroMesa;
-import es.uclm.esi.isoft2.PedidosComandas.Presentacion.IU_Cocina;
-
 import es.uclm.esi.isoft2.ReservaMesas.Dominio.GestorMesa;
 import es.uclm.esi.isoft2.Estadisticas.Dominio.Estadisticas;
 
@@ -82,18 +78,9 @@ public class IU_JefeSala extends JFrame {
 	 * @throws SQLException   excepcion por no estar conectado a la BBDD
 	 */
 	public IU_JefeSala() throws ParseException, SQLException {
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				if (estadisticas != null)
-					try {
-						estadisticas.enviarTiemposPersistencia();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-			}
-		});
+
+		addWindowListener(new ThisWindowListener());
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(800, 100, 561, 583);
 		contentPane = new JPanel();
@@ -272,7 +259,7 @@ public class IU_JefeSala extends JFrame {
 		}
 		{
 			{
-				DefaultComboBoxModel<Mesa> modelo = rellenarCbReserva();
+				rellenarCbReserva();
 			}
 		}
 		{
@@ -392,7 +379,7 @@ public class IU_JefeSala extends JFrame {
 				cBLlegadaReserva.addItem(reservada);
 				cBMesas.removeItem(reservada);
 				MesaDAO.actualizarNumMesa(reservada.getId(), "RESERVADA", reservada.getDni());
-				((DefaultComboBoxModel) cBLlegadaReserva.getModel()).addElement(reservada);
+				((DefaultComboBoxModel<Mesa>) cBLlegadaReserva.getModel()).addElement(reservada);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			} catch (ParseException e2) {
@@ -554,6 +541,34 @@ public class IU_JefeSala extends JFrame {
 	 */
 	public static JComboBox<Mesa> getComboBoxReservadas() {
 		return cBLlegadaReserva;
+	}
+
+	/**
+	 * WindowListener segun inner class que maneja el evento de pulsacion del boton
+	 * de cerrar la ventana (X), y que cierra la ventana y finaliza el programa en
+	 * caso de pulsar Sí.
+	 * 
+	 * @author BC03
+	 *
+	 */
+	private class ThisWindowListener extends WindowAdapter {
+		@Override
+		public void windowClosing(WindowEvent e) {
+			int sel = JOptionPane.showOptionDialog(contentPane, "¿Seguro que quieres salir?", "Salir del programa",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+			if (sel == JOptionPane.YES_OPTION) {
+				if (estadisticas != null)
+					try {
+						estadisticas.enviarTiemposPersistencia();
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				setDefaultCloseOperation(DISPOSE_ON_CLOSE); // Yes
+				System.exit(1);
+			} else {
+				setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); // No
+			}
+		}
 	}
 
 }
