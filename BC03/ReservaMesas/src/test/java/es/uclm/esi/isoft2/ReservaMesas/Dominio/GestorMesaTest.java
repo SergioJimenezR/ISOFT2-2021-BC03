@@ -38,7 +38,7 @@ public class GestorMesaTest {
 		idMesa = 2;
 		JComboBox<Mesa> cBMesas = new JComboBox<Mesa>();
 		Mesa m = new Mesa(3);
-		IU_JefeSala.setComboBoxReservadas(cBMesas);
+		IU_JefeSala.getInterfaz().setComboBoxReservadas(cBMesas);
 		cBMesas.addItem(m);
 		assertFalse(gmesa.cancelarMesa(idMesa));
 		assertTrue(gmesa.cancelarMesa(idMesa + 1));

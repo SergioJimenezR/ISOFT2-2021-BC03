@@ -45,6 +45,11 @@ public class IU_JefeSala extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Instancia del patron Singleton
+	 */
+	private static IU_JefeSala mInstancia = null;
+
 	private JPanel contentPane;
 	private JPanel panel;
 	private JPanel panel_1;
@@ -71,19 +76,39 @@ public class IU_JefeSala extends JFrame {
 	private JLabel lblInfoEst;
 
 	/**
-	 * Launch the application.
+	 * Metodo que ayuda a recuperar la instancia del patron Singleton
+	 * 
+	 * @return Instancia Instancia de la interfaz según Patron Singleton
+	 * @throws SQLException
 	 */
+	public static IU_JefeSala getInterfaz() throws SQLException { // Patron Singleton
+		if (mInstancia == null) {
+			mInstancia = new IU_JefeSala();
+			mInstancia.setVisible(true);
+		}
+		return mInstancia;
+	}
+
 	/**
 	 * Create the frame.
 	 * 
 	 * @throws ParseException execpcion al parsear
-	 * @throws SQLException   excepcion por no estar conectado a la BBDD
+	 * @throws SQLException excepcion por no estar conectado a la BBDD
 	 */
-	public IU_JefeSala() throws ParseException, SQLException {
-		setTitle("Vista Jefe de Sala");
-
-		addWindowListener(new ThisWindowListener());
-
+	private IU_JefeSala() throws SQLException {
+    setTitle("Vista Jefe de Sala");
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				if (estadisticas != null)
+					try {
+						estadisticas.enviarTiemposPersistencia();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			}
+		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -167,14 +192,19 @@ public class IU_JefeSala extends JFrame {
 				panel.add(lblFecha, gbc_lblFecha);
 			}
 			{
-				MaskFormatter formatoFecha = new MaskFormatter("##/##/####");
-				ftfFecha = new JFormattedTextField(formatoFecha);
-				GridBagConstraints gbc_ftfFecha = new GridBagConstraints();
-				gbc_ftfFecha.insets = new Insets(0, 0, 5, 5);
-				gbc_ftfFecha.fill = GridBagConstraints.HORIZONTAL;
-				gbc_ftfFecha.gridx = 2;
-				gbc_ftfFecha.gridy = 5;
-				panel.add(ftfFecha, gbc_ftfFecha);
+				MaskFormatter formatoFecha;
+				try {
+					formatoFecha = new MaskFormatter("##/##/####");
+					ftfFecha = new JFormattedTextField(formatoFecha);
+					GridBagConstraints gbc_ftfFecha = new GridBagConstraints();
+					gbc_ftfFecha.insets = new Insets(0, 0, 5, 5);
+					gbc_ftfFecha.fill = GridBagConstraints.HORIZONTAL;
+					gbc_ftfFecha.gridx = 2;
+					gbc_ftfFecha.gridy = 5;
+					panel.add(ftfFecha, gbc_ftfFecha);
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
 			}
 			{
 				btnReservar = new JButton("Reservar");
@@ -516,7 +546,7 @@ public class IU_JefeSala extends JFrame {
 	 * @return devuelve un modelo de comboBox estandar de Mesa
 	 * @throws SQLException si no esta conectada a la BBDD
 	 */
-	public static DefaultComboBoxModel<Mesa> rellenarCbReserva() throws SQLException {
+	public DefaultComboBoxModel<Mesa> rellenarCbReserva() throws SQLException {
 		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
 		for (int m = 1; m <= Constantes.NUM_MESAS; m++) {
 			ArrayList<Integer> mesasReservadas = MesaDAO.consultarMesasReservadas();
@@ -535,7 +565,7 @@ public class IU_JefeSala extends JFrame {
 	 * @return devuelve un modelo estandar de comboBox de Mesa
 	 * @throws SQLException si no esta conectada a la BBDD
 	 */
-	public static DefaultComboBoxModel<Mesa> rellenarCbLibres() throws SQLException {
+	public DefaultComboBoxModel<Mesa> rellenarCbLibres() throws SQLException {
 		DefaultComboBoxModel<Mesa> modelo = new DefaultComboBoxModel<Mesa>();
 		for (int m = 1; m <= Constantes.NUM_MESAS; m++) {
 			ArrayList<Integer> mesasDisponibles = MesaDAO.consultarMesasDisponibles();
@@ -554,7 +584,7 @@ public class IU_JefeSala extends JFrame {
 	 * 
 	 * @param cbMesas nuevo comboBox de mesas reservadas
 	 */
-	public static void setComboBoxReservadas(JComboBox<Mesa> cbMesas) {
+	public void setComboBoxReservadas(JComboBox<Mesa> cbMesas) {
 		cBLlegadaReserva = cbMesas;
 
 	}
@@ -564,7 +594,7 @@ public class IU_JefeSala extends JFrame {
 	 * 
 	 * @return devuelve el comboBox de mesas reservadas
 	 */
-	public static JComboBox<Mesa> getComboBoxReservadas() {
+	public JComboBox<Mesa> getComboBoxReservadas() {
 		return cBLlegadaReserva;
 	}
 
