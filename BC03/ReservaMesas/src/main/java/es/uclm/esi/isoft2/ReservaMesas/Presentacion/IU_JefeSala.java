@@ -92,28 +92,15 @@ public class IU_JefeSala extends JFrame {
 	/**
 	 * Create the frame.
 	 * 
-	 * @throws ParseException execpcion al parsear
 	 * @throws SQLException excepcion por no estar conectado a la BBDD
 	 */
 	private IU_JefeSala() throws SQLException {
-    setTitle("Vista Jefe de Sala");
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				if (estadisticas != null)
-					try {
-						estadisticas.enviarTiemposPersistencia();
-					} catch (SQLException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-			}
-		});
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Vista Jefe de Sala");
+		addWindowListener(new ThisWindowListener());
 		int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-		
-		setBounds((int) ((int) (ancho*0.7) - 561*0.3), (int) (alto*0.2), 561, 623);
+
+		setBounds((int) ((int) (ancho * 0.7) - 561 * 0.3), (int) (alto * 0.2), 561, 623);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
