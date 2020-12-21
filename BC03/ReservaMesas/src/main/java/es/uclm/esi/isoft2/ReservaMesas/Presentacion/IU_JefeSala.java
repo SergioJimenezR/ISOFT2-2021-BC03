@@ -85,7 +85,10 @@ public class IU_JefeSala extends JFrame {
 		addWindowListener(new ThisWindowListener());
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(800, 100, 561, 623);
+		int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+		
+		setBounds((int) (ancho*0.7), (int) (alto*0.2), 561, 623);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -592,9 +595,10 @@ public class IU_JefeSala extends JFrame {
 			}
 		}
 	}
+
 	private class BtnReiniciarEstadisitcasActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			
+
 			try {
 				estadisticas.reiniciarEstadistica();
 				estadisticas = new Estadisticas();

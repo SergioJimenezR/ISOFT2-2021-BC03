@@ -195,7 +195,9 @@ public class IU_CamareroMesa extends JFrame implements Constantes {
 		numNotificacionesPendientes = 0;
 		setTitle("Vista Camarero Mesa");
 		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 774, 789);
+		int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+		setBounds((int) (ancho*0.4), (int) (alto*0.2), 774, 789);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

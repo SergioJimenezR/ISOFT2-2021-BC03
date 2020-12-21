@@ -100,8 +100,9 @@ public class IU_Cocina extends JFrame {
 
 		numComandasPendientes = 0;
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 478, 242);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+		setBounds((int) (ancho*0.05), (int) (alto*0.2), 478, 242);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
