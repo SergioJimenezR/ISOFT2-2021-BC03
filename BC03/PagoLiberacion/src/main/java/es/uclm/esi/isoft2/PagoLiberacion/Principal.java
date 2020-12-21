@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 import es.uclm.esi.isoft2.PedidosComandas.Dominio.Almacen;
 
-public class App {
+public class Principal {
 
 	/**
 	 * Metodo principal del programa.
