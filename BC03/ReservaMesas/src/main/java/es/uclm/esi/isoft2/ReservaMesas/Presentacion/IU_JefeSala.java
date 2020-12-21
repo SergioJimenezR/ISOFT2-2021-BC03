@@ -88,7 +88,7 @@ public class IU_JefeSala extends JFrame {
 		int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 		int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
 		
-		setBounds((int) (ancho*0.7), (int) (alto*0.2), 561, 623);
+		setBounds((int) ((int) (ancho*0.7) - 561*0.3), (int) (alto*0.2), 561, 623);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
