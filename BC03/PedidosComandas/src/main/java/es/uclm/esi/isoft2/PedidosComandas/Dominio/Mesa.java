@@ -255,7 +255,7 @@ public class Mesa {
 	 */
 	private void actualizarTiempos(double tiempoTranscurrido) {
 		int i = -1;
-		switch (this.estadoMesa) {
+		switch (estadoMesa) {
 		case LIBRE:
 			i = 0;
 			break;
