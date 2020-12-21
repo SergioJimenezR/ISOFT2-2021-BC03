@@ -117,7 +117,6 @@ public class Mesa {
 		if (this.estadoMesa != null) {
 			double tiempoEnEstado = ((System.currentTimeMillis() - this.tiempoTranscurrido) / (double) numComensales)
 					/ 60000.0;
-			System.out.println(tiempoEnEstado);
 			this.actualizarTiempos(tiempoEnEstado);
 		}
 		this.tiempoTranscurrido = System.currentTimeMillis();

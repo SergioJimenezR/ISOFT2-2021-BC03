@@ -87,6 +87,13 @@ public class Estadisticas {
 		if (ejecucionCorrecta == 1)
 			new SQLException();
 	}
+	
+	public void reiniciarEstadistica() throws SQLException {
+		double [] vector = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		int ejecucionCorrecta = dao.anyadirTiemposMedios(vector, 0);
+		if (ejecucionCorrecta == 1)
+			new SQLException();
+	}
 
 	/**
 	 * Devuelve una descripcion del estado del vectorTiemposMediosTotales
@@ -94,10 +101,10 @@ public class Estadisticas {
 	 * @return devuelve los tiempos en formato String
 	 */
 	public String getTiemposEstadistica() {
-		return "Ocupada=" + vectorTiemposMediosTotales[2] + ", Pidiendo=" + vectorTiemposMediosTotales[3]
-				+ ", EsperandoComida=" + vectorTiemposMediosTotales[4] + ", Servidos=" + vectorTiemposMediosTotales[5]
-				+ ", EsperandoCuenta=" + vectorTiemposMediosTotales[6] + ", Paganado=" + vectorTiemposMediosTotales[7]
-				+ ", EnPreparacion =" + vectorTiemposMediosTotales[8] + ".";
+		return "Ocupada=" + vectorTiemposMediosTotales[2] + " \nPidiendo=" + vectorTiemposMediosTotales[3]
+				+ " \nEsperandoComida=" + vectorTiemposMediosTotales[4] + " \nServidos=" + vectorTiemposMediosTotales[5]
+				+ " \nEsperandoCuenta=" + vectorTiemposMediosTotales[6] + " \nPaganado=" + vectorTiemposMediosTotales[7]
+				+ " \nEnPreparacion =" + vectorTiemposMediosTotales[8];
 	}
 
 }
